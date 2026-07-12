@@ -2,7 +2,8 @@ import streamlit as st
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -23,7 +24,7 @@ the most recent complete year of data. Both panels use an **identical color scal
 visible color shift represents a genuine change in pollution levels, not a scaling artifact.
 """)
 
-st.image("../outputs/plots/no2_before_after_map.png", use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_before_after_map.png"), use_container_width=True)
 
 st.markdown("---")
 

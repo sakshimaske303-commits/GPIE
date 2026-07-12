@@ -2,7 +2,8 @@ import streamlit as st
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -34,7 +35,7 @@ with tab1:
     outsize most others), this map uses a **log₁₀ color scale** to make differences across all 
     30 countries visually interpretable.
     """)
-    st.image("../outputs/plots/gdp_choropleth_map.png", use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "gdp_choropleth_map.png"), use_container_width=True)
     st.markdown(
         "<p class='caption-text'>Source: Eurostat (EU-27), World Bank Open Data (control group)</p>",
         unsafe_allow_html=True,
@@ -49,7 +50,7 @@ with tab2:
     causal model, it is fully absorbed by country fixed effects rather than entered as an explicit 
     regressor.
     """)
-    st.image("../outputs/plots/land_cover_dominant_class_map.png", use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "land_cover_dominant_class_map.png"), use_container_width=True)
     st.markdown(
         "<p class='caption-text'>Source: ESA WorldCover 10m v200 (2021) — EU-27 only</p>",
         unsafe_allow_html=True,

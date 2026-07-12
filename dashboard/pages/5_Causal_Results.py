@@ -4,7 +4,8 @@ import plotly.graph_objects as go
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -45,7 +46,7 @@ verifying that EU and control-group countries followed similar trends **before**
 hidden by averaging across the full post-treatment period.
 """)
 
-st.image("../outputs/plots/event_study_plot.png", use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "event_study_plot.png"), use_container_width=True)
 
 st.markdown("""
 **Finding**: All 23 quarters — both before and after the 30 June 2021 treatment date — show 
@@ -103,7 +104,7 @@ st.markdown("### 📉 EU-27 vs. Control Group — Average NO₂ Comparison")
 
 @st.cache_data
 def load_comparison_data():
-    df = pd.read_csv("../data/master_dataset_control.csv")
+    df = pd.read_csv(os.path.join(PROJECT_ROOT, "data", "master_dataset_control.csv"))
     return df
 
 

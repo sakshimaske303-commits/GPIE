@@ -3,7 +3,8 @@ import pandas as pd
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -21,7 +22,7 @@ The complete, cleaned dataset used for this project's causal-inference model —
 2019–2024, monthly resolution — is available below for independent verification or reuse.
 """)
 
-DATA_PATH = "../data/master_dataset_control.csv"
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "master_dataset_control.csv")
 
 @st.cache_data
 def load_data():
