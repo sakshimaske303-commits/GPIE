@@ -1,7 +1,6 @@
 # GREEN POLICY INTELLIGENCE ENGINE (GPIE)
-## Project Journal — Final Version
 
----
+## Project Journal 
 
 ## Project Overview
 
