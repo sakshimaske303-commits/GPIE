@@ -30,17 +30,22 @@ No statistically distinguishable EU-specific reduction in NO₂ was detected onc
 
 ## 🗂️ Repository Structure
 
+```text
+GPIE/
 ├── dashboard/                  # Streamlit dashboard (8 pages)
 ├── data/                       # Processed datasets and master merge files
 │   └── earth_observation/      # Per-dataset acquisition/processing outputs
-├── outputs/plots/               # Final generated maps and charts
+├── outputs/
+│   └── plots/                  # Final generated maps and charts
 ├── Project_Journal.md          # Polished project summary and methodology
-├── Devlopment_Log.md           # Full technical development log (debugging, iteration history)
-├── download_.py               # Dataset acquisition scripts
-├── process_.py / _stats.py    # Dataset processing scripts
-├── causal_inference.py        # Causal inference models (main, placebo, event-study)
+├── Development_Log.md          # Full technical development log (debugging & iteration history)
+├── download_*.py               # Dataset acquisition scripts
+├── process_*.py                # Dataset processing scripts
+├── *_stats.py                  # Statistical processing utilities
+├── causal_inference.py         # Main, placebo & event-study models
 ├── map_*.py                    # Map generation scripts
 └── country_boundaries.py       # Shared EU-27 + control-group boundary loader
+```
 
 ## 🛠️ Tech Stack
 
@@ -71,7 +76,8 @@ streamlit run app.py
 
 ## 👤 Author
 
-**Sakshi D. Maske**
+**Sakshi D. Maske**,
+
 Independent Geospatial Researcher
 
 ---
