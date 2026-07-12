@@ -16,6 +16,39 @@ st.markdown(
 )
 st.markdown("---")
 
+st.markdown("### 📄 Project Documentation")
+st.markdown("""
+Three documents accompany this project, each serving a different purpose:
+""")
+
+doc_col1, doc_col2, doc_col3 = st.columns(3)
+with doc_col1:
+    st.markdown("""
+    **📘 Project Journal**
+
+    Polished summary — methodology, findings, conclusions.
+
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Project_Journal.md)
+    """)
+with doc_col2:
+    st.markdown("""
+    **📗 Research Paper**
+
+    Formal academic write-up — literature review, statistics, discussion.
+
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Research_Paper.md)
+    """)
+with doc_col3:
+    st.markdown("""
+    **📙 Development Log**
+
+    Full technical log — every bug, debug session, iteration.
+
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Devlopment_Log.md)
+    """)
+
+st.markdown("---")
+
 st.markdown("### 📊 Download the Master Dataset")
 st.markdown("""
 The complete, cleaned dataset used for this project's causal-inference model — 30 countries, 

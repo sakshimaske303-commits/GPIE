@@ -8,6 +8,16 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ---
 
+## 📄 Project Documentation
+
+| Document | What's Inside |
+|---|---|
+| 📘 [`Project_Journal.md`](./Project_Journal.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| 📗 [`Research_Paper.md`](./Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
+| 📙 [`Devlopment_Log.md`](./Devlopment_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
+
+---
+
 ## 🔗 Live Dashboard
 
 **[View the interactive dashboard →](https://f5cf6fijj9gm564r6aapt6.streamlit.app/)**
@@ -24,8 +34,6 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## 🔬 Key Finding
 
-
-
 No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.632). This null result was independently confirmed via a 23-quarter event-study analysis. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in `Project_Journal.md`.
 
 ## 🗂️ Repository Structure
@@ -38,11 +46,12 @@ GPIE/
 ├── outputs/
 │   └── plots/                  # Final generated maps and charts
 ├── Project_Journal.md          # Polished project summary and methodology
-├── Development_Log.md          # Full technical development log (debugging & iteration history)
+├── Research_Paper.md           # Formal academic research paper
+├── Devlopment_Log.md           # Full technical development log (debugging & iteration history)
 ├── download_*.py               # Dataset acquisition scripts
 ├── process_*.py                # Dataset processing scripts
 ├── *_stats.py                  # Statistical processing utilities
-├── causal_inference.py         # Main, placebo & event-study models
+├── causal_inference*.py        # Main, placebo & event-study models
 ├── map_*.py                    # Map generation scripts
 └── country_boundaries.py       # Shared EU-27 + control-group boundary loader
 ```
@@ -76,7 +85,7 @@ streamlit run app.py
 
 ## 👤 Author
 
-**Sakshi D. Maske**,
+**Sakshi D. Maske**
 
 Independent Geospatial Researcher
 
