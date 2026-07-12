@@ -10,7 +10,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## 🔗 Live Dashboard
 
-**[View the interactive dashboard →](#)** *(link added after deployment)*
+**[View the interactive dashboard →](https://f5cf6fijj9gm564r6aapt6.streamlit.app/)**
 
 ---
 
