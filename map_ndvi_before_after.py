@@ -55,13 +55,12 @@ def make_map():
 
     merged = gdf.merge(ndvi_2019, on="country", how="left").merge(ndvi_2024, on="country", how="left")
 
-    # Shared color scale across both panels for direct visual comparability
     vmin = min(merged["ndvi_2019"].min(), merged["ndvi_2024"].min())
     vmax = max(merged["ndvi_2019"].max(), merged["ndvi_2024"].max())
 
     bounds = (-25, 34, 35, 72)
 
-    fig, axes = plt.subplots(1, 2, figsize=(22, 12))
+    fig, axes = plt.subplots(1, 2, figsize=(22, 13))
 
     for ax, col, year_label in zip(axes, ["ndvi_2019", "ndvi_2024"], ["2019", "2024"]):
         merged.plot(
@@ -82,22 +81,24 @@ def make_map():
         ax.set_axis_off()
         ax.set_title(f"NDVI — {year_label}", fontsize=18, fontweight="bold", pad=10)
 
-    sm = plt.cm.ScalarMappable(cmap="YlGn", norm=plt.Normalize(vmin=vmin, vmax=vmax))
-    sm._A = []
-    cbar = fig.colorbar(sm, ax=axes, orientation="horizontal", shrink=0.4, pad=0.04)
-    cbar.set_label("Mean NDVI (Vegetation Health Index)", fontsize=10)
-    cbar.ax.tick_params(labelsize=10)
-
     fig.suptitle(
         "NDVI (Vegetation Health) Before vs. After the European Climate Law: EU-27 and Control Group (2019 vs. 2024)\n"
         "Thick borders mark non-EU control-group countries (UK, Norway, Switzerland)",
-        fontsize=13, fontweight="bold"
+        fontsize=13, fontweight="bold", y=0.98
     )
+
+    # Colorbar placed in its own reserved space at the bottom, well below the maps
+    fig.subplots_adjust(bottom=0.18, top=0.88, wspace=0.05)
+    cbar_ax = fig.add_axes([0.3, 0.08, 0.4, 0.025])
+    sm = plt.cm.ScalarMappable(cmap="YlGn", norm=plt.Normalize(vmin=vmin, vmax=vmax))
+    sm._A = []
+    cbar = fig.colorbar(sm, cax=cbar_ax, orientation="horizontal")
+    cbar.set_label("Mean NDVI (Vegetation Health Index)", fontsize=10)
+    cbar.ax.tick_params(labelsize=9)
 
     plt.figtext(0.5, 0.02, "Green Policy Intelligence Engine (GPIE) — Source: CGLS NDVI 300m, Sentinel Hub Statistical API",
                 ha="center", fontsize=8, color="gray")
 
-    plt.subplots_adjust(wspace=0.05)
     plt.savefig(OUTPUT_PATH, dpi=200)
     print(f"Saved: {OUTPUT_PATH}")
 
