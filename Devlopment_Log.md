@@ -65,6 +65,8 @@ Version 1.0
 
 # GPIE — Module Architecture (Updated)
 
+# GPIE — Module Architecture (Final)
+
 # MODULE 1 — Policy Database Acquisition ✅ EXECUTED
 Automated scraping of European Green Deal policy records from EUR-Lex. Extracts and structures policy metadata (title, type, year, status, CELEX ID, summary, word count, thematic tags) into `documents.json` / `documents.csv`, followed by exploratory statistical analysis and visualization. This forms the "policy" half of the project's core comparison — what governments claim to have done.
 
@@ -110,13 +112,19 @@ Used Difference-in-Differences methodology to test whether the European Green De
 # MODULE 9 — Economic Efficiency Ranking ⚠️ SCOPED OUT (reasoned decision, not abandoned)
 Originally planned to combine causal inference results with policy cost data to rank environmental interventions by cost-per-unit-environmental-improvement. **This module has been deliberately scoped out following Module 8's completion**, for a specific, documented reason: Module 8's rigorously validated finding is that no statistically significant EU-specific causal effect on NO₂ was detected. Constructing a "cost-per-unit-environmental-improvement" ranking presupposes the existence of a measurable improvement to rank against cost — proceeding with this module as originally conceived would require either manufacturing statistical significance that the data does not support, or ranking interventions against an effect size that is not distinguishable from zero, neither of which is scientifically defensible.
 
-This decision is itself treated as a finding consistent with the project's core design principle: GPIE exists to independently verify policy claims rather than to assume their effectiveness, and a module whose premise depends on an effect that verification did not confirm should not be forced to completion. This will be documented transparently in the project's final reporting (readme, dashboard, journal) as a deliberate scope decision arising directly from Module 8's result, rather than as an incomplete or abandoned component.
+This decision is itself treated as a finding consistent with the project's core design principle: GPIE exists to independently verify policy claims rather than to assume their effectiveness, and a module whose premise depends on an effect that verification did not confirm should not be forced to completion.
 
-# MODULE 10 — Geospatial Output Generation (QGIS) ❌ NOT YET STARTED
-Will generate thematic maps and regional comparisons — land cover, NO₂ distribution, DEM-derived elevation context, and a spatial visualization of the EU-27 vs. control-group comparison — using the project's finalized master datasets. Not yet started. Given Module 9's scoping-out, this module's focus shifts toward transparently visualizing the Module 8 finding (including the event-study result) rather than a policy-effectiveness ranking output.
+# MODULE 10 — Geospatial Output Generation ✅ COMPLETE
+Seven publication-quality geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` + `matplotlib`), covering: NO₂ distribution (2019–2024 average, 30 countries), a 2019-vs-2024 before/after comparison, the treatment/control study-design map, dominant land cover class (EU-27), NDVI distribution, GDP (log-scale, 30 countries), and the event-study robustness-check plot. Each map was independently verified for correctness via a structured, checklist-based verification workflow before finalization. QGIS was deliberately not used for map production, in favor of a fully scripted, reproducible Python pipeline consistent with the project's automation-first design.
 
-# MODULE 11 — Dashboard & Deployment (Streamlit, GitHub) ❌ NOT YET STARTED
-Will package the project's outputs into an interactive Streamlit dashboard for public/portfolio presentation, with the full codebase, documentation, and reproducible pipeline published on GitHub as the final open-source deliverable. Not yet started. Deployment strategy (GitHub repository + Streamlit Community Cloud, producing a permanent public URL) has been discussed and agreed upon for execution once the project reaches this stage. Given the project's validation-heavy narrative (placebo test → control group → event study → honest null result), the dashboard's design should prominently feature this methodological journey, not just final numeric outputs.
+# MODULE 11 — Dashboard & Deployment ✅ COMPLETE
+The complete project was packaged into an eight-page interactive Streamlit dashboard (Home, Study Design, Environmental Data, Before/After, Economic Context, Causal Results, Methodology & Limitations, Explore Trends, About & Data), featuring an interactive country-level time-series explorer (Plotly), downloadable raw master dataset, and a full narrative walkthrough of the project's validation journey (placebo test → control group → event study → honest null result). The complete codebase was published as a public, open-source GitHub repository, and the dashboard was deployed to Streamlit Community Cloud, producing a permanent public URL. A path-resolution bug (relative image/data paths resolving incorrectly under Streamlit Cloud's different working-directory structure compared to local execution) was identified and fixed across all dashboard pages during deployment.
+
+---
+
+# PROJECT STATUS: COMPLETE
+
+All eleven planned modules have been executed, with Module 9 formally and transparently scoped out for a specific, documented scientific reason rather than left incomplete. GPIE is deployed as a public GitHub repository and a live, interactive Streamlit dashboard, ready for academic and portfolio presentation.
 
 ===========================================================================================================
 
@@ -2462,3 +2470,184 @@ This caveat was identified as an important, previously under-stated nuance in th
 ## Design Principle Reinforced
 
 Two distinct lessons from this session extend patterns already established earlier in the project. First, the matplotlib/conda environment corruption is another instance — following the earlier MKL numerical-library corruption — of environment-level infrastructure failures being indistinguishable from code bugs at first appearance, reinforcing the value of isolating and rebuilding the environment itself as a debugging strategy of last resort, rather than exhaustively debugging code that is not actually at fault. Second, the null-versus-underpowered distinction reinforces a theme central to this project's approach to causal inference: a statistical result's face-value interpretation ("not significant" = "no effect") is often incomplete, and genuinely rigorous reporting requires actively interrogating what a result can and cannot support — the same spirit that motivated the placebo test and control-group construction in the prior module now applied to the interpretation of the null result itself, rather than stopping at the first non-significant p-value obtained.
+
+-----------------------------------------------------------------------------------------------------
+
+# Development Log — Module 10: Geospatial Output Generation (Choropleth Maps and Study-Design Visualization)
+
+## Status
+**Complete.** Seven geospatial and statistical visualizations were produced covering the project's core datasets and causal-inference design, each independently verified for correctness before being finalized for use in the project's dashboard and reporting.
+
+---
+
+## Approach Decision
+
+QGIS was initially considered for this module, as originally planned in the project's module architecture. This was reconsidered and deliberately scoped out in favor of a fully Python-based mapping pipeline (`geopandas` + `matplotlib`), for two reasons: first, all of the project's boundary and statistical data were already in formats directly usable by `geopandas`, avoiding a separate export/import step into QGIS; second, a Python-based pipeline keeps map generation reproducible and version-controlled alongside the rest of the project's codebase, consistent with GPIE's broader automation-first design philosophy. QGIS proficiency is demonstrated through other portfolio work rather than being required here.
+
+## Verification Methodology
+
+Given that generated map images could not be directly viewed within the main working session (attachment limits), a structured verification workflow was adopted: each map was opened locally via the operating system's default image viewer, then uploaded to a separate chat session with a detailed, checklist-style verification prompt specifying exactly what each element of the map was supposed to show. This produced explicit, itemized confirmation (or identification of defects) for each map before it was considered final, rather than relying on visual self-assessment alone.
+
+---
+
+## Map 1 — NO₂ Choropleth (30 Countries, 2019–2024 Average)
+
+The first map produced, establishing the visual template reused across subsequent maps: EU-27 boundaries from NUTS, control-group boundaries (UK, Norway, Switzerland) from GADM, combined into a single GeoDataFrame, with control-group countries visually distinguished via a thicker border rather than a separate color, so their NO₂ values remain directly comparable to EU countries on the same color scale.
+
+**Colormap iteration**: An initial `YlOrRd` (yellow-to-red) colormap was used, chosen for intuitive association with pollution severity. Verification revealed several low-NO₂ countries rendering as visually indistinguishable from blank/white map background, since `YlOrRd`'s low end is very pale. This was corrected by switching to `plasma` (dark purple to bright yellow), whose low end remains clearly visible and distinguishable from missing data, resolving the issue.
+
+**Missing-data handling**: `missing_kwds` was configured to render any genuinely missing country data as grey with diagonal hatching, rather than blending into the white background, established as a standard convention retained across all subsequent choropleth maps in this module.
+
+Final verification confirmed all 30 countries correctly colored, correct legend, title, and attribution, and no rendering defects.
+
+---
+
+## Map 2 — NO₂ Before vs. After (2019 vs. 2024, Side-by-Side)
+
+A two-panel comparison map was built to visually complement the project's quantitative Module 8 finding, showing NO₂ distribution in 2019 and 2024 side by side. A single shared color scale (`vmin`/`vmax` computed across both years) was deliberately used rather than letting each panel auto-scale independently, since independent scaling would visually exaggerate or understate the actual magnitude of change between years — a shared scale ensures that any visible color shift between panels represents a genuine change in value, not an artifact of differing color normalization.
+
+Verification confirmed a visible overall darkening/shift toward lower NO₂ in the 2024 panel relative to 2019 (particularly across Germany and Central Europe), a single shared colorbar beneath both panels, and correctly rendered control-group borders in both panels. Minor cosmetic polish (larger panel titles, larger figure size, reduced inter-panel spacing) was identified as optional refinement but not required for correctness.
+
+---
+
+## Map 3 — Control-Group Study-Design Map
+
+A simple categorical (non-data) map was produced specifically to visually communicate the project's causal-inference research design: EU-27 countries shaded one solid color (treatment group) and the three control-group countries shaded a distinctly different color with thicker borders, accompanied by a legend explicitly labeling each group's role in the Difference-in-Differences framework. This was designed as an introductory/explanatory visual for the dashboard, intended to orient a viewer to the study's comparison structure before presenting substantive data-driven maps.
+
+Verification confirmed all three control-group countries were correctly and exclusively colored in the distinct color, all 27 EU countries correctly colored in the treatment color, correct legend labeling (no color/label swap), and no unexpected third colors or blank countries — assessed as fully correct on first generation.
+
+---
+
+## Map 4 — Land Cover Dominant Class (EU-27)
+
+A categorical map showing each EU-27 country's single largest ESA WorldCover land cover class, intended as environmental baseline context.
+
+**Bug encountered**: The initial implementation crashed with `ValueError: Invalid RGBA argument: nan` when attempting to plot. Diagnosis initially suspected a missing country in the underlying land cover dataset (a pattern seen previously with the WorldPop population dataset), but a direct country-count check confirmed all 27 expected countries were present with no gaps. Further inspection of the raw JSON record structure revealed the actual cause: the land cover class percentages were nested one level deeper than the loading function assumed (`record["land_cover_percent"]`, a dictionary of class names to percentages, rather than the class names appearing as top-level keys directly on each record). The loading function had been written assuming a flat structure inconsistent with the dataset's actual, nested format.
+
+**Fix**: The dominant-class extraction logic was corrected to read from the correctly-nested `land_cover_percent` key. A defensive `fillna("#cccccc")` grey fallback was also added to the color-mapping step, so that any future unmatched or missing land cover class would render as a clearly identifiable grey rather than crashing the script.
+
+Verification confirmed exactly three distinct dominant classes present across EU-27 (Tree cover, Cropland, Grassland), correct solid categorical (non-gradient) rendering, a legend matching only the classes actually present, and correct exclusion of the three control-group countries (Land Cover data was intentionally acquired for EU-27 only, consistent with the project's earlier design decision that static country-level variables are fully absorbed by fixed effects in the causal model and were therefore not required for the control group).
+
+---
+
+## Map 5 — NDVI Choropleth (30 Countries, 2019–2024 Average)
+
+Structurally identical to Map 1, using a `YlGn` (yellow-to-green) colormap appropriate for vegetation-health data, applied without requiring any of the colormap-related debugging encountered in Map 1, since the `plasma`-style low-visibility lesson had already been incorporated by choosing a colormap whose low end remains visually distinct from white.
+
+Verification confirmed all 30 countries correctly colored with no missing/hatched countries, correct control-group border rendering, and a color pattern broadly consistent with known regional vegetation patterns (forested Western/Northern European countries appearing in richer greens than more agricultural or arid regions), with no anomalies requiring further investigation.
+
+---
+
+## Map 6 — GDP Choropleth (30 Countries, 2019–2024 Average)
+
+### Initial Version — Visualization Problem Identified Pre-Verification
+Before formal verification, a design flaw was identified directly by inspection: GDP's real-world distribution is highly right-skewed (a small number of very large economies — Germany, France, the UK — dwarf most other countries in the dataset). Combined with an initial `Blues` linear color scale, this compressed nearly all countries into a visually indistinguishable pale range, with only the largest economies standing out — a technically correct but poorly communicative visualization.
+
+### Fix — Colormap and Log Transformation
+Two changes were made together: switching to the `viridis` colormap (whose low end remains dark and distinguishable, consistent with the fix applied in Map 1), and applying a `log10` transformation to the GDP values before color-mapping. The log transformation directly addresses the underlying skew (rather than merely working around it with a different color palette), spreading the color scale more evenly across the full range of country GDP values rather than compressing most countries into one end of the scale. The colorbar label was updated to explicitly state "log₁₀ scale" to prevent misinterpretation of the transformed values as raw GDP figures.
+
+Verification confirmed a substantially improved visual spread across countries (explicitly noted as a clear improvement over the initial version), correctly identified the largest visible economies (Germany, UK, France) as the brightest/highest values and smaller economies (Cyprus, Baltic states, Balkan countries) as the darkest/lowest, a correctly labeled log-scale colorbar showing appropriately small numeric values (approximately 4.5–6.5) rather than raw GDP figures in the hundreds of thousands, and correct control-group border rendering.
+
+---
+
+## Map 7 — Event-Study Plot
+
+Produced in a prior session (documented separately); included here for completeness of the module's full output inventory. A point-and-error-bar visualization of the 23 quarterly EU-vs-control-group NO₂ coefficients from the event-study regression, with a treatment-date reference line and zero-effect reference line, visually reinforcing the Module 8 finding that no quarter — pre- or post-treatment — showed a statistically significant deviation from zero.
+
+---
+
+## Module 10 — Final Status
+
+All seven planned visualizations are complete, independently verified, and stylistically consistent (shared color-scheme conventions, consistent boundary sources, consistent control-group border treatment, consistent title/attribution formatting) across the full set. This provides the complete visual asset library required for Module 11 (dashboard construction).
+
+## Design Principle Reinforced
+
+Two recurring patterns from earlier in the project reappeared in this module in new forms. First, the land cover `NaN` crash reinforced the value of inspecting a raw data record's actual structure directly (rather than assuming a structure based on how a similar dataset was formatted elsewhere in the project) before writing extraction logic against it — the same lesson underlying several earlier debugging sessions in this project, now applied to a nested-versus-flat JSON structure rather than an API response format. Second, the GDP log-transformation fix exemplifies a distinction relevant throughout this project's visualization work: a technically correct rendering (accurate colors mapped to accurate values) is not the same as an effective one, and recognizing when a visualization technically works but fails to communicate — here, due to an unaddressed property of the underlying data distribution — is a distinct and necessary check beyond confirming the absence of bugs or rendering errors.
+
+# Development Log — Module 11: Interactive Dashboard Construction and GitHub Deployment Setup
+
+## Status
+**Complete (dashboard construction + version control).** An eight-page interactive Streamlit dashboard was built, styled, and populated with all project outputs, followed by first-time Git/GitHub setup and a successful initial push of the full codebase to a public repository.
+
+---
+
+## Part 1 — Dashboard Framework and Styling Iteration
+
+### Initial Setup
+Streamlit was installed into the `gpie2` environment. A multi-page app structure was adopted (`dashboard/app.py` as the home page, with a `dashboard/pages/` subfolder for additional pages), using Streamlit's built-in file-based page routing rather than manual navigation logic.
+
+### Bug — Missing Page Files Crash the App
+On first run, the app crashed with `StreamlitAPIException: Unable to create Page. The file '5_Causal_Results.py' could not be found.` This was because Streamlit's multi-page routing automatically scans the `pages/` folder and expects every referenced page file to exist; since only `app.py` had been created at that point, the app failed immediately rather than rendering a partial navigation. Resolved by creating placeholder files for all six planned pages before proceeding, each containing minimal valid content (`st.title("Coming soon...")`), allowing the app to run while pages were built out incrementally.
+
+### Styling — Two Full Iterations
+A shared `dashboard/styles.py` module was created to centralize CSS styling via `st.markdown()` with `unsafe_allow_html=True`, applied consistently across every page through a shared `apply_custom_style()` function.
+
+**First version**: a pastel color scheme (lavender/mint/peach gradient background, soft rounded cards) was implemented per initial styling preference.
+
+**Revision**: this was explicitly rejected in favor of a dark, "professional/tech/advanced" aesthetic — a near-black gradient background, electric cyan/purple/green accent gradient for headings, glassmorphism-style metric cards, and monospace accents for numeric values (`Inter` and `JetBrains Mono` Google Fonts). This was a deliberate full rewrite of `styles.py` rather than an incremental adjustment, given the stylistic direction was completely different from the first version.
+
+### Minor Fix — Heading Alignment
+The home page's main heading was left-aligned by default (Streamlit's default `st.markdown()` behavior), rather than centered as intended. Fixed by explicitly wrapping the heading HTML with an inline `style="text-align: center;"` attribute, rather than relying on any global CSS rule, since Streamlit's markdown rendering does not center-align headings by default even within custom CSS block styles applied elsewhere.
+
+### Bug — Duplicate Page Configuration
+An early version of one content page (`1_Study_Design.py`) included its own `st.set_page_config()` call, duplicating the one already present in `app.py`. Since `set_page_config()` is only valid once per Streamlit session and must be the first Streamlit command executed, this produced unexpected duplicate rendering behavior. Fixed by removing `set_page_config()` from every subsequent page file — it is called exactly once, in `app.py`, for the entire multi-page app.
+
+---
+
+## Part 2 — Content Pages
+
+Eight pages were built in total, populated with the project's existing outputs:
+
+1. **Home** (`app.py`) — project overview, key metrics, navigation guide, and author attribution ("Developed by Sakshi D. Maske, Independent Geospatial Researcher").
+2. **Environmental Data** — tabbed display of the NO₂ and NDVI choropleth maps (Module 10 outputs).
+3. **Study Design** — the control-group design map, explanation of the treatment/control architecture and the DiD logic, framed for a reader unfamiliar with the project's earlier iterations.
+4. **Before vs. After** — the 2019-vs-2024 side-by-side NO₂ comparison map.
+5. **Economic Context** — tabbed display of the GDP and Land Cover choropleth maps, with explanation of their role as control variables.
+6. **Causal Results** — the project's core statistical findings: headline DiD coefficient/p-value/confidence-interval metrics, the event-study plot, and a narrative summary of the three-step validation sequence (initial model → placebo test → control-group correction).
+7. **Methodology & Limitations** — an expandable, detailed walkthrough of the full validation journey (placebo test failure, control-group construction, event-study robustness check) and explicit statement of the statistical-power limitation and the Module 9 scoping-out decision.
+8. **About & Data** — downloadable master dataset (CSV export via `st.download_button()`), a data-preview table, a data-sources/citation table, and the GitHub repository link (initially a placeholder, updated once the repository existed).
+
+### Design Decision — Full-Effort Map Suite
+Rather than a minimal set of visuals, all previously-verified Module 10 maps were deliberately integrated across the dashboard's relevant pages, since generating them had already been low-marginal-cost in Python and each map's inclusion strengthened a specific page's narrative (e.g., the GDP map on Economic Context, the study-design map on Study Design) rather than being presented as an undifferentiated gallery.
+
+---
+
+## Part 3 — Interactivity Additions (Beyond Static Images)
+
+Following a review that the dashboard, as initially built, was essentially a static image gallery, a set of interactivity enhancements was added:
+
+### Interactive Time-Series Explorer (`7_Explore_Trends.py`)
+`plotly` was installed and used to build a country-selectable, variable-selectable line chart (NO₂, NDVI, temperature, or GDP over 2019–2024), with:
+- A multi-select dropdown for choosing countries to compare, defaulting to a mix of EU-27 and control-group countries
+- Control-group countries rendered with a distinct dotted line style, visually distinguishing them from solid EU-27 lines within the same chart
+- A vertical reference line marking the treatment date (30 June 2021)
+- `st.cache_data` applied to the data-loading function, avoiding repeated CSV reads on every user interaction
+
+### Regression Output Table and Comparative Bar Chart (added to Causal Results page)
+A structured coefficients table was added summarizing the DiD model's key regression output (interaction term, main effects, controls) in tabular form, alongside an interactive Plotly grouped bar chart comparing EU-27 vs. control-group average NO₂ across pre- and post-treatment periods — providing a second, complementary visual representation of the same finding already shown via the event-study plot and headline metrics, aimed at readers who engage more readily with summary bar comparisons than with a 23-point regression coefficient plot.
+
+---
+
+## Part 4 — Version Control Setup (First-Time Git/GitHub Configuration)
+
+### Git Installation
+Git was not previously installed on the system. `git` commands failed with `CommandNotFoundException` in the VS Code terminal even immediately after installing Git for Windows (standalone x64 installer), because VS Code's integrated terminal caches the system PATH at window-launch time and does not pick up newly-installed executables without a full application restart — closing and reopening only the terminal panel was insufficient; the entire VS Code application had to be closed and reopened before `git --version` resolved correctly.
+
+### Repository Initialization
+`git init` was run from the project root (after an initial misstep of running it from the `dashboard/` subdirectory, corrected via `cd ..`), successfully creating a local repository.
+
+### `.gitignore` Audit and Expansion
+The existing `.gitignore` was found to be significantly out of date — it only excluded NO₂ raw data and a couple of credential files, dating from early in the project before DEM, Land Cover, Population, and GADM-related large files had been introduced. It was rewritten to comprehensively exclude: all raw satellite/climate data directories across every dataset (NO₂, NDVI, DEM, Land Cover, Climate, Population), all `.nc` NetCDF files, intermediate processed raster files (VRT mosaics, resampled TIFFs), credentials (`.env`, CLMS service key), Python cache files, and Streamlit's local cache directory — while deliberately leaving all `final/` processed JSON/CSV outputs and the master datasets un-excluded, since these are small, directly reusable, and central to the project's reproducibility.
+
+### Bug — Dubious Ownership Error
+`git add .` failed with `fatal: detected dubious ownership in repository`, a Git security feature that flags repositories on filesystems that don't record standard Unix-style file ownership (relevant here because the project resides on a D: drive rather than the default user profile location). Resolved by explicitly marking the directory as trusted via `git config --global --add safe.directory <path>`, as directed by Git's own error message.
+
+### Bug — Missing Git Identity
+The first commit attempt failed with `Author identity unknown`, since Git requires a configured name and email before allowing any commit, and none had been set on this machine (a fresh Git installation). Resolved via `git config --global user.name` and `git config --global user.email`, a standard one-time setup step.
+
+### Initial Commit and Push
+Following the above fixes, `git add .`, `git commit`, and `git push` completed successfully: 134 files, approximately 1.85 million lines of insertions (reflecting the project's accumulated JSON datasets and generated map images), pushed to a newly created public GitHub repository (`sakshimaske303-commits/GPIE`) via browser-based authentication. Two previously-existing incomplete repositories on the same GitHub account were deleted beforehand, to ensure the new repository represents a clean, complete, single source of truth for the project rather than coexisting alongside earlier abandoned attempts.
+
+## Design Principle Reinforced
+
+This session's environment-level issues (Git PATH caching, dubious-ownership detection, missing Git identity) form a distinct but related category to the numerical-library failures debugged earlier in the project (MKL corruption, matplotlib-triggered Python breakage): all are first-time-setup or tool-configuration failures rather than logic bugs, and all were resolved by directly following the diagnostic information the tool itself provided (Git's own suggested fix commands, in this case) rather than requiring independent root-cause investigation — a useful distinction from the earlier, harder-to-diagnose silent numerical crashes, where the tool provided no actionable guidance and isolation had to be performed manually across multiple library layers.
