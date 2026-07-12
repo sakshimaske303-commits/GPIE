@@ -52,7 +52,7 @@ of the project's development process, debugging history, and methodological deci
 
 st.markdown("""
 <div style="background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 10px; padding: 16px; margin: 10px 0;">
-    <strong>GitHub Repository:</strong> <a href="#" style="color: #00d4ff;">github.com/[your-username]/GPIE</a>
+    <strong>GitHub Repository:</strong> <a href="https://github.com/sakshimaske303-commits/GPIE" style="color: #00d4ff;">github.com/sakshimaske303-commits/GPIE</a>
 </div>
 """, unsafe_allow_html=True)
 
