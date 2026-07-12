@@ -1,0 +1,93 @@
+import streamlit as st
+import pandas as pd
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from styles import apply_custom_style, PALETTE
+
+apply_custom_style()
+
+st.markdown("<h1 style='text-align: center;'>📂 ABOUT & DATA ACCESS</h1>", unsafe_allow_html=True)
+st.markdown(
+    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Raw Data, Reproducibility & Contact</h3>",
+    unsafe_allow_html=True,
+)
+st.markdown("---")
+
+st.markdown("### 📊 Download the Master Dataset")
+st.markdown("""
+The complete, cleaned dataset used for this project's causal-inference model — 30 countries, 
+2019–2024, monthly resolution — is available below for independent verification or reuse.
+""")
+
+DATA_PATH = "../data/master_dataset_control.csv"
+
+@st.cache_data
+def load_data():
+    return pd.read_csv(DATA_PATH)
+
+df = load_data()
+
+st.dataframe(df.head(50), use_container_width=True)
+
+csv = df.to_csv(index=False).encode("utf-8")
+st.download_button(
+    label="⬇️ Download Full Dataset (CSV)",
+    data=csv,
+    file_name="gpie_master_dataset.csv",
+    mime="text/csv",
+)
+
+st.markdown(f"<p class='caption-text'>Showing first 50 of {len(df):,} total rows.</p>", unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown("### 🔗 Full Reproducibility")
+st.markdown("""
+The complete codebase — data acquisition scripts, processing pipelines, causal-inference models, 
+and this dashboard itself — is published as open-source on GitHub, including full documentation 
+of the project's development process, debugging history, and methodological decisions.
+""")
+
+st.markdown("""
+<div style="background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 10px; padding: 16px; margin: 10px 0;">
+    <strong>GitHub Repository:</strong> <a href="#" style="color: #00d4ff;">github.com/[your-username]/GPIE</a>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown("### 📚 Data Sources & Citations")
+st.markdown("""
+| Dataset | Provider | Access Method |
+|---|---|---|
+| NO₂ (Sentinel-5P) | European Space Agency / Copernicus | Sentinel Hub Statistical API |
+| NDVI (CGLS) | Copernicus Land Monitoring Service | Sentinel Hub Statistical API |
+| Climate (ERA5) | ECMWF / Copernicus Climate Data Store | CDS API |
+| Land Cover | ESA WorldCover | AWS Open Data |
+| Elevation (DEM) | Copernicus DEM GLO-30 | AWS Open Data |
+| GDP (EU-27) | Eurostat | REST Statistics API |
+| GDP (Control Group) | World Bank | Open Data API |
+| Administrative Boundaries | Eurostat GISCO (NUTS), GADM | Direct Download |
+| Policy Records | EUR-Lex | Web Scraping |
+""")
+
+st.markdown("---")
+
+st.markdown(
+    f"""
+    <div style="text-align: center; padding: 25px; background: rgba(124, 58, 237, 0.06); border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 12px;">
+        <p style="color: {PALETTE['text_muted']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Project Author</p>
+        <h2 style="color: {PALETTE['cyan']}; margin: 5px 0;">SAKSHI D. MASKE</h2>
+        <p style="color: {PALETTE['purple']}; font-weight: 600;">Independent Geospatial Researcher</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown("---")
+st.markdown(
+    "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine</p>",
+    unsafe_allow_html=True,
+)

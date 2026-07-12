@@ -1,0 +1,142 @@
+[
+  {
+    "NUTS_ID": "AT",
+    "year": 2020,
+    "total_population": 8783094
+  },
+  {
+    "NUTS_ID": "BE",
+    "year": 2019,
+    "total_population": 11530863
+  },
+  {
+    "NUTS_ID": "BE",
+    "year": 2020,
+    "total_population": 11609210
+  },
+  {
+    "NUTS_ID": "BG",
+    "year": 2019,
+    "total_population": 6991252
+  },
+  {
+    "NUTS_ID": "BG",
+    "year": 2020,
+    "total_population": 6949068
+  },
+  {
+    "NUTS_ID": "HR",
+    "year": 2019,
+    "total_population": 4178874
+  },
+  {
+    "NUTS_ID": "HR",
+    "year": 2020,
+    "total_population": 4167472
+  },
+  {
+    "NUTS_ID": "CY",
+    "year": 2019,
+    "total_population": 1334751
+  },
+  {
+    "NUTS_ID": "CY",
+    "year": 2020,
+    "total_population": 1365048
+  },
+  {
+    "NUTS_ID": "CZ",
+    "year": 2019,
+    "total_population": 10766050
+  },
+  {
+    "NUTS_ID": "DK",
+    "year": 2019,
+    "total_population": 5880126
+  },
+  {
+    "NUTS_ID": "EE",
+    "year": 2019,
+    "total_population": 1377916
+  },
+  {
+    "NUTS_ID": "EE",
+    "year": 2020,
+    "total_population": 1401441
+  },
+  {
+    "NUTS_ID": "EL",
+    "year": 2019,
+    "total_population": 10727198
+  },
+  {
+    "NUTS_ID": "HU",
+    "year": 2019,
+    "total_population": 9416500
+  },
+  {
+    "NUTS_ID": "HU",
+    "year": 2020,
+    "total_population": 9362228
+  },
+  {
+    "NUTS_ID": "IE",
+    "year": 2019,
+    "total_population": 5380994
+  },
+  {
+    "NUTS_ID": "LV",
+    "year": 2019,
+    "total_population": 2439080
+  },
+  {
+    "NUTS_ID": "LT",
+    "year": 2019,
+    "total_population": 2783102
+  },
+  {
+    "NUTS_ID": "LU",
+    "year": 2019,
+    "total_population": 583432
+  },
+  {
+    "NUTS_ID": "LU",
+    "year": 2020,
+    "total_population": 593241
+  },
+  {
+    "NUTS_ID": "MT",
+    "year": 2019,
+    "total_population": 438375
+  },
+  {
+    "NUTS_ID": "MT",
+    "year": 2020,
+    "total_population": 441378
+  },
+  {
+    "NUTS_ID": "NL",
+    "year": 2019,
+    "total_population": 17268066
+  },
+  {
+    "NUTS_ID": "NL",
+    "year": 2020,
+    "total_population": 17349948
+  },
+  {
+    "NUTS_ID": "PT",
+    "year": 2019,
+    "total_population": 10682042
+  },
+  {
+    "NUTS_ID": "SK",
+    "year": 2019,
+    "total_population": 5441106
+  },
+  {
+    "NUTS_ID": "SI",
+    "year": 2019,
+    "total_population": 2181594
+  }
+]

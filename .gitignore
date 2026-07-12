@@ -1,0 +1,30 @@
+# Environment & credentials
+.env
+clms_service_key.json
+*.json.key
+
+# Python
+__pycache__/
+*.pyc
+
+# Raw satellite/climate data (large, publicly re-downloadable)
+data/earth_observation/no2/raw/
+data/earth_observation/ndvi/raw/
+data/earth_observation/dem/raw/
+data/earth_observation/land_cover/raw/
+data/earth_observation/climate/raw/
+data/earth_observation/population/raw/
+data/earth_observation/climate/processed/
+*.nc
+
+# Processed intermediate rasters (large, regeneratable from raw)
+data/earth_observation/land_cover/processed/
+data/earth_observation/dem/processed/*.tif
+data/earth_observation/dem/processed/*.vrt
+
+# Streamlit cache
+.streamlit/
+
+# OS/Editor files
+.DS_Store
+Thumbs.db

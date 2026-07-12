@@ -1,0 +1,191 @@
+[
+  {
+    "NUTS_ID": "SI",
+    "elevation_mean_m": 560.41,
+    "elevation_min_m": -2.48,
+    "elevation_max_m": 2596.64,
+    "elevation_std_m": 348.57
+  },
+  {
+    "NUTS_ID": "SK",
+    "elevation_mean_m": 279.45,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 1905.44,
+    "elevation_std_m": 296.77
+  },
+  {
+    "NUTS_ID": "AT",
+    "elevation_mean_m": 949.49,
+    "elevation_min_m": 112.0,
+    "elevation_max_m": 3583.76,
+    "elevation_std_m": 653.48
+  },
+  {
+    "NUTS_ID": "BE",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "BG",
+    "elevation_mean_m": 470.17,
+    "elevation_min_m": -0.23,
+    "elevation_max_m": 2773.82,
+    "elevation_std_m": 428.51
+  },
+  {
+    "NUTS_ID": "CY",
+    "elevation_mean_m": 292.23,
+    "elevation_min_m": -2.98,
+    "elevation_max_m": 1892.24,
+    "elevation_std_m": 293.69
+  },
+  {
+    "NUTS_ID": "CZ",
+    "elevation_mean_m": 44.78,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 1340.95,
+    "elevation_std_m": 159.85
+  },
+  {
+    "NUTS_ID": "DE",
+    "elevation_mean_m": 99.09,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 2679.33,
+    "elevation_std_m": 237.27
+  },
+  {
+    "NUTS_ID": "DK",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "EE",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "EL",
+    "elevation_mean_m": 473.88,
+    "elevation_min_m": -2.97,
+    "elevation_max_m": 2742.91,
+    "elevation_std_m": 435.07
+  },
+  {
+    "NUTS_ID": "ES",
+    "elevation_mean_m": 687.99,
+    "elevation_min_m": -61.09,
+    "elevation_max_m": 3560.18,
+    "elevation_std_m": 405.91
+  },
+  {
+    "NUTS_ID": "FI",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "FR",
+    "elevation_mean_m": 291.38,
+    "elevation_min_m": -10.0,
+    "elevation_max_m": 4646.93,
+    "elevation_std_m": 419.87
+  },
+  {
+    "NUTS_ID": "HR",
+    "elevation_mean_m": 307.55,
+    "elevation_min_m": -1.83,
+    "elevation_max_m": 1774.8,
+    "elevation_std_m": 290.55
+  },
+  {
+    "NUTS_ID": "HU",
+    "elevation_mean_m": 149.92,
+    "elevation_min_m": 44.99,
+    "elevation_max_m": 987.87,
+    "elevation_std_m": 82.28
+  },
+  {
+    "NUTS_ID": "IE",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "IT",
+    "elevation_mean_m": 542.23,
+    "elevation_min_m": -4.84,
+    "elevation_max_m": 4296.31,
+    "elevation_std_m": 594.69
+  },
+  {
+    "NUTS_ID": "LT",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "LU",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "LV",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "MT",
+    "elevation_mean_m": 84.61,
+    "elevation_min_m": 0.99,
+    "elevation_max_m": 234.44,
+    "elevation_std_m": 50.06
+  },
+  {
+    "NUTS_ID": "NL",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "PL",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  },
+  {
+    "NUTS_ID": "PT",
+    "elevation_mean_m": 322.12,
+    "elevation_min_m": -1.52,
+    "elevation_max_m": 2069.17,
+    "elevation_std_m": 266.6
+  },
+  {
+    "NUTS_ID": "RO",
+    "elevation_mean_m": 399.86,
+    "elevation_min_m": -2.74,
+    "elevation_max_m": 2429.33,
+    "elevation_std_m": 387.9
+  },
+  {
+    "NUTS_ID": "SE",
+    "elevation_mean_m": 0.0,
+    "elevation_min_m": 0.0,
+    "elevation_max_m": 0.0,
+    "elevation_std_m": 0.0
+  }
+]
