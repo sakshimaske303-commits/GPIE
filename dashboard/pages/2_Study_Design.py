@@ -2,7 +2,8 @@ import streamlit as st
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -40,7 +41,7 @@ with col3:
 st.markdown("---")
 
 st.markdown("### Geographic Distribution")
-st.image("../outputs/plots/control_group_design_map.png", use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_map.png"), use_container_width=True)
 
 st.markdown("---")
 

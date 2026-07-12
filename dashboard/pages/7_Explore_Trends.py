@@ -4,7 +4,8 @@ import plotly.graph_objects as go
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
 
 apply_custom_style()
@@ -16,7 +17,7 @@ st.markdown(
 )
 st.markdown("---")
 
-DATA_PATH = "../data/master_dataset_control.csv"
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "master_dataset_control.csv")
 
 EU27_COUNTRIES = {
     "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "EL",
