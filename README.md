@@ -36,6 +36,14 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.632). This null result was independently confirmed via a 23-quarter event-study analysis. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in `Project_Journal.md`.
 
+## 🌍 Transferability Validation
+
+GPIE's original design goal was a **globally transferable methodology**, not one limited to the EU-27. To provide direct evidence of this — rather than leaving it as an unverified claim — the project's NO₂ acquisition pipeline was tested standalone on **India** (2019–2024), using the same Sentinel Hub Statistical API infrastructure and evalscript logic built for the EU-27 study, with zero modification to the core acquisition code.
+
+All 6 years acquired successfully, returning physically realistic NO₂ values consistent with the EU-27 dataset's observed range. This confirms the framework's data-acquisition architecture is genuinely portable to other countries and regions — a standalone proof-of-concept, not a comparative analysis. See `test_india_transferability.py`.
+
+---
+
 ## 🗂️ Repository Structure
 
 ```text
