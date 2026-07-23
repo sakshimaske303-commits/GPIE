@@ -41,11 +41,11 @@ A methodological challenge specific to EU-wide legislation is that policies freq
 
 This study evaluates the causal effect of the European Climate Law (effective 30 June 2021) on tropospheric NO₂ concentration using a panel Difference-in-Differences design across 30 European countries: the EU-27 (treatment group) and three non-EU comparator countries — the United Kingdom, Norway, and Switzerland (control group) — selected for geographic proximity, economic development comparability, and explicit non-applicability of EU Green Deal legislation.
 
-**Figure 1. Difference-in-Differences study design showing the treatment group (EU-27) and the non-EU control group (United Kingdom, Norway, and Switzerland).**
-
 <p align="center">
   <img src="outputs/plots/control_group_design_map.png" width="700">
 </p>
+
+**Figure 1. Difference-in-Differences study design showing the treatment group (EU-27) and the non-EU control group (United Kingdom, Norway, and Switzerland).**
 
 ### 3.2 Data Sources
 
@@ -171,7 +171,7 @@ Wang, P. et al. (2020). Nitrogen Dioxide (NO2) Pollution Monitoring with Sentine
 
 Zeldow, B., & Hatfield, L. (2024). Advances in Difference-in-Differences Methods for Policy Evaluation Research. *PMC*.
 
------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 **Full dataset, code, and reproducible pipeline**: [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE)
 **Live interactive dashboard**: [f5cf6fijj9gm564r6aapt6.streamlit.app](https://f5cf6fijj9gm564r6aapt6.streamlit.app/)
