@@ -140,6 +140,16 @@ fig_bar.update_layout(
 
 st.plotly_chart(fig_bar, use_container_width=True)
 
+import plotly.io as pio
+
+pio.write_image(
+    fig_bar,
+    os.path.join(PROJECT_ROOT, "outputs", "plots", "eu_vs_control_bar_chart.png"),
+    width=1400,
+    height=900,
+    scale=2
+)
+
 st.markdown(
     "<p class='caption-text'>Both groups show a similar decline pattern from the pre- to post-treatment period — "
     "visually consistent with the DiD model's non-significant interaction term.</p>",

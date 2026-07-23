@@ -2651,3 +2651,105 @@ Following the above fixes, `git add .`, `git commit`, and `git push` completed s
 ## Design Principle Reinforced
 
 This session's environment-level issues (Git PATH caching, dubious-ownership detection, missing Git identity) form a distinct but related category to the numerical-library failures debugged earlier in the project (MKL corruption, matplotlib-triggered Python breakage): all are first-time-setup or tool-configuration failures rather than logic bugs, and all were resolved by directly following the diagnostic information the tool itself provided (Git's own suggested fix commands, in this case) rather than requiring independent root-cause investigation — a useful distinction from the earlier, harder-to-diagnose silent numerical crashes, where the tool provided no actionable guidance and isolation had to be performed manually across multiple library layers.
+<<<<<<< HEAD
+=======
+
+------------------------------------------------------------------------------------------------
+
+# Development Log — Dashboard Deployment Fixes, Additional Visualizations, and Global Transferability Validation
+
+## Status
+**Complete.** Resolved a Streamlit Cloud path-resolution bug affecting all dashboard pages, added three previously-missing visualizations (DEM, ERA5 climate, NDVI before/after), restructured dashboard navigation and documentation, and conducted a standalone transferability validation of the acquisition pipeline on a non-EU country (India).
+
+---
+
+## Part 1 — Streamlit Cloud Deployment: Path Resolution Bug
+
+### Bug
+Following initial Streamlit Community Cloud deployment, every dashboard page (except Home) failed with `MediaFileStorageError`, tracing to `st.image()` calls using relative paths of the form `"../outputs/plots/..."`. This pattern had worked correctly during local execution but failed under Streamlit Cloud's deployment structure.
+
+### Diagnosis
+The relative path `../outputs/plots/...`, resolved from each page file's location (`dashboard/pages/`), was intended to navigate two directory levels up to the project root. However, the `PROJECT_ROOT` variable used to construct absolute paths was itself computed incorrectly:
+
+```python
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+```
+
+Starting from `dashboard/pages/1_Environmental_Data.py`, two levels of `os.path.dirname()` resolves only to `dashboard/`, not the actual project root — one level short. This had gone undetected during local testing, plausibly because local execution's working directory or a different invocation context masked the discrepancy, but Streamlit Cloud's `/mount/src/gpie/` deployment structure surfaced it immediately, producing paths of the form `/mount/src/gpie/dashboard/outputs/plots/...` (an erroneous extra `dashboard/` segment) rather than the correct `/mount/src/gpie/outputs/plots/...`.
+
+### Fix
+Every page file's `PROJECT_ROOT` calculation was corrected to include a third `os.path.dirname()` call:
+
+```python
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+```
+
+This was applied individually across all eight dashboard page files (`1_Environmental_Data.py` through `8_About_Data.py`), along with converting all remaining relative path references (`../data/...`) to `os.path.join(PROJECT_ROOT, ...)` construction, consistent with the fix already applied to image paths. Following this correction and redeployment, all pages loaded without error.
+
+---
+
+## Part 2 — Documentation Discoverability
+
+### README Restructuring
+A "Project Documentation" table was added to the very top of `README.md`, immediately following the project title and tagline, listing all three accompanying documents (`Project_Journal.md`, `Research_Paper.md`, `Devlopment_Log.md`) with one-line descriptions of each — positioned before the live dashboard link, ensuring documentation is the first thing visible to any repository visitor.
+
+### GitHub Auto-Render Investigation
+A separate concern was raised regarding `README.md` not appearing to auto-render on the repository's main page, appearing only via direct search or direct URL access. Investigation confirmed via direct URL access (`github.com/.../blob/main/README.md`) that the file exists correctly at the expected root path with correct content — ruling out a missing-file or misnamed-file explanation. Further investigation clarified that GitHub's standard behavior places the repository's file/folder listing above the auto-rendered README on the main page (not below or instead of it), which had been misinterpreted as the README "not appearing." This was confirmed to be standard GitHub behavior common to virtually all repositories, not a defect specific to this project.
+
+### Dashboard Documentation Section
+A parallel "Project Documentation" section, mirroring the README's table, was added to the dashboard's About & Data page, with three columns linking directly to each document's GitHub URL — ensuring documentation is discoverable both via the repository and via the live dashboard.
+
+---
+
+## Part 3 — Missing Visualizations: DEM, ERA5 Climate, and NDVI Before/After
+
+### Motivation
+A review of the dashboard's map coverage revealed that two datasets acquired with substantial acquisition and processing effort — Copernicus DEM (elevation, 860 tiles) and ERA5 (climate, involving the earlier duplicate-timestamp bug fix) — had never been visualized anywhere in the project, despite being fully processed and present in the master dataset as control variables. Additionally, the Before/After comparison module had only ever been built for NO₂, leaving NDVI — a co-equal secondary outcome variable in the causal model — without an equivalent visual.
+
+### DEM Elevation Map
+`map_dem_choropleth.py` was implemented following the established choropleth template (EU-27 only, consistent with DEM's EU-27-only acquisition scope), using the `terrain` colormap — a standard cartographic convention for elevation data — to visualize mean elevation per country from `dem_stats_by_country.json`.
+
+### ERA5 Climate Map
+`map_climate_choropleth.py` was implemented for all 30 countries (EU-27 + control group, since climate data was acquired for the full 30-country scope), using the `coolwarm` colormap (blue=cold to red=warm) to visualize mean 2019–2024 temperature, with control-group countries marked via the established thick-border convention.
+
+### NDVI Before/After Map
+`map_ndvi_before_after.py` was implemented as a direct structural parallel to the existing NO₂ before/after map (shared vmin/vmax color scale across both year panels, same boundary-loading and control-group-border logic), producing a 2019-vs-2024 side-by-side NDVI comparison.
+
+### Colorbar Layout Bug
+Initial versions of both before/after maps (NO₂ and NDVI) exhibited a colorbar positioned too close to and slightly overlapping the map panels above it, using `fig.colorbar(..., shrink=0.4)` attached loosely to both axes. This was corrected by switching to an explicit `fig.add_axes()`-defined colorbar position, reserving dedicated vertical space at the bottom of the figure (`fig.subplots_adjust(bottom=0.18, top=0.88, ...)`) rather than relying on matplotlib's automatic layout to avoid overlap — a more reliable approach given the specific two-panel-plus-suptitle-plus-colorbar layout being used. This fix was applied to the NO₂ before/after map first (verified working) and then replicated identically in the NDVI version.
+
+---
+
+## Part 4 — Dashboard Restructuring
+
+### Page Reordering
+The dashboard's page order was identified as logically inverted: "Environmental Data" (presenting NO₂/NDVI maps) appeared before "Study Design" (explaining the treatment/control comparison framework those maps exist to support), requiring a reader to view results before understanding what was being measured or why. Page files were renumbered (`1_Environmental_Data.py` ↔ `2_Study_Design.py` swapped) so Study Design now appears first, establishing context before data presentation.
+
+### Control Variables Page Expansion
+The former "Economic & Land Context" page (containing only GDP and Land Cover tabs) was renamed to "Control Variables & Context" and expanded from two tabs to four, incorporating the newly-created DEM (Elevation) and ERA5 (Climate) maps alongside the existing GDP and Land Cover content — consolidating all of the causal model's control-variable visualizations onto a single, appropriately-named page rather than leaving two of them unvisualized anywhere in the project.
+
+---
+
+## Part 5 — Global Transferability Validation
+
+### Motivation
+The project's original stated design goal — a "globally transferable methodology," explicitly claimed in the earliest project overview — had never been empirically tested; all acquisition, processing, and modeling work had been conducted exclusively within the EU-27 + 3-country control-group scope. This represented a gap between stated claim and demonstrated evidence, worth addressing directly rather than leaving as an unverified assertion, or alternatively softening the claim's language — the former was chosen as achievable within available time.
+
+### Design Decision — Standalone Test, Not a New Comparative Study
+It was explicitly clarified that this validation is a **standalone architectural test** — confirming the acquisition pipeline itself is portable to a non-EU country — rather than a new comparative causal analysis. Accordingly, no modification to any existing EU-27 project script was made; a new, independent, minimal script was written instead, avoiding any risk of introducing changes to the validated EU-27 pipeline.
+
+### Implementation
+`test_india_transferability.py` was implemented as a self-contained script reusing only the existing Sentinel Hub authentication module (`auth_sentinelhub.py`), with a simple rectangular bounding-box geometry for India (rather than a precise administrative boundary, since exact boundary precision is unnecessary for an architectural portability test) and the identical evalscript logic used in the EU-27 NO₂ acquisition pipeline, with zero modification to the core request/aggregation structure.
+
+### Execution and Result
+All 6 requested years (2019–2024) completed successfully with zero failures on first execution, saved to `data/global_transferability_test/india_no2_test.json`. A sample value inspection (January 2019: 2.64 × 10⁻⁵ mol/m²) confirmed the returned NO₂ concentration falls within the same physically realistic range observed throughout the EU-27 dataset (approximately 1–6 × 10⁻⁵), providing evidence the pipeline is not merely executing without error but returning scientifically valid output on a new, previously untested country.
+
+### Visualization
+`plot_india_trend.py` was implemented to flatten the nested Sentinel Hub response (using the same flattening pattern established for NO₂/NDVI elsewhere in the project) and produce a simple time-series line chart of India's NO₂ trend across the full 72-month period, providing a visual complement to the raw acquisition-success confirmation.
+
+### Documentation
+A "Transferability Validation" section was added both to `README.md` (positioned after the Key Finding section) and to the dashboard's About & Data page, explicitly framing this as a standalone architectural proof-of-concept rather than a comparative study, to avoid any ambiguity about its scope or claims.
+
+## Design Principle Reinforced
+
+The `PROJECT_ROOT` path bug reinforces a recurring theme across this project's debugging history: a piece of logic that "worked" in one execution context (local development) is not proof of correctness, only proof that the specific context happened not to expose the error — the underlying arithmetic error (one `dirname()` call short of the actual project root) was present from the moment the code was written, simply undetected until a differently-structured deployment environment made it visible. Separately, the transferability-test design decision — building a new, isolated script rather than modifying validated production code to test a tangential claim — reflects a deliberate risk-management principle applied consistently throughout this project: validated, working code paths (here, the EU-27 causal-inference pipeline) should not be touched to accommodate an unrelated exploratory task, even when doing so might appear more code-efficient, since the risk of introducing a regression into already-correct code outweighs the marginal convenience of code reuse.

@@ -41,6 +41,12 @@ A methodological challenge specific to EU-wide legislation is that policies freq
 
 This study evaluates the causal effect of the European Climate Law (effective 30 June 2021) on tropospheric NO₂ concentration using a panel Difference-in-Differences design across 30 European countries: the EU-27 (treatment group) and three non-EU comparator countries — the United Kingdom, Norway, and Switzerland (control group) — selected for geographic proximity, economic development comparability, and explicit non-applicability of EU Green Deal legislation.
 
+**Figure 1. Difference-in-Differences study design showing the treatment group (EU-27) and the non-EU control group (United Kingdom, Norway, and Switzerland).**
+
+<p align="center">
+  <img src="outputs/plots/control_group_design_map.png" width="700">
+</p>
+
 ### 3.2 Data Sources
 
 | Variable | Source | Resolution |
@@ -87,21 +93,51 @@ Following construction of the non-EU control group, the corrected DiD model prod
 | R² | 0.386 |
 | N | 1,930 |
 
+**Figure 2.** Average NO₂ concentrations before (2019–2020) and after (2021–2024) the European Climate Law for the EU-27 treatment group and the non-EU control group. Both groups exhibit a similar decline, visually supporting the Difference-in-Differences estimate that no statistically distinguishable EU-specific treatment effect was detected.
+
+<p align="center">
+  <img src="outputs/plots/eu_vs_control_bar_chart.png" width="700">
+</p>
+
 The interaction term is not statistically significant, and its confidence interval spans zero.
 
 ### 4.4 Event-Study Validation
 
 All 23 quarterly interaction coefficients were non-significant (p-values ranging from approximately 0.18 to 0.94), with no discernible pattern before or after the treatment quarter. Pre-treatment quarters showed no significant divergence between groups, supporting the parallel-trends assumption; post-treatment quarters showed no delayed effect emerging at any point through the end of 2024.
 
+**Figure 3.** Event-study estimates showing quarter-specific Difference-in-Differences coefficients relative to the 2021Q2 reference period. Error bars represent 95% confidence intervals. No quarter exhibits a statistically significant deviation from zero before or after the European Climate Law.
+
+<p align="center">
+  <img src="outputs/plots/event_study_plot.png" width="700">
+</p>
+
 ### 4.5 Secondary Outcome (NDVI)
 
 A parallel model using NDVI (vegetation health) as the outcome likewise found no significant effect (coefficient = −0.0059, p = 0.128), consistent with the expectation that vegetation-health outcomes respond to land-use policy on longer timescales than atmospheric pollutants respond to emissions policy.
+
+**Figure 4.** Average NDVI before (2019–2020) and after (2021–2024) across the EU-27 study area. Visual inspection suggests no substantial change in vegetation health over the study period, consistent with the non-significant Difference-in-Differences estimate.
+
+<p align="center">
+  <img src="outputs/plots/ndvi_before_after_map.png" width="700">
+</p>
 
 ### 4.6 Transferability Validation
 
 To provide direct evidence for this framework's applicability beyond the EU-27 study region — rather than presenting transferability as an unverified design claim — the NO₂ acquisition pipeline was independently tested on India (2019–2024), using identical Sentinel Hub Statistical API infrastructure with no modification to the core acquisition logic. All six years were retrieved successfully, returning physically realistic NO₂ concentrations consistent with the range observed across the EU-27 dataset. This is presented as a standalone architectural validation, not a comparative causal analysis; establishing India as a genuine study case would require the same rigor (control-group construction, placebo testing) applied to the EU-27 analysis in this paper.
 
+**Figure 5.** Transferability validation using India as an independent test case. The identical Sentinel Hub acquisition pipeline successfully retrieved physically realistic NO₂ observations for 2019–2024 without modification, demonstrating that the framework is geographically transferable beyond the original EU-27 study area.
+
+<p align="center">
+  <img src="outputs/plots/india_transferability_trend.png" width="700">
+</p>
+
 ## 5. Discussion
+
+**Figure 6.** Average tropospheric NO₂ concentrations across the EU-27 in 2019 (pre-treatment) and 2024 (post-treatment). Although a visual reduction is evident, visual change alone cannot establish causality. The Difference-in-Differences analysis demonstrates that a similar decline occurred in the non-EU control group, indicating the observed reduction reflects a broader European trend rather than a statistically distinguishable effect of the European Climate Law.
+
+<p align="center">
+  <img src="outputs/plots/no2_before_after_map.png" width="700">
+</p>
 
 The corrected model's finding — no statistically distinguishable EU-specific NO₂ reduction attributable to the Climate Law — should be interpreted against the demonstrated capacity of this same broad methodological family to detect genuine policy effects: comparable satellite-based DiD analyses of sub-national policy interventions, such as London's low-emission zone, have found clear, significant effects. This makes it more plausible that the present null result reflects a genuine absence of a detectable EU-specific effect, rather than a general insensitivity of satellite-based DiD methodology to real policy impacts.
 

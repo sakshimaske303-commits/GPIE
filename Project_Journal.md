@@ -8,6 +8,8 @@ The Green Policy Intelligence Engine (GPIE) is a geospatial causal-inference fra
 
 The European Green Deal was selected as the demonstration case due to its comprehensive policy scope, high-quality open data availability, and global relevance. The underlying methodology, however, is designed to be transferable to any country or policy context.
 
+This transferability was subsequently tested directly: the project's NO₂ acquisition pipeline was validated standalone on India (2019–2024), confirming successful, physically realistic data acquisition using the identical infrastructure built for the EU-27 study, with zero modification to the core acquisition code.
+
 ## Problem Statement
 
 Governments invest heavily in environmental and climate policy, yet independently verifying whether such investments produce measurable outcomes remains difficult. Administrative self-reporting is inconsistent across countries, and simple before-after comparisons of environmental indicators cannot distinguish a policy's true effect from broader trends that would have occurred regardless. GPIE addresses this gap by building a reproducible, satellite-driven framework capable of testing policy effectiveness with the statistical rigor required to support a genuine causal claim — rather than a correlational one.
@@ -75,7 +77,7 @@ Module 9 was originally planned to rank environmental policies by cost-effective
 
 ### Phase 6 — Geospatial Visualization (Module 10)
 
-Seven geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` and `matplotlib`), covering NO₂ distribution, a 2019-vs-2024 before/after comparison, the treatment/control study design, land cover, NDVI, GDP, and the event-study result. Each visualization was independently verified for correctness before finalization.
+Nine geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` and `matplotlib`), covering NO₂ distribution, an NO₂ 2019-vs-2024 before/after comparison, an NDVI 2019-vs-2024 before/after comparison, the treatment/control study design, land cover, elevation (DEM), climate (temperature), NDVI distribution, GDP, and the event-study result. Each visualization was independently verified for correctness before finalization.
 
 ### Phase 7 — Interactive Dashboard and Deployment (Module 11)
 
@@ -105,6 +107,8 @@ The complete project was packaged into an eight-page interactive Streamlit dashb
 - Seven publication-quality geospatial and statistical visualizations
 - An interactive, publicly deployed Streamlit dashboard
 - Complete open-source codebase and documentation, published on GitHub
+- A formal academic research paper, including literature review and statistical methodology
+- A standalone transferability validation confirming the acquisition pipeline's portability beyond the EU-27 study region (tested on India)
 
 ## Current Status
 
