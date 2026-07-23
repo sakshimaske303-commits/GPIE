@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Ping Streamlit App
         run: |
-          curl -L -s -o /dev/null "https://f5cf6fijj9gm564r6aapt6.streamlit.app/"
+          curl --fail --silent --output /dev/null "https://f5cf6fijj9gm564r6aapt6.streamlit.app"
