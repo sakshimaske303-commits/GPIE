@@ -8,6 +8,8 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+
     steps:
       - name: Ping Streamlit App
-        run: curl -I "https://f5cf6fijj9gm564r6aapt6.streamlit.app/"
+        run: |
+          curl -L -s -o /dev/null "https://f5cf6fijj9gm564r6aapt6.streamlit.app/"
