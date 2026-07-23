@@ -28,3 +28,4 @@ data/earth_observation/dem/processed/*.vrt
 # OS/Editor files
 .DS_Store
 Thumbs.db
+.env
