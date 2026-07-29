@@ -9,6 +9,15 @@ def apply_custom_style():
             font-family: 'Inter', sans-serif;
         }
 
+        /* Reduce top whitespace */
+        .block-container {
+            padding-top: 1.5rem !important;
+        }
+
+        header[data-testid="stHeader"] {
+            height: 0px;
+        }
+
         /* Dark tech background */
         .stApp {
             background: linear-gradient(135deg, #0a0e17 0%, #0f1419 50%, #0a0e17 100%);
