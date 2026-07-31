@@ -19,7 +19,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Independently Verifying Environmental Policy Claims Using Satellite Data</h3>",
+    f"<h3 style='text-align: center; color: {PALETTE['coral']}; font-weight: 400;'>Independently Verifying Environmental Policy Claims Using Satellite Data</h3>",
     unsafe_allow_html=True,
 )
 
@@ -63,12 +63,59 @@ Use the sidebar to explore:
 
 st.markdown("---")
 
+# ============================================================
+# FULL PROJECT DOCUMENTATION
+# ============================================================
 st.markdown(
     f"""
-    <div style="text-align: center; padding: 25px; background: rgba(0, 212, 255, 0.04); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 12px;">
+    <p style="text-align:center; color:{PALETTE['coral']}; text-transform:uppercase;
+              letter-spacing:1.5px; font-weight:700; font-size:0.95rem; margin-bottom:14px;">
+        Full Project Documentation
+    </p>
+    """,
+    unsafe_allow_html=True,
+)
+
+doc_col1, doc_col2, doc_col3 = st.columns(3)
+
+with doc_col1:
+    with open("Research_Paper.pdf", "rb") as f:
+        st.download_button(
+            label="📗 Research Paper",
+            data=f,
+            file_name="Research_Paper.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+
+with doc_col2:
+    with open("Project_Journal.pdf", "rb") as f:
+        st.download_button(
+            label="📘 Project Journal",
+            data=f,
+            file_name="Project_Journal.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+
+with doc_col3:
+    with open("Devlopment_Log.pdf", "rb") as f:
+        st.download_button(
+            label="📙 Development Log",
+            data=f,
+            file_name="Devlopment_Log.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+
+st.markdown("---")
+
+st.markdown(
+    f"""
+    <div style="text-align: center; padding: 25px; background: rgba(0, 135, 149, 0.06); border: 1px solid rgba(248, 131, 121, 0.25); border-radius: 12px;">
         <p style="color: {PALETTE['text_muted']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Developed by</p>
-        <h2 style="color: {PALETTE['cyan']}; margin: 5px 0;">SAKSHI D. MASKE</h2>
-        <p style="color: {PALETTE['purple']}; font-weight: 600;">Independent Geospatial Researcher</p>
+        <h2 style="color: {PALETTE['lagoon']}; margin: 5px 0;">SAKSHI D. MASKE</h2>
+        <p style="color: {PALETTE['coral']}; font-weight: 600;">Independent Geospatial Researcher</p>
     </div>
     """,
     unsafe_allow_html=True,
