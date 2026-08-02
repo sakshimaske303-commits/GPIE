@@ -1,5 +1,7 @@
 # 🛰️ GPIE — Green Policy Intelligence Engine
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21756661.svg)](https://doi.org/10.5281/zenodo.21756661)
+
 **Independently verifying environmental policy claims using satellite data.**
 
 GPIE is a geospatial causal-inference framework that tests whether the European Green Deal's flagship legislation — the **European Climate Law** (effective 30 June 2021) — produced a measurable, statistically distinguishable reduction in NO₂ pollution across the EU-27, using satellite observations rather than self-reported government claims.

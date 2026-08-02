@@ -7,6 +7,11 @@ authors:
     given-names: "Sakshi D."
 repository-code: "https://github.com/sakshimaske303-commits/GPIE"
 url: "https://github.com/sakshimaske303-commits/GPIE"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21756661"
+    description: "Zenodo archive of GPIE v1.0.1"
+doi: "10.5281/zenodo.21756661"
 abstract: >-
   GPIE is a geospatial causal-inference framework that tests whether the European
   Climate Law (Regulation (EU) 2021/1119, effective 30 June 2021) produced a
@@ -31,5 +36,5 @@ keywords:
   - policy evaluation
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.0.0
+version: 1.0.1
 date-released: "2026-08-02"
