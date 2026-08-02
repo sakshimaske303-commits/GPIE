@@ -41,8 +41,6 @@ GPIE integrates eight independently-sourced datasets across 30 countries (EU-27 
 
 All satellite and climate datasets were acquired via the Sentinel Hub Statistical API and the Copernicus Climate Data Store, using automated, reproducible Python pipelines rather than manual downloads.
 
----
-
 ## Methodology
 
 ### Phase 1 — Policy Database (Module 1)
