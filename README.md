@@ -129,6 +129,10 @@ streamlit run app.py
 
 Independent Geospatial Researcher
 
+## 📜 License
+
+This project is licensed under [CC BY 4.0](./LICENSE) — free to share and adapt, with attribution. See `CITATION.cff` for citation metadata.
+
 ---
 
 *This project's full development process — including debugging history, methodology iterations, and every technical decision — is documented in `Devlopment_Log.md` for full transparency and reproducibility.*
