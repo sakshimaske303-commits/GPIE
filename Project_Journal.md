@@ -26,7 +26,7 @@ Did the European Climate Law (effective 30 June 2021) produce a measurable, EU-s
 
 ## Data Sources
 
-GPIE integrates seven independently-sourced datasets across 30 countries (EU-27 plus a three-country control group), spanning 2019–2024:
+GPIE integrates eight independently-sourced datasets across 30 countries (EU-27 plus a three-country control group), spanning 2019–2024 (a ninth dataset, WorldPop population, was also acquired but excluded as a model input — see Limitations):
 
 | Dataset | Provider | Purpose |
 |---|---|---|
@@ -63,11 +63,11 @@ This module constitutes GPIE's core scientific contribution and underwent a rigo
 
 **Initial model.** A first Difference-in-Differences model, comparing all 27 EU countries before and after 30 June 2021 using country and seasonal fixed effects, found a statistically significant reduction in NO₂ (p = 0.026).
 
-**Placebo test.** Before accepting this result, the identical model was re-run using a fake treatment date (30 June 2020), where no relevant policy event occurred. This placebo test found an equally significant "effect" (p = 0.002) — revealing that the original model was detecting a general, ongoing pollution-decline trend rather than an effect specific to the Climate Law. This is a well-documented limitation of any single-cohort design applied to a policy affecting an entire study population simultaneously, with no untreated comparison group available to isolate the policy-specific effect from the underlying trend.
+**Placebo test.** Before accepting this result, the identical model was re-run using a fake treatment date (30 June 2020), where no relevant policy event occurred. This placebo test found an equally significant "effect" (p = 0.004, cluster-robust standard errors by country) — revealing that the original model was detecting a general, ongoing pollution-decline trend rather than an effect specific to the Climate Law. This is a well-documented limitation of any single-cohort design applied to a policy affecting an entire study population simultaneously, with no untreated comparison group available to isolate the policy-specific effect from the underlying trend.
 
 **Methodological correction.** In response, a genuine external control group was constructed: the United Kingdom, Norway, and Switzerland — three non-EU European countries that are geographically and economically comparable to the EU-27 but not subject to EU Green Deal legislation. This required acquiring new boundary data (GADM), extending satellite data acquisition to all 30 countries, and sourcing a second GDP dataset for the control group. A proper two-group Difference-in-Differences model was then estimated, with the interaction between EU-27 membership and the post-treatment period as the core causal estimator.
 
-**Final result.** The corrected model found **no statistically significant EU-specific effect** (coefficient = −1.40 × 10⁻⁶, p = 0.632, 95% confidence interval spanning zero). An event-study extension — testing the effect separately across all 23 individual quarters from 2019 to 2024 — found no significant effect in any single quarter, both confirming the model's parallel-trends assumption (no pre-treatment divergence between groups) and ruling out a delayed effect masked by averaging.
+**Final result.** The corrected model found **no statistically significant EU-specific effect** (coefficient = −1.40 × 10⁻⁶, p = 0.663 with standard errors clustered by country, 95% confidence interval spanning zero). Clustering by country is the standard correction for panel data of this kind, where a country's repeated monthly observations are serially correlated and uncorrected standard errors would understate uncertainty — applying it here made the null result more solid, not less. An event-study extension — testing the effect separately across all 23 individual quarters from 2019 to 2024 — found only 3 of 23 quarters nominally significant under clustered SEs (close to the ~1 expected by chance at this sample size, with no consistent directional pattern), both supporting the model's parallel-trends assumption (no meaningful pre-treatment divergence between groups) and ruling out a delayed effect masked by averaging.
 
 **Honest limitation.** The control group consists of only three countries, and the model's confidence interval is reasonably wide rather than tightly clustered around zero. The rigorous conclusion is therefore not simply "the policy had no effect," but that **no statistically distinguishable EU-specific effect could be detected given this study's sample size and control-group scale** — a result consistent with either a genuinely negligible effect, or a control group too small to provide adequate statistical power to detect a real but modest one.
 
@@ -77,7 +77,7 @@ Module 9 was originally planned to rank environmental policies by cost-effective
 
 ### Phase 6 — Geospatial Visualization (Module 10)
 
-Nine geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` and `matplotlib`), covering NO₂ distribution, an NO₂ 2019-vs-2024 before/after comparison, an NDVI 2019-vs-2024 before/after comparison, the treatment/control study design, land cover, elevation (DEM), climate (temperature), NDVI distribution, GDP, and the event-study result. Each visualization was independently verified for correctness before finalization.
+Ten geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` and `matplotlib`), covering NO₂ distribution, an NO₂ 2019-vs-2024 before/after comparison, an NDVI 2019-vs-2024 before/after comparison, the treatment/control study design, land cover, elevation (DEM), climate (temperature), NDVI distribution, GDP, and the event-study result. Each visualization was independently verified for correctness before finalization.
 
 ### Phase 7 — Interactive Dashboard and Deployment (Module 11)
 
@@ -87,10 +87,10 @@ The complete project was packaged into an eight-page interactive Streamlit dashb
 
 ## Final Findings
 
-1. **No statistically significant EU-specific reduction in NO₂** was detected attributable to the European Climate Law, once rigorously tested against a genuine non-EU control group.
-2. **NDVI (vegetation health)** likewise showed no statistically significant treatment effect, consistent with vegetation-health outcomes typically responding to policy on longer timescales than atmospheric pollutants.
-3. **The validation process itself — placebo test, control-group construction, and event-study disaggregation — is as significant a project output as the substantive result.** An initial, seemingly positive finding was actively tested and shown to be unreliable before a more rigorous, honestly null result was reached.
-4. **This is reported as a credible scientific finding, not a project shortfall.** GPIE's purpose was to independently verify a policy claim, not to confirm it — and a rigorously validated null result fulfills that purpose exactly as much as a positive one would have.
+1. **No statistically significant EU-specific reduction in NO₂** was detected attributable to the European Climate Law, once rigorously tested against a genuine non-EU control group and cluster-robust standard errors.
+2. **NDVI (vegetation health) tells a different story once given the same rigor as NO₂.** The original single-cohort NDVI model (mirroring NO₂'s already-invalidated design) found no effect — but applying the same control-group correction and cluster-robust standard errors used for NO₂ reveals a statistically significant *relative decline* in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is not interpreted as evidence the Climate Law harmed vegetation — land-use change, drought, and agricultural-policy shifts are not controlled for — but it is flagged as a genuine, methodologically robust finding meriting further investigation, and a reminder that validation rigor applied only to a project's primary outcome can leave real findings undetected in its secondary outcomes.
+3. **The validation process itself — placebo test, control-group construction, cluster-robust standard errors, and event-study disaggregation — is as significant a project output as either substantive result.** An initial, seemingly positive NO₂ finding was actively tested and shown to be unreliable; conversely, an initial null NDVI finding was tested and shown to understate a real effect — in both directions, the validation process changed the reported conclusion.
+4. **This is reported as a credible scientific finding, not a project shortfall.** GPIE's purpose was to independently verify policy claims, not to confirm or deny them on the first pass — and rigorously validated results, whether null or significant, fulfill that purpose equally.
 
 ## Limitations
 
@@ -98,13 +98,14 @@ The complete project was packaged into an eight-page interactive Streamlit dashb
 - The EUR-Lex policy database returned a limited number of formally scraped records; the treatment date was instead anchored to the single most legally significant instrument (the European Climate Law) rather than a comprehensive policy-intensity measure.
 - WorldPop population data was only available for 2019–2020 within the accessible dataset version; population was reclassified as a supporting/descriptive variable rather than a model input, given its incomplete temporal coverage relative to the study period.
 - GDP for the control group required a currency conversion (USD to EUR) using approximate annual average exchange rates rather than precise historical rates, an acceptable approximation for a control variable but not for a primary variable of interest.
+- The significant NDVI finding is not controlled for time-varying land-use change, drought/precipitation-driven vegetation stress, or agricultural-policy shifts between treatment and control regions — the project's land-cover control is a static, single-snapshot variable and cannot capture these dynamics. This finding should be treated as exploratory rather than a fully identified causal estimate.
 
 ## Deliverables
 
-- A fully automated, reproducible Python data-acquisition and processing pipeline across seven datasets and 30 countries
+- A fully automated, reproducible Python data-acquisition and processing pipeline across eight datasets and 30 countries
 - Two clean, merged master datasets (EU-27-only and 30-country control-group versions)
 - A rigorously validated causal-inference model, including placebo-test and event-study robustness checks
-- Seven publication-quality geospatial and statistical visualizations
+- Ten publication-quality geospatial and statistical visualizations
 - An interactive, publicly deployed Streamlit dashboard
 - Complete open-source codebase and documentation, published on GitHub
 - A formal academic research paper, including literature review and statistical methodology

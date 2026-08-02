@@ -26,15 +26,17 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## 📊 What This Project Does
 
-- Acquires and processes **7 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records) across **30 countries** (EU-27 + a genuine non-EU control group: UK, Norway, Switzerland), 2019–2024
+- Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **30 countries** (EU-27 + a genuine non-EU control group: UK, Norway, Switzerland), 2019–2024
 - Builds a rigorous **Difference-in-Differences** causal inference model to isolate the Climate Law's specific effect from broader European pollution trends
 - Validates the result through a **placebo test**, a **genuine external control group**, and a **quarterly event-study** robustness check
 - Reports an honest, rigorously validated finding — including when that finding is a **statistically non-significant result**
-- Presents everything through **7 publication-quality maps** and an **interactive Streamlit dashboard**
+- Presents everything through **10 publication-quality maps** and an **interactive Streamlit dashboard**
 
 ## 🔬 Key Finding
 
-No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.632). This null result was independently confirmed via a 23-quarter event-study analysis. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in `Project_Journal.md`.
+No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.663, cluster-robust standard errors by country). This null result was independently confirmed via a 23-quarter event-study analysis and a series of additional robustness checks. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in `Project_Journal.md`.
+
+Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
 
 ## 🌍 Transferability Validation
 

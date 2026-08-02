@@ -5,6 +5,16 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from styles import apply_custom_style, PALETTE
 
+# ------------------------------------------------------------------
+# Robust path resolution: works both locally (running from inside
+# dashboard/) and on Streamlit Cloud (which runs from the repo root
+# without cd'ing into dashboard/ first). Same fix applied to
+# DOUBLE_JEOPARDY and STOLEN_STRATA after their PDFs 404'd only in
+# the cloud deployment.
+# ------------------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # .../dashboard
+ROOT_DIR = os.path.dirname(BASE_DIR)                      # repo root
+
 st.set_page_config(
     page_title="GPIE — Green Policy Intelligence Engine",
     page_icon="🛰️",
@@ -31,7 +41,7 @@ with col1:
 with col2:
     st.metric("STUDY PERIOD", "2019–2024", "6 years")
 with col3:
-    st.metric("DATASETS", "7", "Multi-source")
+    st.metric("DATASETS", "8", "Multi-source")
 with col4:
     st.metric("METHOD", "DiD", "Causal Inference")
 
@@ -79,34 +89,46 @@ st.markdown(
 doc_col1, doc_col2, doc_col3 = st.columns(3)
 
 with doc_col1:
-    with open("Research_Paper.pdf", "rb") as f:
-        st.download_button(
-            label="📗 Research Paper",
-            data=f,
-            file_name="Research_Paper.pdf",
-            mime="application/pdf",
-            use_container_width=True
-        )
+    pdf_path = os.path.join(ROOT_DIR, "Research_Paper.pdf")
+    try:
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                label="📗 Research Paper",
+                data=f,
+                file_name="Research_Paper.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+    except FileNotFoundError:
+        st.warning("Research_Paper.pdf not found.")
 
 with doc_col2:
-    with open("Project_Journal.pdf", "rb") as f:
-        st.download_button(
-            label="📘 Project Journal",
-            data=f,
-            file_name="Project_Journal.pdf",
-            mime="application/pdf",
-            use_container_width=True
-        )
+    pdf_path = os.path.join(ROOT_DIR, "Project_Journal.pdf")
+    try:
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                label="📘 Project Journal",
+                data=f,
+                file_name="Project_Journal.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+    except FileNotFoundError:
+        st.warning("Project_Journal.pdf not found.")
 
 with doc_col3:
-    with open("Devlopment_Log.pdf", "rb") as f:
-        st.download_button(
-            label="📙 Development Log",
-            data=f,
-            file_name="Devlopment_Log.pdf",
-            mime="application/pdf",
-            use_container_width=True
-        )
+    pdf_path = os.path.join(ROOT_DIR, "Devlopment_Log.pdf")
+    try:
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                label="📙 Development Log",
+                data=f,
+                file_name="Devlopment_Log.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+    except FileNotFoundError:
+        st.warning("Devlopment_Log.pdf not found.")
 
 st.markdown("---")
 

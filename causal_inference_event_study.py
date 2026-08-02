@@ -56,10 +56,14 @@ def run_event_study(df):
     print("Fitting model...")
 
     model = sm.OLS(y, X)
-    results = model.fit()
+
+    # Cluster-robust standard errors, clustered by country (see
+    # causal_inference_final_did.py for rationale) - kept consistent across
+    # every model in this project.
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
     print("Model fit complete!")
 
-    print("\n=== EVENT-STUDY COEFFICIENTS (EU x Quarter, relative to 2021Q2) ===")
+    print("\n=== EVENT-STUDY COEFFICIENTS (EU x Quarter, relative to 2021Q2, cluster-robust SEs) ===")
     event_cols = [c for c in event_dummies.columns]
     for col in event_cols:
         coef = results.params[col]
