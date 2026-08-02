@@ -44,10 +44,15 @@ def run_did_model(df):
     print("Fitting model...")
 
     model = sm.OLS(y, X)
-    results = model.fit()
+
+    # Cluster-robust standard errors, clustered by country: with panel data
+    # (repeated monthly observations per country), errors are serially
+    # correlated within a country over time, so default OLS standard errors
+    # understate true uncertainty (Bertrand, Duflo & Mullainathan, 2004).
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
     print("Model fit complete!")
 
-    print("\n=== DiD TREATMENT EFFECT (EU x Post-2021) ===")
+    print("\n=== DiD TREATMENT EFFECT (EU x Post-2021, cluster-robust SEs) ===")
     print("Coefficient:", results.params["did_interaction"])
     print("P-value:", results.pvalues["did_interaction"])
     print("95% CI:", results.conf_int().loc["did_interaction"].values)

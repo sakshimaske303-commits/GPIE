@@ -43,18 +43,25 @@ def run_event_study(df):
     y = model_df["mean_no2"].astype(float)
 
     model = sm.OLS(y, X)
-    results = model.fit()
 
-    # Extract coefficients, confidence intervals, and quarter labels
+    # Cluster-robust standard errors, clustered by country (see
+    # causal_inference_final_did.py for rationale) - kept consistent across
+    # every model in this project.
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
+
+    # Extract coefficients, confidence intervals, p-values, and quarter labels
     plot_data = []
     for q in quarters_to_include:
         col = f"eu_x_{q}"
         coef = results.params[col]
         ci_low, ci_high = results.conf_int().loc[col]
-        plot_data.append({"quarter": q, "coef": coef, "ci_low": ci_low, "ci_high": ci_high})
+        pval = results.pvalues[col]
+        plot_data.append({"quarter": q, "coef": coef, "ci_low": ci_low, "ci_high": ci_high,
+                           "significant": pval < 0.05})
 
     # Add the reference quarter itself as zero (by construction)
-    plot_data.append({"quarter": reference_quarter, "coef": 0.0, "ci_low": 0.0, "ci_high": 0.0})
+    plot_data.append({"quarter": reference_quarter, "coef": 0.0, "ci_low": 0.0, "ci_high": 0.0,
+                       "significant": False})
 
     plot_df = pd.DataFrame(plot_data).sort_values("quarter").reset_index(drop=True)
     return plot_df
@@ -70,12 +77,22 @@ def make_plot(plot_df):
     coefs = plot_df["coef"].values
     ci_low = plot_df["ci_low"].values
     ci_high = plot_df["ci_high"].values
+    sig_mask = plot_df["significant"].values
 
-    # Error bars representing the 95% confidence interval
+    # Error bars representing the 95% confidence interval (cluster-robust)
     yerr = [coefs - ci_low, ci_high - coefs]
 
     ax.errorbar(x, coefs, yerr=yerr, fmt="o", color="#2c7fb8", ecolor="#a6bddb",
-                elinewidth=2, capsize=4, markersize=6, label="EU x Quarter effect")
+                elinewidth=2, capsize=4, markersize=6, label="EU x Quarter effect (p ≥ 0.05)")
+
+    # Highlight the small number of nominally significant quarters distinctly,
+    # rather than omitting them - honest reporting includes them, with context
+    # in the accompanying text (see Research_Paper.md Section 4.4).
+    if sig_mask.any():
+        sig_x = [xi for xi, s in zip(x, sig_mask) if s]
+        sig_y = coefs[sig_mask]
+        ax.scatter(sig_x, sig_y, color="#e34a33", s=90, zorder=5, marker="o",
+                   edgecolor="#7a1d0f", linewidth=1.2, label="Nominally significant (p < 0.05)")
 
     # Zero reference line
     ax.axhline(0, color="gray", linestyle="--", linewidth=1)
@@ -89,7 +106,11 @@ def make_plot(plot_df):
     ax.set_xticklabels(plot_df["quarter"], rotation=45, ha="right")
     ax.set_ylabel("Estimated EU-27 vs. Control Effect on Mean NO₂\n(relative to 2021Q2, mol/m²)")
     ax.set_xlabel("Quarter")
-    ax.set_title("Event-Study: EU-27 vs. Control Group (UK, Norway, Switzerland) NO₂ Difference Over Time\nNo quarter shows a statistically significant deviation from zero")
+    ax.set_title(
+        "Event-Study: EU-27 vs. Control Group (UK, Norway, Switzerland) NO₂ Difference Over Time\n"
+        "20 of 23 quarters non-significant (cluster-robust SEs); 3 nominally significant quarters "
+        "(≈1 expected by chance) show no consistent directional pattern"
+    )
 
     ax.legend(loc="upper right")
     ax.grid(axis="y", alpha=0.3)

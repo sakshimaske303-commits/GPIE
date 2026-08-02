@@ -1,4 +1,21 @@
 streamlit
 pandas
+numpy
 geopandas
 plotly
+matplotlib
+statsmodels
+rasterio
+rasterstats
+xarray
+shapely
+requests
+python-dotenv
+PyJWT
+beautifulsoup4
+
+# GDAL (imported via `from osgeo import gdal` in download_dem.py) is not
+# reliably pip-installable on all platforms - it usually needs a matching
+# system-level GDAL install first, or is easiest via conda:
+#   conda install -c conda-forge gdal
+# then this requirements.txt can be pip-installed as usual for everything else.

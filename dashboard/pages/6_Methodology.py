@@ -18,8 +18,9 @@ st.markdown("---")
 st.markdown("""
 ### Data Sources
 
-GPIE integrates seven independently-sourced datasets, all acquired at the country level for 
-2019–2024 (30 countries: EU-27 + UK, Norway, Switzerland):
+GPIE integrates eight independently-sourced datasets, all acquired at the country level for
+2019–2024 (30 countries: EU-27 + UK, Norway, Switzerland) — a ninth, WorldPop population, was
+also acquired but excluded as a model input (see Limitations below):
 """)
 
 col1, col2 = st.columns(2)
@@ -35,6 +36,7 @@ with col2:
     - **Land Cover** — ESA WorldCover 10m v200
     - **Elevation** — Copernicus DEM GLO-30
     - **Policy Records** — EUR-Lex (EU Green Deal legislation)
+    - **Administrative Boundaries** — Eurostat GISCO (NUTS) + GADM
     """)
 
 st.markdown("---")
@@ -57,10 +59,10 @@ with st.expander("**Step 2 — Placebo Test**", expanded=False):
     To test the result's credibility, the identical model was re-run with the treatment date 
     artificially shifted to 30 June 2020 — a date with no relevant policy event.
 
-    **The result**: the placebo model found an equally significant "effect" (p = 0.002) — even 
-    more significant than the real result. This proved the original model was capturing a general 
-    trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once 
-    the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.408).
+    **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
+    more significant than the real result. This proved the original model was capturing a general
+    trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once
+    the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.186, cluster-robust).
     """)
 
 with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
@@ -78,9 +80,31 @@ with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=Fal
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
-    The overall DiD result was further validated by estimating the treatment effect separately for 
-    all 23 individual quarters (2019Q1–2024Q4), rather than as a single average — confirming the 
+    The overall DiD result was further validated by estimating the treatment effect separately for
+    all 23 individual quarters (2019Q1–2024Q4), rather than as a single average — confirming the
     null result held consistently across every quarter, both before and after treatment.
+    """)
+
+with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustness Checks**", expanded=False):
+    st.markdown("""
+    All models were re-estimated with standard errors clustered by country, the standard
+    correction for panel data where a country's repeated monthly observations are serially
+    correlated (uncorrected OLS standard errors understate true uncertainty). This made the null
+    NO₂ result *more* solid (p = 0.632 → 0.663), not less.
+
+    Five further robustness checks were run against the corrected NO₂ model, all reinforcing the
+    null finding: removing GDP entirely (rules out GDP as a biasing "bad control"); a
+    log-transformed outcome (rules out functional-form artifacts); shifting the assumed treatment
+    date by ±6/±12 months (no shifted date reaches significance); splitting EU-27 countries by
+    baseline pollution level (neither subgroup is significant); and a formal minimum-detectable-effect
+    calculation, which found this design can reliably detect an effect of ~28% of baseline NO₂ or
+    larger — the observed coefficient (~4.4% of baseline) is well below that threshold.
+
+    Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
+    with the original, single-cohort design — surfaced a genuinely different result: a
+    statistically significant relative decline once the same control-group correction was applied
+    (see *Causal Results* page). Full details and all reported numbers are in `Research_Paper.md`
+    and `Project_Journal.md` in the project repository.
     """)
 
 st.markdown("---")
@@ -88,20 +112,31 @@ st.markdown("---")
 st.markdown("### ⚠️ Honest Limitations")
 
 st.warning("""
-**Statistical power**: The control group consists of only 3 countries. The overall model's 
-confidence interval — [-7.12 × 10⁻⁶, +4.32 × 10⁻⁶] — is reasonably wide, not tightly clustered 
-around zero. This means the honest conclusion is not simply *"the policy had no effect,"* but 
-rather: *with this study's sample size and three-country control group, no statistically 
-distinguishable EU-specific effect could be detected* — a result consistent with either a 
-genuinely negligible effect, or a control group too small to provide adequate statistical power 
-to detect a real but modest effect.
+**Statistical power**: The control group consists of only 3 countries. The overall model's
+confidence interval — [-7.68 × 10⁻⁶, +4.88 × 10⁻⁶] — is reasonably wide, not tightly clustered
+around zero. Quantified directly: at 80% power, this design's minimum detectable effect is
+roughly **28% of the EU-27's pre-treatment average NO₂** — this study can rule out an effect of
+that size or larger, but not a smaller one. This means the honest conclusion is not simply
+*"the policy had no effect,"* but rather: *with this study's sample size and three-country
+control group, no effect of at least ~28% could be detected* — consistent with either a
+genuinely negligible effect, or a real but more modest effect this design lacks the power to see.
+""")
+
+st.warning("""
+**The NDVI secondary-outcome finding is exploratory, not causal.** Once given the same
+control-group correction as NO₂, NDVI shows a statistically significant relative decline
+(p = 0.012) — but this analysis does not control for land-use change, drought/precipitation-driven
+vegetation stress, or agricultural-policy shifts between treatment and control regions, any of
+which could plausibly drive the result independent of the Climate Law. It is reported as a
+genuine, robust finding meriting further investigation, not as evidence the Climate Law affected
+vegetation.
 """)
 
 st.info("""
-**Module 9 (Economic Efficiency Ranking) was deliberately scoped out.** Ranking policies by 
-"cost-per-unit-environmental-improvement" presupposes a measurable improvement to rank against — 
-since Module 8 found no statistically significant effect, constructing such a ranking would 
-require manufacturing significance the data does not support. This decision is itself treated as 
+**Module 9 (Economic Efficiency Ranking) was deliberately scoped out.** Ranking policies by
+"cost-per-unit-environmental-improvement" presupposes a measurable improvement to rank against —
+since Module 8 found no statistically significant effect, constructing such a ranking would
+require manufacturing significance the data does not support. This decision is itself treated as
 a finding consistent with GPIE's "Trust, But Verify" design principle.
 """)
 

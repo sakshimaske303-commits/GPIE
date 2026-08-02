@@ -36,10 +36,14 @@ def run_did_model(df):
 
     print("Fitting model...")
     model = sm.OLS(y, X)
-    results = model.fit()
+
+    # Cluster-robust standard errors, clustered by country (see
+    # causal_inference_final_did.py for rationale) - kept consistent across
+    # every model in this project.
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["NUTS_ID"]})
     print("Model fit complete!")
 
-    print("\n=== PLACEBO TREATMENT EFFECT (should be non-significant) ===")
+    print("\n=== PLACEBO TREATMENT EFFECT (should be non-significant, cluster-robust SEs) ===")
     print("Coefficient:", results.params["treatment"])
     print("P-value:", results.pvalues["treatment"])
     print("95% CI:", results.conf_int().loc["treatment"].values)
