@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software or its findings, please cite it using the metadata below."
+title: "GPIE — Green Policy Intelligence Engine: Independently Verifying Environmental Policy Claims Using Satellite Data"
+type: software
+authors:
+  - family-names: "Maske"
+    given-names: "Sakshi D."
+repository-code: "https://github.com/sakshimaske303-commits/GPIE"
+url: "https://github.com/sakshimaske303-commits/GPIE"
+abstract: >-
+  GPIE is a geospatial causal-inference framework that tests whether the European
+  Climate Law (Regulation (EU) 2021/1119, effective 30 June 2021) produced a
+  statistically distinguishable reduction in tropospheric NO2 pollution across the
+  EU-27, using Sentinel-5P TROPOMI satellite observations (2019-2024) and a
+  Difference-in-Differences causal-inference design with a genuine non-EU control
+  group (United Kingdom, Norway, Switzerland). The corrected two-group model finds
+  no statistically significant EU-specific effect (p = 0.663, cluster-robust
+  standard errors), a result independently confirmed via a 23-quarter event-study
+  analysis and a series of additional robustness checks. Applying the same design
+  to a secondary NDVI (vegetation health) outcome finds a statistically significant
+  relative decline (p = 0.012), reported as an exploratory finding.
+keywords:
+  - causal inference
+  - difference-in-differences
+  - satellite remote sensing
+  - Sentinel-5P
+  - air pollution
+  - NO2
+  - NDVI
+  - European Green Deal
+  - policy evaluation
+  - geospatial analysis
+version: 1.0.0
+date-released: "2026-08-02"
