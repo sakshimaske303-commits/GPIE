@@ -43,6 +43,8 @@ This study evaluates the causal effect of the European Climate Law (effective 30
 
 Because the Climate Law applied to all EU-27 member states simultaneously on a single effective date, this design has a single treatment cohort and a single treatment timing, with no staggered rollout across units. This structurally avoids the negative-weighting and heterogeneous-treatment-effect bias that recent econometric literature has identified in two-way fixed-effects DiD estimators specifically when treatment timing varies across units (Callaway, Goodman-Bacon & Sant'Anna, 2024) — a critique this study's design is not exposed to, though the absence of any staggered timing is precisely what removed the possibility of a naturally occurring within-EU control group in the first place (Section 2.3).
 
+The United Kingdom's inclusion in the control group is strengthened, rather than weakened, by its own regulatory history: the UK formally exited the EU in January 2020 and its post-Brexit transition period ended on 31 December 2020, placing its entire post-2021 observation window unambiguously outside EU Green Deal jurisdiction and specifically outside the European Climate Law's regulatory scope. This removes any ambiguity about whether the UK could itself be a partially treated unit during the study's post-treatment period, reinforcing rather than undermining its validity as a genuine, non-EU counterfactual.
+
 <p align="center">
   <img src="outputs/plots/control_group_design_map.png" width="700">
 </p>
@@ -175,15 +177,31 @@ Several limitations should be considered when interpreting these findings. First
 
 An originally planned module ranking Green Deal policies by cost-effectiveness (cost per unit of environmental improvement) was deliberately not pursued once Section 4 established that no statistically significant effect had been detected: ranking interventions against an effect size indistinguishable from zero would require either manufacturing significance the data does not support, or ranking against noise, neither of which is scientifically defensible. This module was scoped out on principle rather than left incomplete, consistent with this study's broader commitment to letting the validated result — rather than a downstream deliverable's requirements — determine what analysis is appropriate to report.
 
-## 7. Conclusion
+## 7. Future Work
+
+The limitations above point to several specific, well-defined technical extensions that were considered but deliberately scoped out of this study's current phase, rather than pursued incompletely within it.
+
+**Synthetic Control Method.** With only three control units, standard DiD weights each control country equally by construction. An Augmented Synthetic Control approach (Abadie, Diamond & Hainmüller, 2010; Ben-Michael, Feller & Rothstein, 2021) would instead construct a weighted composite of the control (and potentially sub-national) units chosen to match the EU-27's pre-treatment NO₂ trajectory as closely as possible, which could tighten the estimated confidence interval without requiring additional control countries. This is a natural next methodological step given the small-N control group identified as this study's primary limitation.
+
+**Sub-national spatial resolution (NUTS-2 / grid-cell DiD).** The current analysis aggregates to the country-month level, which averages away regional and urban-versus-rural heterogeneity within large member states and precludes excluding border-adjacent regions to address the SUTVA spillover risk discussed in Section 5. Re-running the design at NUTS-2 regional resolution, or on a fixed-size grid-cell basis directly from the underlying TROPOMI pixel data, would increase the effective sample size roughly tenfold, materially improving statistical power, and would allow a border-buffer exclusion as a direct empirical test of the spillover-attenuation argument rather than a qualitative one.
+
+**Spatial econometric diagnostics.** Country-level pollution readings are not necessarily spatially independent observations; formal spatial autocorrelation diagnostics (Moran's I) and, if warranted, spatial-lag or spatial-error model specifications would test and, if necessary, correct for this directly, complementing the country-clustered standard errors already applied in Section 3.3.
+
+**Delayed and cumulative policy effects.** The event-study analysis (Section 4.4) does not extend past 2024Q4 and cannot speak to effects of later Green Deal instruments, such as the "Fit for 55" legislative package, which continued phasing in after this study's observation window closes. A specific, testable extension would be to check whether the loosely-defined, non-significant 2023Q3 event-study deviation reflects early anticipation of these later instruments, once sufficient post-period data becomes available.
+
+## 8. Conclusion
 
 This study finds no statistically distinguishable, EU-specific reduction in NO₂ pollution attributable to the European Climate Law, once rigorously tested against a genuine non-EU control group and validated through placebo testing and event-study disaggregation. This null result followed directly from a validation process that identified and corrected a flawed initial specification — itself demonstrating the practical necessity of placebo testing in policy evaluation research applying single-cohort designs to universally applied legislation. Applying that same validation standard to the secondary NDVI outcome, rather than stopping at the primary result, surfaced a significant relative decline that the original single-cohort NDVI specification had missed entirely — underscoring that methodological rigor applied unevenly across primary and secondary outcomes can itself become a source of error. The framework developed here is directly transferable to future evaluations of EU environmental policy, and to other jurisdictions facing the same structural identification challenge of legislation without a naturally occurring internal comparison group — a claim supported empirically in this study by a successful standalone acquisition test on India (Section 4.6), rather than asserted without evidence.
 
 ## References
 
+Abadie, A., Diamond, A., & Hainmüller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program. *Journal of the American Statistical Association*, 105(490), 493–505.
+
 Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press.
 
 Bekes, G., & Kezdi, G. (2021). Impact evaluation using Difference-in-Differences. *RAUSP Management Journal*, 54(4), 519–532.
+
+Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The Augmented Synthetic Control Method. *Journal of the American Statistical Association*, 116(536), 1789–1803.
 
 Bertrand, M., Duflo, E., & Mullainathan, S. (2004). How Much Should We Trust Differences-in-Differences Estimates? *The Quarterly Journal of Economics*, 119(1), 249–275.
 

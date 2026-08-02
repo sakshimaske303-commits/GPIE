@@ -46,6 +46,36 @@ All 6 years acquired successfully, returning physically realistic NO₂ values c
 
 ---
 
+## 🏗️ Architecture
+
+```text
+ DATA SOURCES                    PREPROCESSING                 MODELLING                   PRESENTATION
+ ─────────────                   ─────────────                 ─────────                   ────────────
+ Sentinel-5P (NO₂)     ┐
+ CGLS (NDVI)           │
+ ERA5 (Climate)        │         Per-dataset          Country-month        Difference-in-
+ Eurostat / World      ├────▶    download_*.py   ─▶    master datasets ─▶  Differences model   ─▶   outputs/plots/
+ Bank (GDP)             │        process_*.py          (data/)             (causal_inference*.py)     (maps & charts)
+ ESA WorldCover        │         *_stats.py                                Placebo test                    │
+ Copernicus DEM        │                                                   Event-study                     ▼
+ GISCO / GADM          │                                                   Cluster-robust SEs      Streamlit dashboard
+ (boundaries)          │                                                   Robustness checks        (dashboard/app.py)
+ EUR-Lex (policy)      ┘                                                                                    │
+                                                                                                              ▼
+                                                                                              Research_Paper.md / Project_Journal.md
+```
+
+Each stage is a separate, independently re-runnable script — there is no hidden manual step between raw acquisition and the final published figures; every number in the paper traces back to a script in this repository.
+
+## ♻️ Reproducibility
+
+- **Environment**: Python 3.10+. Most dependencies install via `requirements.txt`; `geopandas`/`rasterio`/`GDAL` are easiest installed via `conda` (`conda install -c conda-forge geopandas rasterio gdal`) if the `pip` install fails on your platform.
+- **Credentials**: Sentinel Hub, Copernicus CDS, and World Bank API access require free account credentials, stored in a local `.env` file (never committed — see `.env.example` if present, or the acquisition scripts' docstrings for the expected variable names).
+- **Run order**: `download_*.py` (per dataset) → `process_*.py` (standardization) → `*_stats.py` (country-month aggregation) → `causal_inference*.py` (models) → `map_*.py` (figures) → `dashboard/app.py` (interactive presentation). Every intermediate output is written to `data/` or `outputs/plots/` so any stage can be re-run independently without repeating earlier stages.
+- **Full audit trail**: every fix, bug, and methodology change made after the first working version — including this project's cluster-robust standard error correction and the NDVI re-analysis — is logged chronologically in `Devlopment_Log.md`, so any reported number can be traced back to the change that produced it.
+
+---
+
 ## 🗂️ Repository Structure
 
 ```text
