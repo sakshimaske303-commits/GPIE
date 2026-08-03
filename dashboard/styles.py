@@ -13,7 +13,9 @@ def apply_custom_style():
         open/close button) but hide only the Deploy button ---- */
 [data-testid="stHeader"] {
     background-color: #04181B !important;
-    height: 3rem !important;
+    height: 0rem !important;
+    min-height: 0 !important;
+    padding: 0 !important;
 }
 [data-testid="stAppDeployButton"] {
     display: none !important;
@@ -25,7 +27,7 @@ def apply_custom_style():
     visibility: hidden !important;
 }
 .block-container {
-    padding-top: 1rem !important;
+    padding-top: 0.5rem !important;
 }
 
         /* ---- Sidebar collapse/expand button — safety net
