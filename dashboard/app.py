@@ -141,9 +141,9 @@ with doc_col2:
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="📘 Project Journal",
+                label="📘 Project Report",
                 data=f,
-                file_name="GPIE_Project_Journal.pdf",
+                file_name="GPIE_Project_Report.pdf",
                 mime="application/pdf",
                 use_container_width=True
             )
