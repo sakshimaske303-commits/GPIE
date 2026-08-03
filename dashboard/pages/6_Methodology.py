@@ -45,13 +45,20 @@ st.markdown("### The Validation Sequence")
 
 with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
     st.markdown("""
-    The first causal model compared all 27 EU countries before vs. after the European Climate Law 
-    (30 June 2021), using country and seasonal fixed effects. This found a statistically significant 
-    reduction in NO₂ (p = 0.026).
+    The first causal model compared all 27 EU countries before vs. after the European Climate Law
+    (30 June 2021), using country and seasonal fixed effects. This found a statistically significant
+    reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
 
-    **The problem**: because all 27 countries were treated simultaneously, there was no untreated 
-    comparison group — making it mathematically impossible to distinguish a genuine policy effect 
-    from a general, ongoing pollution-decline trend.
+    **A later verification correction**: this initial-model figure had not been re-estimated with the
+    cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
+    cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
+    doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
+    model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
+    p = 0.0017 (significant) once corrected the same way.
+
+    **The problem**: because all 27 countries were treated simultaneously, there was no untreated
+    comparison group — making it mathematically impossible to distinguish a genuine policy effect
+    from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
     """)
 
 with st.expander("**Step 2 — Placebo Test**", expanded=False):
@@ -101,10 +108,13 @@ with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustne
     larger — the observed coefficient (~4.4% of baseline) is well below that threshold.
 
     Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
-    with the original, single-cohort design — surfaced a genuinely different result: a
-    statistically significant relative decline once the same control-group correction was applied
-    (see *Causal Results* page). Full details and all reported numbers are in `Research_Paper.md`
-    and `Project_Journal.md` in the project repository.
+    with the original, single-cohort design — produced a statistically significant relative decline
+    once the same control-group correction was applied (see *Causal Results* page). A verification
+    pass later found that outcome's own initial single-cohort model was, once correctly re-estimated
+    with cluster-robust standard errors, already significant too (p = 0.0017, not the originally
+    reported p = 0.128) — so the control-group correction's role for NDVI is better identification
+    of an EU-specific effect, not first-time detection of significance. Full details and all
+    reported numbers are in `Research_Paper.md` and `Project_Journal.md` in the project repository.
     """)
 
 st.markdown("---")
