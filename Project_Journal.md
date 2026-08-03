@@ -41,6 +41,8 @@ GPIE integrates eight independently-sourced datasets across 30 countries (EU-27 
 
 All satellite and climate datasets were acquired via the Sentinel Hub Statistical API and the Copernicus Climate Data Store, using automated, reproducible Python pipelines rather than manual downloads.
 
+---
+
 ## Methodology
 
 ### Phase 1 — Policy Database (Module 1)
@@ -59,7 +61,7 @@ All datasets were converted into a standardized, country-month structure. Two ma
 
 This module constitutes GPIE's core scientific contribution and underwent a rigorous, multi-stage validation process rather than a single model-and-report approach.
 
-**Initial model.** A first Difference-in-Differences model, comparing all 27 EU countries before and after 30 June 2021 using country and seasonal fixed effects, found a statistically significant reduction in NO₂ (p = 0.026).
+**Initial model.** A first Difference-in-Differences model, comparing all 27 EU countries before and after 30 June 2021 using country and seasonal fixed effects, found a statistically significant reduction in NO₂. As originally computed with classical (non-clustered) standard errors, p = 0.026; a later verification pass found this specific figure had not been re-estimated with the cluster-robust standard errors used everywhere else in this project — cluster-robust, it is p = 0.041, still significant at 5%, so this correction does not change the model's conclusion (see Devlopment_Log.md for the full correction).
 
 **Placebo test.** Before accepting this result, the identical model was re-run using a fake treatment date (30 June 2020), where no relevant policy event occurred. This placebo test found an equally significant "effect" (p = 0.004, cluster-robust standard errors by country) — revealing that the original model was detecting a general, ongoing pollution-decline trend rather than an effect specific to the Climate Law. This is a well-documented limitation of any single-cohort design applied to a policy affecting an entire study population simultaneously, with no untreated comparison group available to isolate the policy-specific effect from the underlying trend.
 
@@ -86,8 +88,8 @@ The complete project was packaged into an eight-page interactive Streamlit dashb
 ## Final Findings
 
 1. **No statistically significant EU-specific reduction in NO₂** was detected attributable to the European Climate Law, once rigorously tested against a genuine non-EU control group and cluster-robust standard errors.
-2. **NDVI (vegetation health) tells a different story once given the same rigor as NO₂.** The original single-cohort NDVI model (mirroring NO₂'s already-invalidated design) found no effect — but applying the same control-group correction and cluster-robust standard errors used for NO₂ reveals a statistically significant *relative decline* in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is not interpreted as evidence the Climate Law harmed vegetation — land-use change, drought, and agricultural-policy shifts are not controlled for — but it is flagged as a genuine, methodologically robust finding meriting further investigation, and a reminder that validation rigor applied only to a project's primary outcome can leave real findings undetected in its secondary outcomes.
-3. **The validation process itself — placebo test, control-group construction, cluster-robust standard errors, and event-study disaggregation — is as significant a project output as either substantive result.** An initial, seemingly positive NO₂ finding was actively tested and shown to be unreliable; conversely, an initial null NDVI finding was tested and shown to understate a real effect — in both directions, the validation process changed the reported conclusion.
+2. **NDVI (vegetation health) tells a different story once given the same rigor as NO₂.** The original single-cohort NDVI model (mirroring NO₂'s already-invalidated design) was originally reported as finding no effect (p = 0.128, using classical standard errors) — a later verification pass found that, re-estimated with the cluster-robust standard errors used everywhere else in this project, that same initial model was already significant (p = 0.0017). Regardless, since a single-cohort design cannot reliably distinguish a policy-specific effect from a general regional trend (per the NO₂ placebo test), the same control-group correction applied to NO₂ was applied to NDVI as well, producing a statistically significant *relative decline* in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is not interpreted as evidence the Climate Law harmed vegetation — land-use change, drought, and agricultural-policy shifts are not controlled for — but it is flagged as a genuine, methodologically robust finding meriting further investigation.
+3. **The validation process itself — placebo test, control-group construction, cluster-robust standard errors, and event-study disaggregation — is as significant a project output as either substantive result.** An initial, seemingly positive NO₂ finding was actively tested and shown to be unreliable; the NDVI finding, once consistently re-estimated with this project's own stated standard-error methodology, held up as significant at both the single-cohort and corrected-model stages — with the control-group correction improving its identification rather than being what first produced significance.
 4. **This is reported as a credible scientific finding, not a project shortfall.** GPIE's purpose was to independently verify policy claims, not to confirm or deny them on the first pass — and rigorously validated results, whether null or significant, fulfill that purpose equally.
 
 ## Limitations

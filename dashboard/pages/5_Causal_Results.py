@@ -77,7 +77,7 @@ process that fundamentally changed the analytical approach:
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.error("**1️⃣ Initial Model**\n\nSingle-cohort design (all EU countries, no control group) found a seemingly significant effect (p=0.026)")
+    st.error("**1️⃣ Initial Model**\n\nSingle-cohort design (all EU countries, no control group) found a seemingly significant effect (p=0.026 as originally computed with classical SEs; p=0.041 cluster-robust, still significant — see Methodology)")
 with col2:
     st.error("**2️⃣ Placebo Test Failed**\n\nTesting a fake treatment date found an equally 'significant' effect — revealing the original result was actually a general pollution-decline trend")
 with col3:
@@ -163,9 +163,13 @@ st.markdown("---")
 st.markdown("### 🌿 Secondary Outcome: NDVI (Vegetation Health)")
 
 st.markdown("""
-The same two-group, control-adjusted design used for NO₂ was also applied to NDVI, after an
-earlier single-cohort NDVI model (mirroring NO₂'s already-invalidated original design) had found
-no effect. Applying NO₂'s own validation standard to the secondary outcome changed the result:
+The same two-group, control-adjusted design used for NO₂ was also applied to NDVI. An earlier
+single-cohort NDVI model (mirroring NO₂'s already-invalidated original design) was originally
+reported as finding no effect (p=0.128) — a later verification pass found that figure had used
+classical, not cluster-robust, standard errors; correctly re-estimated, that same initial model
+was already significant (p=0.0017). Either way, a single-cohort design can't reliably isolate a
+policy-specific effect from a general trend, so the control-group correction below remains the
+trustworthy result — its role here is better identification, not first-time significance:
 """)
 
 ncol1, ncol2, ncol3 = st.columns(3)

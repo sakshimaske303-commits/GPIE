@@ -1,5 +1,84 @@
 # GREEN POLICY INTELLIGENCE ENGINE (GPIE)
 
+## Index
+
+1. [Project Overview](#project-overview)
+2. [Problem Statement](#problem-statement)
+3. [Aim](#aim)
+4. [Objectives](#objectives)
+5. [Research Question](#research-question)
+6. [Expected Outputs](#expected-outputs)
+7. [Demonstration Case](#demonstration-case)
+8. [Current Status](#current-status)
+9. [Module Architecture (Updated)](#gpie-module-architecture-updated)
+10. [Module Architecture (Final)](#gpie-module-architecture-final)
+11. [Module 1 — Policy Database Acquisition](#module-1-policy-database-acquisition-executed)
+12. [Module 2 — Earth Observation & Auxiliary Data Acquisition](#module-2-earth-observation-auxiliary-data-acquisition-executed-population-partial-by-design)
+13. [Module 3 — Preprocessing & Standardization](#module-3-preprocessing-standardization-executed)
+14. [Module 4 — Temporal Aggregation](#module-4-temporal-aggregation-effectively-complete-via-per-dataset-scripts-not-a-shared-engine)
+15. [Module 5 — Export & Output Standardization](#module-5-export-output-standardization-effectively-complete-ad-hoc-not-a-dedicated-engine)
+16. [Module 6 — Validation & Quality Control](#module-6-validation-quality-control-partially-executed-ad-hoc-proven-highly-effective)
+17. [Module 7 — Pipeline Orchestration & Execution Management](#module-7-pipeline-orchestration-execution-management-partially-executed-superseded-in-practice)
+18. [Module 8 — Causal Inference & Policy Verification](#module-8-causal-inference-policy-verification-complete)
+19. [Module 9 — Economic Efficiency Ranking](#module-9-economic-efficiency-ranking-scoped-out-reasoned-decision-not-abandoned)
+20. [Module 10 — Geospatial Output Generation](#module-10-geospatial-output-generation-complete)
+21. [Module 11 — Dashboard & Deployment](#module-11-dashboard-deployment-complete)
+22. [Project Status: Complete](#project-status-complete)
+23. [Policy Database Construction (Days 1–2)](#policy-database-construction-days-12)
+24. [Sentinel-5P TROPOMI NO₂ Acquisition Protocol (DS02)](#sentinel-5p-tropomi-no-acquisition-protocol-ds02-final-locked-version-v10)
+    - [Product Selection](#product-selection)
+    - [Study Area](#study-area)
+    - [Temporal Extent](#temporal-extent)
+    - [Coordinate Reference System (CRS)](#coordinate-reference-system-crs)
+    - [Spatial Discovery Strategy](#spatial-discovery-strategy)
+    - [Download Strategy](#download-strategy)
+    - [Spatial Processing Strategy](#spatial-processing-strategy)
+    - [Spatial Resolution](#spatial-resolution)
+    - [Raw Data Acquisition Strategy](#raw-data-acquisition-strategy)
+    - [Batch Execution Strategy](#batch-execution-strategy)
+    - [Query Strategy](#query-strategy)
+    - [Quality Control](#quality-control)
+    - [Processing Workflow](#processing-workflow)
+    - [Processing Platform](#processing-platform)
+    - [Failure Recovery Strategy](#failure-recovery-strategy)
+    - [Raw Data Lifecycle](#raw-data-lifecycle)
+    - [Missing Data Policy](#missing-data-policy)
+    - [Output Products](#output-products)
+    - [Directory Structure](#directory-structure)
+    - [File Naming Convention](#file-naming-convention)
+    - [Metadata Policy](#metadata-policy)
+    - [Logging Policy](#logging-policy)
+    - [Version Control Policy](#version-control-policy)
+    - [Framework Design Principle](#framework-design-principle)
+    - [Scientific Design Principle](#scientific-design-principle)
+    - [Methodology Lock](#methodology-lock)
+25. [Project Journal — DS05 Population Module](#project-journal-ds05-population-module)
+26. [Project Journal — DS05 Copernicus DEM Module](#project-journal-ds05-copernicus-dem-module)
+27. [Project Journal — DS03 NDVI: Planned Approach (Not Yet Implemented)](#project-journal-ds03-ndvi-planned-approach-not-yet-implemented)
+28. [Project Journal — DS08 Eurostat Regional GDP Module](#project-journal-ds08-eurostat-regional-gdp-module)
+29. [Project Journal — DS04 ESA WorldCover Module](#project-journal-ds04-esa-worldcover-module)
+30. [Project Journal — DS06 ERA5 Climate Reanalysis Module](#project-journal-ds06-era5-climate-reanalysis-module)
+31. [Project Journal — Day 6: DS04 Land Cover Processing (Complete Pipeline)](#project-journal-day-6-ds04-land-cover-processing-complete-pipeline)
+32. [Project Journal — Day 6: DS06 ERA5 Climate Processing (Complete Pipeline)](#project-journal-day-6-ds06-era5-climate-processing-complete-pipeline)
+33. [Project Journal — Day 6: DS08 Eurostat GDP Processing (Complete Pipeline)](#project-journal-day-6-ds08-eurostat-gdp-processing-complete-pipeline)
+34. [Project Journal — DS03 NDVI: Implementation Attempt — Complete Session Log](#project-journal-ds03-ndvi-implementation-attempt-complete-session-log)
+35. [Project Journal — DS03 NDVI: Sentinel Hub Implementation — Complete & Successful](#project-journal-ds03-ndvi-sentinel-hub-implementation-complete-successful)
+36. [Project Journal — Day 6 (continued): Cross-Dataset Consistency Fix (EU-27 Scope Alignment)](#project-journal-day-6-continued-cross-dataset-consistency-fix-eu-27-scope-alignment)
+37. [Project Journal — Day 07: DS02 NO₂ — Methodology Switch to Sentinel Hub Statistical API](#project-journal-day-07-ds02-no-methodology-switch-to-sentinel-hub-statistical-api)
+38. [Project Journal — DS02 NO₂ EU-27 Filter Execution & Population Dataset Scope Decision](#project-journal-ds02-no-eu-27-filter-execution-population-dataset-scope-decision)
+39. [Development Log — NO₂ Flattening & December Data-Gap Fix](#development-log-no-flattening-december-data-gap-fix)
+40. [Development Log — DEM Processing Through Master Dataset Completion](#development-log-dem-processing-through-master-dataset-completion)
+41. [Development Log — Module 8: Causal Inference Model Design, Implementation, and Critical Environment Debugging](#development-log-module-8-causal-inference-model-design-implementation-and-critical-environment-debugging)
+42. [Development Log — Module 8 Robustness Testing: NDVI Validation, Placebo Test, and Identification of a Fundamental Design Limitation](#development-log-module-8-robustness-testing-ndvi-validation-placebo-test-and-identification-of-a-fundamental-design-limitation)
+43. [Development Log — Module 8 Extension: Control-Group Implementation and Final Difference-in-Differences Model](#development-log-module-8-extension-control-group-implementation-and-final-difference-in-differences-model)
+44. [Development Log — Module 8 Final Validation: Event-Study Analysis](#development-log-module-8-final-validation-event-study-analysis)
+45. [Module 8 — Final Status: Complete](#module-8-final-status-complete)
+46. [Development Log — Event-Study Visualization and Environment Recovery](#development-log-event-study-visualization-and-environment-recovery)
+47. [Development Log — Module 10: Geospatial Output Generation (Choropleth Maps and Study-Design Visualization)](#development-log-module-10-geospatial-output-generation-choropleth-maps-and-study-design-visualization)
+48. [Development Log — Module 11: Interactive Dashboard Construction and GitHub Deployment Setup](#development-log-module-11-interactive-dashboard-construction-and-github-deployment-setup)
+49. [Development Log — Dashboard Deployment Fixes, Additional Visualizations, and Global Transferability Validation](#development-log-dashboard-deployment-fixes-additional-visualizations-and-global-transferability-validation)
+50. [Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic](#development-log-deep-verify-independent-recomputation-of-every-reported-statistic-2026-08-03)
+
 ## Project Overview
 
 The Green Policy Intelligence Engine (GPIE) is a global geospatial decision intelligence framework designed to independently evaluate the real-world environmental effectiveness and economic efficiency of environmental policies using Earth Observation, Geographic Information Systems (GIS), remote sensing, spatial data science, and environmental economics.
@@ -2794,3 +2873,26 @@ Rather than chasing every possible improvement, each candidate addition was tria
 
 ### Outcome
 No new empirical claims were added in this pass — all changes are documentation and repository-presentation improvements layered on top of the analysis already validated in Part 6. The Research Paper's reference list was extended with the two Synthetic Control Method citations (Abadie, Diamond & Hainmüller, 2010; Ben-Michael, Feller & Rothstein, 2021) introduced by the new Future Work section.
+
+---
+
+## Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic (2026-08-03)
+
+### Status
+Complete. Every quantitative claim in `Research_Paper.md` was independently recomputed from `data/master_dataset.csv` and `data/master_dataset_control.csv`, re-running `causal_inference.py`, `causal_inference_placebo.py`, `causal_inference_final_did.py`, `causal_inference_ndvi.py`, and `causal_inference_event_study.py` directly, plus hand-written reimplementations of the four robustness checks (GDP removal, log-transform, treatment-date sensitivity, baseline-pollution heterogeneity split) and the minimum-detectable-effect calculation, since no standalone scripts for those exist in the repository.
+
+### Result — one real inconsistency found and corrected
+Every number checked out to the reported precision **except** the two "initial single-cohort model" figures (NO₂, Section 4.1; NDVI, Section 4.5 first paragraph). Both were computed with **classical (non-clustered) standard errors**, not the cluster-robust-by-country standard errors this project's own methodology section (3.3) and every other model in the paper explicitly use. This was traceable directly: the corrected two-group NO₂ model's own Methodology page already documents its p-value moving from 0.632 (classical) to 0.663 (cluster-robust) — proof cluster-robust SEs were correctly adopted as the project standard partway through the analysis — but the two earliest, already-superseded single-cohort models were apparently never revisited under that later standard once it was adopted.
+
+Recomputed with cluster-robust SEs, by country:
+- **NO₂ initial model** (coefficient −2.29 × 10⁻⁶ confirmed exact): p = 0.041, 95% CI [−4.48 × 10⁻⁶, −9.04 × 10⁻⁸] — not 0.026/[−4.30 × 10⁻⁶, −2.69 × 10⁻⁷] as originally reported. Still significant at 5%, so this does **not** change Section 4.1's conclusion or the paper's overall narrative arc for NO₂.
+- **NDVI initial model** (coefficient −0.0059 confirmed exact): p = 0.0017 — not p = 0.128 ("no significant effect") as originally reported. This **does** change the accurate narrative: the initial single-cohort NDVI model was already statistically significant under this project's own stated standard-error methodology, not only after the two-group control-group correction. The corrected model (p = 0.012, confirmed exact) remains the trustworthy, reported result — its role is improved identification (isolating an EU-specific effect from a shared regional trend via a genuine control group), not first-time detection of significance.
+
+### Everything else — confirmed exact
+Placebo test (coefficient −3.29 × 10⁻⁶, p = 0.004); linear-time-trend-controlled model (p = 0.186); corrected two-group NO₂ model (coefficient −1.40 × 10⁻⁶, p = 0.663, CI [−7.68 × 10⁻⁶, +4.88 × 10⁻⁶], R² = 0.386, N = 1,930); corrected two-group NDVI model (coefficient −0.0210, p = 0.012, CI [−0.0372, −0.0047]); event-study result (exactly 3 of 23 quarters significant at p < 0.05 — 2020Q1 positive, 2023Q1 positive, 2023Q3 negative — matching "opposite signs" and the "close to 1 expected by chance" framing precisely); GDP-removed robustness check (coefficient −4.80 × 10⁻⁷, p = 0.880); log-transformed model (23/1,930 = 1.2% non-positive NO₂ rows, 10 of 23 in December 2023, log coefficient 0.046/≈4.7% relative change, p = 0.669); treatment-date sensitivity (p = 0.764, 0.357, 0.151, 0.086 at the four shifted dates); baseline-pollution heterogeneity split (13 higher-baseline / 14 lower-baseline countries; coefficients −4.49 × 10⁻⁶ p = 0.245 and +3.74 × 10⁻⁶ p = 0.339); and the minimum-detectable-effect calculation (28.4% of pre-treatment baseline NO₂; observed effect ≈4.4% of that baseline). All matched the paper to the reported precision.
+
+### Citations
+Spot-checked 3 of the paper's 13 references via independent web search (Tong et al. 2025, *npj Clean Air*; Riveros-Gavilanes 2023, *JORIT*; Mathew et al. 2024, *Scientific Reports* 14, 21624) — all confirmed real and correctly cited. The remaining 10 (Abadie, Diamond & Hainmüller 2010; Angrist & Pischke 2009; Bekes & Kezdi 2021; Ben-Michael, Feller & Rothstein 2021; Bertrand, Duflo & Mullainathan 2004; Bikbov et al. 2024; Callaway, Goodman-Bacon & Sant'Anna 2024; Roth, Sant'Anna, Bilinski & Poe 2023; Wang et al. 2020; Zeldow & Hatfield 2024) were not individually re-verified this round due to time — flagged here rather than silently treated as checked.
+
+### Fix applied
+Corrected the two initial-model passages in `Research_Paper.md` (Sections 4.1, 4.5, and the Section 5 Discussion paragraph comparing NO₂ and NDVI), `Project_Journal.md` (Methodology Phase 4 and Final Findings #2/#3), and the dashboard's `5_Causal_Results.py` and `6_Methodology.py` pages, to state both the originally-reported classical-SE figures and the corrected cluster-robust figures, and to reframe the NDVI narrative accurately: the control-group correction improved identification, it did not newly create significance. No underlying data, model code, or headline conclusion changes — this is a standard-error consistency fix, not a data or specification error.
