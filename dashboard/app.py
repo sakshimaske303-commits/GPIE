@@ -123,13 +123,13 @@ st.markdown(
 doc_col1, doc_col2, doc_col3 = st.columns(3)
 
 with doc_col1:
-    pdf_path = os.path.join(ROOT_DIR, "Research_Paper.pdf")
+    pdf_path = os.path.join(ROOT_DIR, "GPIE_Research_Paper.pdf")
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
                 label="📗 Research Paper",
                 data=f,
-                file_name="Research_Paper.pdf",
+                file_name="GPIE_Research_Paper.pdf",
                 mime="application/pdf",
                 use_container_width=True
             )
@@ -137,13 +137,13 @@ with doc_col1:
         st.warning("Research_Paper.pdf not found.")
 
 with doc_col2:
-    pdf_path = os.path.join(ROOT_DIR, "Project_Journal.pdf")
+    pdf_path = os.path.join(ROOT_DIR, "GPIE_Project_Report.pdf")
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
                 label="📘 Project Journal",
                 data=f,
-                file_name="Project_Journal.pdf",
+                file_name="GPIE_Project_Journal.pdf",
                 mime="application/pdf",
                 use_container_width=True
             )
@@ -151,13 +151,13 @@ with doc_col2:
         st.warning("Project_Journal.pdf not found.")
 
 with doc_col3:
-    pdf_path = os.path.join(ROOT_DIR, "Devlopment_Log.pdf")
+    pdf_path = os.path.join(ROOT_DIR, "GPIE_Development_Log.pdf")
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
                 label="📙 Development Log",
                 data=f,
-                file_name="Devlopment_Log.pdf",
+                file_name="GPIE_Development_Log.pdf",
                 mime="application/pdf",
                 use_container_width=True
             )
