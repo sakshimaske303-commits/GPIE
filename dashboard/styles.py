@@ -83,11 +83,6 @@ def apply_custom_style():
         section[data-testid="stSidebar"] {
             background: linear-gradient(180deg, #052226 0%, #04181B 100%);
             border-right: 1px solid rgba(248, 131, 121, 0.2);
-            box-shadow: 6px 0 30px rgba(0, 0, 0, 0.45);
-        }
-
-        section[data-testid="stSidebar"] > div:first-child {
-            padding-top: 1.75rem;
         }
 
         section[data-testid="stSidebar"] label,
@@ -97,30 +92,20 @@ def apply_custom_style():
             font-weight: 500;
         }
 
-        /* Nav item links — no extra margin, so no gap between page names */
         section[data-testid="stSidebar"] a {
             border-radius: 8px !important;
-            padding: 6px 14px !important;
+            padding: 8px 14px !important;
             transition: all 0.2s ease;
-            display: block;
-            border-left: 3px solid transparent;
         }
-
         section[data-testid="stSidebar"] a:hover {
-            background: rgba(248, 131, 121, 0.10);
-            border-left: 3px solid rgba(248, 131, 121, 0.5);
+            background: rgba(248, 131, 121, 0.12) !important;
+            border-left: 3px solid #F88379;
         }
-
-        /* Active/selected nav item */
+        section[data-testid="stSidebar"] a[aria-current="page"],
         section[data-testid="stSidebar"] [aria-selected="true"] {
-            background: linear-gradient(90deg, rgba(248, 131, 121, 0.20), rgba(0, 135, 149, 0.12)) !important;
-            border-left: 3px solid #F88379 !important;
-            border-radius: 8px !important;
+            background: rgba(0, 135, 149, 0.18) !important;
+            border-left: 3px solid #008795;
             font-weight: 700 !important;
-        }
-
-        section[data-testid="stSidebar"] [aria-selected="true"] * {
-            color: #F88379 !important;
         }
 
         /* Headers - coral-to-teal-to-blush gradient */
