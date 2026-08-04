@@ -128,19 +128,6 @@ st.markdown("""
 """)
 
 st.markdown("---")
-
-st.markdown(
-    f"""
-    <div style="text-align: center; padding: 25px; background: rgba(124, 58, 237, 0.06); border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 12px;">
-        <p style="color: {PALETTE['text_muted']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Project Author</p>
-        <h2 style="color: {PALETTE['cyan']}; margin: 5px 0;">SAKSHI D. MASKE</h2>
-        <p style="color: {PALETTE['purple']}; font-weight: 600;">Independent Geospatial Researcher</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown("---")
 st.markdown(
     "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine</p>",
     unsafe_allow_html=True,
