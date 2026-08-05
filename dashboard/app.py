@@ -97,11 +97,12 @@ test policy claims against independently observed evidence.
 ### Navigate the Analysis
 
 Use the sidebar to explore:
-- **Study Design** — the treatment vs. control comparison architecture  
-- **Environmental Data** — NO₂ and vegetation health across Europe  
-- **Before vs. After** — pollution levels, 2019 vs. 2024  
-- **Economic Context** — GDP and land cover as control variables  
-- **Causal Results** — the project's core statistical findings  
+- **Study Design** — the treatment vs. control comparison architecture
+- **Theoretical Foundations** — the retrieval physics behind the NO₂ column, and why it makes an unbiased dependent variable
+- **Environmental Data** — NO₂ and vegetation health across Europe
+- **Before vs. After** — pollution levels, 2019 vs. 2024
+- **Economic Context** — GDP and land cover as control variables
+- **Causal Results** — the project's core statistical findings
 - **Methodology & Limitations** — the full validation journey, including a placebo test that reshaped the entire analytical approach
 """)
 
@@ -134,7 +135,7 @@ with doc_col1:
                 use_container_width=True
             )
     except FileNotFoundError:
-        st.warning("Research_Paper.pdf not found.")
+        st.warning("GPIE_Research_Paper.pdf not found.")
 
 with doc_col2:
     pdf_path = os.path.join(ROOT_DIR, "GPIE_Project_Report.pdf")
@@ -148,7 +149,7 @@ with doc_col2:
                 use_container_width=True
             )
     except FileNotFoundError:
-        st.warning("Project_Journal.pdf not found.")
+        st.warning("GPIE_Project_Report.pdf not found.")
 
 with doc_col3:
     pdf_path = os.path.join(ROOT_DIR, "GPIE_Development_Log.pdf")
@@ -162,7 +163,7 @@ with doc_col3:
                 use_container_width=True
             )
     except FileNotFoundError:
-        st.warning("Devlopment_Log.pdf not found.")
+        st.warning("GPIE_Development_Log.pdf not found.")
 
 st.markdown("---")
 
