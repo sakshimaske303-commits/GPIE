@@ -88,56 +88,62 @@ def proof_popover(filename, caption):
 
 st.markdown("### The Validation Sequence")
 
-with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
-    st.markdown("""
-    The first causal model compared all 27 EU countries before vs. after the European Climate Law
-    (30 June 2021), using country and seasonal fixed effects. This found a statistically significant
-    reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
+s1a, s1b = st.columns([0.94, 0.06])
+with s1a:
+    with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
+        st.markdown("""
+        The first causal model compared all 27 EU countries before vs. after the European Climate Law
+        (30 June 2021), using country and seasonal fixed effects. This found a statistically significant
+        reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
 
-    **A later verification correction**: this initial-model figure had not been re-estimated with the
-    cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
-    cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
-    doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
-    model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
-    p = 0.0017 (significant) once corrected the same way.
+        **A later verification correction**: this initial-model figure had not been re-estimated with the
+        cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
+        cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
+        doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
+        model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
+        p = 0.0017 (significant) once corrected the same way.
 
-    **The problem**: because all 27 countries were treated simultaneously, there was no untreated
-    comparison group — making it mathematically impossible to distinguish a genuine policy effect
-    from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
-    """)
-    s1a, s1b = st.columns([0.92, 0.08])
-    with s1b:
-        proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code — the initial single-cohort model (all 27 EU countries, before vs. after the Climate Law).")
+        **The problem**: because all 27 countries were treated simultaneously, there was no untreated
+        comparison group — making it mathematically impossible to distinguish a genuine policy effect
+        from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
+        """)
+with s1b:
+    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
+    proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code — the initial single-cohort model (all 27 EU countries, before vs. after the Climate Law).")
 
-with st.expander("**Step 2 — Placebo Test**", expanded=False):
-    st.markdown("""
-    To test the result's credibility, the identical model was re-run with the treatment date
-    artificially shifted to 30 June 2020 — a date with no relevant policy event.
+s2a, s2b = st.columns([0.94, 0.06])
+with s2a:
+    with st.expander("**Step 2 — Placebo Test**", expanded=False):
+        st.markdown("""
+        To test the result's credibility, the identical model was re-run with the treatment date
+        artificially shifted to 30 June 2020 — a date with no relevant policy event.
 
-    **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
-    more significant than the real result. This proved the original model was capturing a general
-    trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once
-    the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.186, cluster-robust).
-    """)
-    s2a, s2b = st.columns([0.92, 0.08])
-    with s2b:
-        proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020, proving the original model was capturing a general trend.")
+        **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
+        more significant than the real result. This proved the original model was capturing a general
+        trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once
+        the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.186, cluster-robust).
+        """)
+with s2b:
+    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
+    proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020, proving the original model was capturing a general trend.")
 
-with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
-    st.markdown("""
-    Three non-EU European countries were added as a control group — the **UK, Norway, and
-    Switzerland** — selected for being geographically and economically comparable to the EU-27
-    while not being subject to EU Green Deal legislation. This required:
-    - New boundary data (GADM Level 0)
-    - Extended satellite data acquisition for all 30 countries
-    - A second GDP data source (World Bank API) for non-EU countries
+s3a, s3b = st.columns([0.94, 0.06])
+with s3a:
+    with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
+        st.markdown("""
+        Three non-EU European countries were added as a control group — the **UK, Norway, and
+        Switzerland** — selected for being geographically and economically comparable to the EU-27
+        while not being subject to EU Green Deal legislation. This required:
+        - New boundary data (GADM Level 0)
+        - Extended satellite data acquisition for all 30 countries
+        - A second GDP data source (World Bank API) for non-EU countries
 
-    This enabled a genuine two-group Difference-in-Differences model — the version presented on
-    the *Causal Results* page.
-    """)
-    s3a, s3b = st.columns([0.92, 0.08])
-    with s3b:
-        proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the three control countries — UK, Norway, Switzerland (GADM boundaries) — loaded together in QGIS, showing the full 30-country treatment-vs-control footprint.")
+        This enabled a genuine two-group Difference-in-Differences model — the version presented on
+        the *Causal Results* page.
+        """)
+with s3b:
+    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
+    proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the three control countries — UK, Norway, Switzerland (GADM boundaries) — loaded together in QGIS, showing the full 30-country treatment-vs-control footprint.")
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
@@ -146,33 +152,35 @@ with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     null result held consistently across every quarter, both before and after treatment.
     """)
 
-with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustness Checks**", expanded=False):
-    st.markdown("""
-    All models were re-estimated with standard errors clustered by country, the standard
-    correction for panel data where a country's repeated monthly observations are serially
-    correlated (uncorrected OLS standard errors understate true uncertainty). This made the null
-    NO₂ result *more* solid (p = 0.632 → 0.663), not less.
+s5a, s5b = st.columns([0.94, 0.06])
+with s5a:
+    with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustness Checks**", expanded=False):
+        st.markdown("""
+        All models were re-estimated with standard errors clustered by country, the standard
+        correction for panel data where a country's repeated monthly observations are serially
+        correlated (uncorrected OLS standard errors understate true uncertainty). This made the null
+        NO₂ result *more* solid (p = 0.632 → 0.663), not less.
 
-    Five further robustness checks were run against the corrected NO₂ model, all reinforcing the
-    null finding: removing GDP entirely (rules out GDP as a biasing "bad control"); a
-    log-transformed outcome (rules out functional-form artifacts); shifting the assumed treatment
-    date by ±6/±12 months (no shifted date reaches significance); splitting EU-27 countries by
-    baseline pollution level (neither subgroup is significant); and a formal minimum-detectable-effect
-    calculation, which found this design can reliably detect an effect of ~28% of baseline NO₂ or
-    larger — the observed coefficient (~4.4% of baseline) is well below that threshold.
+        Five further robustness checks were run against the corrected NO₂ model, all reinforcing the
+        null finding: removing GDP entirely (rules out GDP as a biasing "bad control"); a
+        log-transformed outcome (rules out functional-form artifacts); shifting the assumed treatment
+        date by ±6/±12 months (no shifted date reaches significance); splitting EU-27 countries by
+        baseline pollution level (neither subgroup is significant); and a formal minimum-detectable-effect
+        calculation, which found this design can reliably detect an effect of ~28% of baseline NO₂ or
+        larger — the observed coefficient (~4.4% of baseline) is well below that threshold.
 
-    Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
-    with the original, single-cohort design — produced a statistically significant relative decline
-    once the same control-group correction was applied (see *Causal Results* page). A verification
-    pass later found that outcome's own initial single-cohort model was, once correctly re-estimated
-    with cluster-robust standard errors, already significant too (p = 0.0017, not the originally
-    reported p = 0.128) — so the control-group correction's role for NDVI is better identification
-    of an EU-specific effect, not first-time detection of significance. Full details and all
-    reported numbers are in `Research_Paper.md` and `Project_Journal.md` in the project repository.
-    """)
-    s5a, s5b = st.columns([0.92, 0.08])
-    with s5b:
-        proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the final two-group Difference-in-Differences model with cluster-robust standard errors, the headline model behind the Causal Results page.")
+        Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
+        with the original, single-cohort design — produced a statistically significant relative decline
+        once the same control-group correction was applied (see *Causal Results* page). A verification
+        pass later found that outcome's own initial single-cohort model was, once correctly re-estimated
+        with cluster-robust standard errors, already significant too (p = 0.0017, not the originally
+        reported p = 0.128) — so the control-group correction's role for NDVI is better identification
+        of an EU-specific effect, not first-time detection of significance. Full details and all
+        reported numbers are in `Research_Paper.md` and `Project_Journal.md` in the project repository.
+        """)
+with s5b:
+    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
+    proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the final two-group Difference-in-Differences model with cluster-robust standard errors, the headline model behind the Causal Results page.")
 
 st.markdown("---")
 
