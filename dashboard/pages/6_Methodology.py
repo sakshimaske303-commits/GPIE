@@ -41,6 +41,51 @@ with col2:
 
 st.markdown("---")
 
+# ============================================================
+# PROOF-OF-WORK POPOVERS — tiny, pulsing "📸" buttons next to the
+# exact validation step they back up. Click to reveal the
+# screenshot inline; nothing pushes the page layout around. Drop
+# the PNGs into outputs/proof_screenshots/ (see filenames below)
+# and these activate automatically — until then each falls back to
+# a quiet "not added yet" note instead of breaking the page.
+# ============================================================
+st.markdown(f"""
+<style>
+    div[data-testid="stPopover"] button {{
+        animation: proof-blink 1.8s ease-in-out infinite;
+        border: 3px solid {PALETTE['coral']} !important;
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        min-height: unset !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }}
+    div[data-testid="stPopover"] button p {{
+        margin: 0 !important;
+        font-size: 0.95rem !important;
+        line-height: 1 !important;
+    }}
+    @keyframes proof-blink {{
+        0%, 100% {{ box-shadow: 0 0 0px rgba(248, 131, 121, 0); }}
+        50% {{ box-shadow: 0 0 12px rgba(248, 131, 121, 0.85); }}
+    }}
+</style>
+""", unsafe_allow_html=True)
+
+PROOF_DIR = os.path.join(PROJECT_ROOT, "outputs", "proof_screenshots")
+
+def proof_popover(filename, caption):
+    path = os.path.join(PROOF_DIR, filename)
+    with st.popover("📸"):
+        if os.path.exists(path):
+            st.image(path, caption=caption, use_container_width=True)
+        else:
+            st.caption(f"Screenshot not added yet — save it as `outputs/proof_screenshots/{filename}`.")
+
 st.markdown("### The Validation Sequence")
 
 with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
@@ -60,10 +105,13 @@ with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
     comparison group — making it mathematically impossible to distinguish a genuine policy effect
     from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
     """)
+    s1a, s1b = st.columns([0.92, 0.08])
+    with s1b:
+        proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code — the initial single-cohort model (all 27 EU countries, before vs. after the Climate Law).")
 
 with st.expander("**Step 2 — Placebo Test**", expanded=False):
     st.markdown("""
-    To test the result's credibility, the identical model was re-run with the treatment date 
+    To test the result's credibility, the identical model was re-run with the treatment date
     artificially shifted to 30 June 2020 — a date with no relevant policy event.
 
     **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
@@ -71,19 +119,25 @@ with st.expander("**Step 2 — Placebo Test**", expanded=False):
     trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once
     the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.186, cluster-robust).
     """)
+    s2a, s2b = st.columns([0.92, 0.08])
+    with s2b:
+        proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020, proving the original model was capturing a general trend.")
 
 with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
     st.markdown("""
-    Three non-EU European countries were added as a control group — the **UK, Norway, and 
-    Switzerland** — selected for being geographically and economically comparable to the EU-27 
+    Three non-EU European countries were added as a control group — the **UK, Norway, and
+    Switzerland** — selected for being geographically and economically comparable to the EU-27
     while not being subject to EU Green Deal legislation. This required:
     - New boundary data (GADM Level 0)
     - Extended satellite data acquisition for all 30 countries
     - A second GDP data source (World Bank API) for non-EU countries
 
-    This enabled a genuine two-group Difference-in-Differences model — the version presented on 
+    This enabled a genuine two-group Difference-in-Differences model — the version presented on
     the *Causal Results* page.
     """)
+    s3a, s3b = st.columns([0.92, 0.08])
+    with s3b:
+        proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the three control countries — UK, Norway, Switzerland (GADM boundaries) — loaded together in QGIS, showing the full 30-country treatment-vs-control footprint.")
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
@@ -116,6 +170,9 @@ with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustne
     of an EU-specific effect, not first-time detection of significance. Full details and all
     reported numbers are in `Research_Paper.md` and `Project_Journal.md` in the project repository.
     """)
+    s5a, s5b = st.columns([0.92, 0.08])
+    with s5b:
+        proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the final two-group Difference-in-Differences model with cluster-robust standard errors, the headline model behind the Causal Results page.")
 
 st.markdown("---")
 
