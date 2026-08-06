@@ -14,9 +14,9 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 | Document | What's Inside |
 |---|---|
-| 📘 [`Project_Journal.md`](./Project_Journal.md) | Polished project summary — methodology, findings, conclusions (start here) |
-| 📗 [`Research_Paper.md`](./Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
-| 📙 [`Devlopment_Log.md`](./Devlopment_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
+| 📘 [Project Report](./GPIE_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| 📗 [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
+| 📙 [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
 ---
 
@@ -36,7 +36,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## 🔬 Key Finding
 
-No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.663, cluster-robust standard errors by country). This null result was independently confirmed via a 23-quarter event-study analysis and a series of additional robustness checks. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in `Project_Journal.md`.
+No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.663, cluster-robust standard errors by country). This null result was independently confirmed via a 23-quarter event-study analysis and a series of additional robustness checks. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in the Project Report.
 
 Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
 
@@ -64,7 +64,7 @@ All 6 years acquired successfully, returning physically realistic NO₂ values c
  (boundaries)          │                                                   Robustness checks        (dashboard/app.py)
  EUR-Lex (policy)      ┘                                                                                    │
                                                                                                               ▼
-                                                                                              Research_Paper.md / Project_Journal.md
+                                                                                              Research Paper / Project Report
 ```
 
 Each stage is a separate, independently re-runnable script — there is no hidden manual step between raw acquisition and the final published figures; every number in the paper traces back to a script in this repository.
@@ -74,7 +74,7 @@ Each stage is a separate, independently re-runnable script — there is no hidde
 - **Environment**: Python 3.10+. Most dependencies install via `requirements.txt`; `geopandas`/`rasterio`/`GDAL` are easiest installed via `conda` (`conda install -c conda-forge geopandas rasterio gdal`) if the `pip` install fails on your platform.
 - **Credentials**: Sentinel Hub, Copernicus CDS, and World Bank API access require free account credentials, stored in a local `.env` file (never committed — see `.env.example` if present, or the acquisition scripts' docstrings for the expected variable names).
 - **Run order**: `download_*.py` (per dataset) → `process_*.py` (standardization) → `*_stats.py` (country-month aggregation) → `causal_inference*.py` (models) → `map_*.py` (figures) → `dashboard/app.py` (interactive presentation). Every intermediate output is written to `data/` or `outputs/plots/` so any stage can be re-run independently without repeating earlier stages.
-- **Full audit trail**: every fix, bug, and methodology change made after the first working version — including this project's cluster-robust standard error correction and the NDVI re-analysis — is logged chronologically in `Devlopment_Log.md`, so any reported number can be traced back to the change that produced it.
+- **Full audit trail**: every fix, bug, and methodology change made after the first working version — including this project's cluster-robust standard error correction and the NDVI re-analysis — is logged chronologically in the Development Log, so any reported number can be traced back to the change that produced it.
 
 ---
 
@@ -87,9 +87,9 @@ GPIE/
 │   └── earth_observation/      # Per-dataset acquisition/processing outputs
 ├── outputs/
 │   └── plots/                  # Final generated maps and charts
-├── Project_Journal.md          # Polished project summary and methodology
-├── Research_Paper.md           # Formal academic research paper
-├── Devlopment_Log.md           # Full technical development log (debugging & iteration history)
+├── GPIE_Project_Report.md      # Polished project summary and methodology
+├── GPIE_Research_Paper.md      # Formal academic research paper
+├── GPIE_Development_Log.md     # Full technical development log (debugging & iteration history)
 ├── download_*.py               # Dataset acquisition scripts
 ├── process_*.py                # Dataset processing scripts
 ├── *_stats.py                  # Statistical processing utilities
@@ -137,4 +137,4 @@ This project is licensed under [CC BY 4.0](./LICENSE) — free to share and adap
 
 ---
 
-*This project's full development process — including debugging history, methodology iterations, and every technical decision — is documented in `Devlopment_Log.md` for full transparency and reproducibility.*
+*This project's full development process — including debugging history, methodology iterations, and every technical decision — is documented in the Development Log for full transparency and reproducibility.*

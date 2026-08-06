@@ -24,11 +24,11 @@ Three documents accompany this project, each serving a different purpose:
 doc_col1, doc_col2, doc_col3 = st.columns(3)
 with doc_col1:
     st.markdown("""
-    **📘 Project Journal**
+    **📘 Project Report**
 
     Polished summary — methodology, findings, conclusions.
 
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Project_Journal.md)
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Project_Report.md)
     """)
 with doc_col2:
     st.markdown("""
@@ -36,7 +36,7 @@ with doc_col2:
 
     Formal academic write-up — literature review, statistics, discussion.
 
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Research_Paper.md)
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Research_Paper.md)
     """)
 with doc_col3:
     st.markdown("""
@@ -44,7 +44,7 @@ with doc_col3:
 
     Full technical log — every bug, debug session, iteration.
 
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/Devlopment_Log.md)
+    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Development_Log.md)
     """)
 
 st.markdown("---")
