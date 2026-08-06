@@ -87,7 +87,7 @@ def make_plot(plot_df):
 
     # Highlight the small number of nominally significant quarters distinctly,
     # rather than omitting them - honest reporting includes them, with context
-    # in the accompanying text (see Research_Paper.md Section 4.4).
+    # in the accompanying text (see GPIE_Research_Paper.md Section 4.4).
     if sig_mask.any():
         sig_x = [xi for xi, s in zip(x, sig_mask) if s]
         sig_y = coefs[sig_mask]
