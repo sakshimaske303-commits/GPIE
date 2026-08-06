@@ -1,3 +1,5 @@
+[ FACE ON CAMERA — starts here ]
+
 Hi, I'm Sakshi Maske, and welcome to this walkthrough of the Green Policy Intelligence Engine — GPIE, for short.
 
 I want to be upfront about what GPIE actually is, because the framing matters a lot to me. This isn't a project built narrowly to study the EU. It's a causal-inference engine designed from the ground up to be transferable to any country, any environmental policy — and the European Green Deal, specifically the European Climate Law, is the demonstration case I built it around first, because it's one of the most ambitious, well-documented climate policies in the world, with genuinely excellent open satellite and administrative data behind it. Later in this video, I'll actually show you direct proof that this engine generalizes beyond the EU — I ran the exact same acquisition pipeline, completely unmodified, on India.
@@ -9,6 +11,8 @@ So what I built is a full causal-inference framework — six years of satellite 
 And I'm using Sentinel-5P TROPOMI NO2 retrievals as the primary evidence here — an independently, physically measured signal, not a self-reported one.
 
 I'm going to move between the dashboard, the actual code, and QGIS pretty freely in this video, and honestly go a lot deeper into the code than a typical project walkthrough — because I think the interesting part isn't just "here's a chart," it's why every single one of these design decisions got made the way it did. Let's get into it.
+
+[ FACE ON CAMERA — ends here. Switch to screen recording, voice continues. ]
 
 ———
 
@@ -132,7 +136,11 @@ This second file, causal_inference_placebo dot py, is structurally almost identi
 
 The logic here is simple but powerful — if a model with a completely fake treatment date still comes back statistically significant, that tells you the model isn't detecting a policy effect at all. It's just picking up whatever general trend already existed in the data, regardless of when you draw the line.
 
+[ FACE ON CAMERA — starts here. Pause screen recording / cut to webcam. ]
+
 And the first time I ran this — it did come back significant. Almost as significant as the real result. That's the exact moment you realize your original finding wasn't measuring the policy. Not a great feeling in the moment, honestly, but genuinely the single most useful five minutes of the entire project.
+
+[ FACE ON CAMERA — ends here. Back to screen recording. ]
 
 That failure is exactly what forced me to go build a real control group — which is that QGIS boundary work I showed you earlier, on the Study Design page. Two failed models led directly to that decision.
 
@@ -196,11 +204,17 @@ There's a second small script too, plot_india_trend dot py, which flattens that 
 
 Here's what actually happened when I ran it. All six years came back successfully, on the first execution, zero failures. And I didn't just check that it ran without erroring — a script can execute cleanly and still return garbage, so I checked the actual values. January 2019 alone came back at 2.64 times ten to the minus five mol per square meter, which sits comfortably inside the same range the EU-27 dataset shows overall, roughly 1 to 6 times ten to the minus five. That's a physically sensible number, for a country this exact code had never touched before.
 
+[ FACE ON CAMERA — starts here. Pause screen recording / cut to webcam. ]
+
 Now I want to be really precise about what this test does and doesn't prove, because it would be easy to oversell it. This confirms the acquisition architecture — the API calls, the evalscript, the quality filtering — is genuinely portable to a new country with zero code changes. It does not mean I've run a causal study on India. There's no control group here, no placebo test, no difference-in-differences model at all — establishing India as a genuine study case, the way the EU-27 analysis is, would need the exact same full rigor: a comparable control group, a placebo test, cluster-robust standard errors, all of it. This is a standalone architectural proof, not a comparative causal analysis, and I say that explicitly in the research paper too, not just here on camera.
+
+[ FACE ON CAMERA — ends here. Back to screen recording. ]
 
 This kind of independent satellite verification isn't just an EU story either — the US EPA has been leaning more on remote-sensing verification too, for the same reason. This "independently check it yourself, alongside the official numbers" approach is becoming a broader trend in how environmental policy gets evaluated globally, not something specific to this one project.
 
 ———
+
+[ FACE ON CAMERA — starts here, stays for the rest of the video. ]
 
 So that's GPIE, start to finish — the study design, the physics behind the measurement, the actual causal result, and, honestly, the failed attempts along the way that made the final result something I actually trust.
 
