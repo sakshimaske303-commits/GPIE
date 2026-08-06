@@ -64,10 +64,12 @@ with tab2:
         st.markdown("""
         #### 🎯 Why This Matters
 
-        This visual stability is consistent with GPIE's statistical finding for NDVI: no 
-        significant treatment effect was detected, plausibly because vegetation-health outcomes 
-        respond to land-use policy on longer timescales than atmospheric pollutants respond to 
-        emissions policy.
+        This visual subtlety doesn't mean nothing happened statistically — GPIE's corrected model,
+        using the same control-group design as NO₂, actually detects a **significant** relative
+        decline in EU-27 NDVI (p = 0.012). Effects like this can be real but modest in magnitude,
+        easy to miss by eye but still statistically detectable — which is exactly why the causal
+        model exists rather than relying on a visual scan alone. See the *Methodology* page for
+        why this finding is treated as exploratory rather than fully causal.
         """)
 
 st.markdown("---")
