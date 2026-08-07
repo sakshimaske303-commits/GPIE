@@ -194,6 +194,6 @@ st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "ndvi_eu_vs_control_bar_
 
 st.markdown("---")
 st.markdown(
-    "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine | Full methodology on the next page</p>",
+    "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine | Full methodology on the following pages</p>",
     unsafe_allow_html=True,
 )

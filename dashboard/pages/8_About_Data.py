@@ -44,21 +44,6 @@ st.markdown(f"<p class='caption-text'>Showing first 50 of {len(df):,} total rows
 
 st.markdown("---")
 
-st.markdown("### 🔗 Full Reproducibility")
-st.markdown("""
-The complete codebase — data acquisition scripts, processing pipelines, causal-inference models, 
-and this dashboard itself — is published as open-source on GitHub, including full documentation 
-of the project's development process, debugging history, and methodological decisions.
-""")
-
-st.markdown("""
-<div style="background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 10px; padding: 16px; margin: 10px 0;">
-    <strong>GitHub Repository:</strong> <a href="https://github.com/sakshimaske303-commits/GPIE" style="color: #00d4ff;">github.com/sakshimaske303-commits/GPIE</a>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("---")
-
 st.markdown("### 📚 Data Sources & Citations")
 st.markdown("""
 | Dataset | Provider | Access Method |

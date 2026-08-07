@@ -52,9 +52,9 @@ def run_did_model(df):
 
 
 def main():
-    # Fake treatment date: 30 June 2018, a full year before the study's
-    # actual baseline period even begins any Green Deal activity, and
-    # 3 years before the real treatment date.
+    # Fake treatment date: 30 June 2020, a full year before the real
+    # treatment date, well after the study's baseline period begins,
+    # and with no relevant Green Deal policy event on this date.
     fake_date = pd.Timestamp("2020-06-30")
 
     df = load_and_prepare(fake_date)

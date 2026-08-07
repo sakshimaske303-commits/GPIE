@@ -103,6 +103,7 @@ Use the sidebar to explore:
 - **Before vs. After** — pollution levels, 2019 vs. 2024
 - **Economic Context** — GDP and land cover as control variables
 - **Causal Results** — the project's core statistical findings
+- **Global Transferability** — testing the acquisition pipeline on a non-EU country, India
 - **Methodology & Limitations** — the full validation journey, including a placebo test that reshaped the entire analytical approach
 """)
 
@@ -164,6 +165,16 @@ with doc_col3:
             )
     except FileNotFoundError:
         st.warning("GPIE_Development_Log.pdf not found.")
+
+st.markdown(
+    f"""
+    <div style="text-align: center; padding: 16px; margin: 18px 0; background: rgba(0, 135, 149, 0.06); border: 1px solid rgba(248, 131, 121, 0.25); border-radius: 10px;">
+        <strong style="color: {PALETTE['text']};">GitHub Repository:</strong>
+        <a href="https://github.com/sakshimaske303-commits/GPIE" target="_blank" style="color: {PALETTE['coral']};">github.com/sakshimaske303-commits/GPIE</a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 
