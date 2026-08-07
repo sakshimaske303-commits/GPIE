@@ -46,8 +46,10 @@ st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_ma
 st.markdown("---")
 
 st.markdown("""
-### The Difference-in-Differences (DiD) Logic By comparing the *change* in each group rather than raw values, any general European-wide trend 
-(technology improvements, broader decarbonization) common to both groups cancels out — isolating 
+### The Difference-in-Differences (DiD) Logic
+
+By comparing the *change* in each group rather than raw values, any general European-wide trend
+(technology improvements, broader decarbonization) common to both groups cancels out — isolating
 only the portion of change specifically attributable to being subject to EU climate legislation.
 
 **Treatment date**: 30 June 2021 — the date the **European Climate Law** (Regulation (EU) 2021/1119) 
