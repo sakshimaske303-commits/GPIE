@@ -10,22 +10,21 @@
 6. [Expected Outputs](#expected-outputs)
 7. [Demonstration Case](#demonstration-case)
 8. [Current Status](#current-status)
-9. [Module Architecture (Updated)](#gpie-module-architecture-updated)
-10. [Module Architecture (Final)](#gpie-module-architecture-final)
-11. [Module 1 — Policy Database Acquisition](#module-1-policy-database-acquisition-executed)
-12. [Module 2 — Earth Observation & Auxiliary Data Acquisition](#module-2-earth-observation-auxiliary-data-acquisition-executed-population-partial-by-design)
-13. [Module 3 — Preprocessing & Standardization](#module-3-preprocessing-standardization-executed)
-14. [Module 4 — Temporal Aggregation](#module-4-temporal-aggregation-effectively-complete-via-per-dataset-scripts-not-a-shared-engine)
-15. [Module 5 — Export & Output Standardization](#module-5-export-output-standardization-effectively-complete-ad-hoc-not-a-dedicated-engine)
-16. [Module 6 — Validation & Quality Control](#module-6-validation-quality-control-partially-executed-ad-hoc-proven-highly-effective)
-17. [Module 7 — Pipeline Orchestration & Execution Management](#module-7-pipeline-orchestration-execution-management-partially-executed-superseded-in-practice)
-18. [Module 8 — Causal Inference & Policy Verification](#module-8-causal-inference-policy-verification-complete)
-19. [Module 9 — Economic Efficiency Ranking](#module-9-economic-efficiency-ranking-scoped-out-reasoned-decision-not-abandoned)
-20. [Module 10 — Geospatial Output Generation](#module-10-geospatial-output-generation-complete)
-21. [Module 11 — Dashboard & Deployment](#module-11-dashboard-deployment-complete)
-22. [Project Status: Complete](#project-status-complete)
-23. [Policy Database Construction (Days 1–2)](#policy-database-construction-days-12)
-24. [Sentinel-5P TROPOMI NO₂ Acquisition Protocol (DS02)](#sentinel-5p-tropomi-no-acquisition-protocol-ds02-final-locked-version-v10)
+9. [Module Architecture](#gpie-module-architecture)
+10. [Module 1 — Policy Database Acquisition](#module-1-policy-database-acquisition)
+11. [Module 2 — Earth Observation & Auxiliary Data Acquisition](#module-2-earth-observation-auxiliary-data-acquisition)
+12. [Module 3 — Preprocessing & Standardization](#module-3-preprocessing-standardization)
+13. [Module 4 — Temporal Aggregation](#module-4-temporal-aggregation)
+14. [Module 5 — Export & Output Standardization](#module-5-export-output-standardization)
+15. [Module 6 — Validation & Quality Control](#module-6-validation-quality-control)
+16. [Module 7 — Pipeline Orchestration & Execution Management](#module-7-pipeline-orchestration-execution-management)
+17. [Module 8 — Causal Inference & Policy Verification](#module-8-causal-inference-policy-verification)
+18. [Module 9 — Economic Efficiency Ranking](#module-9-economic-efficiency-ranking)
+19. [Module 10 — Geospatial Output Generation](#module-10-geospatial-output-generation)
+20. [Module 11 — Dashboard & Deployment](#module-11-dashboard-deployment)
+21. [Project Status](#project-status)
+22. [Policy Database Construction (Days 1–2)](#policy-database-construction-days-12)
+23. [Sentinel-5P TROPOMI NO₂ Acquisition Protocol (DS02)](#sentinel-5p-tropomi-no-acquisition-protocol-ds02-final-locked-version-v10)
     - [Product Selection](#product-selection)
     - [Study Area](#study-area)
     - [Temporal Extent](#temporal-extent)
@@ -52,32 +51,32 @@
     - [Framework Design Principle](#framework-design-principle)
     - [Scientific Design Principle](#scientific-design-principle)
     - [Methodology Lock](#methodology-lock)
-25. [Project Journal — DS05 Population Module](#project-journal-ds05-population-module)
-26. [Project Journal — DS05 Copernicus DEM Module](#project-journal-ds05-copernicus-dem-module)
-27. [Project Journal — DS03 NDVI: Planned Approach (Not Yet Implemented)](#project-journal-ds03-ndvi-planned-approach-not-yet-implemented)
-28. [Project Journal — DS08 Eurostat Regional GDP Module](#project-journal-ds08-eurostat-regional-gdp-module)
-29. [Project Journal — DS04 ESA WorldCover Module](#project-journal-ds04-esa-worldcover-module)
-30. [Project Journal — DS06 ERA5 Climate Reanalysis Module](#project-journal-ds06-era5-climate-reanalysis-module)
-31. [Project Journal — Day 6: DS04 Land Cover Processing (Complete Pipeline)](#project-journal-day-6-ds04-land-cover-processing-complete-pipeline)
-32. [Project Journal — Day 6: DS06 ERA5 Climate Processing (Complete Pipeline)](#project-journal-day-6-ds06-era5-climate-processing-complete-pipeline)
-33. [Project Journal — Day 6: DS08 Eurostat GDP Processing (Complete Pipeline)](#project-journal-day-6-ds08-eurostat-gdp-processing-complete-pipeline)
-34. [Project Journal — DS03 NDVI: Implementation Attempt — Complete Session Log](#project-journal-ds03-ndvi-implementation-attempt-complete-session-log)
-35. [Project Journal — DS03 NDVI: Sentinel Hub Implementation — Complete & Successful](#project-journal-ds03-ndvi-sentinel-hub-implementation-complete-successful)
-36. [Project Journal — Day 6 (continued): Cross-Dataset Consistency Fix (EU-27 Scope Alignment)](#project-journal-day-6-continued-cross-dataset-consistency-fix-eu-27-scope-alignment)
-37. [Project Journal — Day 07: DS02 NO₂ — Methodology Switch to Sentinel Hub Statistical API](#project-journal-day-07-ds02-no-methodology-switch-to-sentinel-hub-statistical-api)
-38. [Project Journal — DS02 NO₂ EU-27 Filter Execution & Population Dataset Scope Decision](#project-journal-ds02-no-eu-27-filter-execution-population-dataset-scope-decision)
-39. [Development Log — NO₂ Flattening & December Data-Gap Fix](#development-log-no-flattening-december-data-gap-fix)
-40. [Development Log — DEM Processing Through Master Dataset Completion](#development-log-dem-processing-through-master-dataset-completion)
-41. [Development Log — Module 8: Causal Inference Model Design, Implementation, and Critical Environment Debugging](#development-log-module-8-causal-inference-model-design-implementation-and-critical-environment-debugging)
-42. [Development Log — Module 8 Robustness Testing: NDVI Validation, Placebo Test, and Identification of a Fundamental Design Limitation](#development-log-module-8-robustness-testing-ndvi-validation-placebo-test-and-identification-of-a-fundamental-design-limitation)
-43. [Development Log — Module 8 Extension: Control-Group Implementation and Final Difference-in-Differences Model](#development-log-module-8-extension-control-group-implementation-and-final-difference-in-differences-model)
-44. [Development Log — Module 8 Final Validation: Event-Study Analysis](#development-log-module-8-final-validation-event-study-analysis)
-45. [Module 8 — Final Status: Complete](#module-8-final-status-complete)
-46. [Development Log — Event-Study Visualization and Environment Recovery](#development-log-event-study-visualization-and-environment-recovery)
-47. [Development Log — Module 10: Geospatial Output Generation (Choropleth Maps and Study-Design Visualization)](#development-log-module-10-geospatial-output-generation-choropleth-maps-and-study-design-visualization)
-48. [Development Log — Module 11: Interactive Dashboard Construction and GitHub Deployment Setup](#development-log-module-11-interactive-dashboard-construction-and-github-deployment-setup)
-49. [Development Log — Dashboard Deployment Fixes, Additional Visualizations, and Global Transferability Validation](#development-log-dashboard-deployment-fixes-additional-visualizations-and-global-transferability-validation)
-50. [Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic](#development-log-deep-verify-independent-recomputation-of-every-reported-statistic-2026-08-03)
+24. [Project Journal — DS05 Population Module](#project-journal-ds05-population-module)
+25. [Project Journal — DS05 Copernicus DEM Module](#project-journal-ds05-copernicus-dem-module)
+26. [Project Journal — DS03 NDVI: Planned Approach (Not Yet Implemented)](#project-journal-ds03-ndvi-planned-approach-not-yet-implemented)
+27. [Project Journal — DS08 Eurostat Regional GDP Module](#project-journal-ds08-eurostat-regional-gdp-module)
+28. [Project Journal — DS04 ESA WorldCover Module](#project-journal-ds04-esa-worldcover-module)
+29. [Project Journal — DS06 ERA5 Climate Reanalysis Module](#project-journal-ds06-era5-climate-reanalysis-module)
+30. [Project Journal — Day 6: DS04 Land Cover Processing (Complete Pipeline)](#project-journal-day-6-ds04-land-cover-processing-complete-pipeline)
+31. [Project Journal — Day 6: DS06 ERA5 Climate Processing (Complete Pipeline)](#project-journal-day-6-ds06-era5-climate-processing-complete-pipeline)
+32. [Project Journal — Day 6: DS08 Eurostat GDP Processing (Complete Pipeline)](#project-journal-day-6-ds08-eurostat-gdp-processing-complete-pipeline)
+33. [Project Journal — DS03 NDVI: Implementation Attempt — Complete Session Log](#project-journal-ds03-ndvi-implementation-attempt-complete-session-log)
+34. [Project Journal — DS03 NDVI: Sentinel Hub Implementation — Complete & Successful](#project-journal-ds03-ndvi-sentinel-hub-implementation-complete-successful)
+35. [Project Journal — Day 6 (continued): Cross-Dataset Consistency Fix (EU-27 Scope Alignment)](#project-journal-day-6-continued-cross-dataset-consistency-fix-eu-27-scope-alignment)
+36. [Project Journal — Day 07: DS02 NO₂ — Methodology Switch to Sentinel Hub Statistical API](#project-journal-day-07-ds02-no-methodology-switch-to-sentinel-hub-statistical-api)
+37. [Project Journal — DS02 NO₂ EU-27 Filter Execution & Population Dataset Scope Decision](#project-journal-ds02-no-eu-27-filter-execution-population-dataset-scope-decision)
+38. [Development Log — NO₂ Flattening & December Data-Gap Fix](#development-log-no-flattening-december-data-gap-fix)
+39. [Development Log — DEM Processing Through Master Dataset Completion](#development-log-dem-processing-through-master-dataset-completion)
+40. [Development Log — Module 8: Causal Inference Model Design, Implementation, and Critical Environment Debugging](#development-log-module-8-causal-inference-model-design-implementation-and-critical-environment-debugging)
+41. [Development Log — Module 8 Robustness Testing: NDVI Validation, Placebo Test, and Identification of a Fundamental Design Limitation](#development-log-module-8-robustness-testing-ndvi-validation-placebo-test-and-identification-of-a-fundamental-design-limitation)
+42. [Development Log — Module 8 Extension: Control-Group Implementation and Final Difference-in-Differences Model](#development-log-module-8-extension-control-group-implementation-and-final-difference-in-differences-model)
+43. [Development Log — Module 8 Final Validation: Event-Study Analysis](#development-log-module-8-final-validation-event-study-analysis)
+44. [Module 8 — Final Status](#module-8-final-status)
+45. [Development Log — Event-Study Visualization and Environment Recovery](#development-log-event-study-visualization-and-environment-recovery)
+46. [Development Log — Module 10: Geospatial Output Generation (Choropleth Maps and Study-Design Visualization)](#development-log-module-10-geospatial-output-generation-choropleth-maps-and-study-design-visualization)
+47. [Development Log — Module 11: Interactive Dashboard Construction and GitHub Deployment Setup](#development-log-module-11-interactive-dashboard-construction-and-github-deployment-setup)
+48. [Development Log — Dashboard Deployment Fixes, Additional Visualizations, and Global Transferability Validation](#development-log-dashboard-deployment-fixes-additional-visualizations-and-global-transferability-validation)
+49. [Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic](#development-log-deep-verify-independent-recomputation-of-every-reported-statistic-2026-08-03)
 
 ## Project Overview
 
@@ -142,18 +141,16 @@ Version 1.0
 
 ==========================================================================================================
 
-# GPIE — Module Architecture (Updated)
+# GPIE — Module Architecture
 
-# GPIE — Module Architecture (Final)
+## MODULE 1 — Policy Database Acquisition
+**Executed.** Automated scraping of European Green Deal policy records from EUR-Lex. Extracts and structures policy metadata (title, type, year, status, CELEX ID, summary, word count, thematic tags) into `documents.json` / `documents.csv`, followed by exploratory statistical analysis and visualization. This forms the "policy" half of the project's core comparison — what governments claim to have done.
 
-# MODULE 1 — Policy Database Acquisition ✅ EXECUTED
-Automated scraping of European Green Deal policy records from EUR-Lex. Extracts and structures policy metadata (title, type, year, status, CELEX ID, summary, word count, thematic tags) into `documents.json` / `documents.csv`, followed by exploratory statistical analysis and visualization. This forms the "policy" half of the project's core comparison — what governments claim to have done.
+## MODULE 2 — Earth Observation & Auxiliary Data Acquisition
+**Executed** (Population partial by design). Acquisition of all independent datasets needed to verify policy outcomes and support spatial/economic analysis, across two scopes: the original EU-27 dataset, and an expanded 30-country dataset (EU-27 + UK, Norway, Switzerland) built later to support a genuine control group for causal inference. Sentinel-5P NO₂ and Sentinel-2/CGLS NDVI fully acquired for both scopes via the Sentinel Hub Statistical API (December data-gap bug identified and fixed in both variables' acquisition scripts). ERA5 Climate fully acquired and processed for both scopes (a duplicate-timestamp processing bug affecting the temperature variable was identified and fixed; EFTA-country double-counting in the 30-country boundary set was also identified and fixed). Copernicus DEM and ESA WorldCover fully acquired for the EU-27 scope only (not required for the control-group countries, since these are static variables fully absorbed by country fixed effects in the causal model). Eurostat GDP acquired for EU-27; a second GDP source (World Bank API, with documented approximate EUR/USD currency conversion) acquired for the three control-group countries, since Eurostat does not cover non-EU countries. NUTS Boundaries (EU-27) and GADM Level-0 boundaries (UK, Norway, Switzerland) both acquired, combined via a shared boundary-loading utility (`country_boundaries.py`). WorldPop Population remains partially executed by design (2019–2020 only), formally a supporting/descriptive dataset excluded from causal modeling.
 
-# MODULE 2 — Earth Observation & Auxiliary Data Acquisition ✅ EXECUTED (Population partial by design)
-Acquisition of all independent datasets needed to verify policy outcomes and support spatial/economic analysis, across two scopes: the original EU-27 dataset, and an expanded 30-country dataset (EU-27 + UK, Norway, Switzerland) built later to support a genuine control group for causal inference. Sentinel-5P NO₂ and Sentinel-2/CGLS NDVI fully acquired for both scopes via the Sentinel Hub Statistical API (December data-gap bug identified and fixed in both variables' acquisition scripts). ERA5 Climate fully acquired and processed for both scopes (a duplicate-timestamp processing bug affecting the temperature variable was identified and fixed; EFTA-country double-counting in the 30-country boundary set was also identified and fixed). Copernicus DEM and ESA WorldCover fully acquired for the EU-27 scope only (not required for the control-group countries, since these are static variables fully absorbed by country fixed effects in the causal model). Eurostat GDP acquired for EU-27; a second GDP source (World Bank API, with documented approximate EUR/USD currency conversion) acquired for the three control-group countries, since Eurostat does not cover non-EU countries. NUTS Boundaries (EU-27) and GADM Level-0 boundaries (UK, Norway, Switzerland) both acquired, combined via a shared boundary-loading utility (`country_boundaries.py`). WorldPop Population remains partially executed by design (2019–2020 only), formally a supporting/descriptive dataset excluded from causal modeling.
-
-# MODULE 3 — Preprocessing & Standardization ✅ EXECUTED
-Converts raw acquired data into standardized, analysis-ready form, for both the EU-27-only and 30-country (EU-27 + control group) dataset scopes.
+## MODULE 3 — Preprocessing & Standardization
+**Executed.** Converts raw acquired data into standardized, analysis-ready form, for both the EU-27-only and 30-country (EU-27 + control group) dataset scopes.
 - **NO₂ and NDVI**: processed via Sentinel Hub server-side statistical aggregation (minQa=75 quality filtering applied server-side for NO₂); flattened from nested API-response structure into flat per-country-year-month format via shared flattening logic, applied consistently to both the EU-27-only and 30-country datasets.
 - **ERA5 Climate**: fully processed — unit conversion (Kelvin→Celsius, meters→millimeters), merging of split temperature/precipitation source files with explicit time-coordinate alignment (correcting a duplicate-timestamp bug), and aggregation into country-level monthly statistics for both dataset scopes, using a unified NUTS+GADM boundary loader for the 30-country version.
 - **ESA WorldCover (Land Cover)**: fully processed for EU-27 — mosaicked via VRT, resampled to 500m using nearest-neighbor (categorical-safe) resampling, aggregated into country-level land cover class percentages.
@@ -163,47 +160,46 @@ Converts raw acquired data into standardized, analysis-ready form, for both the 
 
 Two master datasets were assembled: `master_dataset.csv` (EU-27 only, 1,944 rows, includes DEM and Land Cover) for exploratory work, and `master_dataset_control.csv` (30 countries, 2,160 rows, includes a `treatment_group` indicator) as the dataset actually used for the project's final causal inference model.
 
-# MODULE 4 — Temporal Aggregation ✅ EFFECTIVELY COMPLETE (via per-dataset scripts, not a shared engine)
-Monthly aggregation achieved independently within each dataset's own processing script. No dedicated, generalized temporal-aggregation engine was built as a separate module; this remains a possible future refactor but has not blocked progress, since all monthly-resolution datasets share a consistent `(country, year, month)` structure suitable for merging across both dataset scopes.
+## MODULE 4 — Temporal Aggregation
+**Effectively complete** (via per-dataset scripts, not a shared engine). Monthly aggregation achieved independently within each dataset's own processing script. No dedicated, generalized temporal-aggregation engine was built as a separate module; this remains a possible future refactor but has not blocked progress, since all monthly-resolution datasets share a consistent `(country, year, month)` structure suitable for merging across both dataset scopes.
 
-# MODULE 5 — Export & Output Standardization ✅ EFFECTIVELY COMPLETE (ad hoc, not a dedicated engine)
-All processed datasets exist in practical analysis-ready form (JSON/CSV), produced ad hoc within each dataset's own processing or flattening script. This approach proved sufficient to reach two fully merged, verified master datasets; a dedicated export module was not built as a separate component.
+## MODULE 5 — Export & Output Standardization
+**Effectively complete** (ad hoc, not a dedicated engine). All processed datasets exist in practical analysis-ready form (JSON/CSV), produced ad hoc within each dataset's own processing or flattening script. This approach proved sufficient to reach two fully merged, verified master datasets; a dedicated export module was not built as a separate component.
 
-# MODULE 6 — Validation & Quality Control 🟡 PARTIALLY EXECUTED (ad hoc, proven highly effective)
-No dedicated, standalone validation engine was built. Systematic ad hoc verification was applied consistently throughout — record-count checks, missing-value audits, diagnostic investigation of illogical patterns, and, critically, **statistical robustness testing of the causal model itself** (placebo test, event-study disaggregation). This approach identified and resolved multiple hidden defects across the project (the NO₂/NDVI December gap, the ERA5 duplicate-timestamp bug, EFTA double-counting in the 30-country boundary set) and, most significantly, identified a fundamental research-design flaw in the original single-cohort causal model via placebo testing — arguably this module's most important contribution to the project's overall scientific integrity.
+## MODULE 6 — Validation & Quality Control
+**Partially executed** (ad hoc, proven highly effective). No dedicated, standalone validation engine was built. Systematic ad hoc verification was applied consistently throughout — record-count checks, missing-value audits, diagnostic investigation of illogical patterns, and, critically, **statistical robustness testing of the causal model itself** (placebo test, event-study disaggregation). This approach identified and resolved multiple hidden defects across the project (the NO₂/NDVI December gap, the ERA5 duplicate-timestamp bug, EFTA double-counting in the 30-country boundary set) and, most significantly, identified a fundamental research-design flaw in the original single-cohort causal model via placebo testing — arguably this module's most important contribution to the project's overall scientific integrity.
 
-# MODULE 7 — Pipeline Orchestration & Execution Management 🟡 PARTIALLY EXECUTED (superseded in practice)
-The original month-wise orchestrator (`run_pipeline.py`) remains implemented but is no longer the primary execution path. All datasets were acquired and processed via independent, dataset-specific scripts, coordinated manually. This has proven adequate for the project's actual scale.
+## MODULE 7 — Pipeline Orchestration & Execution Management
+**Partially executed** (superseded in practice). The original month-wise orchestrator (`run_pipeline.py`) remains implemented but is no longer the primary execution path. All datasets were acquired and processed via independent, dataset-specific scripts, coordinated manually. This has proven adequate for the project's actual scale.
 
-# MODULE 8 — Causal Inference & Policy Verification ✅ COMPLETE
-Used Difference-in-Differences methodology to test whether the European Green Deal / European Climate Law (effective 30 June 2021) produced a statistically distinguishable reduction in satellite-observed NO₂ pollution across EU-27 countries.
+## MODULE 8 — Causal Inference & Policy Verification
+**Complete.** Used Difference-in-Differences methodology to test whether the European Green Deal / European Climate Law (effective 30 June 2021) produced a statistically distinguishable reduction in satellite-observed NO₂ pollution across EU-27 countries.
 
 **Development sequence**: An initial single-cohort model (all 27 EU countries, no control group, country and seasonal fixed effects) found a statistically significant negative effect (p=0.026). A placebo test — rerunning the identical model with a fake treatment date — found an equally or more significant "effect" at a date with no relevant policy event, revealing that the original result was capturing a general multi-year pollution-decline trend rather than a policy-specific effect. This is a well-documented structural limitation of single-cohort designs applied to policies affecting an entire study population simultaneously, with no available control group.
 
 **Correction**: A genuine external control group (United Kingdom, Norway, Switzerland — geographically and economically comparable non-EU European countries) was constructed, requiring new boundary data (GADM), extended Earth Observation acquisition (NO₂, NDVI, Climate for 30 countries), and a second GDP data source (World Bank API). A proper two-group DiD model (EU-27 vs. control group, treatment × post interaction term) was then estimated.
 
-**Final result**: The DiD interaction coefficient was not statistically significant (coefficient −1.40×10⁻⁶, p=0.632, 95% CI spanning zero). An event-study extension, testing the effect separately across all 23 individual quarters from 2019Q1 to 2024Q4, found no significant effect in any single quarter — providing both support for the model's parallel-trends assumption (no significant pre-treatment divergence) and confirmation that the null result is not an artifact of averaging across time (no delayed effect emerged in any later quarter either).
+**Final result**: The DiD interaction coefficient was not statistically significant (coefficient −1.40×10⁻⁶, p=0.663, cluster-robust by country, 95% CI spanning zero). An event-study extension, testing the effect separately across all 23 individual quarters from 2019Q1 to 2024Q4, found no significant effect in any single quarter — providing both support for the model's parallel-trends assumption (no significant pre-treatment divergence) and confirmation that the null result is not an artifact of averaging across time (no delayed effect emerged in any later quarter either).
 
 **Conclusion**: No statistically distinguishable EU-specific reduction in NO₂ attributable to the European Climate Law was found, once genuinely compared against a non-EU control group; the pollution decline observed within the EU-27 over this period appears to reflect a broader trend shared with comparable non-EU European countries. This is reported as a rigorously validated, honest scientific finding consistent with the project's "Trust, But Verify" design — the validation process itself (placebo test → control group → event study) is as significant a project output as the substantive result.
 
 **Environment note**: A significant native numerical-computing failure (corrupted Intel MKL backend causing silent crashes across `linearmodels`, `statsmodels`, and raw NumPy operations) was diagnosed and resolved mid-module via reinstalling NumPy/SciPy with an OpenBLAS backend (`nomkl`), unrelated to any project code logic.
 
-# MODULE 9 — Economic Efficiency Ranking ⚠️ SCOPED OUT (reasoned decision, not abandoned)
-Originally planned to combine causal inference results with policy cost data to rank environmental interventions by cost-per-unit-environmental-improvement. **This module has been deliberately scoped out following Module 8's completion**, for a specific, documented reason: Module 8's rigorously validated finding is that no statistically significant EU-specific causal effect on NO₂ was detected. Constructing a "cost-per-unit-environmental-improvement" ranking presupposes the existence of a measurable improvement to rank against cost — proceeding with this module as originally conceived would require either manufacturing statistical significance that the data does not support, or ranking interventions against an effect size that is not distinguishable from zero, neither of which is scientifically defensible.
+## MODULE 9 — Economic Efficiency Ranking
+**Scoped out** (reasoned decision, not abandoned). Originally planned to combine causal inference results with policy cost data to rank environmental interventions by cost-per-unit-environmental-improvement. **This module has been deliberately scoped out following Module 8's completion**, for a specific, documented reason: Module 8's rigorously validated finding is that no statistically significant EU-specific causal effect on NO₂ was detected. Constructing a "cost-per-unit-environmental-improvement" ranking presupposes the existence of a measurable improvement to rank against cost — proceeding with this module as originally conceived would require either manufacturing statistical significance that the data does not support, or ranking interventions against an effect size that is not distinguishable from zero, neither of which is scientifically defensible.
 
 This decision is itself treated as a finding consistent with the project's core design principle: GPIE exists to independently verify policy claims rather than to assume their effectiveness, and a module whose premise depends on an effect that verification did not confirm should not be forced to completion.
 
-# MODULE 10 — Geospatial Output Generation ✅ COMPLETE
-Seven publication-quality geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` + `matplotlib`), covering: NO₂ distribution (2019–2024 average, 30 countries), a 2019-vs-2024 before/after comparison, the treatment/control study-design map, dominant land cover class (EU-27), NDVI distribution, GDP (log-scale, 30 countries), and the event-study robustness-check plot. Each map was independently verified for correctness via a structured, checklist-based verification workflow before finalization. QGIS was deliberately not used for map production, in favor of a fully scripted, reproducible Python pipeline consistent with the project's automation-first design.
+## MODULE 10 — Geospatial Output Generation
+**Complete.** Seven publication-quality geospatial and statistical visualizations were produced using a Python-based mapping pipeline (`geopandas` + `matplotlib`), covering: NO₂ distribution (2019–2024 average, 30 countries), a 2019-vs-2024 before/after comparison, the treatment/control study-design map, dominant land cover class (EU-27), NDVI distribution, GDP (log-scale, 30 countries), and the event-study robustness-check plot. Each map was independently verified for correctness via a structured, checklist-based verification workflow before finalization. QGIS was deliberately not used for map production, in favor of a fully scripted, reproducible Python pipeline consistent with the project's automation-first design.
 
-# MODULE 11 — Dashboard & Deployment ✅ COMPLETE
-The complete project was packaged into an eight-page interactive Streamlit dashboard (Home, Study Design, Environmental Data, Before/After, Economic Context, Causal Results, Methodology & Limitations, Explore Trends, About & Data), featuring an interactive country-level time-series explorer (Plotly), downloadable raw master dataset, and a full narrative walkthrough of the project's validation journey (placebo test → control group → event study → honest null result). The complete codebase was published as a public, open-source GitHub repository, and the dashboard was deployed to Streamlit Community Cloud, producing a permanent public URL. A path-resolution bug (relative image/data paths resolving incorrectly under Streamlit Cloud's different working-directory structure compared to local execution) was identified and fixed across all dashboard pages during deployment.
+## MODULE 11 — Dashboard & Deployment
+**Complete.** The complete project was packaged into an eight-page interactive Streamlit dashboard (Home, Study Design, Environmental Data, Before/After, Economic Context, Causal Results, Methodology & Limitations, Explore Trends, About & Data), featuring an interactive country-level time-series explorer (Plotly), downloadable raw master dataset, and a full narrative walkthrough of the project's validation journey (placebo test → control group → event study → honest null result). The complete codebase was published as a public, open-source GitHub repository, and the dashboard was deployed to Streamlit Community Cloud, producing a permanent public URL. A path-resolution bug (relative image/data paths resolving incorrectly under Streamlit Cloud's different working-directory structure compared to local execution) was identified and fixed across all dashboard pages during deployment.
 
 ---
 
-# PROJECT STATUS: COMPLETE
-
-All eleven planned modules have been executed, with Module 9 formally and transparently scoped out for a specific, documented scientific reason rather than left incomplete. GPIE is deployed as a public GitHub repository and a live, interactive Streamlit dashboard, ready for academic and portfolio presentation.
+## Project Status
+**Complete.** All eleven planned modules have been executed, with Module 9 formally and transparently scoped out for a specific, documented scientific reason rather than left incomplete. GPIE is deployed as a public GitHub repository and a live, interactive Streamlit dashboard, ready for academic and portfolio presentation.
 
 ===========================================================================================================
 
@@ -211,7 +207,7 @@ All eleven planned modules have been executed, with Module 9 formally and transp
 
 Before any Earth Observation data could be collected, the first working component of GPIE needed to be a structured database of the policies themselves. The following two days document the process of building an automated web-scraping and data-processing pipeline to extract, structure, and analyze European Green Deal policy records directly from EUR-Lex — starting from a single test request and progressing to a fully modular, reusable Python system producing a clean, analysis-ready dataset (`documents.json` / `documents.csv`).
 
-### Day 1
+## Day 1
 
 - Verified EUR-Lex API availability.
 - Tested Python requests library.
@@ -222,7 +218,7 @@ Before any Earth Observation data could be collected, the first working componen
 - Extracted title, h1 tag and href attribute.
 - Started understanding HTML structure for future web scraping.
 
-### Day 2
+## Day 2
 
 - Continued exploration of the EUR-Lex website HTML structure using BeautifulSoup.
 - Identified and extracted multiple policy document containers from the search results page.
@@ -360,7 +356,7 @@ Before any Earth Observation data could be collected, the first working componen
 - Refactored the web scraping workflow by introducing the reusable `fetch_page()` function, eliminating duplicate page retrieval logic.
 - Successfully completed the first production-level code refactoring while preserving identical analytical outputs, establishing the foundation for a modular, maintainable, and scalable Green Policy Intelligence System architecture.
 
-### Day 3
+## Day 3
 
 - Continued production-level refactoring of the Green Policy Intelligence System to improve code modularity and maintainability.
 - Extracted policy metadata generation into a dedicated reusable function (`extract_metadata()`), separating data extraction logic from the main scraping workflow.
@@ -392,7 +388,7 @@ Before any Earth Observation data could be collected, the first working componen
 - Confirmed reproducibility of analytical outputs by generating identical structured datasets, summary statistics, visualizations, and analysis-ready exports after complete architectural refactoring.
 - Established a reusable software architecture capable of supporting future integration of Earth Observation datasets, GIS workflows, spatial analysis, environmental indicators, and decision intelligence modules without altering the existing policy intelligence pipeline.
 
-### Why This Phase Was Necessary (Days 1–2-3)
+## Why This Phase Was Necessary (Days 1–2-3)
 
 Before any satellite or geospatial processing could begin, GPIE needed a **policy-side dataset** — a structured record of what environmental policies actually exist, when they were introduced, and what they cover. Without this, the Earth Observation data collected in later phases would have nothing concrete to be evaluated against.
 
@@ -406,7 +402,7 @@ In short: **Days 1–2-3 built the "policy" half of GPIE's core comparison** —
 
 ==================================================================================================
 
-### Earth Observation Database Development Methodology
+## Earth Observation Database Development Methodology
 
 ### Objective
 
@@ -533,7 +529,7 @@ The methodology described above shall serve as the fixed implementation framewor
 - Developed an isolated authentication testing workflow to validate server responses before integrating product search and download functionality.
 - Verified the latest CDSE API documentation and aligned the implementation with the current authentication specifications.
 
-### Current Status
+### Status
 - Authentication request workflow implemented.
 - Response validation mechanism prepared.
 - Access Token extraction and validation will be completed in the next development stage.
@@ -578,7 +574,7 @@ The methodology described above shall serve as the fixed implementation framewor
 
 # Sentinel-5P TROPOMI NO₂ Acquisition Protocol (DS02) — FINAL LOCKED VERSION (v1.0)
 
-# Product Selection
+## Product Selection
 
 - Dataset: Sentinel-5P TROPOMI NO₂ Level-2
 - Product Version: RPRO (Reprocessed)
@@ -588,21 +584,21 @@ The methodology described above shall serve as the fixed implementation framewor
 Reason:
 RPRO products provide the highest-quality historical retrievals using improved processing algorithms and are specifically designed for long-term environmental trend analysis. Since GPIE evaluates environmental policy effectiveness between 2019–2024 rather than real-time air quality, RPRO represents the scientifically preferred dataset.
 
-# Study Area
+## Study Area
 
 - European Union (Demonstration Case)
 
 Reason:
 The European Green Deal serves as the first validation case for the globally transferable Green Policy Intelligence Engine (GPIE). The framework architecture remains applicable to future policy evaluations in any country or region.
 
-# Temporal Extent
+## Temporal Extent
 
 - 01 January 2019 – 31 December 2024
 
 Reason:
 A standardized six-year study period captures both pre-policy baseline conditions and multiple years following Green Deal implementation, enabling robust long-term environmental assessment.
 
-# Coordinate Reference System (CRS)
+## Coordinate Reference System (CRS)
 
 Raw Sentinel-5P Products
 - EPSG:4326 (WGS84)
@@ -619,7 +615,7 @@ No reprojection shall be performed unless a future analysis explicitly requires 
 Reason:
 Sentinel-5P products are natively referenced in WGS84. Maintaining a single CRS throughout the processing pipeline eliminates unnecessary reprojection errors and preserves scientific reproducibility.
 
-# Spatial Discovery Strategy
+## Spatial Discovery Strategy
 
 Catalogue discovery shall use the standardized European Bounding Box (BBOX).
 
@@ -636,7 +632,7 @@ MAX_LAT = 71.5
 Reason:
 Bounding Box discovery is recommended by ESA/CDSE because it provides efficient catalogue searches, minimizes API processing overhead, avoids complex polygon timeouts, and retrieves all orbital swaths intersecting the study area.
 
-# Download Strategy
+## Download Strategy
 
 - Download only Sentinel-5P Level-2 RPRO orbital swaths intersecting the European Bounding Box.
 - Global Sentinel-5P products will not be downloaded.
@@ -645,7 +641,7 @@ Bounding Box discovery is recommended by ESA/CDSE because it provides efficient 
 Reason:
 Restricting downloads to intersecting orbital swaths substantially reduces storage requirements and download time while preserving all observations required for environmental policy assessment.
 
-# Spatial Processing Strategy
+## Spatial Processing Strategy
 
 European Bounding Box Search
              ↓
@@ -660,7 +656,7 @@ Generate Analysis-Ready Datasets
 Reason:
 Searching with a Bounding Box maximizes API efficiency, while clipping after Level-3 generation preserves pixel integrity, avoids boundary artifacts, and produces datasets containing only the official European Union study area.
 
-# Spatial Resolution
+## Spatial Resolution
 
 Raw Level-2
 
@@ -677,7 +673,7 @@ Final Products
 Reason:
 A standardized 0.05° grid provides consistent spatial analysis across Europe while preserving appropriate scientific resolution for long-term policy evaluation.
 
-# Raw Data Acquisition Strategy
+## Raw Data Acquisition Strategy
 
 - Acquire Sentinel-5P Level-2 RPRO products throughout the complete study period.
 - Products shall be collected as orbital swaths preserving the original satellite observations.
@@ -685,13 +681,13 @@ A standardized 0.05° grid provides consistent spatial analysis across Europe wh
 Reason:
 Monthly Sentinel-5P products do not exist. Level-2 orbital products preserve the complete observational record and maximize scientific reproducibility for downstream processing.
 
-# Batch Execution Strategy
+## Batch Execution Strategy
 
 -Data acquisition shall be executed using monthly batches, aligned with the project's month-wise pipeline lifecycle (download → process → raw-delete → next month). Each monthly batch retrieves all intersecting Sentinel-5P products for that calendar month.
 
 Reason: Monthly execution matches the orchestration granularity implemented in run_pipeline.py and date_utils.generate_monthly_ranges(), allowing fault isolation and raw-data cleanup to occur once per month rather than requiring finer-grained weekly checkpointing.
 
-# Query Strategy
+## Query Strategy
 
 - Catalogue searches shall be executed sequentially throughout the study period using small temporal batches.
 - Large multi-year catalogue requests will never be used.
@@ -699,7 +695,7 @@ Reason: Monthly execution matches the orchestration granularity implemented in r
 Reason:
 Small temporal queries improve API stability, simplify failure recovery, reduce timeout risk, and align with Copernicus Data Space best practices for automated Earth Observation workflows.
 
-# Quality Control
+## Quality Control
 
 Apply
 
@@ -710,7 +706,7 @@ during preprocessing.
 Reason:
 This is the official ESA-recommended quality threshold for tropospheric NO₂ analyses. It removes low-quality retrievals affected by clouds, snow/ice, and retrieval uncertainties, ensuring scientifically reliable atmospheric observations.
 
-# Processing Workflow
+## Processing Workflow
 
 Downloaded Level-2 Products
             ↓
@@ -729,7 +725,7 @@ Multi-Year Composite (when required)
 Reason:
 This workflow preserves the complete observation record while producing standardized multi-temporal datasets suitable for long-term environmental policy evaluation.
 
-# Processing Platform
+## Processing Platform
 
 Primary Processing Engine
 
@@ -758,7 +754,7 @@ QGIS shall not be used for the operational production pipeline.
 Reason:
 Python enables fully automated, reproducible, scalable, and globally transferable processing workflows, whereas QGIS is reserved for visualization and validation.
 
-# Failure Recovery Strategy
+## Failure Recovery Strategy
 
 Implement
 
@@ -775,7 +771,7 @@ The pipeline shall
 Reason:
 Differential downloading minimizes unnecessary network usage, improves robustness against interrupted downloads, prevents duplicate downloads, and represents the industry standard for large-scale Earth Observation systems.
 
-# Raw Data Lifecycle
+## Raw Data Lifecycle
 
 Download
    ↓
@@ -792,7 +788,7 @@ Archive or Remove Temporary Raw Products (when storage optimization is required)
 Reason:
 The processing pipeline preserves reproducibility while minimizing long-term storage requirements.
 
-# Missing Data Policy
+## Missing Data Policy
 
 - Invalid pixels shall be stored as NaN.
 - No interpolation shall be performed during preprocessing.
@@ -801,7 +797,7 @@ The processing pipeline preserves reproducibility while minimizing long-term sto
 Reason:
 Preserving missing values maintains scientific integrity and prevents introduction of artificial atmospheric signals.
 
-# Output Products
+## Output Products
 
 Raw
 
@@ -826,7 +822,7 @@ Parquet (.parquet)
 Reason:
 Each format is optimized for its intended downstream application while maintaining interoperability.
 
-# Directory Structure
+## Directory Structure
 
 data/
 └── earth_observation/
@@ -845,7 +841,7 @@ data/
 Reason:
 The hierarchy supports scalable automation, efficient storage management, and reproducible processing.
 
-# File Naming Convention
+## File Naming Convention
 
 Raw ---> Raw files are stored using the original Copernicus product name as returned by the CDSE catalogue (e.g., S5P_RPRO_L2__NO2____...nc), preserving full traceability to the source product rather than applying a custom renaming scheme.
 Reason: Retaining the official product name avoids ambiguity, simplifies cross-referencing against the Copernicus catalogue, and eliminates the need for a separate naming-parity check between local files and source metadata.
@@ -869,7 +865,7 @@ NO2_MULTIYEAR_2019_2024.tif
 Reason:
 A standardized naming convention simplifies automation and chronological indexing.
 
-# Metadata Policy
+## Metadata Policy
 
 Every processed output shall contain metadata including
 
@@ -888,7 +884,7 @@ Every processed output shall contain metadata including
 Reason:
 Complete metadata ensures reproducibility, transparency, and future auditability.
 
-# Logging Policy
+## Logging Policy
 
 The pipeline shall automatically record
 
@@ -904,7 +900,7 @@ The pipeline shall automatically record
 Reason:
 Comprehensive logs simplify debugging, monitoring, and recovery.
 
-# Version Control Policy
+## Version Control Policy
 
 Pipeline versions shall be documented.
 
@@ -923,7 +919,7 @@ v2.0
 Reason:
 Version tracking guarantees reproducibility across future framework improvements.
 
-# Framework Design Principle
+## Framework Design Principle
 
 - All acquisition parameters shall remain configurable rather than hard-coded.
 - Study area, temporal extent, CRS, processing settings, output structure, and quality thresholds shall be controlled through centralized configuration files.
@@ -932,7 +928,7 @@ Version tracking guarantees reproducibility across future framework improvements
 Reason:
 GPIE is designed as a reusable global environmental policy evaluation framework. The European Green Deal represents only the first demonstration case, while the same architecture should support environmental policy assessment anywhere in the world through configuration changes alone.
 
-# Scientific Design Principle
+## Scientific Design Principle
 
 Raw satellite observations shall never be modified.
 
@@ -941,7 +937,7 @@ All analyses shall be performed on processed derivative products while preservin
 Reason:
 Preservation of original observations ensures scientific integrity, reproducibility, and future reprocessing capability.
 
-# Methodology Lock
+## Methodology Lock
 
 The Sentinel-5P NO₂ acquisition protocol described above shall serve as the fixed implementation framework for DS02 within the Green Policy Intelligence Engine (GPIE).
 
@@ -956,7 +952,7 @@ and never merely for implementation convenience.
 
 ----------------------------------------------------------------------------
 
-### Day 4
+## Day 4
 
 • Implemented the finalized European Bounding Box (WKT) within the Sentinel-5P OData catalogue search, enabling automated retrieval of orbital swaths intersecting the study area.
 
@@ -1062,7 +1058,7 @@ and never merely for implementation convenience.
 
 -----------------------------------------------------------------------------------------------------------
 
-### Day 5 — Security Hardening & Pipeline Robustness
+## Day 5 — Security Hardening & Pipeline Robustness
 
 - Identified that authentication credentials were hardcoded in plaintext within `auth.py`, posing a security and reproducibility risk.
 - Migrated credential management to a `.env` file using `python-dotenv`, removing all hardcoded secrets from source code.
@@ -1072,7 +1068,7 @@ and never merely for implementation convenience.
 - Verified successful token retrieval end-to-end via `test_auth.py`, confirming HTTP 200 authentication against the CDSE Identity Service.
 - Verified `search_products.py` independently, confirming correct retrieval of Sentinel-5P RPRO NO₂ product metadata for the January 2019 test window.
 
-### Day 5 — Download Pipeline Hardening
+## Day 5 — Download Pipeline Hardening
 
 - Rebuilt `download_no2.py` to eliminate the single-point-of-failure behavior in which one failed product download halted the entire batch.
 - Implemented per-file retry logic (3 attempts) with delay-based backoff to handle transient network failures.
@@ -1081,20 +1077,20 @@ and never merely for implementation convenience.
 - Conducted a live download test; confirmed correct differential-download behavior (skipping already-verified files) and correct retry behavior under manual interruption.
 - Identified and removed one incomplete (interrupted) raw NO₂ file from the local dataset to prevent downstream corruption during processing.
 
-### Day 5 — (HARP Preprocessing)
+## Day 5 — (HARP Preprocessing)
 
 - Converted the exploratory `extract_no2.py` script into a reusable, production-oriented function: `preprocess_file()`.
 - Implemented the ESA-recommended quality assurance filter (`qa_value ≥ 0.75`) directly within the HARP operations string, aligning implementation with the locked DS02 methodology.
 - Implemented 0.05° spatial binning within the same HARP operation chain, converting raw orbital swaths into standardized Level-3 grid products.
 - Function returns the output filepath on success and `None` on failure, without raising unhandled exceptions, to support fault-tolerant batch execution.
 
-### Day 5 — Temporal Automation Layer
+## Day 5 — Temporal Automation Layer
 
 - Removed a duplicate import statement in `date_utils.py`.
 - Implemented `generate_monthly_ranges()` in `date_utils.py`, producing ISO-formatted start/end date pairs for each calendar month across an arbitrary year range.
 - Extended `config.py` with `STUDY_START_YEAR`, `STUDY_START_MONTH`, `STUDY_END_YEAR`, and `STUDY_END_MONTH` to define the full 2019–2024 study period, while preserving legacy `START_DATE`/`END_DATE` variables for backward compatibility.
 
-### Day 5 — Module 6 Implementation (Execution, Cleanup & Orchestration)
+## Day 5 — Module 6 Implementation (Execution, Cleanup & Orchestration)
 
 - Rebuilt `run_pipeline.py` as a full month-wise orchestrator, implementing the locked lifecycle: download → preprocess → raw-file deletion → progression to next month.
 - Implemented structured logging via Python's `logging` module, writing timestamped execution logs to a dedicated `logs/` directory in addition to console output, satisfying the project's Logging Policy requirement.
@@ -1102,7 +1098,7 @@ and never merely for implementation convenience.
 - Implemented fault isolation at the file level: if preprocessing fails for a given file, the raw file is preserved (not deleted) to allow reprocessing, consistent with the Raw Data Lifecycle principle that raw observations are never deleted before successful validation.
 - Created `test_pipeline_one_month.py` as an isolated single-month test harness to validate the full download-process-cleanup cycle prior to full-scale 72-month execution.
 
-### Day 5 — DS05 Implementation (Copernicus DEM GLO-30)
+## Day 5 — DS05 Implementation (Copernicus DEM GLO-30)
 
 - Verified current data access pathway for Copernicus DEM GLO-30 via the public, authentication-free AWS Open Data S3 bucket (managed by Sinergise), confirming the dataset remains actively maintained.
 - Implemented `download_dem.py`, including tile-name generation logic matching the official Copernicus Product Package naming convention.
@@ -1110,7 +1106,7 @@ and never merely for implementation convenience.
 - Implemented per-tile retry logic (3 attempts) and graceful handling of non-existent (ocean) tiles via HTTP 404 detection.
 - Conducted a live single-tile test download (Netherlands region, tile N50_E003); confirmed successful retrieval, correct file size (10.2 MB), and correct placement within the standardized `data/earth_observation/dem/raw/` directory structure, maintaining EPSG:4326 and bounding-box consistency with DS02.
 
-### Day 5 — DS09 Implementation (NUTS Administrative Boundaries)
+## Day 5 — DS09 Implementation (NUTS Administrative Boundaries)
 
 - Implemented `download_nuts.py`, retrieving country-level (NUTS LEVL_0) boundaries as a single GeoJSON file from the official Eurostat GISCO distribution API.
 - Verified successful download of the 2024 NUTS release at 1:20M resolution in EPSG:4326.
@@ -1118,7 +1114,7 @@ and never merely for implementation convenience.
 - Identified that the raw NUTS dataset includes non-EU entities (EFTA members, candidate countries, and non-member states); implemented an explicit EU-27 ISO2-to-ISO3 mapping to filter the dataset to official EU member states only, including correct handling of Eurostat's non-standard "EL" designation for Greece.
 - Verified successful extraction of exactly 27 EU member state ISO3 codes, establishing a reusable country-code list for cross-dataset use.
 
-### Day 5 — DS07 Implementation (WorldPop Population, Partial)
+## Day 5 — DS07 Implementation (WorldPop Population, Partial)
 
 - Implemented `download_population.py`, consuming the EU-27 country list generated from DS09 to drive per-country data acquisition, establishing a cross-dataset dependency between boundary and demographic data layers.
 - Implemented retrieval via the WorldPop REST API (`wpgp` project alias) for the verified 2000–2020 "Global 1" dataset, with FTP-to-HTTPS URL normalization.
@@ -1126,7 +1122,7 @@ and never merely for implementation convenience.
 - Scoped initial execution to the 2019–2020 period only, as these years are confirmed available in the verified dataset.
 - Identified that full study-period coverage (2021–2024) requires integration with WorldPop's newer "Global 2" dataset (distributed via HDX/STAC), whose exact programmatic access pattern has not yet been verified and remains an open task for a future session.
 
-### Current Status — End of Day 5
+## Status — End of Day 5
 
 - DS01 (Policy Database): Complete.
 - DS02 (Sentinel-5P NO₂): Pipeline complete and hardened; full 72-month execution pending.
@@ -1139,7 +1135,7 @@ and never merely for implementation convenience.
 
 # Project Journal — DS05 Population Module
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: WorldPop "Global 1" gridded population estimates
 - **Provider**: WorldPop (University of Southampton)
@@ -1149,7 +1145,7 @@ and never merely for implementation convenience.
 - **CRS**: WGS84 (EPSG:4326), consistent with DS02/DS05 CRS Lock policy
 - **Organizational Unit**: Per-country (not bounding-box based, unlike DEM) — data is distributed as one file per country per year
 
-### Temporal Scope
+## Temporal Scope
 
 - Full study period requirement: 2019–2024 (per project's standardized six-year study window)
 - Verified data availability via the WorldPop REST API is confirmed only for **2019 and 2020**, as these fall within the "Global 1" dataset (2000–2020 coverage)
@@ -1157,12 +1153,12 @@ and never merely for implementation convenience.
 - **Decision**: Execution scope restricted explicitly to verified years (`years = [2019, 2020]`) to ensure the module runs reliably without introducing unverified or unrepresented data gaps
 - 2021–2024 population acquisition remains an open task for a future session, to be resolved via direct Global 2/HDX integration
 
-### Cross-Dataset Dependency
+## Cross-Dataset Dependency
 
 - Population acquisition is driven by the EU-27 country list generated in the DS09 (NUTS Boundaries) module, establishing an explicit dependency between boundary data and demographic data layers
 - Ensures consistent country coverage across all per-country datasets in the project
 
-### Implementation Details
+## Implementation Details
 
 - Implemented `download_population.py` with per-country, per-year download logic via `download_country_population()`
 - Implemented differential-download logic: existing non-empty local files are skipped to avoid redundant downloads
@@ -1170,7 +1166,7 @@ and never merely for implementation convenience.
 - Implemented graceful error handling at both the metadata-query stage and the file-download stage, ensuring failures for a single country/year do not halt batch execution across the full 27-country loop
 - `download_all_eu_population()` iterates over all EU-27 countries for each verified year, logging progress as `[done/total]` for execution visibility
 
-### Design Principle
+## Design Principle
 
 - No silent or implicit data substitution is performed for unavailable years; only years with verified, physically-downloadable source data are included in the execution scope, consistent with the project's broader emphasis on reproducibility and data provenance transparency
 
@@ -1178,7 +1174,7 @@ and never merely for implementation convenience.
 
 # Project Journal — DS05 Copernicus DEM Module
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: Copernicus DEM GLO-30 (Digital Elevation Model)
 - **Provider**: Copernicus Programme, distributed via AWS Open Data Registry (managed by Sinergise)
@@ -1189,18 +1185,18 @@ and never merely for implementation convenience.
 - **Temporal Resolution**: Static (single acquisition, no repeat downloads required)
 - **Organizational Unit**: 1°×1° tiles, following the official Copernicus DSM Product Package naming convention
 
-### Data Source Verification
+## Data Source Verification
 
 - Verified via web search that the AWS Open Data S3 bucket remains actively maintained and publicly accessible, with no authentication required
 - Noted that this AWS mirror reflects an earlier dataset version (last confirmed update ~March 2023), as certain third-party platforms (e.g., OpenTopography) have since migrated to sourcing directly from ESA for the most current version
 - **Decision**: AWS mirror deemed acceptable for project use, as DEM is a static, slowly-changing dataset where version currency is less critical than for time-series data (e.g., DS02 NO₂); version/access-date to be noted in documentation for reproducibility
 
-### Spatial Extent Strategy
+## Spatial Extent Strategy
 
 - Tile discovery performed by iterating over integer latitude/longitude steps spanning the project's standardized European Bounding Box (`MIN_LON`, `MIN_LAT`, `MAX_LON`, `MAX_LAT` from `config.py`), ensuring consistency with DS02's spatial extent
 - Since the bounding box spans both land and ocean area, a significant number of tile requests are expected to return HTTP 404 (no tile exists over open ocean) — handled explicitly as an expected, non-error condition
 
-### Implementation Details
+## Implementation Details
 
 - Implemented `download_dem.py` with tile-name generation logic (`generate_tile_name()`) matching the official Copernicus naming convention (e.g., `Copernicus_DSM_COG_10_N50_00_E003_00_DEM`)
 - Implemented remote file-size verification via HTTP HEAD requests (`get_remote_size()`) prior to download, enabling accurate differential-download logic without downloading files solely to check completeness
@@ -1209,7 +1205,7 @@ and never merely for implementation convenience.
 - Implemented explicit differentiation between download outcomes (`downloaded`, `skipped`, `not_found`, `failed`) with a summary report printed at the end of batch execution
 - Corrupted or incomplete local files are automatically deleted and re-downloaded rather than silently skipped
 
-### Live Verification
+## Live Verification
 
 - Conducted a single-tile live test download (Netherlands region, tile `N50_E003`)
 - Confirmed successful retrieval: correct file size (10.2 MB), valid TIF file (thumbnail-readable), and correct placement within the standardized `data/earth_observation/dem/raw/` directory structure
@@ -1219,47 +1215,47 @@ and never merely for implementation convenience.
 
 # Project Journal — DS03 NDVI: Planned Approach (Not Yet Implemented)
 
-### Status
+## Status
 Not yet started. Documented here as a planned methodology decision for a future session.
 
-### Original Plan vs. Revised Plan
+## Original Plan vs. Revised Plan
 
 - **Original plan**: Download raw Sentinel-2 tiles and calculate NDVI locally, or use the Sentinel Hub Statistical/Process API to compute NDVI on-the-fly from raw bands.
 - **Problem identified**: Raw Sentinel-2 tiles are extremely large (500MB–1GB per tile), making full EU/6-year coverage impractical in terms of storage. The cloud-computation alternative (Sentinel Hub API) requires a separate OAuth client setup (distinct from the existing CDSE credentials), introduces monthly Processing Unit (PU) quota management, and adds a new layer of authentication complexity beyond what the rest of the pipeline uses.
 - **Revised plan**: Use a **pre-computed NDVI product** instead of computing NDVI from raw bands.
 
-### Rationale for Using Pre-Computed NDVI
+## Rationale for Using Pre-Computed NDVI
 
 - NDVI is a standardized, formula-based index — (NIR − Red) / (NIR + Red) — so a pre-computed NDVI product from an official source is scientifically equivalent to computing it manually from raw bands. There is no loss of methodological control, unlike with the project's primary variable.
 - This decision was evaluated specifically against the project's core NO₂ methodology, where raw-to-processed control is essential (QA thresholds, custom spatial binning) because NO₂ is the primary variable used for causal inference and government-outcome verification. NDVI, by contrast, functions as a supporting/control variable in the broader analysis, so using a standardized, pre-validated product does not weaken the project's core scientific contribution.
 - Conclusion: pre-computed NDVI is an acceptable and defensible substitution; it does not compromise the "Trust but Verify" research design, which centers on NO₂.
 
-### Selected Data Source
+## Selected Data Source
 
 - **Dataset**: Copernicus Global Land Service (CGLS) NDVI, 300m resolution, 10-daily composites, Version 3 (covering 2014–present; earlier versions 1 and 2 are superseded and should not be used)
 - **Provider**: Copernicus Land Monitoring Service (CLMS), distributed via the dedicated portal at `land.copernicus.eu`
 - **Format**: NetCDF/GeoTIFF, consistent with the project's raster format standards
 - **CRS**: WGS84 (EPSG:4326), consistent with the project-wide CRS Lock policy
 
-### Access Path Investigated and Rejected
+## Access Path Investigated and Rejected
 
 - An alternative access route was identified: the same CGLS NDVI collection (`CLMS_NDVI_GLOBAL_300M_10DAILY_V3`) has recently become available through the Copernicus Data Space Ecosystem (CDSE), as part of an ongoing CLMS-to-CDSE migration.
 - This route was rejected for immediate use because the collection is currently exposed only via the **openEO API**, not the standard OData Products catalogue already used for DS02 (NO₂). openEO uses a fundamentally different request structure (JSON-based process graphs rather than simple filtered queries) and would require building a separate client integration.
 - Critically, this pathway would not fail loudly if used incorrectly — a mismatched implementation would return empty results silently for every query rather than raising an error, risking undetected data loss during time-constrained field execution. This route is deferred until it can be properly researched and tested, since a new API architecture should not be first tested on a bulk production run.
 
-### Planned Access Method
+## Planned Access Method
 
 - The CGLS direct distribution portal will be used instead, as it is a long-standing, independently documented distribution path that does not depend on the newer CDSE/openEO migration.
 - This path requires a one-time manual step: free account registration at `land.copernicus.eu/global`, followed by generation of an API token via the account dashboard (a comparable manual step to the OAuth client creation that would otherwise have been required for Sentinel Hub).
 - Following registration and token generation, programmatic bulk downloading is expected to be possible via CLMS's Machine-to-Machine (M2M) API and/or its published manifest-file system (text files listing available product files per time period, intended for automated batch downloading).
 
-### Explicitly Deferred / Not Verified
+## Explicitly Deferred / Not Verified
 
 - The exact M2M API request format, authentication header structure, and download URL pattern have not yet been verified against official documentation.
 - A candidate implementation was drafted externally but was found to rely on an unverified, likely incorrect base URL and contained no functioning download logic; it was discarded rather than used, to avoid introducing an untested dependency into a live field session.
 - Before implementation, the official "How to download data through the M2M API" guide (CLMS documentation) must be read in full and the request format tested against a small sample before scaling to the full 27-country, 6-year batch.
 
-### Next Steps (Future Session)
+## Next Steps (Future Session)
 
 1. Register for a free account at the CGLS portal.
 2. Generate an API token via the account dashboard.
@@ -1271,7 +1267,7 @@ Not yet started. Documented here as a planned methodology decision for a future 
 
 # Project Journal — DS08 Eurostat Regional GDP Module
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: Gross Domestic Product (GDP) at current market prices, by NUTS 2 region
 - **Official Dataset Code**: `nama_10r_2gdp`
@@ -1281,30 +1277,30 @@ Not yet started. Documented here as a planned methodology decision for a future 
 - **Spatial Unit**: NUTS 2 administrative regions (basic regions for regional policy application), consistent with the DS09 NUTS Boundaries module
 - **Temporal Resolution**: Annual
 
-### Verification Process
+## Verification Process
 
 - Confirmed the current, active Eurostat REST API endpoint structure via official Eurostat API documentation: `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/{DATASET_CODE}`
 - Verified the exact dataset code (`nama_10r_2gdp`) against multiple independent sources (official Eurostat data browser, EU regional statistics publications, and third-party citations), rather than assuming a code from memory, to avoid the type of silent-failure risk identified during the DS03 NDVI investigation
 
-### Design Rationale — Single Bulk Request vs. Per-Country Looping
+## Design Rationale — Single Bulk Request vs. Per-Country Looping
 
 - Unlike DS07 (Population), which required per-country iteration due to WorldPop's per-country file distribution model, the Eurostat API returns data for **all NUTS regions in a single request**
 - This eliminates the need for a country-code-driven loop (and therefore a dependency on the DS09 country list), simplifying the module to a single API call covering the full EU dataset
 - This reflects a broader project pattern: acquisition strategy is adapted to each provider's native data structure rather than forcing a uniform per-country approach across all datasets
 
-### Temporal Scope
+## Temporal Scope
 
 - Query filtered to the project's standardized study period (2019–2024) using the Eurostat API's built-in `sinceTimePeriod` and `untilTimePeriod` filter parameters, avoiding the need to download and locally filter the full historical time series
 - This is consistent with the project's general principle of minimizing unnecessary data transfer where server-side filtering is available (as also applied in DS02's temporal batching and DS05's spatial bounding-box discovery)
 
-### Implementation Details
+## Implementation Details
 
 - Implemented `download_eurostat_gdp.py` with a single function, `download_regional_gdp()`, encapsulating the full request-and-save workflow
 - Implemented basic differential-download logic: if a non-empty output file already exists for the given year range, the download is skipped rather than repeated
 - Implemented graceful error handling for both non-200 HTTP responses and request exceptions, returning `None` on failure rather than raising an unhandled exception, consistent with the fault-tolerance pattern established across DS02, DS05, and DS07 modules
 - Output is stored under `data/earth_observation/economy/raw/`, following the project's standardized per-dataset directory structure
 
-### Design Simplicity Note
+## Design Simplicity Note
 
 - This module is intentionally the simplest acquisition script in the project to date: no authentication, no batching, no retry logic was deemed necessary, as a single well-scoped API request against a stable government statistics service carries substantially lower failure risk than large-scale satellite or per-country raster acquisition
 - Retry logic and chunked/streaming download handling (as used in DS02, DS05, DS07) were deliberately omitted here, as the expected response size is small (tabular JSON, not large binary raster data) and does not require streaming
@@ -1313,7 +1309,7 @@ Not yet started. Documented here as a planned methodology decision for a future 
 
 # Project Journal — DS04 ESA WorldCover Module
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: ESA WorldCover 10m 2021, Version 200 (v200)
 - **Provider**: European Space Agency (ESA), produced by the WorldCover consortium; distributed via AWS Open Data (managed by VITO)
@@ -1323,25 +1319,25 @@ Not yet started. Documented here as a planned methodology decision for a future 
 - **CRS**: WGS84 (EPSG:4326), consistent with the project-wide CRS Lock policy
 - **Native Tile Grid**: 3° × 3° tiles (distinct from DEM's 1° × 1° tile grid)
 
-### Version Selection Rationale
+## Version Selection Rationale
 
 - Two versions exist: v100 (2020 map) and v200 (2021 map), generated using different underlying algorithms
 - v200 (2021) was selected as it reflects an improved training methodology and higher validated overall accuracy (76.7% vs. 74.4% for v100), and represents the more current classification approach
 - Noted for future documentation: because v100 and v200 differ algorithmically (not just temporally), any comparison between the two years would conflate real land cover change with algorithmic differences — this project uses a single version (v200) as its land cover baseline rather than attempting a direct 2020-vs-2021 change analysis from these two products
 
-### Verification Process
+## Verification Process
 
 - Confirmed via official ESA WorldCover, AWS Open Data Registry, and Digital Earth Africa documentation that the dataset is hosted on a public, no-authentication-required S3 bucket
 - Confirmed the tile naming convention includes a coordinate-based identifier (e.g., `N00E033`) corresponding to the 3°×3° grid cell, cross-referenced via independent third-party documentation (Microsoft Planetary Computer dataset examples)
 - **Open verification item**: the exact full filename string format (constructed as `ESA_WorldCover_10m_2021_v200_{lat}{lon}_Map.tif`) was assembled from established ESA WorldCover naming conventions but has not yet been confirmed against a live server response, unlike DS05 where a single-tile download was already verified live. A single-tile test is planned as the first execution step before full bounding-box download, mirroring the verification approach used for DS05.
 
-### Spatial Extent Strategy
+## Spatial Extent Strategy
 
 - Tile discovery adapted to WorldCover's native 3° grid (distinct from DEM's 1° grid), using floor-division logic to align arbitrary bounding-box coordinates to valid tile boundaries
 - Reuses the project's standardized European Bounding Box (`MIN_LON`, `MIN_LAT`, `MAX_LON`, `MAX_LAT` from `config.py`), maintaining spatial extent consistency with DS02 and DS05
 - As with DS05, the bounding box spans both land and ocean, so a subset of tile requests are expected to return HTTP 404 (no tile exists over open ocean); handled explicitly as an expected, non-error condition rather than a failure
 
-### Implementation Details
+## Implementation Details
 
 - Implemented `download_worldcover.py`, structurally modeled on the DS05 (`download_dem.py`) module to maintain consistency in acquisition patterns across static/near-static datasets
 - Implemented tile-name generation (`generate_tile_name()`) using floor-division to snap arbitrary coordinates to the nearest valid 3° tile origin
@@ -1349,7 +1345,7 @@ Not yet started. Documented here as a planned methodology decision for a future 
 - Implemented per-tile retry logic (3 attempts) and explicit HTTP 404 handling for non-existent (ocean) tiles, consistent with the DS05 retry standard
 - Implemented an execution summary (tiles checked, downloaded, skipped, not found, failed) printed at the end of batch execution, consistent with DS05's reporting format
 
-### Planned Verification Step (Not Yet Executed)
+## Planned Verification Step (Not Yet Executed)
 
 - Before full bounding-box execution, a single-tile test download is planned (e.g., the same Netherlands-region coordinates used to verify DS05) to confirm the filename pattern resolves correctly against the live S3 bucket
 - If the single-tile test fails (e.g., HTTP 404 for a known-land tile, indicating an incorrect filename pattern), the naming convention will be corrected before attempting full-scale execution, following the same fail-fast, verify-before-scale principle applied throughout the project's acquisition modules
@@ -1358,7 +1354,7 @@ Not yet started. Documented here as a planned methodology decision for a future 
 
 # Project Journal — DS06 ERA5 Climate Reanalysis Module
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: ERA5 Monthly Averaged Reanalysis on Single Levels
 - **Provider**: Copernicus Climate Data Store (CDS), operated by ECMWF
@@ -1368,29 +1364,29 @@ Not yet started. Documented here as a planned methodology decision for a future 
 - **Spatial Resolution**: ~31 km (native ERA5 resolution)
 - **Temporal Resolution**: Monthly averages (project's target aggregation level, avoiding the need for local hourly-to-monthly aggregation)
 
-### Architectural Distinction from Prior Modules
+## Architectural Distinction from Prior Modules
 
 - Unlike DS02, DS05, DS07, DS08, and DS04 — all of which use direct HTTP GET requests against REST/OData/S3 endpoints — DS06 required migrating to an entirely separate system: the CDS API, which operates on an **asynchronous job-queue model** rather than direct file retrieval
 - A request is submitted, queued server-side (`accepted` → `running` → `successful`), and the resulting file is only released once processing completes; wait times vary from seconds to several minutes depending on server load, in contrast to the immediate-response pattern of the project's other acquisition modules
 - This required no custom polling logic to be written: the `cdsapi.Client.retrieve()` method handles the accept/run/complete lifecycle internally and blocks until the file is ready, simplifying the implementation despite the underlying architectural difference
 
-### Platform Migration Context
+## Platform Migration Context
 
 - Verified that the Copernicus Climate Data Store underwent a full infrastructure migration ("CDS-Beta") in 2024, meaning any pre-existing CDS account or credentials would not be valid; a new ECMWF account registration was required
 - This was confirmed via official ECMWF/CDS migration documentation before implementation began, avoiding the risk of building against a deprecated system
 
-### Authentication Setup
+## Authentication Setup
 
 - Unlike the project's other modules, which use either no authentication (DS05, DS08, initial DS04) or credentials read from a project-local `.env` file (DS02, DS07), CDS authentication requires a `.cdsapirc` file located in the user's home directory (`C:\Users\<username>\.cdsapirc`), a fixed location expected by the `cdsapi` library itself and not configurable from within the project
 - This represents an intentional deviation from the project's otherwise centralized `.env`-based credential pattern, necessitated by the external library's hardcoded lookup behavior
 - File contains two fields: the CDS API base URL and a personal access token, generated via the CDS account dashboard
 
-### Mandatory Terms of Use Acceptance
+## Mandatory Terms of Use Acceptance
 
 - Discovered that CDS enforces per-dataset licence acceptance as a precondition for API access; requests submitted without prior acceptance fail even with valid credentials
 - Terms of Use (CC-BY licence) were accepted manually via the dataset's web interface (`Download` tab) before any programmatic request was attempted, as this step cannot be automated or bypassed via the API
 
-### Debugging Log
+## Debugging Log
 
 - Initial execution attempt failed with `Exception: Missing/incomplete configuration file: C:\Users\shobh/.cdsapirc`
 - Root cause identified in two stages:
@@ -1399,14 +1395,14 @@ Not yet started. Documented here as a planned methodology decision for a future 
 - Resolved via terminal-based rename (`Rename-Item`) to strip the incorrect extension, after which authentication succeeded immediately on the next execution
 - This debugging pattern (extension-hiding causing silent configuration failures) is consistent with an earlier incident in the same project (initial `.env` file creation), suggesting a recurring environment-specific risk worth noting for future file-based configuration steps
 
-### Implementation Details
+## Implementation Details
 
 - Implemented `download_era5.py` with `download_era5_year()`, requesting all 12 months of a given year in a single API call (rather than per-month requests), reducing the number of queued jobs relative to a more granular request pattern
 - Implemented differential-download logic via local file-existence and non-zero-size checks, consistent with the pattern established across other acquisition modules
 - Spatial extent constrained to the project's standardized European Bounding Box (converted to CDS's required `[North, West, South, East]` order), rather than requesting the "whole available region," to align with DS02/DS05 spatial consistency and avoid unnecessary global data transfer
 - Output organized as one file per year (`era5_monthly_{year}.nc`) rather than one file per month, reflecting the dataset's low per-request data volume relative to DS02/DS05
 
-### Live Verification
+## Live Verification
 
 - Conducted a live single-year test download (2019) prior to full-batch execution, consistent with the project's established fail-fast verification principle (as applied to DS05's single-tile test)
 - Confirmed successful end-to-end execution: request accepted, processed server-side, and file downloaded to `data/earth_observation/climate/raw/era5_monthly_2019.nc`
@@ -1416,41 +1412,41 @@ Not yet started. Documented here as a planned methodology decision for a future 
 
 # Project Journal — Day 6: DS04 Land Cover Processing (Complete Pipeline)
 
-### Status
+## Status
 Complete. Raw tiles successfully converted to analysis-ready, region-level land cover statistics.
 
-### Objective
+## Objective
 
 To transform the 233 raw ESA WorldCover tiles (downloaded in the prior session) into a format usable for policy-evaluation analysis — specifically, land cover class percentages (forest, cropland, built-up, etc.) aggregated at the NUTS country level, rather than leaving the data as disconnected raw raster tiles.
 
-### Environment Setup — GDAL Installation
+## Environment Setup — GDAL Installation
 
 - Attempted to install GDAL via `pip install gdal`; this failed due to GDAL requiring compiled C++ binaries that pip cannot reliably build on Windows.
 - Resolved by installing GDAL via `conda-forge` into the existing `gpie` conda environment (`conda install -c conda-forge gdal`), which provides pre-built binaries and avoids the compilation issue entirely.
 - Discovered that VS Code's integrated PowerShell terminal does not automatically recognize `conda` commands or activate conda environments, even after setting the Python interpreter to the `gpie` environment via VS Code's interpreter selector.
 - Adopted a reliable workaround: invoking the `gpie` environment's Python executable directly by full path (`& "$env:USERPROFILE\miniconda3\envs\gpie\python.exe" script.py`) for all subsequent script executions, rather than relying on `conda activate` or the `python` command working correctly in this terminal context.
 
-### Step 1 — Mosaic Construction (VRT)
+## Step 1 — Mosaic Construction (VRT)
 
 - Implemented `process_landcover.py` to combine all 233 individual WorldCover tiles into a single logical mosaic using GDAL's `BuildVRT()` function.
 - Deliberately used a **Virtual Raster (VRT)** rather than physically merging tiles into one large file: a VRT is a lightweight XML index file (confirmed at 128 KB) that references the original tile files and lets GDAL/QGIS/Python treat them as one continuous raster, without duplicating any pixel data or requiring additional disk space.
 - This approach was chosen specifically to avoid the storage cost of physically merging 233 tiles of 10m-resolution data, which would have required a very large single file.
 
-### Step 2 — Rejected Approach: Full-Resolution Clipping
+## Step 2 — Rejected Approach: Full-Resolution Clipping
 
 - Initially attempted to clip the VRT mosaic to the actual EU country boundary (from DS09 NUTS data) at full native 10m resolution, in order to remove the extra North Africa / ocean area included in the original satellite-orbit bounding box.
 - This failed: GDAL reported that clipping at 10m resolution across the full European extent would require approximately 1.75 TB of disk space, exceeding available storage.
 - The script did not correctly detect this failure — it proceeded to print a false success message despite the operation not producing an output file, due to a missing validation check on the `gdal.Warp()` return value.
 - **Conclusion**: producing a full continent-scale clipped raster at native 10m resolution is not a practical goal, since country-level summary statistics do not require pixel-level precision at that scale. This step was abandoned in favor of a statistics-based approach (Step 3).
 
-### Step 3 — Rejected Approach: Zonal Statistics at Native/100m Resolution
+## Step 3 — Rejected Approach: Zonal Statistics at Native/100m Resolution
 
 - Attempted to compute per-NUTS-country land cover percentages directly via `rasterstats.zonal_stats()`, reading from the VRT without materializing a full clipped file — this is the correct general strategy (avoids the storage problem above).
 - First attempt (at native 10m resolution) failed with a `TIFFReadEncodedTile` I/O error, traced to one specific corrupted tile (`ESA_WorldCover_10m_2021_v200_N45E012_Map.tif`) with incomplete pixel data, consistent with a prior known limitation: the WorldCover download module (DS04) does not perform byte-level completeness verification the way DS02 and DS05 do. Resolved by deleting the corrupted tile and re-running the download script, which re-fetched only the missing file via its existing differential-download logic.
 - Second attempt (still at native 10m resolution, after fixing the corrupted tile) failed with an out-of-memory error, because computing statistics for a large country still required loading a very large pixel array into RAM at full resolution.
 - Attempted an intermediate fix: resampling the mosaic to 100m resolution before computing statistics. This reduced data volume substantially but still failed with an out-of-memory error on at least one large NUTS feature (likely a country with a wide bounding box, such as one including overseas territories), because 100m resolution over a very wide extent still produced an array too large for available memory.
 
-### Step 4 — Working Solution: 500m Resampling + Zonal Statistics
+## Step 4 — Working Solution: 500m Resampling + Zonal Statistics
 
 - Resampled the WorldCover mosaic to approximately 500m resolution using `gdal.Warp()` with **nearest-neighbor resampling** (`resampleAlg="near"`), explicitly not average or bilinear resampling.
 - This resampling method was a deliberate scientific choice: WorldCover values are **categorical class codes** (e.g., 10 = Tree cover, 40 = Cropland, 50 = Built-up), not continuous measurements. Averaging or interpolating between class codes would produce meaningless intermediate values with no real-world interpretation; nearest-neighbor resampling preserves valid class codes at every pixel.
@@ -1460,11 +1456,11 @@ To transform the 233 raw ESA WorldCover tiles (downloaded in the prior session) 
 - For each NUTS country, converted raw per-class pixel counts into percentages of total classified pixels, and mapped numeric WorldCover class codes to human-readable class names (Tree cover, Shrubland, Grassland, Cropland, Built-up, Bare/sparse vegetation, Snow and ice, Permanent water bodies, Herbaceous wetland, Mangroves, Moss and lichen) using the official WorldCover legend.
 - Output saved as a single structured JSON file (`landcover_stats_by_country.json`) containing, for each NUTS country ID, a dictionary of land cover class percentages — a compact, directly analysis-ready format suitable for integration into the project's causal-inference workflow, in contrast to the raw raster tiles this pipeline started from.
 
-### Cleanup
+## Cleanup
 
 - Deleted the intermediate, unsuccessful 100m resampled raster (`worldcover_2021_100m.tif`) after confirming the 500m version was the one actually used to produce the final statistics, to avoid retaining a non-functional intermediate artifact.
 
-### Final Pipeline Summary (DS04)
+## Final Pipeline Summary (DS04)
 
 ```
 233 raw 10m tiles
@@ -1476,7 +1472,7 @@ Compressed 500m raster
 landcover_stats_by_country.json
 ```
 
-### Design Principle Reinforced
+## Design Principle Reinforced
 
 - This session's repeated failures (disk space, corrupted tile, memory exhaustion) collectively reinforced a pattern already established elsewhere in the project (DS02, DS05): **resolution and processing scope should match the actual analytical requirement**, not the native resolution of the source data by default. Country-level policy analysis does not require pixel-perfect continental rasters; matching processing resolution to the analytical question (here, region-level percentages) is what made the pipeline computationally feasible on available hardware.
 
@@ -1484,14 +1480,14 @@ landcover_stats_by_country.json
 
 # Project Journal — Day 6: DS06 ERA5 Climate Processing (Complete Pipeline)
 
-### Status
+## Status
 Complete. Raw ERA5 files successfully converted to analysis-ready, monthly country-level temperature and precipitation statistics.
 
-### Objective
+## Objective
 
 To transform the six raw ERA5 yearly download files (2019–2024, downloaded in the prior session) into a format usable for policy-evaluation analysis — specifically, monthly average temperature and precipitation aggregated at the NUTS country level — rather than leaving the data as raw gridded NetCDF files.
 
-### Step 1 — Discovering the Actual File Format (Zip-in-Disguise Issue)
+## Step 1 — Discovering the Actual File Format (Zip-in-Disguise Issue)
 
 - Attempted to open the first raw file (`era5_monthly_2019.nc`) directly with `xarray.open_dataset()`; this failed with an error indicating xarray could not identify a valid backend/format for the file.
 - Diagnosed the root cause by testing the file with Python's `zipfile.is_zipfile()`, which confirmed the file was actually a **ZIP archive saved with a `.nc` extension**, not a genuine NetCDF file.
@@ -1503,7 +1499,7 @@ To transform the six raw ERA5 yearly download files (2019–2024, downloaded in 
   - This split reflects a genuine technical distinction in the source GRIB data: temperature is an instantaneous-type field, while precipitation is an accumulated-type field, and CDS's GRIB-to-NetCDF conversion process (`cfgrib`) apparently separates variables by this type when both are requested in a single request.
 - Made `unzip_era5.py` idempotent and batch-capable: it checks whether an `_extracted` folder already exists before re-extracting (avoiding redundant work), and uses `glob` to automatically discover and process all six yearly files in one execution rather than requiring the year to be hardcoded, correcting an earlier version of the script that only ever processed 2019.
 
-### Step 2 — Merging and Unit Conversion
+## Step 2 — Merging and Unit Conversion
 
 - Implemented `process_era5.py` to merge the two per-year variable files into a single combined dataset per year, and convert raw ERA5 units into human-interpretable units:
   - Temperature: converted from **Kelvin to Celsius** (ERA5's native unit is Kelvin, which is not directly interpretable for policy-relevant climate reporting)
@@ -1513,7 +1509,7 @@ To transform the six raw ERA5 yearly download files (2019–2024, downloaded in 
 - Output: one combined, unit-converted NetCDF file per year (`era5_processed_{year}.nc`), each containing both `temperature_c` and `precipitation_mm` variables on the same spatial/temporal grid.
 - Successfully processed all six years (2019–2024) in a single batch execution of `main()`.
 
-### Step 3 — Regional Aggregation (NUTS Country-Level Monthly Statistics)
+## Step 3 — Regional Aggregation (NUTS Country-Level Monthly Statistics)
 
 - Implemented `era5_regional_stats.py` to aggregate the gridded climate data into per-NUTS-country, per-month summary statistics, following the same general strategy established in the DS04 (Land Cover) pipeline: raw gridded data is not analytically useful on its own for policy comparison, so it must be reduced to region-level statistics matching the spatial units used elsewhere in the project (NUTS boundaries, consistent with DS04, DS07, DS08, DS09).
 - For each year and each of the 12 months within it, computed a country-level statistical mask using `rasterio.features.geometry_mask()` against each NUTS country polygon, applied directly to the ERA5 grid via a manually constructed affine transform derived from the dataset's latitude/longitude coordinate spacing.
@@ -1522,12 +1518,12 @@ To transform the six raw ERA5 yearly download files (2019–2024, downloaded in 
 - Aggregated results across all six years into a single flat JSON structure, with one record per country-month combination, containing NUTS ID, month (YYYY-MM), average temperature (°C), and average precipitation (mm).
 - Final output: `era5_stats_by_country_monthly.json`, containing 5,472 country-month records (consistent with approximately 27 countries × 12 months × 6 years, with some records naturally reduced by the small-territory grid-mask exclusion described above).
 
-### Why This Approach Was Chosen
+## Why This Approach Was Chosen
 
 - ERA5's coarse native resolution (~31km) made memory-related failures (of the kind encountered during DS04 Land Cover processing) unlikely, so no intermediate resampling step was required here — the full-resolution grid was small enough to process directly.
 - Aggregating to monthly country-level statistics (rather than retaining daily or full-grid data) directly matches the temporal and spatial granularity needed for the project's planned causal-inference analysis, where climate variables are intended to serve as **control variables** — used to account for weather-driven variation in NO₂ or vegetation signals before attributing changes to policy effects, rather than as primary variables of interest requiring high spatial precision.
 
-### Final Pipeline Summary (DS06)
+## Final Pipeline Summary (DS06)
 
 ```
 6 yearly raw files (ZIP-disguised-as-.nc)
@@ -1542,14 +1538,14 @@ era5_stats_by_country_monthly.json (5,472 records)
 
 # Project Journal — Day 6: DS08 Eurostat GDP Processing (Complete Pipeline)
 
-### Status
+## Status
 Complete. Raw JSON-stat data successfully converted to a flat, analysis-ready CSV.
 
-### Objective
+## Objective
 
 To transform the raw Eurostat regional GDP file (downloaded in an earlier session as a single JSON-stat response) into a simple, flat table — one row per region-year combination — usable for merging with the project's other datasets in future causal-inference analysis.
 
-### Step 1 — Understanding the Source Format
+## Step 1 — Understanding the Source Format
 
 - Inspected the raw file structure via `inspect_eurostat.py` before writing any decoding logic, consistent with the project's established practice of verifying data structure rather than assuming it (as done previously for DS02, DS05, DS03).
 - Confirmed the file follows the **JSON-stat 2.0** specification, a compact statistical data-exchange format used by Eurostat and other official statistics agencies.
@@ -1558,7 +1554,7 @@ To transform the raw Eurostat regional GDP file (downloaded in an earlier sessio
   - `id` and `size`: the fixed ordering of dimensions and the number of categories in each, which together define how multi-dimensional data is flattened
   - `value`: a dictionary of `{flat_index: value}` pairs, where `flat_index` is a single integer encoding the combination of all dimension positions (e.g., a specific region + a specific year), rather than nested per-dimension structures
 
-### Step 2 — Decoding the Flat Index Structure
+## Step 2 — Decoding the Flat Index Structure
 
 - Recognized that JSON-stat's flat-index encoding is a space-efficient way of representing a multi-dimensional array as a 1D dictionary: for dimensions of sizes `(d1, d2, d3, d4)`, each valid combination of indices is mapped to a single integer via `((i1 × d2 + i2) × d3 + i3) × d4 + i4`, and this must be reversed to recover the original per-dimension indices.
 - Implemented `process_eurostat.py` with `decode_jsonstat()`, which:
@@ -1567,18 +1563,18 @@ To transform the raw Eurostat regional GDP file (downloaded in an earlier sessio
   3. Uses the decoded `geo` and `time` indices to look up the actual region code and year label
 - This approach avoids relying on any external JSON-stat parsing library, keeping the dependency footprint minimal and making the decoding logic fully transparent and auditable — relevant given the project's broader emphasis on reproducibility and understanding each processing step rather than treating any step as a black box.
 
-### Step 3 — Output Structure
+## Step 3 — Output Structure
 
 - Flattened the decoded data into a list of records, each containing: `geo` (NUTS region code), `year`, and `gdp_million_eur` (the GDP value).
 - Saved the result as a single CSV file (`gdp_by_country_year.csv`) using Python's built-in `csv` module, avoiding the need for additional dependencies (e.g., pandas) for this comparatively simple tabular-output task.
 - Final output contained 18,470 records — substantially more than the number of EU-27 countries alone, because the source dataset spans **all NUTS levels (0, 1, and 2)** simultaneously (e.g., both country-level "DE" and sub-national regions like "DE11" appear as separate `geo` codes in the same flat structure), not country-level data only.
 
-### Why This Was the Simplest Module in the Pipeline
+## Why This Was the Simplest Module in the Pipeline
 
 - Unlike DS02, DS04, DS05, and DS06 — all of which required raster or gridded-data handling, spatial masking, resampling, or memory-management strategies — DS08 required only tabular parsing and a lookup-table decoding operation, with no geospatial processing, no large data volumes, and no risk of the memory/storage failures encountered in the raster-based modules.
 - No streaming, chunking, or resolution-reduction was necessary, consistent with the project's general principle (reinforced during DS04 processing) of matching processing complexity to the actual nature and scale of each dataset, rather than applying a uniform processing strategy across all modules.
 
-### Final Pipeline Summary (DS08)
+## Final Pipeline Summary (DS08)
 
 ```
 Raw JSON-stat response (nama_10r_2gdp)
@@ -1591,17 +1587,17 @@ gdp_by_country_year.csv (18,470 records)
 
 # Project Journal — DS03 NDVI: Implementation Attempt — Complete Session Log
 
-### Status
+## Status
 Blocked. Authentication and dataset discovery fully functional; all download-request pathways tested against the CLMS M2M API have failed. Root cause identified as a structural limitation of the dataset itself, not a request-formatting error.
 
-### Prerequisite Steps Completed
+## Prerequisite Steps Completed
 
 - Registered a free account at the CGLS portal (`land.copernicus.eu/global`).
 - Encountered a "Please fill in all required data" validation block on the user profile page; resolved by completing all required profile fields before proceeding.
 - Generated a **service account key** via the profile's "API tokens" section — a JSON object containing `client_id`, `user_id`, `key_id`, a PEM-format private RSA key, and a `token_uri`, distinct in structure from the single-string bearer tokens used elsewhere in the project (e.g., DS06/CDS).
 - Saved the service key as `clms_service_key.json` in the project root and added it to `.gitignore`, consistent with the project's established credential-handling practice.
 
-### Authentication Implementation — JWT-Based Flow
+## Authentication Implementation — JWT-Based Flow
 
 - Verified via official CLMS API documentation that access requires a four-step OAuth2 JWT-bearer flow, distinct from every other authentication method used elsewhere in the project (`.env`-based for DS02/DS07, home-directory `.cdsapirc` for DS06):
   1. Build a JWT containing claims `iss` (client_id), `sub` (user_id), `aud` (token_uri), `iat`, `exp`
@@ -1612,7 +1608,7 @@ Blocked. Authentication and dataset discovery fully functional; all download-req
 - Implemented `auth_clms.py` with `get_clms_access_token()`, encapsulating this flow.
 - **Confirmed working**: subsequent requests reached the server and returned data-validation errors rather than authentication errors, indicating the JWT exchange succeeded correctly.
 
-### Dataset Discovery
+## Dataset Discovery
 
 - Rather than guessing the dataset UID, implemented `find_ndvi_dataset.py` to search the CLMS catalogue programmatically via the `@search` endpoint.
 - Confirmed two matching datasets; selected the non-superseded version:
@@ -1620,34 +1616,34 @@ Blocked. Authentication and dataset discovery fully functional; all download-req
   - Rejected: Version 2, explicitly marked "SUPERSEDED" in its title
 - Retrieved the associated `DatasetDownloadInformationID` (`e4662555-eb53-4e45-a3d2-45f6eb044d85`), required alongside the UID for any download request.
 
-### Download Request Debugging — Round 1: Request Format
+## Download Request Debugging — Round 1: Request Format
 
 - Implemented `download_ndvi.py` following the CLMS API's documented asynchronous task pattern (submit → poll → download), architecturally similar to DS06 but with additional required fields.
 - **Error 1** (`HTTP 400: "BoundingBox is not valid"`): initial implementation submitted `BoundingBox` as a keyed object (`{west, south, east, north}`). Corrected against official documentation to the required flat array format `[North, East, South, West]`. Also corrected `TemporalFilter` dates from `YYYY-MM-DD` strings to milliseconds-since-epoch integers, per the same documentation.
 - **Error 2** (`HTTP 400: "the requested BoundingBox is too big. The limit is 1600000000000"`): after fixing the format, the request reached a server-side area-size limit. The project's full European bounding box (sized for DS02's satellite-orbit discovery) exceeded this limit by a substantial margin.
 
-### Download Request Debugging — Round 2: Spatial Chunking
+## Download Request Debugging — Round 2: Spatial Chunking
 
 - Implemented `bbox_grid.py`, a reusable helper generating an evenly-spaced grid of sub-bounding-boxes across an arbitrary extent (`generate_bbox_grid()`), to split the oversized request into multiple smaller ones.
 - Updated `download_ndvi.py` to loop over both temporal chunks (years) and spatial chunks (grid cells), submitting one request per combination, with per-cell output filenames to avoid collisions.
 - Tested with a 5×5 grid (25 cells): still exceeded the area limit on the first cell, indicating the limit was substantially smaller than initially estimated.
 - Tested with a 15×15 grid (225 cells): the area-limit error **no longer occurred**, confirming the limit had been correctly worked around through finer spatial chunking.
 
-### Download Request Debugging — Round 3: New Blocking Error
+## Download Request Debugging — Round 3: New Blocking Error
 
 - With the area-limit issue resolved, a **new, different error** appeared: `HTTP 400: "this dataset is not downloadable"`.
 - Hypothesized this might be specific to the `BoundingBox` restriction method, since CLMS documentation also describes an alternative, explicitly-supported restriction method using **NUTS country codes** (`"NUTS": "DE"` style parameter) rather than arbitrary bounding boxes.
 - Pivoted `download_ndvi.py` to use NUTS-based requests instead of the bbox grid, iterating over the project's existing EU-27 country list (reusing `get_eu_country_codes()` from DS09/DS07, with an added ISO3→ISO2 mapping since CLMS's NUTS codes use the 2-letter convention).
 - Tested against a single small country (Netherlands, `"NUTS": "NL"`): **identical error** (`"this dataset is not downloadable"`) was returned, ruling out the spatial-restriction method as the cause.
 
-### Root Cause Identified
+## Root Cause Identified
 
 - Since the error persisted regardless of spatial-restriction method (bounding box or NUTS code), inspected the dataset's download-information metadata directly via `inspect_ndvi_dataset.py`, querying the `@search` endpoint for the dataset's full `dataset_download_information` block.
 - The response revealed two critical fields not previously visible: `"full_source": "CDSE"` and a `"byoc_collection"` identifier (`6303088f-3c19-4967-9038-119267c6d090`).
 - **Conclusion**: this specific NDVI dataset is not physically hosted on CLMS's own infrastructure. It is a reference/proxy to a "Bring Your Own Collection" (BYOC) entry within the Copernicus Data Space Ecosystem / Sentinel Hub system. The CLMS website's `@datarequest_post` (M2M) endpoint — the pathway this entire session's implementation was built around — is fundamentally unable to serve this dataset, regardless of correctly-formatted requests, because CLMS itself does not hold the underlying data.
 - This explains why the error was invariant across bounding-box format fixes, area-limit fixes, and the switch to NUTS-based restriction: none of these addressed the actual constraint, which is architectural rather than parameter-related.
 
-### Where This Leaves the Project
+## Where This Leaves the Project
 
 - The CGLS direct-portal M2M route — the access method selected in the prior session specifically to *avoid* Sentinel Hub/CDSE authentication complexity — has now been shown to not function for this dataset at all.
 - The two remaining viable routes both lead back to the CDSE/Sentinel Hub ecosystem this project originally tried to route around:
@@ -1668,33 +1664,33 @@ The previously finalized DS03 methodology (prior journal entry) stated the CGLS 
 
 # Project Journal — DS03 NDVI: Sentinel Hub Implementation — Complete & Successful
 
-### Status
+## Status
 **Complete.** All 27 EU countries successfully acquired and processed for 2019–2024. This resolves the blocker documented in the prior session and fulfills the methodology update specified at that time.
 
-### Step 1 — Sentinel Hub OAuth Client Setup (Methodology Update, Point 2, Executed)
+## Step 1 — Sentinel Hub OAuth Client Setup (Methodology Update, Point 2, Executed)
 
 - Logged into the CDSE dashboard (`dataspace.copernicus.eu`) and located the Sentinel Hub OAuth Clients section under user account settings — a separate credential system from both the CDSE username/password (used for DS02) and the CLMS service key (used for the prior, unsuccessful NDVI attempt).
 - Generated a new OAuth Client (Client ID + Client Secret), completing the exact setup step that the prior session's methodology update had flagged as required but not yet done.
 - Added `SH_CLIENT_ID` and `SH_CLIENT_SECRET` to the project's existing `.env` file, keeping credential storage consistent with the project's established `.env`-based pattern rather than introducing a new storage mechanism.
 
-### Step 2 — Sentinel Hub Authentication Implementation
+## Step 2 — Sentinel Hub Authentication Implementation
 
 - Implemented `auth_sentinelhub.py` using the OAuth2 **Client Credentials** grant type (distinct from both the JWT-bearer flow used for CLMS and the password grant used for CDSE/DS02) — the simplest of the three authentication patterns encountered across the project, requiring only a single POST request with client ID and secret.
 - Verified working via a standalone test execution, confirming successful token retrieval before building any request logic on top of it.
 
-### Step 3 — Choosing the Statistical API Over Raw Raster Download
+## Step 3 — Choosing the Statistical API Over Raw Raster Download
 
 - Rather than requesting raw NDVI GeoTIFF tiles (which would require a separate mosaicking/zonal-statistics pipeline, as was necessary for DS04 Land Cover), used Sentinel Hub's **Statistical API**, which computes zonal statistics (mean, min, max, standard deviation) server-side and returns them directly as JSON.
 - This was a deliberate architectural choice: it collapses the "acquisition" and "processing" stages into a single step for this dataset, in contrast to every other raster dataset in the project (DS02, DS04, DS05), where acquisition and processing were necessarily separate due to the need to handle raw pixel data locally.
 - Used the `byoc_collection` ID (`6303088f-3c19-4967-9038-119267c6d090`) discovered in the prior session's diagnostic investigation, confirming that the dataset-discovery work from that session was not wasted, consistent with the prior methodology update's note (Point 4).
 
-### Step 4 — Evalscript Construction and Debugging
+## Step 4 — Evalscript Construction and Debugging
 
 - Wrote a custom Sentinel Hub "evalscript" (the JavaScript-like function that defines what the API computes per pixel) requesting the `NDVI` and `dataMask` input bands, aggregated monthly (`P1M` interval) over each country's geometry.
 - **Error 1**: `"Output dataMask requested but missing from function setup()"` — the evalscript's `setup()` function declared `dataMask` as an input but not as a corresponding output. Fixed by explicitly declaring both `ndvi` and `dataMask` as named outputs in `setup()`, matching Sentinel Hub's requirement that every input used in `evaluatePixel()` for masking purposes must have a matching output declaration when used with the Statistical API.
 - After this fix, the request succeeded and returned valid statistics — the first successful NDVI data of any kind retrieved in the project.
 
-### Step 5 — Discovering and Correcting the Digital Number Encoding
+## Step 5 — Discovering and Correcting the Digital Number Encoding
 
 - Initial successful results returned values in the range 0–250 (e.g., mean ≈ 160), which are not physically meaningful NDVI values (valid NDVI ranges from -1 to +1). Recognized this as a **digital number (DN) encoding** rather than raw physical NDVI — a common practice in satellite products to store continuous values as compact integers.
 - Rather than guessing a conversion formula, retrieved and read the official CGLS NDVI 300m V3 Product User Manual (PDF, via `land.copernicus.eu` technical library) to find the documented scale factor and offset.
@@ -1702,7 +1698,7 @@ The previously finalized DS03 methodology (prior journal entry) stated the CGLS 
 - Verified the formula against the test output: a DN mean of 159.77 converts to (159.77 × 0.004) − 0.08 = 0.559, a physically realistic NDVI value for the Netherlands in January (moderate vegetation cover, consistent with winter conditions).
 - Updated the evalscript to perform the DN-to-NDVI conversion and flag-value exclusion **server-side**, so that all data retrieved from this point forward is already in correct, physically meaningful units — avoiding the need for a separate post-processing conversion step, unlike DS06 (ERA5), which required a distinct unit-conversion stage after download.
 
-### Step 6 — Full Batch Execution and the France Anomaly
+## Step 6 — Full Batch Execution and the France Anomaly
 
 - Extended execution from the single-year, single-country test to the full scope: all 27 EU countries × 6 years (2019–2024) = 162 requests, iterating using the existing EU-27 country list (reused from DS09/DS07) and per-country NUTS geometries.
 - **26 of 27 countries succeeded on the first full run.** France failed consistently across all six years with: `"Your request of 49944.87 meters per pixel exceeds the limit 26080.00 meters per pixel of the collection."`
@@ -1712,11 +1708,11 @@ The previously finalized DS03 methodology (prior journal entry) stated the CGLS 
 - Re-tested France alone after the fix: succeeded, with realistic NDVI values (~0.51–0.57 for early 2019, consistent with the earlier Netherlands verification).
 - Re-ran the full batch: **all 27 countries succeeded**, producing 162 total country-year records (27 × 6), confirmed by direct inspection of the output JSON (record count and country-code set).
 
-### Outcome Relative to the Prior Session's Open Constraint (Point 3)
+## Outcome Relative to the Prior Session's Open Constraint (Point 3)
 
 - The PU (Processing Unit) quota constraint flagged in the prior session's methodology update was monitored throughout this execution; the full 162-request batch completed without any quota-exceeded error, indicating the request volume for this dataset's scope (country-level monthly statistics, not full-resolution raster tiles) remained well within the free-tier monthly allowance. No quota-management logic (e.g., request throttling or budget tracking) was ultimately required for this dataset's actual usage pattern.
 
-### Final Pipeline Summary (DS03)
+## Final Pipeline Summary (DS03)
 
 ```
 Sentinel Hub OAuth Client (new credential type)
@@ -1728,7 +1724,7 @@ Monthly NDVI statistics per country, 2019–2024
 ndvi_stats_test.json (162 records) — acquisition and processing complete in one step
 ```
 
-### Note on File Naming
+## Note on File Naming
 
 - The output file is currently named `ndvi_stats_test.json`, a holdover from the original single-country test script. Since this file now contains the complete, final 27-country batch output (not a test), it should be renamed to something reflecting its final status (e.g., `ndvi_stats_by_country_monthly.json`, matching the naming convention used for DS06's `era5_stats_by_country_monthly.json`) before this dataset is considered fully finalized in the project's file structure.
 
@@ -1736,14 +1732,14 @@ ndvi_stats_test.json (162 records) — acquisition and processing complete in on
 
 # Project Journal — Day 6 (continued): Cross-Dataset Consistency Fix (EU-27 Scope Alignment)
 
-### Status
+## Status
 Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share a consistent EU-27, country-level scope, verified via direct record-count checks.
 
-### Motivation
+## Motivation
 
 - Rather than proceeding directly to further dataset acquisition/processing while download-dependent work (NO₂, DEM, Population) was blocked on connectivity, used the available time to validate that already-processed datasets could actually be merged together — a "dry run" of the eventual analysis-integration step, intended to surface structural mismatches early rather than discovering them during final causal-inference analysis.
 
-### Step 1 — Merge Compatibility Test
+## Step 1 — Merge Compatibility Test
 
 - Implemented `merge_test.py` to load all four processed datasets (Climate, Land Cover, GDP, NDVI) and inspect their shapes and `NUTS_ID`/`geo` code samples side by side.
 - This immediately surfaced two structural inconsistencies that had not been visible when each dataset was processed independently:
@@ -1751,18 +1747,18 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
   2. **GDP (Eurostat) output mixed multiple NUTS levels** (country-level `AL`, region-level `AL0`, `AL01`, etc.) in a single unfiltered column, and additionally — discovered in a later step — mixed multiple measurement units within the same country-year rows.
 - Confirmed one apparent discrepancy (Liechtenstein `LI` present in Land Cover but absent from Climate) was **not a bug**: ERA5's coarse (~31km) native grid resolution means very small territories like Liechtenstein may not contain any grid-cell center, causing the zonal mask to be empty and the country to be legitimately skipped during DS06 processing — consistent with a limitation already documented in that dataset's journal entry.
 
-### Step 2 — Building a Reusable EU-27 Filter Utility
+## Step 2 — Building a Reusable EU-27 Filter Utility
 
 - Implemented `filter_eu27.py`, exposing `get_eu27_iso2_list()`, which reuses the existing `get_eu_country_codes()` function (originally built for DS09/DS07) and converts its ISO3 codes to the ISO2 format used by NUTS-based datasets, via the same mapping table already established in DS03/DS07.
 - Built as a single shared utility specifically so that any future dataset requiring EU-27 filtering (rather than duplicating the country list and mapping across multiple scripts) can import and reuse it, consistent with the project's general pattern of reusing established components (e.g., DS07's dependency on DS09's country list) rather than re-deriving them per module.
 
-### Step 3 — Applying the Filter with Backups
+## Step 3 — Applying the Filter with Backups
 
 - Implemented `apply_eu27_filter.py` to filter the Climate and Land Cover JSON outputs and the GDP CSV output down to EU-27-only records.
 - Deliberately created a backup of each original (unfiltered) file (`_full.json` / `_full.csv` suffix) before overwriting, preserving the option to use broader NUTS-level or non-EU data in future analysis if needed, while establishing the EU-27, country-level version as the default working dataset — consistent with the project's general principle (established during DS04 processing) of keeping intermediate/reference artifacts rather than discarding data that might later prove useful.
 - Initial filtering run for GDP produced 1,134 records instead of the expected 162 (27 × 6), indicating an unresolved second issue beyond country scope.
 
-### Step 4 — Diagnosing and Fixing the GDP Unit-Mixing Issue
+## Step 4 — Diagnosing and Fixing the GDP Unit-Mixing Issue
 
 - Investigated the unexpected GDP record count by inspecting all rows for a single country-year combination (`DE`, 2019), which returned **seven different values** for the same country and year — ranging from 123 to over 3.5 million — immediately indicating that multiple measurement units were being conflated as if they were duplicate or comparable records.
 - Traced the root cause back to `process_eurostat.py`'s original JSON-stat decoding logic (Day 6, DS08 session): the `unit` dimension had been decoded as part of the flat-index reconstruction but was never included in the output records, silently discarding information that turned out to be essential for correct filtering.
@@ -1771,13 +1767,13 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
 - Selected **`MIO_EUR`** (Million Euro, absolute/total GDP at current prices) as the project's standard GDP unit, on the basis that it is the most directly interpretable and universally comparable metric for the planned policy-impact analysis, rather than a per-capita or purchasing-power-adjusted variant.
 - Updated `filter_gdp()` to filter on both EU-27 membership *and* `unit == "MIO_EUR"` simultaneously, and to rename/clean the output columns (`value` → `gdp_million_eur`, dropping the now-redundant `unit` column) so the final file's schema matches its original intended structure.
 
-### Debugging Note — Backup Restoration Error
+## Debugging Note — Backup Restoration Error
 
 - While attempting to re-apply the unit fix, mistakenly restored the GDP file from its `_full.csv` backup **before** re-running the fixed decoding script — this backup had been created *prior* to the `unit` column fix, so it did not contain the column needed for the new filtering logic, causing a `KeyError: 'unit'`.
 - Resolved by recognizing that the correct fix was not to restore from any existing backup, but to simply re-run `process_eurostat.py` from the raw source JSON (which regenerates the full 18,470-record file with the corrected schema including `unit`), then re-run the GDP-specific filter against that freshly regenerated file.
 - This is noted explicitly because it reflects a general lesson relevant to the project's backup practice: a backup only preserves data as it existed *at backup time* — if the processing logic itself changes afterward (as it did here, adding a new field), restoring an old backup can reintroduce the very problem the fix was meant to resolve, rather than simply undoing an unwanted filter.
 
-### Final Verification
+## Final Verification
 
 - Re-ran the full filtering pipeline in corrected order: `process_eurostat.py` (regenerate from source) → `refilter_gdp.py` (apply EU-27 + `MIO_EUR` filter) → confirmed exactly 162 records (27 countries × 6 years), matching the expected scope.
 - Final consistent dataset scope across all four processed modules:
@@ -1789,7 +1785,7 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
 | GDP (DS08) | 162 | EU-27 × 6 years, `MIO_EUR` only |
 | NDVI (DS03) | 162 | EU-27 × 6 years |
 
-### Design Principle Reinforced
+## Design Principle Reinforced
 
 - This session reinforced that **processing a dataset correctly in isolation does not guarantee it is usable in combination with other datasets** — scope (which countries), granularity (which NUTS level), and units (which measurement convention) must be explicitly aligned across all datasets before any cross-dataset analysis is attempted, rather than assumed to already match. Discovering and fixing this now, while only four datasets were involved, was substantially cheaper than discovering it later during full causal-inference analysis with all nine datasets combined.
 
@@ -1797,17 +1793,17 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
 
 # Project Journal — Day 07: DS02 NO₂ — Methodology Switch to Sentinel Hub Statistical API
 
-### Status
+## Status
 **Complete.** Full acquisition finished for all 27 EU countries × 6 years (2019–2024) via the Sentinel Hub Statistical API. This supersedes the previously locked RPRO/HARP-based acquisition and processing pipeline for full-scale execution, while that original pipeline remains implemented and functional at small scale.
 
-### Context — Why the Switch Was Needed
+## Context — Why the Switch Was Needed
 
 - The originally locked DS02 methodology specified direct acquisition of Sentinel-5P Level-2 RPRO orbital products via the CDSE OData catalogue, followed by local HARP-based preprocessing (QA filtering, spatial binning) and month-wise batch orchestration (`run_pipeline.py`).
 - This pipeline was fully built, hardened (retry logic, differential downloading, fault isolation), and verified correct at small scale (January 2019 partial test).
 - At full scale, however, the raw acquisition volume proved impractical under real-world field conditions: approximately 55–60 orbital files per month × 72 months, each requiring separate download and HARP processing. Even at reasonable connection speeds, verification/skip-checking alone across previously-downloaded files consumed several minutes per run, and full-scale completion within the available time and bandwidth was not realistic.
 - Rather than continuing to force the raw-acquisition approach, the decision was made to switch to the same **Sentinel Hub Statistical API** pattern already validated and proven successful for DS03 (NDVI) in the prior session — applying server-side quality filtering and returning aggregated statistics directly, without requiring bulk raw-file transfer.
 
-### Methodology & Data Source
+## Methodology & Data Source
 
 - **Dataset**: Sentinel-5P TROPOMI Nitrogen Dioxide (NO₂), tropospheric column density
 - **Access Method**: Sentinel Hub Statistical API, via the `sentinel-5p-l2` collection type
@@ -1816,7 +1812,7 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
 - **Spatial Scope**: Each country's NUTS geometry intersected with the project's standardized European bounding box (reusing the clipping logic built for the DS03 France fix) before submission
 - **Temporal Scope**: 27 EU countries × 6 years (2019–2024) = 162 requests, one per country-year, with monthly aggregation intervals (`P1M`) returned within each request
 
-### Implementation and Debugging
+## Implementation and Debugging
 
 - Implemented `download_no2_sentinelhub.py`, structurally modeled on the DS03 NDVI Sentinel Hub implementation (`load_country_geometry()`, per-country/per-year request loop, evalscript-based server-side processing).
 - **Error 1**: `"Collection 'S5PL2' has no band 'qa_value'"` — an initial evalscript attempted to reference quality-assurance values as an input band named `qa_value`, based on an unverified assumption. Verified against official Sentinel Hub Sentinel-5P L2 documentation that quality filtering for this collection is not a per-pixel band at all, but a **request-level parameter**: `processing.minQa`.
@@ -1824,19 +1820,19 @@ Complete. All four processed datasets (Climate, Land Cover, GDP, NDVI) now share
 - Corrected the evalscript to remove the invalid `qa_value` band reference and added `"processing": {"minQa": 75}` at the request level, alongside correcting the collection type identifier to `"sentinel-5p-l2"` (lowercase-hyphenated, per official documentation) rather than an earlier incorrect `"S5PL2"` guess.
 - Re-tested against a single country (Netherlands, 2019): succeeded, returning physically realistic tropospheric NO₂ column density values (mean ≈ 1.9×10⁻⁴ mol/m², within the documented expected range for this parameter). Noted a high `noDataCount` relative to `sampleCount` in the response, confirmed as expected behavior given Sentinel-5P's orbital revisit pattern combined with strict QA filtering, not indicative of a processing error.
 
-### Full Batch Execution
+## Full Batch Execution
 
 - Extended execution to the full scope: all 27 EU countries × 6 years, iterating over the existing EU-27 country list (reused from DS09/DS07/DS03).
 - **All 162 requests completed successfully** on execution, with no country-specific anomaly of the kind encountered for France in the DS03 NDVI batch (the same European-bounding-box geometry clipping, already built into `load_country_geometry()` from the DS03 fix, was reused here and prevented the issue from recurring).
 - Output saved as `no2_stats_by_country_monthly.json`.
 
-### Relationship to the Original Locked DS02 Methodology
+## Relationship to the Original Locked DS02 Methodology
 
 - The original RPRO/HARP-based pipeline (`auth.py`, `search_products.py`, `download_no2.py`, `extract_no2.py`/`preprocess_file()`, `run_pipeline.py`) remains fully implemented, tested, and functionally correct at small scale. It is not deleted or invalidated — it represents a legitimate, higher-control acquisition path that remains available if a future need arises for raw Level-2 access (e.g., custom spatial binning at finer resolution than country-level statistics).
 - The Sentinel Hub Statistical API route is understood to reflect the collection's standard processing level (OFFL-equivalent) rather than the specifically-locked RPRO reprocessed tier, since RPRO is not independently selectable via this API pathway. This is a deliberate, documented trade-off, consistent with the equivalent trade-off already accepted for DS03.
 - This switch mirrors the DS03 precedent exactly: both datasets moved from a raw-acquisition-plus-local-processing model to a server-side statistical aggregation model, for the same underlying reason (full-scale raw acquisition impractical under real-world bandwidth/time constraints), using the same authentication infrastructure and the same spatial-clipping fix.
 
-### Final Pipeline Summary (DS02, Updated)
+## Final Pipeline Summary (DS02, Updated)
 
 ```
 Sentinel Hub OAuth Client (shared with DS03)
@@ -2467,9 +2463,9 @@ This analysis exemplifies a standard but often-omitted step in credible causal i
 
 ---
 
-# Module 8 — Final Status: COMPLETE
+# Module 8 — Final Status
 
-GPIE's core causal inference objective has been fulfilled: an independently-verified, satellite-derived assessment of whether the European Green Deal / European Climate Law produced a measurable, EU-specific reduction in NO₂ pollution, validated through a placebo test, a genuine external control group, and a full event-study robustness check. The finding — no statistically distinguishable EU-specific effect, distinct from a broader European trend shared with non-EU comparator countries — is a scientifically defensible, rigorously validated conclusion consistent with the project's "Trust, But Verify" research design, regardless of whether it matches the outcome that might have been hoped for at the project's outset.
+**Complete.** GPIE's core causal inference objective has been fulfilled: an independently-verified, satellite-derived assessment of whether the European Green Deal / European Climate Law produced a measurable, EU-specific reduction in NO₂ pollution, validated through a placebo test, a genuine external control group, and a full event-study robustness check. The finding — no statistically distinguishable EU-specific effect, distinct from a broader European trend shared with non-EU comparator countries — is a scientifically defensible, rigorously validated conclusion consistent with the project's "Trust, But Verify" research design, regardless of whether it matches the outcome that might have been hoped for at the project's outset.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -2876,23 +2872,23 @@ No new empirical claims were added in this pass — all changes are documentatio
 
 ---
 
-## Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic (2026-08-03)
+# Development Log — Deep Verify: Independent Recomputation of Every Reported Statistic (2026-08-03)
 
-### Status
+## Status
 Complete. Every quantitative claim in `Research_Paper.md` was independently recomputed from `data/master_dataset.csv` and `data/master_dataset_control.csv`, re-running `causal_inference.py`, `causal_inference_placebo.py`, `causal_inference_final_did.py`, `causal_inference_ndvi.py`, and `causal_inference_event_study.py` directly, plus hand-written reimplementations of the four robustness checks (GDP removal, log-transform, treatment-date sensitivity, baseline-pollution heterogeneity split) and the minimum-detectable-effect calculation, since no standalone scripts for those exist in the repository.
 
-### Result — one real inconsistency found and corrected
+## Result — one real inconsistency found and corrected
 Every number checked out to the reported precision **except** the two "initial single-cohort model" figures (NO₂, Section 4.1; NDVI, Section 4.5 first paragraph). Both were computed with **classical (non-clustered) standard errors**, not the cluster-robust-by-country standard errors this project's own methodology section (3.3) and every other model in the paper explicitly use. This was traceable directly: the corrected two-group NO₂ model's own Methodology page already documents its p-value moving from 0.632 (classical) to 0.663 (cluster-robust) — proof cluster-robust SEs were correctly adopted as the project standard partway through the analysis — but the two earliest, already-superseded single-cohort models were apparently never revisited under that later standard once it was adopted.
 
 Recomputed with cluster-robust SEs, by country:
 - **NO₂ initial model** (coefficient −2.29 × 10⁻⁶ confirmed exact): p = 0.041, 95% CI [−4.48 × 10⁻⁶, −9.04 × 10⁻⁸] — not 0.026/[−4.30 × 10⁻⁶, −2.69 × 10⁻⁷] as originally reported. Still significant at 5%, so this does **not** change Section 4.1's conclusion or the paper's overall narrative arc for NO₂.
 - **NDVI initial model** (coefficient −0.0059 confirmed exact): p = 0.0017 — not p = 0.128 ("no significant effect") as originally reported. This **does** change the accurate narrative: the initial single-cohort NDVI model was already statistically significant under this project's own stated standard-error methodology, not only after the two-group control-group correction. The corrected model (p = 0.012, confirmed exact) remains the trustworthy, reported result — its role is improved identification (isolating an EU-specific effect from a shared regional trend via a genuine control group), not first-time detection of significance.
 
-### Everything else — confirmed exact
+## Everything else — confirmed exact
 Placebo test (coefficient −3.29 × 10⁻⁶, p = 0.004); linear-time-trend-controlled model (p = 0.186); corrected two-group NO₂ model (coefficient −1.40 × 10⁻⁶, p = 0.663, CI [−7.68 × 10⁻⁶, +4.88 × 10⁻⁶], R² = 0.386, N = 1,930); corrected two-group NDVI model (coefficient −0.0210, p = 0.012, CI [−0.0372, −0.0047]); event-study result (exactly 3 of 23 quarters significant at p < 0.05 — 2020Q1 positive, 2023Q1 positive, 2023Q3 negative — matching "opposite signs" and the "close to 1 expected by chance" framing precisely); GDP-removed robustness check (coefficient −4.80 × 10⁻⁷, p = 0.880); log-transformed model (23/1,930 = 1.2% non-positive NO₂ rows, 10 of 23 in December 2023, log coefficient 0.046/≈4.7% relative change, p = 0.669); treatment-date sensitivity (p = 0.764, 0.357, 0.151, 0.086 at the four shifted dates); baseline-pollution heterogeneity split (13 higher-baseline / 14 lower-baseline countries; coefficients −4.49 × 10⁻⁶ p = 0.245 and +3.74 × 10⁻⁶ p = 0.339); and the minimum-detectable-effect calculation (28.4% of pre-treatment baseline NO₂; observed effect ≈4.4% of that baseline). All matched the paper to the reported precision.
 
-### Citations
+## Citations
 Spot-checked 3 of the paper's 13 references via independent web search (Tong et al. 2025, *npj Clean Air*; Riveros-Gavilanes 2023, *JORIT*; Mathew et al. 2024, *Scientific Reports* 14, 21624) — all confirmed real and correctly cited. The remaining 10 (Abadie, Diamond & Hainmüller 2010; Angrist & Pischke 2009; Bekes & Kezdi 2021; Ben-Michael, Feller & Rothstein 2021; Bertrand, Duflo & Mullainathan 2004; Bikbov et al. 2024; Callaway, Goodman-Bacon & Sant'Anna 2024; Roth, Sant'Anna, Bilinski & Poe 2023; Wang et al. 2020; Zeldow & Hatfield 2024) were not individually re-verified this round due to time — flagged here rather than silently treated as checked.
 
-### Fix applied
+## Fix applied
 Corrected the two initial-model passages in `Research_Paper.md` (Sections 4.1, 4.5, and the Section 5 Discussion paragraph comparing NO₂ and NDVI), `Project_Journal.md` (Methodology Phase 4 and Final Findings #2/#3), and the dashboard's `5_Causal_Results.py` and `6_Methodology.py` pages, to state both the originally-reported classical-SE figures and the corrected cluster-robust figures, and to reframe the NDVI narrative accurately: the control-group correction improved identification, it did not newly create significance. No underlying data, model code, or headline conclusion changes — this is a standard-error consistency fix, not a data or specification error.
