@@ -16,39 +16,6 @@ st.markdown(
 )
 st.markdown("---")
 
-st.markdown("### 📄 Project Documentation")
-st.markdown("""
-Three documents accompany this project, each serving a different purpose:
-""")
-
-doc_col1, doc_col2, doc_col3 = st.columns(3)
-with doc_col1:
-    st.markdown("""
-    **📘 Project Report**
-
-    Polished summary — methodology, findings, conclusions.
-
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Project_Report.md)
-    """)
-with doc_col2:
-    st.markdown("""
-    **📗 Research Paper**
-
-    Formal academic write-up — literature review, statistics, discussion.
-
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Research_Paper.md)
-    """)
-with doc_col3:
-    st.markdown("""
-    **📙 Development Log**
-
-    Full technical log — every bug, debug session, iteration.
-
-    [View →](https://github.com/sakshimaske303-commits/GPIE/blob/main/GPIE_Development_Log.md)
-    """)
-
-st.markdown("---")
-
 st.markdown("### 📊 Download the Master Dataset")
 st.markdown("""
 The complete, cleaned dataset used for this project's causal-inference model — 30 countries, 
@@ -89,26 +56,6 @@ st.markdown("""
     <strong>GitHub Repository:</strong> <a href="https://github.com/sakshimaske303-commits/GPIE" style="color: #00d4ff;">github.com/sakshimaske303-commits/GPIE</a>
 </div>
 """, unsafe_allow_html=True)
-
-st.markdown("---")
-
-st.markdown("### 🌍 Transferability Validation")
-st.markdown("""
-GPIE's original design goal was a **globally transferable methodology**, not one limited to the 
-EU-27 study region. To provide direct evidence of this rather than leaving it as an unverified 
-claim, the project's NO₂ acquisition pipeline was tested standalone on **India** (2019–2024) — 
-using the same Sentinel Hub Statistical API infrastructure built for the EU-27 study, with zero 
-modification to the core acquisition code.
-""")
-
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "india_transferability_trend.png"), use_container_width=True)
-
-st.markdown(
-    "<p class='caption-text'>All 6 years acquired successfully, returning physically realistic NO₂ "
-    "values consistent with the EU-27 dataset's observed range. This is a standalone proof-of-concept "
-    "confirming the framework's portability — not a comparative analysis.</p>",
-    unsafe_allow_html=True,
-)
 
 st.markdown("---")
 
