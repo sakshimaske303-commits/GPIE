@@ -52,7 +52,7 @@ def make_map():
     avg_ndvi = compute_avg_ndvi()
 
     merged = gdf.merge(avg_ndvi, on="country", how="left")
-
+ 
     bounds = (-25, 34, 35, 72)
 
     fig, ax = plt.subplots(figsize=(13, 12))
