@@ -80,6 +80,28 @@ with col4:
 
 st.markdown("---")
 
+st.markdown(
+    f"""
+    <div style="padding: 20px 26px; margin: 4px 0 20px 0; background: rgba(248, 131, 121, 0.06);
+                border: 1px solid rgba(0, 135, 149, 0.3); border-left: 4px solid {PALETTE['coral']};
+                border-radius: 10px;">
+        <p style="color:{PALETTE['coral']}; text-transform:uppercase; letter-spacing:1.5px;
+                  font-weight:700; font-size:0.85rem; margin-bottom:8px;">⚡ Why This Matters</p>
+        <p style="color:{PALETTE['text']}; font-size:1rem; line-height:1.6; margin:0;">
+            Governments announce landmark climate policy and then report their own progress against it —
+            that self-reported progress is rarely independently audited against physical, satellite-observed
+            evidence. GPIE builds that independent audit layer for the EU's Climate Law. Its most important
+            result isn't a discovery — it's a disciplined <strong>non-finding</strong>: once tested against a
+            genuine control group instead of a simple before/after comparison, the claimed pollution effect
+            could not be statistically distinguished from a general European trend. An honest "no detectable
+            effect" is itself a policy-relevant result, not a failed study — and the same acquisition pipeline
+            was separately proven to transfer cleanly to India, confirming this isn't a one-country tool.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 st.markdown("""
 ### System Overview
 
@@ -121,9 +143,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-doc_col1, doc_col2, doc_col3 = st.columns(3)
+doc_col1, doc_col2, doc_col3, doc_col4 = st.columns(4)
 
 with doc_col1:
+    pdf_path = os.path.join(ROOT_DIR, "GPIE_Executive_Summary.pdf")
+    try:
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                label="⚡ Executive Summary",
+                data=f,
+                file_name="GPIE_Executive_Summary.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+    except FileNotFoundError:
+        st.warning("GPIE_Executive_Summary.pdf not found.")
+
+with doc_col2:
     pdf_path = os.path.join(ROOT_DIR, "GPIE_Research_Paper.pdf")
     try:
         with open(pdf_path, "rb") as f:
@@ -137,7 +173,7 @@ with doc_col1:
     except FileNotFoundError:
         st.warning("GPIE_Research_Paper.pdf not found.")
 
-with doc_col2:
+with doc_col3:
     pdf_path = os.path.join(ROOT_DIR, "GPIE_Project_Report.pdf")
     try:
         with open(pdf_path, "rb") as f:
@@ -151,7 +187,7 @@ with doc_col2:
     except FileNotFoundError:
         st.warning("GPIE_Project_Report.pdf not found.")
 
-with doc_col3:
+with doc_col4:
     pdf_path = os.path.join(ROOT_DIR, "GPIE_Development_Log.pdf")
     try:
         with open(pdf_path, "rb") as f:

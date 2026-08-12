@@ -14,6 +14,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 | Document | What's Inside |
 |---|---|
+| ⚡ [Executive Summary](./GPIE_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
 | 📘 [Project Report](./GPIE_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
 | 📗 [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
 | 📙 [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
