@@ -2892,3 +2892,50 @@ Spot-checked 3 of the paper's 13 references via independent web search (Tong et 
 
 ## Fix applied
 Corrected the two initial-model passages in `Research_Paper.md` (Sections 4.1, 4.5, and the Section 5 Discussion paragraph comparing NO₂ and NDVI), `Project_Journal.md` (Methodology Phase 4 and Final Findings #2/#3), and the dashboard's `5_Causal_Results.py` and `6_Methodology.py` pages, to state both the originally-reported classical-SE figures and the corrected cluster-robust figures, and to reframe the NDVI narrative accurately: the control-group correction improved identification, it did not newly create significance. No underlying data, model code, or headline conclusion changes — this is a standard-error consistency fix, not a data or specification error.
+
+---
+
+# Development Log — Augmented Synthetic Control and Spatial Autocorrelation Diagnostics (2026-08-14)
+
+## Status
+Complete. Built and ran two new checks against the corrected two-group NO₂ model, both named in the Future Work section as specific next steps rather than left as vague aspirations: an Augmented Synthetic Control (`synthetic_control.py`) and a Moran's I spatial-autocorrelation diagnostic (`spatial_autocorrelation.py`). Two new figures (`plot_synthetic_control.py`, `map_moran_lisa_clusters.py`).
+
+## Synthetic control
+First attempt used all three control countries (UK, NO, CH) as donors — collapsed the usable pre-treatment window from 30 months to 12 because Norway's NO₂ series is missing 29 of 72 months (real acquisition gaps, confirmed against the raw data, not random). Dropped Norway from the donor pool entirely rather than imputing over a 40%-missing series; UK + CH alone keeps 28 of 30 pre-treatment months. Fit: convex NNLS weights (UK 21.4%, CH 78.6%) plus a ridge-augmented bias correction (Ben-Michael, Feller & Rothstein 2021) on the pre-treatment residual. Post-treatment gap = −1e-6, same sign and order of magnitude as the DiD coefficient (−1.40e-06). In-space placebo (swap UK/CH as the "treated" unit) gives gaps of similar size to the real EU-27 gap — with only 2 donors this isn't a real permutation test, said so directly rather than dressing it up as one.
+
+## Spatial autocorrelation
+Built country geometries from the existing NUTS/GADM files (`country_boundaries.py`, no new acquisition needed), KNN-4 weights on projected (EPSG:3035) centroids rather than contiguity — several countries here are islands (CY, MT, IE) that'd end up disconnected under Queen/Rook adjacency. Global Moran's I on raw NO₂ level: 0.522, p=0.001 — strongly clustered, holds pre- and post-treatment separately too. Expected physically, pollution doesn't stop at a border. The actually useful check is on the DiD model's residuals: I=0.020, p=0.247, not significant — the country+month fixed effects already absorb the spatial dependence, so the clustered SEs aren't missing something a spatial model would need to fix. Added Local Moran's I (LISA) on top of the global test since a single global statistic doesn't say *where* — found a High-High cluster (Benelux + Germany + Denmark + UK) and a Low-Low cluster (Nordic/Baltic), Switzerland and Ireland as Low-High outliers.
+
+## Docs
+Both checks written into `Research_Paper.md` as new Methodology (3.5, 3.6) and Results (4.8, 4.9) sections, not framed as later additions — the two Future Work items they resolve (Synthetic Control Method, spatial diagnostics) are removed from Section 7 accordingly, keeping only NUTS-2/grid-cell resolution and delayed-effects as remaining. Limitations (Section 6) updated to note the synthetic control's own donor pool is thinner still (2, not 3) and that Norway's coverage gap is a real data-quality issue, not swept under. `Project_Report.md`, `README.md`, `CITATION.cff` (v1.1.0) updated to match. Figures renumbered — the pre-existing Figure 7 (no2_before_after_map, sitting under the Discussion heading) became Figure 10 so the new Figures 8/9 stay in document order.
+
+# Development Log — Control Group Expansion: 9 Countries, Heterogeneous Effect Found (2026-08-14)
+
+## Acquisition
+Wrote NO2/NDVI/GDP acquisition scripts for 6 new control candidates (Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia) + a full clean re-fetch of Norway's NO2. Ran on my own machine since this environment has no route to Sentinel Hub/World Bank. All 6 new countries already had NUTS_ID geometry in the existing boundary file — no new boundary download needed, `country_boundaries.py` picks them up automatically since they're not in the GADM-only `CONTROL_COUNTRIES` set. Climate (ERA5) came free from the already-downloaded grid files — no new API calls, just a wider zonal-stats loop over the same NetCDFs.
+
+Norway's NO2 gap didn't actually fix: 29/72 missing before, still 29/72 after the clean re-fetch. So it's a real high-latitude satellite coverage limit (polar orbit geometry / QA masking), not a stale-file problem like I'd assumed. Iceland has the same issue at a smaller scale (18/72 missing NO2, 18/72 NDVI). Both stay out of the synthetic control donor pool; documented as a genuine limitation, not swept under.
+
+## Merge
+`master_merge_control_expanded.py` overlays the expansion files on the originals, keyed by (country, year, month) — expansion wins on collision, which is how Norway's re-fetched NO2 replaces its old gappy series without a separate patch step. 36 countries, 2,592 rows total.
+
+## Re-running everything downstream
+Every result that depends on the control group needed a re-run, not just the new-country acquisition: NDVI DiD, event study, the 5 additional robustness checks (previously never saved as their own script — fixed that this time, consolidated into `causal_inference_robustness_checks_expanded.py`), synthetic control, spatial autocorrelation. Also regenerated every map/plot that touches the control group (11 files) rather than leaving old 3-country maps next to new 9-country numbers.
+
+Main DiD result: coefficient -2.22e-6, p=0.101 (vs -1.40e-6, p=0.663 with less power) — closer to conventional significance but still not there on its own. Wasn't expecting the extra data to actually change the story instead of just tightening the same null, but it did:
+
+- **Heterogeneity split by baseline pollution**: higher-baseline (14 countries, mostly Western/Central Europe) comes back significant, p=0.003, coefficient -5.46e-6. Lower-baseline: nothing, p=0.189. This wasn't significant with the 3-country control group (p=0.245) — more power actually surfaced something real, not just tighter noise.
+- **Event study**: 4 post-treatment quarters now significant (2022Q2, 2023Q2, 2024Q2, 2024Q3), all negative, all Q2/Q3. Was 3 quarters before with no consistent pattern (mixed signs, one pre-treatment). Now: zero significant pre-treatment quarters, and every significant post-treatment quarter negative and same-season. That's a real pattern, not noise scattered across the panel.
+- **Treatment-date sensitivity**: -6mo date is itself significant (p=0.021) while the true date isn't (p=0.101). Flagged this honestly rather than picking the date that looks best — could mean the effect's real onset doesn't line up exactly with the legal effective date, could be something else. Didn't try to explain it away.
+- **Log-transform check goes the other way**: coefficient shrinks to near-zero (0.0047, p=0.910), unlike every other check here. Makes sense given the effect is concentrated in a subset of countries rather than a uniform % decline everywhere — noted this rather than treating it as contradicting the other checks.
+
+None of this overturns the pooled null as the headline number — the interaction term's CI still crosses zero. But three independent things (heterogeneity split, event study, date sensitivity) point the same direction now, which the 3-country design didn't have the power to distinguish from noise. Wrote this up as an honestly open, partially-resolved finding rather than forcing it into either "still null" or "actually significant."
+
+## Synthetic control
+7 donors now instead of 2 (UK, CH, AL, BA, ME, MK, RS — Norway and Iceland still excluded, real coverage gap). This also fixed the placebo test: with only 2 donors the old placebo degenerated to a straight 1:1 comparison; with 7, holding one out still leaves 6 to fit NNLS weights against, so it's a real in-space permutation check now. EU-27's gap ranks 2nd of 8 by size — the UK-as-placebo gap is actually bigger than the real one. Same near-zero pooled ATT as before (-1e-6), same conclusion, better-powered check.
+
+## Spatial autocorrelation
+Reran on all 36 countries. Global Moran's I on raw NO2: 0.570, p=0.001 (was 0.522) — still strongly clustered, as expected. Residuals: 0.069, p=0.135 (was 0.020, p=0.247) — still not significant at 5%, but closer to the line than before. Noted this rather than glossing over it. LISA clusters basically unchanged — Iceland joins the existing Low-Low Nordic cluster, none of the 5 Balkan countries land in a significant cluster.
+
+## Docs
+Rewrote the paper's headline numbers, abstract, Sections 3.1/3.5/3.6, 4.3-4.9, Discussion, Limitations, Future Work, and Conclusion — not as "originally 3, now 9" but describing the 9-country design and the heterogeneity finding directly, since that's the actual study now. Same for Project Report, README, CITATION.cff (v1.2.0), Executive Summary. Regenerated all 11 affected maps/plots so nothing is showing a 3-country map next to 9-country numbers. Dashboard pages 5 and 6 next.

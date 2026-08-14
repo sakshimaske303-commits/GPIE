@@ -25,9 +25,10 @@ trend that would have happened anyway.
 
 ### The Solution: An External Control Group
 
-GPIE addresses this by introducing three **non-EU European countries** as a control group — 
-geographically and economically comparable nations that are **not** subject to EU Green Deal 
-legislation:
+GPIE addresses this by introducing nine **non-EU European countries** as a control group —
+geographically and economically comparable nations that are **not** subject to EU Green Deal
+legislation, spanning both established Western European economies and EU-accession-candidate
+economies in the Western Balkans:
 """)
 
 col1, col2, col3 = st.columns(3)
@@ -37,6 +38,22 @@ with col2:
     st.info("🇳🇴 **Norway**\n\nNever an EU member — economically developed, geographically proximate")
 with col3:
     st.info("🇨🇭 **Switzerland**\n\nNever an EU member — comparable industrial base and climate")
+
+col4, col5, col6 = st.columns(3)
+with col4:
+    st.info("🇮🇸 **Iceland**\n\nNever an EU member — EEA-linked, high-latitude comparator")
+with col5:
+    st.info("🇦🇱 **Albania**\n\nEU accession candidate — not yet subject to Green Deal legislation")
+with col6:
+    st.info("🇧🇦 **Bosnia and Herzegovina**\n\nEU accession candidate — Western Balkans comparator")
+
+col7, col8, col9 = st.columns(3)
+with col7:
+    st.info("🇲🇪 **Montenegro**\n\nEU accession candidate — Western Balkans comparator")
+with col8:
+    st.info("🇲🇰 **North Macedonia**\n\nEU accession candidate — Western Balkans comparator")
+with col9:
+    st.info("🇷🇸 **Serbia**\n\nEU accession candidate — largest Western Balkans economy in the control group")
 
 st.markdown("---")
 

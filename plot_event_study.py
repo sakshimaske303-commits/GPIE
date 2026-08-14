@@ -107,9 +107,9 @@ def make_plot(plot_df):
     ax.set_ylabel("Estimated EU-27 vs. Control Effect on Mean NO₂\n(relative to 2021Q2, mol/m²)")
     ax.set_xlabel("Quarter")
     ax.set_title(
-        "Event-Study: EU-27 vs. Control Group (UK, Norway, Switzerland) NO₂ Difference Over Time\n"
-        "20 of 23 quarters non-significant (cluster-robust SEs); 3 nominally significant quarters "
-        "(≈1 expected by chance) show no consistent directional pattern"
+        "Event-Study: EU-27 vs. 9-Country Control Group NO₂ Difference Over Time\n"
+        "19 of 23 quarters non-significant (cluster-robust SEs); 4 nominally significant post-treatment "
+        "quarters, all negative, cluster in Q2/Q3 of 2022-2024"
     )
 
     ax.legend(loc="upper right")

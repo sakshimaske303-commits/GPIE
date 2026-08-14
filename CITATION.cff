@@ -10,23 +10,35 @@ url: "https://github.com/sakshimaske303-commits/GPIE"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.21756661"
-    description: "Zenodo archive of GPIE v1.0.1"
+    description: "Zenodo archive of GPIE v1.2.0"
 doi: "10.5281/zenodo.21756661"
 abstract: >-
   GPIE is a geospatial causal-inference framework that tests whether the European
   Climate Law (Regulation (EU) 2021/1119, effective 30 June 2021) produced a
   statistically distinguishable reduction in tropospheric NO2 pollution across the
   EU-27, using Sentinel-5P TROPOMI satellite observations (2019-2024) and a
-  Difference-in-Differences causal-inference design with a genuine non-EU control
-  group (United Kingdom, Norway, Switzerland). The corrected two-group model finds
-  no statistically significant EU-specific effect (p = 0.663, cluster-robust
-  standard errors), a result independently confirmed via a 23-quarter event-study
-  analysis and a series of additional robustness checks. Applying the same design
-  to a secondary NDVI (vegetation health) outcome finds a statistically significant
-  relative decline (p = 0.012), reported as an exploratory finding.
+  Difference-in-Differences causal-inference design with a genuine 9-country non-EU
+  control group (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and
+  Herzegovina, Montenegro, North Macedonia, Serbia). The corrected two-group model
+  finds no statistically significant pooled EU-wide effect at the conventional 5%
+  level (p = 0.101, cluster-robust standard errors), but a heterogeneity check
+  finds a statistically significant reduction concentrated in higher-baseline,
+  more industrialized EU member states (p = 0.003), corroborated by a 23-quarter
+  event-study analysis, a series of additional robustness checks, and an augmented
+  synthetic control (weighted 7-country donor pool) reaching the same near-zero
+  pooled estimate through a structurally independent method. A Moran's I
+  spatial-autocorrelation test confirms raw NO2 levels are strongly spatially
+  clustered (I=0.570, p=0.001) but the DiD model's residuals are not significantly
+  clustered (I=0.069, p=0.135), consistent with the country and month fixed effects
+  absorbing most of that dependence. Applying the same design to a secondary NDVI
+  (vegetation health) outcome finds a statistically significant relative decline
+  (p = 0.007), reported as an exploratory finding.
 keywords:
   - causal inference
   - difference-in-differences
+  - synthetic control
+  - spatial autocorrelation
+  - treatment effect heterogeneity
   - satellite remote sensing
   - Sentinel-5P
   - air pollution
@@ -36,5 +48,5 @@ keywords:
   - policy evaluation
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.0.1
-date-released: "2026-08-02"
+version: 1.2.0
+date-released: "2026-08-14"

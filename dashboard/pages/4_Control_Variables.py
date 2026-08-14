@@ -30,10 +30,10 @@ with tab1:
     st.markdown("""
     ### Gross Domestic Product (2019–2024 Average)
 
-    GDP is used as a **control variable** in the Difference-in-Differences model, accounting for 
-    each country's economic scale. Because GDP is highly right-skewed (a few large economies vastly 
-    outsize most others), this map uses a **log₁₀ color scale** to make differences across all 
-    30 countries visually interpretable.
+    GDP is used as a **control variable** in the Difference-in-Differences model, accounting for
+    each country's economic scale. Because GDP is highly right-skewed (a few large economies vastly
+    outsize most others), this map uses a **log₁₀ color scale** to make differences across all
+    36 countries visually interpretable.
     """)
     st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "gdp_choropleth_map.png"), use_container_width=True)
     st.markdown(

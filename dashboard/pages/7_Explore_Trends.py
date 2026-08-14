@@ -24,7 +24,7 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-CONTROL_COUNTRIES = {"UK", "NO", "CH"}
+CONTROL_COUNTRIES = {"UK", "NO", "CH", "IS", "AL", "BA", "ME", "MK", "RS"}
 
 COUNTRY_NAMES = {
     "AT": "Austria", "BE": "Belgium", "BG": "Bulgaria", "HR": "Croatia", "CY": "Cyprus",
@@ -33,6 +33,8 @@ COUNTRY_NAMES = {
     "LV": "Latvia", "LT": "Lithuania", "LU": "Luxembourg", "MT": "Malta", "NL": "Netherlands",
     "PL": "Poland", "PT": "Portugal", "RO": "Romania", "SK": "Slovakia", "SI": "Slovenia",
     "ES": "Spain", "SE": "Sweden", "UK": "United Kingdom", "NO": "Norway", "CH": "Switzerland",
+    "IS": "Iceland", "AL": "Albania", "BA": "Bosnia and Herzegovina", "ME": "Montenegro",
+    "MK": "North Macedonia", "RS": "Serbia",
 }
 
 

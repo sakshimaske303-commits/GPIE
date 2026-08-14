@@ -18,9 +18,9 @@ st.markdown("---")
 st.markdown("""
 ### Visual Comparison Across the Study Period
 
-These side-by-side comparisons show conditions across all 30 countries (EU-27 + control group) 
-in **2019** — the pre-treatment baseline year — versus **2024**, the most recent complete year 
-of data. Each pair of panels uses an **identical color scale**, so any visible color shift 
+These side-by-side comparisons show conditions across all 36 countries (EU-27 + 9-country control group)
+in **2019** — the pre-treatment baseline year — versus **2024**, the most recent complete year
+of data. Each pair of panels uses an **identical color scale**, so any visible color shift
 represents a genuine change, not a scaling artifact.
 """)
 
@@ -36,8 +36,8 @@ with tab1:
         st.markdown("""
         #### 🔵 What the Map Shows
 
-        A general decline in NO₂ is visible across most of Europe between 2019 and 2024 — 
-        including both EU-27 countries **and** the non-EU control group (UK, Norway, Switzerland).
+        A general decline in NO₂ is visible across most of Europe between 2019 and 2024 —
+        including both EU-27 countries **and** the 9-country non-EU control group.
         """)
     with col2:
         st.markdown("""

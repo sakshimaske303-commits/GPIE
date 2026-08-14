@@ -19,7 +19,8 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-CONTROL_COUNTRIES = {"UK", "NO", "CH"}
+CONTROL_COUNTRIES_NUTS = {"IS", "AL", "BA", "ME", "MK", "RS"}
+CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 
 
 def build_geometry_gdf():
@@ -28,7 +29,7 @@ def build_geometry_gdf():
         nuts_data = json.load(f)
     for feature in nuts_data["features"]:
         nid = feature["properties"].get("NUTS_ID")
-        if nid in EU27_COUNTRIES:
+        if nid in EU27_COUNTRIES or nid in CONTROL_COUNTRIES_NUTS:
             records.append({"country": nid, "geometry": shape(feature["geometry"])})
     for country_code, path in GADM_PATHS.items():
         with open(path, encoding="utf-8") as f:
@@ -83,7 +84,7 @@ def make_map():
 
     fig.suptitle(
         "NDVI (Vegetation Health) Before vs. After the European Climate Law: EU-27 and Control Group (2019 vs. 2024)\n"
-        "Thick borders mark non-EU control-group countries (UK, Norway, Switzerland)",
+        "Thick borders mark the 9-country non-EU control group",
         fontsize=13, fontweight="bold", y=0.98
     )
 

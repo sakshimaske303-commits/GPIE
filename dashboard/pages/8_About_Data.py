@@ -18,7 +18,7 @@ st.markdown("---")
 
 st.markdown("### 📊 Download the Master Dataset")
 st.markdown("""
-The complete, cleaned dataset used for this project's causal-inference model — 30 countries, 
+The complete, cleaned dataset used for this project's causal-inference model — 36 countries,
 2019–2024, monthly resolution — is available below for independent verification or reuse.
 """)
 
