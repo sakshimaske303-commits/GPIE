@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Helvetica, Arial, sans-serif; color: #1a1a1a; margin: 40px 50px; }
+  h1 { font-size: 26px; margin-bottom: 2px; }
+  .subtitle { color: #0d9488; font-style: italic; font-size: 15px; margin: 2px 0 8px 0; }
+  .meta { font-size: 12px; color: #444; margin-bottom: 10px; }
+  hr.top { border: none; border-top: 2px solid #0d9488; margin: 10px 0 18px 0; }
+  h2 { color: #e8664f; font-size: 16px; margin-top: 20px; margin-bottom: 6px; }
+  p { font-size: 12.5px; line-height: 1.5; margin: 4px 0 10px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 6px 0; font-size: 12px; }
+  th { background: #12283a; color: #fff; text-align: left; padding: 7px 10px; }
+  td { padding: 6px 10px; border-bottom: 1px solid #ddd; }
+  .note { font-size: 11px; color: #555; font-style: italic; margin: 4px 0 12px 0; }
+  ul { margin: 4px 0 10px 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6; }
+  li { margin-bottom: 2px; }
+  .check { color: #0d9488; font-weight: bold; }
+  hr.bottom { border: none; border-top: 1.5px solid #0d9488; margin: 16px 0 8px 0; }
+  .footer { font-size: 11.5px; }
+  sub { font-size: 9px; }
+</style>
+</head>
+<body>
+
+<h1>GPIE — Green Policy Intelligence Engine</h1>
+<div class="subtitle">Independently Verifying Environmental Policy Claims Using Satellite Data</div>
+<div class="meta">Executive Summary &nbsp;&middot;&nbsp; DOI: 10.5281/zenodo.21756661 &nbsp;&middot;&nbsp; Sakshi D. Maske</div>
+<hr class="top">
+
+<h2>The Question</h2>
+<p>Did the European Union's Climate Law (effective 30 June 2021) produce a measurable, statistically distinguishable reduction in NO<sub>2</sub> air pollution across the EU-27 — beyond what would have happened anyway? Governments report their own climate progress; that self-reported progress is rarely audited against independent, physical evidence. GPIE builds that independent audit layer using satellite data rather than assuming the policy worked.</p>
+
+<h2>The Method</h2>
+<p>A two-group Difference-in-Differences (DiD) design compares EU-27 countries against a genuine 9-country non-EU control group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia — across 8 independently-sourced datasets (NO<sub>2</sub> via Sentinel-5P TROPOMI, NDVI via CGLS, climate via ERA5, GDP via Eurostat/World Bank, land cover, elevation, administrative boundaries, and EU policy records), spanning 36 countries and 2019–2024. Standard errors are clustered by country throughout. Two independent checks corroborate the pooled DiD result through structurally different methods: an augmented synthetic control (weighted 7-country donor pool) and a Moran's I spatial-autocorrelation diagnostic.</p>
+
+<h2>The Finding</h2>
+<p>No statistically distinguishable pooled, EU-wide reduction in NO<sub>2</sub> was detected at the conventional 5% level once genuinely compared against the 9-country non-EU control group — but a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the 14 higher-baseline, more industrialized member states (p=0.003), corroborated by a 23-quarter event-study finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022&ndash;2024. An augmented synthetic control confirms the pooled near-zero estimate independently, and a spatial-autocorrelation test confirms the model's fixed effects absorb most of the spatial clustering present in raw pollution levels. Reporting this nuanced result honestly — a pooled null that conceals a real, concentrated effect — rather than the flawed "significant" result an earlier single-cohort design produced, is itself the project's core finding.</p>
+
+<table>
+  <tr><th>Metric</th><th>NO2 (Primary, Pooled)</th><th>NO2 (Higher-Baseline Subgroup)</th><th>NDVI (Secondary)</th></tr>
+  <tr><td>DiD Coefficient</td><td>-2.22e-6</td><td>-5.46e-6</td><td>-0.0145</td></tr>
+  <tr><td>P-value (cluster-robust)</td><td>0.101 — not significant</td><td>0.003 — significant</td><td>0.007 — significant</td></tr>
+  <tr><td>95% Confidence Interval</td><td>[-4.87e-6, +4.32e-7]</td><td>&mdash;</td><td>[-0.0250, -0.0039]</td></tr>
+</table>
+<div class="note">The NDVI result is reported as an honest, exploratory secondary finding meriting further investigation — not as evidence the Climate Law itself affected vegetation health, since this analysis does not control for land-use change or drought-driven vegetation stress.</div>
+
+<h2>Validation &amp; Robustness Checklist</h2>
+<ul>
+  <li><span class="check">&#10003;</span> Cluster-robust standard errors, clustered by country (Bertrand, Duflo &amp; Mullainathan, 2004)</li>
+  <li><span class="check">&#10003;</span> Genuine external control group — 9 non-EU countries (UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia)</li>
+  <li><span class="check">&#10003;</span> Placebo test — caught and fixed a flawed initial single-cohort design (which had wrongly shown significance)</li>
+  <li><span class="check">&#10003;</span> 23-quarter event-study validation — confirms parallel pre-trends and finds 4 significant, same-signed post-treatment quarters</li>
+  <li><span class="check">&#10003;</span> 5 additional robustness checks — GDP removed, log-transformed outcome, treatment-date shifted &plusmn;6/&plusmn;12 months, pollution-level subgroup split (significant), and a formal minimum-detectable-effect calculation</li>
+  <li><span class="check">&#10003;</span> Augmented synthetic control (7-country donor pool, weighted) — reaches the same near-zero, same-sign pooled estimate through a method independent of the DiD specification</li>
+  <li><span class="check">&#10003;</span> Moran's I spatial-autocorrelation test — raw NO2 is spatially clustered (I=0.570, p=0.001) as expected, but DiD residuals are not significantly clustered (I=0.069, p=0.135)</li>
+  <li><span class="check">&#10003;</span> Honest, nuanced result reported — pooled null and concentrated significant subgroup effect both disclosed, neither smoothed over</li>
+</ul>
+
+<h2>Honest Limitation</h2>
+<p>Even with a 9-country control group (7 for the synthetic control specification, since Norway's and Iceland's NO2 coverage remain too incomplete to use as donors even after a clean re-fetch), the pooled model's confidence interval still spans zero. At 80% statistical power, this design can reliably detect a pooled effect of roughly 12.7% of baseline EU NO<sub>2</sub> or larger. The honest conclusion is not "the policy had no effect" nor "the policy worked," but that the pooled EU-wide average is not conventionally significant while a real effect concentrated in higher-baseline member states and specific post-treatment quarters is — a genuinely open finding this design can characterize but not fully resolve without a longer panel or sub-national data.</p>
+
+<h2>Global Transferability</h2>
+<p>The NO<sub>2</sub> acquisition pipeline was separately tested, with zero modification to the core code, on India (2019–2024) — returning physically realistic values consistent with the EU-27 dataset's observed range. This confirms the framework's architecture is portable beyond a single region, not a one-country tool.</p>
+
+<hr class="bottom">
+<div class="footer">
+<b>GitHub:</b> github.com/sakshimaske303-commits/GPIE &nbsp;|&nbsp; <b>Live Dashboard:</b> f5cf6fijj9gm564r6aapt6.streamlit.app &nbsp;|&nbsp; <b>Zenodo DOI:</b> 10.5281/zenodo.21756661<br>
+Sakshi D. Maske — Independent Geospatial Researcher
+</div>
+
+</body>
+</html>

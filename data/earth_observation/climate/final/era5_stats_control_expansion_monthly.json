@@ -1,0 +1,2594 @@
+[
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-01",
+    "avg_temperature_c": -3.13,
+    "avg_precipitation_mm": 3.67
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-01",
+    "avg_temperature_c": 1.64,
+    "avg_precipitation_mm": 5.63
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-01",
+    "avg_temperature_c": -0.99,
+    "avg_precipitation_mm": 3.83
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-01",
+    "avg_temperature_c": -2.27,
+    "avg_precipitation_mm": 4.94
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-01",
+    "avg_temperature_c": -2.15,
+    "avg_precipitation_mm": 3.8
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-01",
+    "avg_temperature_c": -0.99,
+    "avg_precipitation_mm": 2.77
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-02",
+    "avg_temperature_c": -2.67,
+    "avg_precipitation_mm": 4.37
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-02",
+    "avg_temperature_c": 5.67,
+    "avg_precipitation_mm": 1.79
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-02",
+    "avg_temperature_c": 3.24,
+    "avg_precipitation_mm": 2.59
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-02",
+    "avg_temperature_c": 1.94,
+    "avg_precipitation_mm": 4.1
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-02",
+    "avg_temperature_c": 2.82,
+    "avg_precipitation_mm": 0.92
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-02",
+    "avg_temperature_c": 3.37,
+    "avg_precipitation_mm": 1.39
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-03",
+    "avg_temperature_c": -2.53,
+    "avg_precipitation_mm": 4.29
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-03",
+    "avg_temperature_c": 9.92,
+    "avg_precipitation_mm": 1.29
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-03",
+    "avg_temperature_c": 7.62,
+    "avg_precipitation_mm": 1.79
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-03",
+    "avg_temperature_c": 6.05,
+    "avg_precipitation_mm": 1.8
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-03",
+    "avg_temperature_c": 8.36,
+    "avg_precipitation_mm": 0.47
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-03",
+    "avg_temperature_c": 8.78,
+    "avg_precipitation_mm": 0.73
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-04",
+    "avg_temperature_c": 2.83,
+    "avg_precipitation_mm": 2.99
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-04",
+    "avg_temperature_c": 12.14,
+    "avg_precipitation_mm": 4.17
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-04",
+    "avg_temperature_c": 10.63,
+    "avg_precipitation_mm": 4.94
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-04",
+    "avg_temperature_c": 8.81,
+    "avg_precipitation_mm": 5.51
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-04",
+    "avg_temperature_c": 10.96,
+    "avg_precipitation_mm": 2.62
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-04",
+    "avg_temperature_c": 12.23,
+    "avg_precipitation_mm": 2.7
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-05",
+    "avg_temperature_c": 3.55,
+    "avg_precipitation_mm": 1.45
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-05",
+    "avg_temperature_c": 13.75,
+    "avg_precipitation_mm": 6.96
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-05",
+    "avg_temperature_c": 11.69,
+    "avg_precipitation_mm": 6.56
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-05",
+    "avg_temperature_c": 10.2,
+    "avg_precipitation_mm": 7.9
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-05",
+    "avg_temperature_c": 13.61,
+    "avg_precipitation_mm": 3.3
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-05",
+    "avg_temperature_c": 13.89,
+    "avg_precipitation_mm": 3.84
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-06",
+    "avg_temperature_c": 6.92,
+    "avg_precipitation_mm": 1.47
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-06",
+    "avg_temperature_c": 21.66,
+    "avg_precipitation_mm": 2.14
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-06",
+    "avg_temperature_c": 20.66,
+    "avg_precipitation_mm": 3.79
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-06",
+    "avg_temperature_c": 18.83,
+    "avg_precipitation_mm": 2.44
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-06",
+    "avg_temperature_c": 20.62,
+    "avg_precipitation_mm": 2.56
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-06",
+    "avg_temperature_c": 21.73,
+    "avg_precipitation_mm": 3.14
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-07",
+    "avg_temperature_c": 9.66,
+    "avg_precipitation_mm": 2.76
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-07",
+    "avg_temperature_c": 22.55,
+    "avg_precipitation_mm": 2.32
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-07",
+    "avg_temperature_c": 20.49,
+    "avg_precipitation_mm": 2.58
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-07",
+    "avg_temperature_c": 18.97,
+    "avg_precipitation_mm": 3.39
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-07",
+    "avg_temperature_c": 21.74,
+    "avg_precipitation_mm": 1.56
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-07",
+    "avg_temperature_c": 21.68,
+    "avg_precipitation_mm": 2.01
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-08",
+    "avg_temperature_c": 7.26,
+    "avg_precipitation_mm": 3.61
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-08",
+    "avg_temperature_c": 24.03,
+    "avg_precipitation_mm": 0.41
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-08",
+    "avg_temperature_c": 21.65,
+    "avg_precipitation_mm": 1.88
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-08",
+    "avg_temperature_c": 20.54,
+    "avg_precipitation_mm": 1.11
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-08",
+    "avg_temperature_c": 23.57,
+    "avg_precipitation_mm": 0.29
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-08",
+    "avg_temperature_c": 23.08,
+    "avg_precipitation_mm": 1.16
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-09",
+    "avg_temperature_c": 6.18,
+    "avg_precipitation_mm": 4.99
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-09",
+    "avg_temperature_c": 19.63,
+    "avg_precipitation_mm": 2.48
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-09",
+    "avg_temperature_c": 16.18,
+    "avg_precipitation_mm": 2.5
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-09",
+    "avg_temperature_c": 15.65,
+    "avg_precipitation_mm": 2.38
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-09",
+    "avg_temperature_c": 18.31,
+    "avg_precipitation_mm": 1.02
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-09",
+    "avg_temperature_c": 17.73,
+    "avg_precipitation_mm": 1.22
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-10",
+    "avg_temperature_c": 1.35,
+    "avg_precipitation_mm": 4.02
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-10",
+    "avg_temperature_c": 15.71,
+    "avg_precipitation_mm": 1.37
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-10",
+    "avg_temperature_c": 12.58,
+    "avg_precipitation_mm": 1.24
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-10",
+    "avg_temperature_c": 11.83,
+    "avg_precipitation_mm": 0.82
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-10",
+    "avg_temperature_c": 14.23,
+    "avg_precipitation_mm": 0.5
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-10",
+    "avg_temperature_c": 13.48,
+    "avg_precipitation_mm": 0.63
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-11",
+    "avg_temperature_c": -1.73,
+    "avg_precipitation_mm": 2.19
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-11",
+    "avg_temperature_c": 12.17,
+    "avg_precipitation_mm": 9.79
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-11",
+    "avg_temperature_c": 9.57,
+    "avg_precipitation_mm": 5.87
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-11",
+    "avg_temperature_c": 8.46,
+    "avg_precipitation_mm": 11.82
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-11",
+    "avg_temperature_c": 10.02,
+    "avg_precipitation_mm": 3.33
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-11",
+    "avg_temperature_c": 10.46,
+    "avg_precipitation_mm": 2.07
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2019-12",
+    "avg_temperature_c": -2.43,
+    "avg_precipitation_mm": 6.46
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2019-12",
+    "avg_temperature_c": 6.86,
+    "avg_precipitation_mm": 5.94
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2019-12",
+    "avg_temperature_c": 3.72,
+    "avg_precipitation_mm": 3.82
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2019-12",
+    "avg_temperature_c": 2.68,
+    "avg_precipitation_mm": 5.37
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2019-12",
+    "avg_temperature_c": 3.1,
+    "avg_precipitation_mm": 2.41
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2019-12",
+    "avg_temperature_c": 3.58,
+    "avg_precipitation_mm": 2.2
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-01",
+    "avg_temperature_c": -2.71,
+    "avg_precipitation_mm": 5.68
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-01",
+    "avg_temperature_c": 4.02,
+    "avg_precipitation_mm": 1.76
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-01",
+    "avg_temperature_c": 0.98,
+    "avg_precipitation_mm": 0.88
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-01",
+    "avg_temperature_c": 0.3,
+    "avg_precipitation_mm": 1.49
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-01",
+    "avg_temperature_c": 0.59,
+    "avg_precipitation_mm": 0.67
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-01",
+    "avg_temperature_c": -0.06,
+    "avg_precipitation_mm": 0.81
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-02",
+    "avg_temperature_c": -3.34,
+    "avg_precipitation_mm": 5.36
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-02",
+    "avg_temperature_c": 6.57,
+    "avg_precipitation_mm": 4.11
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-02",
+    "avg_temperature_c": 5.13,
+    "avg_precipitation_mm": 2.34
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-02",
+    "avg_temperature_c": 3.38,
+    "avg_precipitation_mm": 3.7
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-02",
+    "avg_temperature_c": 4.01,
+    "avg_precipitation_mm": 2.07
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-02",
+    "avg_temperature_c": 5.04,
+    "avg_precipitation_mm": 2.33
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-03",
+    "avg_temperature_c": -3.58,
+    "avg_precipitation_mm": 4.32
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-03",
+    "avg_temperature_c": 8.68,
+    "avg_precipitation_mm": 5.3
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-03",
+    "avg_temperature_c": 6.16,
+    "avg_precipitation_mm": 2.52
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-03",
+    "avg_temperature_c": 5.02,
+    "avg_precipitation_mm": 5.35
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-03",
+    "avg_temperature_c": 6.35,
+    "avg_precipitation_mm": 4.05
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-03",
+    "avg_temperature_c": 6.96,
+    "avg_precipitation_mm": 2.25
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-04",
+    "avg_temperature_c": -0.05,
+    "avg_precipitation_mm": 2.98
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-04",
+    "avg_temperature_c": 11.48,
+    "avg_precipitation_mm": 2.99
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-04",
+    "avg_temperature_c": 10.6,
+    "avg_precipitation_mm": 1.26
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-04",
+    "avg_temperature_c": 8.49,
+    "avg_precipitation_mm": 2.64
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-04",
+    "avg_temperature_c": 9.78,
+    "avg_precipitation_mm": 3.28
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-04",
+    "avg_temperature_c": 11.46,
+    "avg_precipitation_mm": 0.9
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-05",
+    "avg_temperature_c": 2.88,
+    "avg_precipitation_mm": 2.32
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-05",
+    "avg_temperature_c": 16.23,
+    "avg_precipitation_mm": 2.08
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-05",
+    "avg_temperature_c": 13.69,
+    "avg_precipitation_mm": 3.69
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-05",
+    "avg_temperature_c": 12.45,
+    "avg_precipitation_mm": 3.43
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-05",
+    "avg_temperature_c": 15.09,
+    "avg_precipitation_mm": 2.05
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-05",
+    "avg_temperature_c": 14.9,
+    "avg_precipitation_mm": 2.67
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-06",
+    "avg_temperature_c": 7.38,
+    "avg_precipitation_mm": 2.64
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-06",
+    "avg_temperature_c": 18.73,
+    "avg_precipitation_mm": 2.62
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-06",
+    "avg_temperature_c": 17.61,
+    "avg_precipitation_mm": 4.32
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-06",
+    "avg_temperature_c": 15.55,
+    "avg_precipitation_mm": 4.13
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-06",
+    "avg_temperature_c": 18.36,
+    "avg_precipitation_mm": 2.74
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-06",
+    "avg_temperature_c": 19.07,
+    "avg_precipitation_mm": 4.0
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-07",
+    "avg_temperature_c": 7.52,
+    "avg_precipitation_mm": 2.91
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-07",
+    "avg_temperature_c": 22.73,
+    "avg_precipitation_mm": 0.74
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-07",
+    "avg_temperature_c": 19.95,
+    "avg_precipitation_mm": 2.13
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-07",
+    "avg_temperature_c": 18.89,
+    "avg_precipitation_mm": 1.7
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-07",
+    "avg_temperature_c": 21.81,
+    "avg_precipitation_mm": 1.27
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-07",
+    "avg_temperature_c": 21.08,
+    "avg_precipitation_mm": 2.59
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-08",
+    "avg_temperature_c": 8.78,
+    "avg_precipitation_mm": 3.13
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-08",
+    "avg_temperature_c": 23.24,
+    "avg_precipitation_mm": 1.8
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-08",
+    "avg_temperature_c": 21.1,
+    "avg_precipitation_mm": 4.03
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-08",
+    "avg_temperature_c": 19.43,
+    "avg_precipitation_mm": 3.44
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-08",
+    "avg_temperature_c": 21.37,
+    "avg_precipitation_mm": 3.63
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-08",
+    "avg_temperature_c": 22.13,
+    "avg_precipitation_mm": 2.79
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-09",
+    "avg_temperature_c": 4.08,
+    "avg_precipitation_mm": 5.89
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-09",
+    "avg_temperature_c": 20.48,
+    "avg_precipitation_mm": 4.4
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-09",
+    "avg_temperature_c": 17.09,
+    "avg_precipitation_mm": 2.68
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-09",
+    "avg_temperature_c": 16.48,
+    "avg_precipitation_mm": 5.3
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-09",
+    "avg_temperature_c": 18.88,
+    "avg_precipitation_mm": 1.13
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-09",
+    "avg_temperature_c": 18.62,
+    "avg_precipitation_mm": 1.01
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-10",
+    "avg_temperature_c": 2.22,
+    "avg_precipitation_mm": 3.75
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-10",
+    "avg_temperature_c": 14.13,
+    "avg_precipitation_mm": 6.97
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-10",
+    "avg_temperature_c": 11.39,
+    "avg_precipitation_mm": 4.7
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-10",
+    "avg_temperature_c": 10.22,
+    "avg_precipitation_mm": 7.63
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-10",
+    "avg_temperature_c": 12.39,
+    "avg_precipitation_mm": 1.99
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-10",
+    "avg_temperature_c": 12.35,
+    "avg_precipitation_mm": 2.63
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-11",
+    "avg_temperature_c": -1.25,
+    "avg_precipitation_mm": 4.59
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-11",
+    "avg_temperature_c": 9.46,
+    "avg_precipitation_mm": 0.34
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-11",
+    "avg_temperature_c": 6.01,
+    "avg_precipitation_mm": 1.2
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-11",
+    "avg_temperature_c": 5.83,
+    "avg_precipitation_mm": 0.38
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-11",
+    "avg_temperature_c": 6.04,
+    "avg_precipitation_mm": 0.24
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-11",
+    "avg_temperature_c": 5.72,
+    "avg_precipitation_mm": 0.58
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2020-12",
+    "avg_temperature_c": -2.59,
+    "avg_precipitation_mm": 6.23
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2020-12",
+    "avg_temperature_c": 7.82,
+    "avg_precipitation_mm": 7.09
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2020-12",
+    "avg_temperature_c": 4.2,
+    "avg_precipitation_mm": 5.47
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2020-12",
+    "avg_temperature_c": 3.61,
+    "avg_precipitation_mm": 8.63
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2020-12",
+    "avg_temperature_c": 4.8,
+    "avg_precipitation_mm": 2.47
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2020-12",
+    "avg_temperature_c": 4.29,
+    "avg_precipitation_mm": 2.11
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-01",
+    "avg_temperature_c": -4.44,
+    "avg_precipitation_mm": 3.46
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-01",
+    "avg_temperature_c": 4.8,
+    "avg_precipitation_mm": 13.9
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-01",
+    "avg_temperature_c": 0.91,
+    "avg_precipitation_mm": 5.18
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-01",
+    "avg_temperature_c": -0.19,
+    "avg_precipitation_mm": 11.96
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-01",
+    "avg_temperature_c": 1.97,
+    "avg_precipitation_mm": 6.75
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-01",
+    "avg_temperature_c": 1.87,
+    "avg_precipitation_mm": 3.8
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-02",
+    "avg_temperature_c": -1.78,
+    "avg_precipitation_mm": 3.63
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-02",
+    "avg_temperature_c": 6.4,
+    "avg_precipitation_mm": 4.97
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-02",
+    "avg_temperature_c": 4.61,
+    "avg_precipitation_mm": 2.2
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-02",
+    "avg_temperature_c": 2.61,
+    "avg_precipitation_mm": 4.99
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-02",
+    "avg_temperature_c": 3.45,
+    "avg_precipitation_mm": 1.93
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-02",
+    "avg_temperature_c": 4.27,
+    "avg_precipitation_mm": 1.3
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-03",
+    "avg_temperature_c": -1.24,
+    "avg_precipitation_mm": 4.18
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-03",
+    "avg_temperature_c": 6.63,
+    "avg_precipitation_mm": 3.74
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-03",
+    "avg_temperature_c": 4.63,
+    "avg_precipitation_mm": 2.44
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-03",
+    "avg_temperature_c": 2.63,
+    "avg_precipitation_mm": 3.7
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-03",
+    "avg_temperature_c": 3.87,
+    "avg_precipitation_mm": 2.47
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-03",
+    "avg_temperature_c": 4.74,
+    "avg_precipitation_mm": 2.44
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-04",
+    "avg_temperature_c": -0.8,
+    "avg_precipitation_mm": 2.81
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-04",
+    "avg_temperature_c": 9.89,
+    "avg_precipitation_mm": 4.48
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-04",
+    "avg_temperature_c": 7.63,
+    "avg_precipitation_mm": 3.46
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-04",
+    "avg_temperature_c": 5.72,
+    "avg_precipitation_mm": 4.68
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-04",
+    "avg_temperature_c": 8.53,
+    "avg_precipitation_mm": 2.53
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-04",
+    "avg_temperature_c": 8.69,
+    "avg_precipitation_mm": 2.15
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-05",
+    "avg_temperature_c": 0.81,
+    "avg_precipitation_mm": 1.66
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-05",
+    "avg_temperature_c": 16.05,
+    "avg_precipitation_mm": 1.85
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-05",
+    "avg_temperature_c": 13.91,
+    "avg_precipitation_mm": 2.98
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-05",
+    "avg_temperature_c": 12.53,
+    "avg_precipitation_mm": 2.36
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-05",
+    "avg_temperature_c": 15.52,
+    "avg_precipitation_mm": 1.32
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-05",
+    "avg_temperature_c": 15.45,
+    "avg_precipitation_mm": 2.04
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-06",
+    "avg_temperature_c": 6.02,
+    "avg_precipitation_mm": 3.49
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-06",
+    "avg_temperature_c": 20.79,
+    "avg_precipitation_mm": 1.35
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-06",
+    "avg_temperature_c": 20.17,
+    "avg_precipitation_mm": 1.26
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-06",
+    "avg_temperature_c": 17.82,
+    "avg_precipitation_mm": 1.72
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-06",
+    "avg_temperature_c": 19.4,
+    "avg_precipitation_mm": 1.81
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-06",
+    "avg_temperature_c": 21.01,
+    "avg_precipitation_mm": 1.35
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-07",
+    "avg_temperature_c": 10.66,
+    "avg_precipitation_mm": 1.75
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-07",
+    "avg_temperature_c": 24.08,
+    "avg_precipitation_mm": 1.31
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-07",
+    "avg_temperature_c": 22.3,
+    "avg_precipitation_mm": 4.43
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-07",
+    "avg_temperature_c": 21.06,
+    "avg_precipitation_mm": 2.0
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-07",
+    "avg_temperature_c": 23.33,
+    "avg_precipitation_mm": 1.56
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-07",
+    "avg_temperature_c": 23.85,
+    "avg_precipitation_mm": 2.79
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-08",
+    "avg_temperature_c": 10.72,
+    "avg_precipitation_mm": 1.74
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-08",
+    "avg_temperature_c": 24.07,
+    "avg_precipitation_mm": 1.4
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-08",
+    "avg_temperature_c": 20.46,
+    "avg_precipitation_mm": 2.24
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-08",
+    "avg_temperature_c": 20.14,
+    "avg_precipitation_mm": 2.25
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-08",
+    "avg_temperature_c": 23.17,
+    "avg_precipitation_mm": 0.66
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-08",
+    "avg_temperature_c": 21.63,
+    "avg_precipitation_mm": 1.12
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-09",
+    "avg_temperature_c": 5.53,
+    "avg_precipitation_mm": 6.66
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-09",
+    "avg_temperature_c": 18.8,
+    "avg_precipitation_mm": 2.13
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-09",
+    "avg_temperature_c": 16.26,
+    "avg_precipitation_mm": 1.2
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-09",
+    "avg_temperature_c": 15.06,
+    "avg_precipitation_mm": 1.78
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-09",
+    "avg_temperature_c": 17.01,
+    "avg_precipitation_mm": 1.33
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-09",
+    "avg_temperature_c": 16.86,
+    "avg_precipitation_mm": 0.88
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-10",
+    "avg_temperature_c": 1.46,
+    "avg_precipitation_mm": 5.41
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-10",
+    "avg_temperature_c": 12.66,
+    "avg_precipitation_mm": 4.35
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-10",
+    "avg_temperature_c": 9.01,
+    "avg_precipitation_mm": 3.62
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-10",
+    "avg_temperature_c": 8.56,
+    "avg_precipitation_mm": 3.37
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-10",
+    "avg_temperature_c": 9.3,
+    "avg_precipitation_mm": 3.95
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-10",
+    "avg_temperature_c": 9.5,
+    "avg_precipitation_mm": 2.46
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-11",
+    "avg_temperature_c": -1.45,
+    "avg_precipitation_mm": 4.93
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-11",
+    "avg_temperature_c": 11.33,
+    "avg_precipitation_mm": 6.34
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-11",
+    "avg_temperature_c": 6.9,
+    "avg_precipitation_mm": 6.16
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-11",
+    "avg_temperature_c": 7.14,
+    "avg_precipitation_mm": 7.92
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-11",
+    "avg_temperature_c": 7.7,
+    "avg_precipitation_mm": 2.33
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-11",
+    "avg_temperature_c": 6.96,
+    "avg_precipitation_mm": 2.1
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2021-12",
+    "avg_temperature_c": -2.35,
+    "avg_precipitation_mm": 2.76
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2021-12",
+    "avg_temperature_c": 5.1,
+    "avg_precipitation_mm": 7.29
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2021-12",
+    "avg_temperature_c": 2.74,
+    "avg_precipitation_mm": 5.62
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2021-12",
+    "avg_temperature_c": 1.0,
+    "avg_precipitation_mm": 8.08
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2021-12",
+    "avg_temperature_c": 1.96,
+    "avg_precipitation_mm": 3.71
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2021-12",
+    "avg_temperature_c": 2.5,
+    "avg_precipitation_mm": 4.1
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-01",
+    "avg_temperature_c": -2.52,
+    "avg_precipitation_mm": 5.9
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-01",
+    "avg_temperature_c": 3.24,
+    "avg_precipitation_mm": 1.97
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-01",
+    "avg_temperature_c": 0.56,
+    "avg_precipitation_mm": 1.76
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-01",
+    "avg_temperature_c": -1.09,
+    "avg_precipitation_mm": 2.25
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-01",
+    "avg_temperature_c": -0.13,
+    "avg_precipitation_mm": 1.36
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-01",
+    "avg_temperature_c": 0.19,
+    "avg_precipitation_mm": 1.46
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-02",
+    "avg_temperature_c": -5.34,
+    "avg_precipitation_mm": 5.04
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-02",
+    "avg_temperature_c": 5.72,
+    "avg_precipitation_mm": 4.24
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-02",
+    "avg_temperature_c": 4.14,
+    "avg_precipitation_mm": 2.55
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-02",
+    "avg_temperature_c": 1.84,
+    "avg_precipitation_mm": 4.49
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-02",
+    "avg_temperature_c": 3.09,
+    "avg_precipitation_mm": 2.29
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-02",
+    "avg_temperature_c": 4.45,
+    "avg_precipitation_mm": 1.67
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-03",
+    "avg_temperature_c": -0.94,
+    "avg_precipitation_mm": 6.87
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-03",
+    "avg_temperature_c": 5.5,
+    "avg_precipitation_mm": 2.31
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-03",
+    "avg_temperature_c": 4.49,
+    "avg_precipitation_mm": 1.64
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-03",
+    "avg_temperature_c": 2.05,
+    "avg_precipitation_mm": 3.13
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-03",
+    "avg_temperature_c": 2.55,
+    "avg_precipitation_mm": 1.59
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-03",
+    "avg_temperature_c": 4.41,
+    "avg_precipitation_mm": 1.04
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-04",
+    "avg_temperature_c": 1.14,
+    "avg_precipitation_mm": 2.19
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-04",
+    "avg_temperature_c": 11.18,
+    "avg_precipitation_mm": 4.88
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-04",
+    "avg_temperature_c": 9.19,
+    "avg_precipitation_mm": 3.18
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-04",
+    "avg_temperature_c": 7.33,
+    "avg_precipitation_mm": 4.9
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-04",
+    "avg_temperature_c": 9.98,
+    "avg_precipitation_mm": 1.89
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-04",
+    "avg_temperature_c": 10.25,
+    "avg_precipitation_mm": 2.12
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-05",
+    "avg_temperature_c": 3.43,
+    "avg_precipitation_mm": 3.39
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-05",
+    "avg_temperature_c": 17.21,
+    "avg_precipitation_mm": 2.13
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-05",
+    "avg_temperature_c": 16.44,
+    "avg_precipitation_mm": 2.24
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-05",
+    "avg_temperature_c": 14.34,
+    "avg_precipitation_mm": 2.5
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-05",
+    "avg_temperature_c": 16.34,
+    "avg_precipitation_mm": 2.14
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-05",
+    "avg_temperature_c": 17.44,
+    "avg_precipitation_mm": 1.11
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-06",
+    "avg_temperature_c": 6.56,
+    "avg_precipitation_mm": 3.1
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-06",
+    "avg_temperature_c": 22.44,
+    "avg_precipitation_mm": 1.9
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-06",
+    "avg_temperature_c": 21.25,
+    "avg_precipitation_mm": 2.47
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-06",
+    "avg_temperature_c": 19.43,
+    "avg_precipitation_mm": 2.16
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-06",
+    "avg_temperature_c": 20.64,
+    "avg_precipitation_mm": 2.85
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-06",
+    "avg_temperature_c": 21.79,
+    "avg_precipitation_mm": 2.43
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-07",
+    "avg_temperature_c": 8.1,
+    "avg_precipitation_mm": 3.61
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-07",
+    "avg_temperature_c": 23.96,
+    "avg_precipitation_mm": 0.8
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-07",
+    "avg_temperature_c": 21.84,
+    "avg_precipitation_mm": 1.32
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-07",
+    "avg_temperature_c": 20.61,
+    "avg_precipitation_mm": 1.55
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-07",
+    "avg_temperature_c": 22.34,
+    "avg_precipitation_mm": 1.48
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-07",
+    "avg_temperature_c": 23.01,
+    "avg_precipitation_mm": 1.26
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-08",
+    "avg_temperature_c": 7.34,
+    "avg_precipitation_mm": 4.23
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-08",
+    "avg_temperature_c": 23.08,
+    "avg_precipitation_mm": 2.0
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-08",
+    "avg_temperature_c": 20.94,
+    "avg_precipitation_mm": 3.22
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-08",
+    "avg_temperature_c": 19.74,
+    "avg_precipitation_mm": 2.69
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-08",
+    "avg_temperature_c": 21.53,
+    "avg_precipitation_mm": 3.05
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-08",
+    "avg_temperature_c": 22.6,
+    "avg_precipitation_mm": 3.03
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-09",
+    "avg_temperature_c": 6.56,
+    "avg_precipitation_mm": 2.69
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-09",
+    "avg_temperature_c": 18.48,
+    "avg_precipitation_mm": 6.09
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-09",
+    "avg_temperature_c": 15.37,
+    "avg_precipitation_mm": 4.88
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-09",
+    "avg_temperature_c": 14.2,
+    "avg_precipitation_mm": 8.08
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-09",
+    "avg_temperature_c": 16.32,
+    "avg_precipitation_mm": 2.03
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-09",
+    "avg_temperature_c": 16.11,
+    "avg_precipitation_mm": 3.49
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-10",
+    "avg_temperature_c": 1.27,
+    "avg_precipitation_mm": 4.68
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-10",
+    "avg_temperature_c": 14.73,
+    "avg_precipitation_mm": 2.42
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-10",
+    "avg_temperature_c": 13.3,
+    "avg_precipitation_mm": 0.74
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-10",
+    "avg_temperature_c": 11.54,
+    "avg_precipitation_mm": 1.34
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-10",
+    "avg_temperature_c": 12.35,
+    "avg_precipitation_mm": 1.47
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-10",
+    "avg_temperature_c": 12.91,
+    "avg_precipitation_mm": 0.69
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-11",
+    "avg_temperature_c": 2.12,
+    "avg_precipitation_mm": 4.85
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-11",
+    "avg_temperature_c": 10.98,
+    "avg_precipitation_mm": 7.83
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-11",
+    "avg_temperature_c": 7.39,
+    "avg_precipitation_mm": 5.69
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-11",
+    "avg_temperature_c": 6.99,
+    "avg_precipitation_mm": 8.95
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-11",
+    "avg_temperature_c": 8.43,
+    "avg_precipitation_mm": 2.67
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-11",
+    "avg_temperature_c": 7.87,
+    "avg_precipitation_mm": 3.06
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2022-12",
+    "avg_temperature_c": -7.0,
+    "avg_precipitation_mm": 1.91
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2022-12",
+    "avg_temperature_c": 8.69,
+    "avg_precipitation_mm": 6.94
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2022-12",
+    "avg_temperature_c": 5.28,
+    "avg_precipitation_mm": 4.3
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2022-12",
+    "avg_temperature_c": 5.05,
+    "avg_precipitation_mm": 8.22
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2022-12",
+    "avg_temperature_c": 5.28,
+    "avg_precipitation_mm": 2.27
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2022-12",
+    "avg_temperature_c": 4.53,
+    "avg_precipitation_mm": 2.39
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-01",
+    "avg_temperature_c": -4.25,
+    "avg_precipitation_mm": 4.52
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-01",
+    "avg_temperature_c": 5.92,
+    "avg_precipitation_mm": 7.84
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-01",
+    "avg_temperature_c": 3.23,
+    "avg_precipitation_mm": 5.28
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-01",
+    "avg_temperature_c": 2.21,
+    "avg_precipitation_mm": 9.12
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-01",
+    "avg_temperature_c": 3.45,
+    "avg_precipitation_mm": 3.38
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-01",
+    "avg_temperature_c": 3.95,
+    "avg_precipitation_mm": 2.92
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-02",
+    "avg_temperature_c": -1.03,
+    "avg_precipitation_mm": 6.05
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-02",
+    "avg_temperature_c": 4.94,
+    "avg_precipitation_mm": 1.48
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-02",
+    "avg_temperature_c": 2.28,
+    "avg_precipitation_mm": 3.06
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-02",
+    "avg_temperature_c": 0.03,
+    "avg_precipitation_mm": 3.43
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-02",
+    "avg_temperature_c": 2.69,
+    "avg_precipitation_mm": 0.98
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-02",
+    "avg_temperature_c": 2.73,
+    "avg_precipitation_mm": 1.8
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-03",
+    "avg_temperature_c": -6.32,
+    "avg_precipitation_mm": 2.4
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-03",
+    "avg_temperature_c": 8.92,
+    "avg_precipitation_mm": 4.63
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-03",
+    "avg_temperature_c": 7.1,
+    "avg_precipitation_mm": 2.17
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-03",
+    "avg_temperature_c": 5.41,
+    "avg_precipitation_mm": 3.4
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-03",
+    "avg_temperature_c": 7.02,
+    "avg_precipitation_mm": 2.3
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-03",
+    "avg_temperature_c": 7.83,
+    "avg_precipitation_mm": 1.7
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-04",
+    "avg_temperature_c": 1.15,
+    "avg_precipitation_mm": 3.5
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-04",
+    "avg_temperature_c": 10.28,
+    "avg_precipitation_mm": 4.72
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-04",
+    "avg_temperature_c": 8.73,
+    "avg_precipitation_mm": 4.14
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-04",
+    "avg_temperature_c": 6.54,
+    "avg_precipitation_mm": 5.23
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-04",
+    "avg_temperature_c": 8.44,
+    "avg_precipitation_mm": 3.52
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-04",
+    "avg_temperature_c": 9.3,
+    "avg_precipitation_mm": 3.2
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-05",
+    "avg_temperature_c": 4.09,
+    "avg_precipitation_mm": 4.14
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-05",
+    "avg_temperature_c": 15.8,
+    "avg_precipitation_mm": 4.11
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-05",
+    "avg_temperature_c": 14.57,
+    "avg_precipitation_mm": 6.31
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-05",
+    "avg_temperature_c": 12.79,
+    "avg_precipitation_mm": 6.07
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-05",
+    "avg_temperature_c": 13.83,
+    "avg_precipitation_mm": 3.84
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-05",
+    "avg_temperature_c": 15.44,
+    "avg_precipitation_mm": 3.34
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-06",
+    "avg_temperature_c": 8.52,
+    "avg_precipitation_mm": 2.91
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-06",
+    "avg_temperature_c": 20.16,
+    "avg_precipitation_mm": 3.56
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-06",
+    "avg_temperature_c": 18.57,
+    "avg_precipitation_mm": 4.28
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-06",
+    "avg_temperature_c": 16.87,
+    "avg_precipitation_mm": 5.37
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-06",
+    "avg_temperature_c": 18.49,
+    "avg_precipitation_mm": 4.16
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-06",
+    "avg_temperature_c": 19.36,
+    "avg_precipitation_mm": 4.53
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-07",
+    "avg_temperature_c": 7.54,
+    "avg_precipitation_mm": 1.67
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-07",
+    "avg_temperature_c": 24.64,
+    "avg_precipitation_mm": 0.81
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-07",
+    "avg_temperature_c": 22.46,
+    "avg_precipitation_mm": 1.98
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-07",
+    "avg_temperature_c": 21.18,
+    "avg_precipitation_mm": 1.43
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-07",
+    "avg_temperature_c": 23.37,
+    "avg_precipitation_mm": 0.79
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-07",
+    "avg_temperature_c": 23.41,
+    "avg_precipitation_mm": 1.91
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-08",
+    "avg_temperature_c": 8.74,
+    "avg_precipitation_mm": 1.77
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-08",
+    "avg_temperature_c": 23.01,
+    "avg_precipitation_mm": 2.7
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-08",
+    "avg_temperature_c": 21.08,
+    "avg_precipitation_mm": 2.68
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-08",
+    "avg_temperature_c": 19.33,
+    "avg_precipitation_mm": 3.28
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-08",
+    "avg_temperature_c": 22.2,
+    "avg_precipitation_mm": 1.2
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-08",
+    "avg_temperature_c": 22.29,
+    "avg_precipitation_mm": 2.42
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-09",
+    "avg_temperature_c": 5.18,
+    "avg_precipitation_mm": 5.04
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-09",
+    "avg_temperature_c": 20.84,
+    "avg_precipitation_mm": 1.29
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-09",
+    "avg_temperature_c": 18.77,
+    "avg_precipitation_mm": 2.42
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-09",
+    "avg_temperature_c": 17.14,
+    "avg_precipitation_mm": 2.42
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-09",
+    "avg_temperature_c": 19.44,
+    "avg_precipitation_mm": 1.35
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-09",
+    "avg_temperature_c": 19.71,
+    "avg_precipitation_mm": 1.85
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-10",
+    "avg_temperature_c": 1.29,
+    "avg_precipitation_mm": 4.15
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-10",
+    "avg_temperature_c": 17.01,
+    "avg_precipitation_mm": 4.06
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-10",
+    "avg_temperature_c": 14.84,
+    "avg_precipitation_mm": 2.28
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-10",
+    "avg_temperature_c": 13.05,
+    "avg_precipitation_mm": 4.24
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-10",
+    "avg_temperature_c": 14.7,
+    "avg_precipitation_mm": 0.81
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-10",
+    "avg_temperature_c": 15.18,
+    "avg_precipitation_mm": 0.54
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-11",
+    "avg_temperature_c": -0.85,
+    "avg_precipitation_mm": 2.55
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-11",
+    "avg_temperature_c": 10.54,
+    "avg_precipitation_mm": 11.42
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-11",
+    "avg_temperature_c": 7.26,
+    "avg_precipitation_mm": 6.57
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-11",
+    "avg_temperature_c": 5.77,
+    "avg_precipitation_mm": 11.32
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-11",
+    "avg_temperature_c": 7.28,
+    "avg_precipitation_mm": 4.71
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-11",
+    "avg_temperature_c": 7.46,
+    "avg_precipitation_mm": 4.35
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2023-12",
+    "avg_temperature_c": -5.38,
+    "avg_precipitation_mm": 2.88
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2023-12",
+    "avg_temperature_c": 7.22,
+    "avg_precipitation_mm": 2.89
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2023-12",
+    "avg_temperature_c": 4.94,
+    "avg_precipitation_mm": 2.31
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2023-12",
+    "avg_temperature_c": 3.43,
+    "avg_precipitation_mm": 3.4
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2023-12",
+    "avg_temperature_c": 3.73,
+    "avg_precipitation_mm": 2.34
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2023-12",
+    "avg_temperature_c": 4.43,
+    "avg_precipitation_mm": 1.67
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-01",
+    "avg_temperature_c": -3.52,
+    "avg_precipitation_mm": 3.38
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-01",
+    "avg_temperature_c": 5.34,
+    "avg_precipitation_mm": 5.16
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-01",
+    "avg_temperature_c": 2.23,
+    "avg_precipitation_mm": 2.71
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-01",
+    "avg_temperature_c": 1.15,
+    "avg_precipitation_mm": 4.29
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-01",
+    "avg_temperature_c": 1.59,
+    "avg_precipitation_mm": 1.91
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-01",
+    "avg_temperature_c": 1.81,
+    "avg_precipitation_mm": 1.79
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-02",
+    "avg_temperature_c": -4.52,
+    "avg_precipitation_mm": 3.31
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-02",
+    "avg_temperature_c": 8.4,
+    "avg_precipitation_mm": 2.42
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-02",
+    "avg_temperature_c": 7.82,
+    "avg_precipitation_mm": 2.52
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-02",
+    "avg_temperature_c": 5.37,
+    "avg_precipitation_mm": 5.19
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-02",
+    "avg_temperature_c": 6.43,
+    "avg_precipitation_mm": 1.02
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-02",
+    "avg_temperature_c": 8.22,
+    "avg_precipitation_mm": 0.67
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-03",
+    "avg_temperature_c": -2.43,
+    "avg_precipitation_mm": 4.24
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-03",
+    "avg_temperature_c": 10.06,
+    "avg_precipitation_mm": 5.2
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-03",
+    "avg_temperature_c": 9.41,
+    "avg_precipitation_mm": 3.16
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-03",
+    "avg_temperature_c": 6.93,
+    "avg_precipitation_mm": 4.7
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-03",
+    "avg_temperature_c": 8.26,
+    "avg_precipitation_mm": 2.6
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-03",
+    "avg_temperature_c": 9.94,
+    "avg_precipitation_mm": 1.64
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-04",
+    "avg_temperature_c": -1.75,
+    "avg_precipitation_mm": 2.28
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-04",
+    "avg_temperature_c": 13.78,
+    "avg_precipitation_mm": 3.29
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-04",
+    "avg_temperature_c": 12.54,
+    "avg_precipitation_mm": 2.21
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-04",
+    "avg_temperature_c": 10.63,
+    "avg_precipitation_mm": 2.77
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-04",
+    "avg_temperature_c": 12.74,
+    "avg_precipitation_mm": 1.97
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-04",
+    "avg_temperature_c": 13.76,
+    "avg_precipitation_mm": 1.24
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-05",
+    "avg_temperature_c": 3.98,
+    "avg_precipitation_mm": 2.8
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-05",
+    "avg_temperature_c": 16.77,
+    "avg_precipitation_mm": 3.61
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-05",
+    "avg_temperature_c": 15.87,
+    "avg_precipitation_mm": 3.91
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-05",
+    "avg_temperature_c": 13.54,
+    "avg_precipitation_mm": 4.48
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-05",
+    "avg_temperature_c": 14.92,
+    "avg_precipitation_mm": 3.09
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-05",
+    "avg_temperature_c": 16.73,
+    "avg_precipitation_mm": 3.16
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-06",
+    "avg_temperature_c": 5.52,
+    "avg_precipitation_mm": 3.84
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-06",
+    "avg_temperature_c": 22.96,
+    "avg_precipitation_mm": 1.44
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-06",
+    "avg_temperature_c": 21.06,
+    "avg_precipitation_mm": 3.22
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-06",
+    "avg_temperature_c": 19.57,
+    "avg_precipitation_mm": 2.31
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-06",
+    "avg_temperature_c": 22.44,
+    "avg_precipitation_mm": 1.66
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-06",
+    "avg_temperature_c": 22.7,
+    "avg_precipitation_mm": 2.18
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-07",
+    "avg_temperature_c": 8.93,
+    "avg_precipitation_mm": 3.13
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-07",
+    "avg_temperature_c": 25.31,
+    "avg_precipitation_mm": 0.9
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-07",
+    "avg_temperature_c": 23.38,
+    "avg_precipitation_mm": 1.69
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-07",
+    "avg_temperature_c": 21.76,
+    "avg_precipitation_mm": 2.01
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-07",
+    "avg_temperature_c": 24.25,
+    "avg_precipitation_mm": 0.75
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-07",
+    "avg_temperature_c": 24.8,
+    "avg_precipitation_mm": 1.59
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-08",
+    "avg_temperature_c": 6.69,
+    "avg_precipitation_mm": 4.72
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-08",
+    "avg_temperature_c": 24.97,
+    "avg_precipitation_mm": 0.82
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-08",
+    "avg_temperature_c": 23.78,
+    "avg_precipitation_mm": 1.59
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-08",
+    "avg_temperature_c": 21.69,
+    "avg_precipitation_mm": 0.99
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-08",
+    "avg_temperature_c": 23.49,
+    "avg_precipitation_mm": 1.03
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-08",
+    "avg_temperature_c": 24.96,
+    "avg_precipitation_mm": 0.59
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-09",
+    "avg_temperature_c": 3.53,
+    "avg_precipitation_mm": 3.26
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-09",
+    "avg_temperature_c": 19.0,
+    "avg_precipitation_mm": 5.39
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-09",
+    "avg_temperature_c": 16.66,
+    "avg_precipitation_mm": 5.02
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-09",
+    "avg_temperature_c": 15.08,
+    "avg_precipitation_mm": 6.17
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-09",
+    "avg_temperature_c": 17.34,
+    "avg_precipitation_mm": 2.45
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-09",
+    "avg_temperature_c": 18.09,
+    "avg_precipitation_mm": 2.9
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-10",
+    "avg_temperature_c": -0.45,
+    "avg_precipitation_mm": 3.6
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-10",
+    "avg_temperature_c": 15.19,
+    "avg_precipitation_mm": 3.6
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-10",
+    "avg_temperature_c": 13.35,
+    "avg_precipitation_mm": 2.92
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-10",
+    "avg_temperature_c": 11.98,
+    "avg_precipitation_mm": 4.24
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-10",
+    "avg_temperature_c": 12.61,
+    "avg_precipitation_mm": 0.89
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-10",
+    "avg_temperature_c": 12.68,
+    "avg_precipitation_mm": 1.05
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-11",
+    "avg_temperature_c": -1.57,
+    "avg_precipitation_mm": 4.16
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-11",
+    "avg_temperature_c": 8.64,
+    "avg_precipitation_mm": 5.39
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-11",
+    "avg_temperature_c": 4.97,
+    "avg_precipitation_mm": 3.43
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-11",
+    "avg_temperature_c": 3.76,
+    "avg_precipitation_mm": 4.88
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-11",
+    "avg_temperature_c": 4.7,
+    "avg_precipitation_mm": 3.16
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-11",
+    "avg_temperature_c": 4.35,
+    "avg_precipitation_mm": 2.41
+  },
+  {
+    "NUTS_ID": "IS",
+    "month": "2024-12",
+    "avg_temperature_c": -4.13,
+    "avg_precipitation_mm": 3.77
+  },
+  {
+    "NUTS_ID": "AL",
+    "month": "2024-12",
+    "avg_temperature_c": 5.82,
+    "avg_precipitation_mm": 5.53
+  },
+  {
+    "NUTS_ID": "BA",
+    "month": "2024-12",
+    "avg_temperature_c": 2.22,
+    "avg_precipitation_mm": 4.08
+  },
+  {
+    "NUTS_ID": "ME",
+    "month": "2024-12",
+    "avg_temperature_c": 1.53,
+    "avg_precipitation_mm": 4.49
+  },
+  {
+    "NUTS_ID": "MK",
+    "month": "2024-12",
+    "avg_temperature_c": 2.69,
+    "avg_precipitation_mm": 3.44
+  },
+  {
+    "NUTS_ID": "RS",
+    "month": "2024-12",
+    "avg_temperature_c": 2.44,
+    "avg_precipitation_mm": 2.71
+  }
+]

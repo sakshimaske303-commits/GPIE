@@ -2,13 +2,7 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 
-# Two-group control DiD (matches causal_inference_final_did.py's design for NO2).
-# The original version of this file ran a single-cohort model (EU-27 only, no
-# external control group) on master_dataset.csv -- the exact design that the
-# placebo test proved unreliable for the primary NO2 outcome. This was an
-# oversight: the same control-group correction applied to NO2 was never
-# carried over to the NDVI secondary outcome. Fixed here to use the genuine
-# 30-country control dataset and the same did_interaction specification.
+# Two-group control DiD (same design as causal_inference_final_did.py, NDVI outcome).
 DATA_PATH = "data/master_dataset_control.csv"
 
 

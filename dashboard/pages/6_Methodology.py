@@ -19,8 +19,9 @@ st.markdown("""
 ### Data Sources
 
 GPIE integrates eight independently-sourced datasets, all acquired at the country level for
-2019–2024 (30 countries: EU-27 + UK, Norway, Switzerland) — a ninth, WorldPop population, was
-also acquired but excluded as a model input (see Limitations below):
+2019–2024 (36 countries: EU-27 + a 9-country non-EU control group — UK, Norway, Switzerland,
+Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia) — a ninth,
+WorldPop population, was also acquired but excluded as a model input (see Limitations below):
 """)
 
 col1, col2 = st.columns(2)
@@ -131,11 +132,13 @@ s3a, s3b = st.columns([0.94, 0.06])
 with s3a:
     with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
         st.markdown("""
-        Three non-EU European countries were added as a control group — the **UK, Norway, and
-        Switzerland** — selected for being geographically and economically comparable to the EU-27
-        while not being subject to EU Green Deal legislation. This required:
-        - New boundary data (GADM Level 0)
-        - Extended satellite data acquisition for all 30 countries
+        Nine non-EU European countries were added as a control group — **UK, Norway, Switzerland,
+        Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia** —
+        selected for being geographically and economically comparable to the EU-27 while not being
+        subject to EU Green Deal legislation, spanning both established Western European economies
+        and EU-accession-candidate economies in the Western Balkans. This required:
+        - New boundary data (GADM Level 0 for UK/Norway/Switzerland; NUTS directly for the remaining six)
+        - Extended satellite data acquisition for all 36 countries
         - A second GDP data source (World Bank API) for non-EU countries
 
         This enabled a genuine two-group Difference-in-Differences model — the version presented on
@@ -143,13 +146,15 @@ with s3a:
         """)
 with s3b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the three control countries — UK, Norway, Switzerland (GADM boundaries) — loaded together in QGIS, showing the full 30-country treatment-vs-control footprint.")
+    proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the nine control countries (GADM for UK/Norway/Switzerland, NUTS for the rest) — loaded together in QGIS, showing the full 36-country treatment-vs-control footprint.")
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
     The overall DiD result was further validated by estimating the treatment effect separately for
-    all 23 individual quarters (2019Q1–2024Q4), rather than as a single average — confirming the
-    null result held consistently across every quarter, both before and after treatment.
+    all 23 individual quarters (2019Q1–2024Q4), rather than as a single average. Every pre-treatment
+    quarter is non-significant, supporting the parallel-trends assumption. Four post-treatment
+    quarters (2022Q2, 2023Q2, 2024Q2, 2024Q3) are nominally significant, all negative, all falling
+    in Q2 or Q3 — a consistent pattern, not scattered noise, corroborating the heterogeneity check below.
     """)
 
 s5a, s5b = st.columns([0.94, 0.06])
@@ -158,16 +163,18 @@ with s5a:
         st.markdown("""
         All models were re-estimated with standard errors clustered by country, the standard
         correction for panel data where a country's repeated monthly observations are serially
-        correlated (uncorrected OLS standard errors understate true uncertainty). This made the null
-        NO₂ result *more* solid (p = 0.632 → 0.663), not less.
+        correlated (uncorrected OLS standard errors understate true uncertainty).
 
-        Five further robustness checks were run against the corrected NO₂ model, all reinforcing the
-        null finding: removing GDP entirely (rules out GDP as a biasing "bad control"); a
-        log-transformed outcome (rules out functional-form artifacts); shifting the assumed treatment
-        date by ±6/±12 months (no shifted date reaches significance); splitting EU-27 countries by
-        baseline pollution level (neither subgroup is significant); and a formal minimum-detectable-effect
-        calculation, which found this design can reliably detect an effect of ~28% of baseline NO₂ or
-        larger — the observed coefficient (~4.4% of baseline) is well below that threshold.
+        Five further robustness checks were run against the corrected, pooled NO₂ model. Removing
+        GDP entirely barely moves the coefficient (rules out GDP as a biasing "bad control"); shifting
+        the assumed treatment date by ±6/±12 months finds one alternate date (−6 months) nominally
+        significant on its own (p = 0.021), flagged honestly as a genuine dating-uncertainty signal
+        rather than smoothed over; splitting EU-27 countries by baseline pollution level finds a
+        **statistically significant effect in the 14 higher-baseline countries** (p = 0.003) and none
+        in the 13 lower-baseline countries; a log-transformed outcome shrinks toward zero, consistent
+        with the effect being concentrated rather than a uniform percentage decline everywhere; and a
+        formal minimum-detectable-effect calculation found this design can reliably detect a *pooled*
+        effect of ~12.7% of baseline NO₂ or larger.
 
         Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
         with the original, single-cohort design — produced a statistically significant relative decline
@@ -184,23 +191,64 @@ with s5b:
 
 st.markdown("---")
 
+st.markdown("### 🎯 Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
+
+st.markdown("""
+The control group's construction invites two specific objections: that equal weighting might
+mismatch the treated series' true counterfactual trajectory, and that country-level readings
+might not be spatially independent observations. Both were tested directly rather than left as
+theoretical concerns.
+
+**Augmented Synthetic Control** (Abadie, Diamond &amp; Hainmüller, 2010; ridge-augmented per
+Ben-Michael, Feller &amp; Rothstein, 2021) fits convex donor weights to match the EU-27's
+pre-treatment NO₂ trajectory, rather than averaging control countries equally. Norway's and
+Iceland's NO₂ series both have real, high-latitude coverage gaps that persist even after a clean
+re-fetch — Norway 43% pre-treatment coverage, Iceland 70% — so the donor pool is the remaining
+seven control countries (UK, Switzerland, Albania, Bosnia and Herzegovina, Montenegro, North
+Macedonia, Serbia). The post-treatment gap between actual and synthetic EU-27 is −1×10⁻⁶ — the same
+sign and order of magnitude as the pooled DiD coefficient (−2.22×10⁻⁶), reached through a method
+that doesn't rely on the DiD model's fixed-effects specification at all. With 7 donors, the
+in-space placebo is a genuine permutation-style check: the real EU-27 gap ranks 2nd of 8 by size.
+
+**Moran's I spatial-autocorrelation diagnostic** (KNN-4 weights on country centroids, robust to
+island geometries like Cyprus, Malta, Ireland, and Iceland) tests whether country-clustered standard
+errors are missing cross-border spatial dependence. Raw NO₂ levels are strongly clustered (Global
+Moran's I = 0.570, p = 0.001) — expected for an atmospheric pollutant. The DiD model's own
+residuals are not significantly clustered (I = 0.069, p = 0.135): the country and month fixed
+effects already absorb the large majority of that dependence. Local Moran's I (LISA) identifies a
+High-High cluster (Benelux, Germany, Denmark, UK) and a Low-Low cluster (Nordic/Baltic countries
+plus Iceland), with Switzerland and Ireland as significant Low-High outliers.
+
+Neither check overturns the pooled null result — that was never the point. Both close off a
+specific way the control group's construction could otherwise be second-guessed, though neither
+speaks directly to the higher-baseline heterogeneity finding above, since both evaluate the pooled
+EU-27 aggregate.
+""")
+
+st.markdown("---")
+
 st.markdown("### ⚠️ Honest Limitations")
 
 st.warning("""
-**Statistical power**: The control group consists of only 3 countries. The overall model's
-confidence interval — [-7.68 × 10⁻⁶, +4.88 × 10⁻⁶] — is reasonably wide, not tightly clustered
-around zero. Quantified directly: at 80% power, this design's minimum detectable effect is
-roughly **28% of the EU-27's pre-treatment average NO₂** — this study can rule out an effect of
-that size or larger, but not a smaller one. This means the honest conclusion is not simply
-*"the policy had no effect,"* but rather: *with this study's sample size and three-country
-control group, no effect of at least ~28% could be detected* — consistent with either a
-genuinely negligible effect, or a real but more modest effect this design lacks the power to see.
+**Statistical power**: Even with a 9-country control group (7 for the synthetic control
+specification above, since Norway's and Iceland's NO₂ coverage remain too incomplete to use as
+donors even after a clean re-fetch), the pooled model's confidence interval — [-4.87 × 10⁻⁶, +4.32 × 10⁻⁷]
+— still spans zero. Quantified directly: at 80% power, this design's minimum detectable effect for
+the pooled estimate is roughly **12.7% of the EU-27's pre-treatment average NO₂**, down
+substantially from what a smaller control group could resolve. This means the honest conclusion is
+not *"the policy had no effect"* nor *"the policy worked,"* but rather: the pooled, EU-wide average
+effect is not conventionally significant, while a real effect concentrated in higher-baseline
+member states and specific post-treatment quarters is — a genuinely open finding this design can
+characterize but not fully resolve without a longer panel or sub-national data. The synthetic
+control reaches the same pooled conclusion through weighted rather than equal donor weighting,
+now with a real 7-donor permutation-style placebo — corroborating, not resolving, the underlying
+question of how far the effect extends beyond the higher-baseline subgroup.
 """)
 
 st.warning("""
 **The NDVI secondary-outcome finding is exploratory, not causal.** Once given the same
 control-group correction as NO₂, NDVI shows a statistically significant relative decline
-(p = 0.012) — but this analysis does not control for land-use change, drought/precipitation-driven
+(p = 0.007) — but this analysis does not control for land-use change, drought/precipitation-driven
 vegetation stress, or agricultural-policy shifts between treatment and control regions, any of
 which could plausibly drive the result independent of the Climate Law. It is reported as a
 genuine, robust finding meriting further investigation, not as evidence the Climate Law affected

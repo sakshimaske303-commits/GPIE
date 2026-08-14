@@ -1,0 +1,89 @@
+{
+  "gdp_removed": {
+    "coefficient": -2.2259627192573755e-06,
+    "p_value": 0.15582077398830957,
+    "n": 2321
+  },
+  "log_transform": {
+    "coefficient": 0.004747575110601274,
+    "p_value": 0.909659537276046,
+    "n": 2297,
+    "n_excluded_nonpositive": 24
+  },
+  "treatment_date_sensitivity": {
+    "-12mo": {
+      "date": "2020-06-30",
+      "coefficient": -2.516017237210498e-06,
+      "p_value": 0.10798875927530734
+    },
+    "-6mo": {
+      "date": "2020-12-31",
+      "coefficient": -2.725612648027597e-06,
+      "p_value": 0.021398813814129954
+    },
+    "true": {
+      "date": "2021-06-30",
+      "coefficient": -2.218944929424712e-06,
+      "p_value": 0.10085557242558418
+    },
+    "+6mo": {
+      "date": "2021-12-31",
+      "coefficient": -1.691321979837327e-06,
+      "p_value": 0.07284054845950899
+    },
+    "+12mo": {
+      "date": "2022-06-30",
+      "coefficient": -1.190009185010328e-06,
+      "p_value": 0.2321807121239191
+    }
+  },
+  "baseline_pollution_split": {
+    "higher_baseline": {
+      "coefficient": -5.457178713531387e-06,
+      "p_value": 0.0032275959476594967,
+      "n": 1503,
+      "countries": [
+        "AT",
+        "BE",
+        "CZ",
+        "DE",
+        "DK",
+        "FR",
+        "HU",
+        "IT",
+        "LU",
+        "NL",
+        "PL",
+        "RO",
+        "SI",
+        "SK"
+      ]
+    },
+    "lower_baseline": {
+      "coefficient": 1.5335881405389906e-06,
+      "p_value": 0.188558045036876,
+      "n": 1391,
+      "countries": [
+        "BG",
+        "CY",
+        "EE",
+        "EL",
+        "ES",
+        "FI",
+        "HR",
+        "IE",
+        "LT",
+        "LV",
+        "MT",
+        "PT",
+        "SE"
+      ]
+    }
+  },
+  "minimum_detectable_effect": {
+    "se": 1.3524215385770807e-06,
+    "mde": 3.788923896154471e-06,
+    "baseline_mean": 2.9926467184258162e-05,
+    "mde_pct_of_baseline": 12.660779078352121
+  }
+}

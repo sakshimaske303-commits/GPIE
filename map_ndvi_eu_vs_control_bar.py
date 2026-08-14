@@ -2,10 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-# NDVI equivalent of the existing NO2 EU-vs-control bar chart. Added after
-# the corrected two-group NDVI DiD model (causal_inference_ndvi.py) found a
-# statistically significant relative decline - this chart gives that finding
-# a visual companion, the same way the NO2 result already has one.
+# NDVI companion to the NO2 EU-vs-control bar chart, same two-group DiD design.
 DATA_PATH = "data/master_dataset_control.csv"
 OUTPUT_PATH = "outputs/plots/ndvi_eu_vs_control_bar_chart.png"
 
@@ -42,8 +39,8 @@ def make_chart():
     ax.set_xticklabels(periods)
     ax.set_ylabel("Mean NDVI (Vegetation Health Index)")
     ax.set_title(
-        "NDVI: EU-27 vs. Control Group, Before vs. After the European Climate Law\n"
-        "Corrected two-group DiD model: coefficient = -0.021, p = 0.012 (cluster-robust) -\n"
+        "NDVI: EU-27 vs. 9-Country Control Group, Before vs. After the European Climate Law\n"
+        "Two-group DiD model: coefficient = -0.0145, p = 0.007 (cluster-robust) -\n"
         "a statistically significant relative decline, not visible in NO2's equivalent comparison",
         fontsize=11, fontweight="bold"
     )

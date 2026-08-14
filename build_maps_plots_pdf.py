@@ -19,21 +19,24 @@ OUTPUT_PATH = "GPIE_Maps_and_Plots.pdf"
 # (filename, display title, one-line caption)
 IMAGES = [
     ("control_group_design_map.png", "Study Design: Treatment vs. Control Group",
-     "EU-27 (treatment) and the non-EU control group - United Kingdom, Norway, Switzerland."),
+     "EU-27 (treatment) and the 9-country non-EU control group - UK, Norway, Switzerland, Iceland, "
+     "Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia."),
     ("no2_choropleth_map.png", "NO2 Choropleth Map",
      "Mean tropospheric NO2 concentration by country, Sentinel-5P TROPOMI."),
     ("no2_before_after_map.png", "NO2 Before vs. After the European Climate Law",
      "Average NO2 across the EU-27, 2019 (pre-treatment) vs. 2024 (post-treatment)."),
     ("eu_vs_control_bar_chart.png", "NO2: EU-27 vs. Control Group",
-     "Mean NO2, pre- and post-treatment, EU-27 vs. control group."),
+     "Mean NO2, pre- and post-treatment, EU-27 vs. 9-country control group - coefficient = -2.22e-06, p = 0.101."),
     ("event_study_plot.png", "Event-Study: Quarter-by-Quarter NO2 Effect",
-     "23-quarter Difference-in-Differences event-study estimates, cluster-robust SEs."),
+     "23-quarter Difference-in-Differences event-study estimates, cluster-robust SEs - 4 significant "
+     "post-treatment quarters, all negative, clustering in Q2/Q3 of 2022-2024."),
     ("ndvi_choropleth_map.png", "NDVI Choropleth Map",
      "Mean vegetation health index (NDVI) by country."),
     ("ndvi_before_after_map.png", "NDVI Before vs. After the European Climate Law",
      "Average NDVI across the EU-27, pre- vs. post-treatment."),
     ("ndvi_eu_vs_control_bar_chart.png", "NDVI: EU-27 vs. Control Group",
-     "Corrected two-group DiD model: coefficient = -0.021, p = 0.012 (cluster-robust)."),
+     "Two-group DiD model: coefficient = -0.0145, p = 0.007 (cluster-robust) - a statistically "
+     "significant relative decline."),
     ("gdp_choropleth_map.png", "GDP Choropleth Map",
      "Control variable - GDP by country."),
     ("land_cover_dominant_class_map.png", "Dominant Land Cover Class Map",
@@ -44,6 +47,12 @@ IMAGES = [
      "Control variable - average temperature by country."),
     ("india_transferability_trend.png", "India Transferability Validation",
      "NO2 acquisition pipeline independently tested on India, 2019-2024."),
+    ("synthetic_control_gap.png", "Augmented Synthetic Control: EU-27 vs. 7-Country Donor Composite",
+     "Post-treatment gap = -1e-6, same near-zero direction as the DiD estimate (-2.22e-06, p=0.101), "
+     "reached independently via a 7-country donor pool (Norway and Iceland excluded, high-latitude NO2 coverage gaps)."),
+    ("moran_lisa_cluster_map.png", "Local Moran's I (LISA) Spatial Cluster Map",
+     "NO2 levels cluster spatially across 36 countries (I=0.570, p=0.001); DiD residuals do not "
+     "(I=0.069, p=0.135) - fixed effects absorb it."),
     ("policies_by_year.png", "Policies by Year",
      "Count of EU environmental/climate policies enacted per year."),
     ("policy_type_distribution.png", "Policy Type Distribution",

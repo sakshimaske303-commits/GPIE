@@ -19,7 +19,8 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-CONTROL_COUNTRIES = {"UK", "NO", "CH"}
+CONTROL_COUNTRIES_NUTS = {"IS", "AL", "BA", "ME", "MK", "RS"}
+CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 
 
 def build_geometry_gdf():
@@ -28,7 +29,7 @@ def build_geometry_gdf():
         nuts_data = json.load(f)
     for feature in nuts_data["features"]:
         nid = feature["properties"].get("NUTS_ID")
-        if nid in EU27_COUNTRIES:
+        if nid in EU27_COUNTRIES or nid in CONTROL_COUNTRIES_NUTS:
             records.append({"country": nid, "geometry": shape(feature["geometry"])})
     for country_code, path in GADM_PATHS.items():
         with open(path, encoding="utf-8") as f:
@@ -52,7 +53,7 @@ def make_map():
     avg_ndvi = compute_avg_ndvi()
 
     merged = gdf.merge(avg_ndvi, on="country", how="left")
- 
+
     bounds = (-25, 34, 35, 72)
 
     fig, ax = plt.subplots(figsize=(13, 12))
@@ -81,7 +82,7 @@ def make_map():
     ax.set_axis_off()
 
     ax.set_title(
-        "Vegetation Health (NDVI): EU-27 vs. Control Group (UK, Norway, Switzerland)\n"
+        "Vegetation Health (NDVI): EU-27 vs. 9-Country Control Group\n"
         "Thick borders mark non-EU control-group countries",
         fontsize=12, fontweight="bold", pad=15
     )

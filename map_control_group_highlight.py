@@ -18,7 +18,10 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-CONTROL_COUNTRIES = {"UK", "NO", "CH"}
+# UK/NO/CH ship as separate GADM files; the rest already carry a NUTS_ID
+# in the boundary geojson, so they're pulled straight from there.
+CONTROL_COUNTRIES_NUTS = {"IS", "AL", "BA", "ME", "MK", "RS"}
+CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 
 
 def build_geometry_gdf():
@@ -27,7 +30,7 @@ def build_geometry_gdf():
         nuts_data = json.load(f)
     for feature in nuts_data["features"]:
         nid = feature["properties"].get("NUTS_ID")
-        if nid in EU27_COUNTRIES:
+        if nid in EU27_COUNTRIES or nid in CONTROL_COUNTRIES_NUTS:
             records.append({"country": nid, "geometry": shape(feature["geometry"])})
     for country_code, path in GADM_PATHS.items():
         with open(path, encoding="utf-8") as f:
@@ -61,13 +64,14 @@ def make_map():
 
     legend_patches = [
         mpatches.Patch(color="#2c7fb8", label="Treatment Group — EU-27 (27 countries)"),
-        mpatches.Patch(color="#e34a33", label="Control Group — UK, Norway, Switzerland (3 countries)"),
+        mpatches.Patch(color="#e34a33", label="Control Group — 9 non-EU countries"),
     ]
     ax.legend(handles=legend_patches, loc="lower left", fontsize=11, frameon=True, framealpha=0.95)
 
     ax.set_title(
         "GPIE Study Design: Treatment vs. Control Group\n"
-        "Difference-in-Differences comparison — EU-27 (subject to the European Climate Law) vs. three non-EU comparator countries",
+        "Difference-in-Differences comparison — EU-27 (subject to the European Climate Law) vs. nine non-EU comparator countries\n"
+        "UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia",
         fontsize=13, fontweight="bold", pad=15
     )
 

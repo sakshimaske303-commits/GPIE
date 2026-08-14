@@ -20,18 +20,19 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-CONTROL_COUNTRIES = {"UK", "NO", "CH"}
+CONTROL_COUNTRIES_NUTS = {"IS", "AL", "BA", "ME", "MK", "RS"}
+CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 
 
 def build_geometry_gdf():
-    """Combines NUTS (EU-27) and GADM (control group) into one GeoDataFrame."""
+    """Combines NUTS (EU-27 + 6 control countries) and GADM (UK/NO/CH) into one GeoDataFrame."""
     records = []
 
     with open(NUTS_PATH, encoding="utf-8") as f:
         nuts_data = json.load(f)
     for feature in nuts_data["features"]:
         nid = feature["properties"].get("NUTS_ID")
-        if nid in EU27_COUNTRIES:
+        if nid in EU27_COUNTRIES or nid in CONTROL_COUNTRIES_NUTS:
             records.append({"country": nid, "geometry": shape(feature["geometry"])})
 
     for country_code, path in GADM_PATHS.items():
@@ -96,7 +97,7 @@ def make_map():
     ax.set_axis_off()
 
     ax.set_title(
-        "Tropospheric NO₂ Concentration: EU-27 vs. Control Group (UK, Norway, Switzerland)\n"
+        "Tropospheric NO₂ Concentration: EU-27 vs. 9-Country Control Group\n"
         "Thick borders mark non-EU control-group countries — visually comparable NO₂ levels support the DiD null result",
         fontsize=12, fontweight="bold", pad=15
     )

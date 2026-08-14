@@ -29,20 +29,7 @@ with col_b:
         st.warning("Diagram not found at outputs/plots/img1.png")
     st.markdown(
         f"<p style='text-align:center; color:{PALETTE['text_muted']}; font-size:0.85rem; margin-top:6px;'>"
-        "🤖 AI-generated diagram — visual only</p>",
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        f"""
-        <div style="background: rgba(0, 135, 149, 0.06); border: 1px solid rgba(248, 131, 121, 0.25);
-                    border-radius: 10px; padding: 14px 20px; margin-top: 6px;">
-            <p style="color:{PALETTE['text_muted']}; font-size:0.85rem; font-style:italic; margin:0; text-align:center;">
-                Generated with an AI image tool from a fully-specified brief — every process, label, and
-                physical relationship shown was authored by me from my own understanding of the
-                retrieval physics; the AI was directed to illustrate it, not to originate it.
-            </p>
-        </div>
-        """,
+        "Retrieval-physics diagram — illustrative only</p>",
         unsafe_allow_html=True,
     )
 

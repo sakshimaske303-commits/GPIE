@@ -29,17 +29,17 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## 📊 What This Project Does
 
-- Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **30 countries** (EU-27 + a genuine non-EU control group: UK, Norway, Switzerland), 2019–2024
+- Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **36 countries** (EU-27 + a genuine 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
 - Builds a rigorous **Difference-in-Differences** causal inference model to isolate the Climate Law's specific effect from broader European pollution trends
-- Validates the result through a **placebo test**, a **genuine external control group**, and a **quarterly event-study** robustness check
-- Reports an honest, rigorously validated finding — including when that finding is a **statistically non-significant result**
-- Presents everything through **10 publication-quality maps** and an **interactive Streamlit dashboard**
+- Validates the result through a **placebo test**, a **genuine external control group**, a **quarterly event-study**, a **baseline-pollution heterogeneity check**, an **augmented synthetic control**, and a **Moran's I spatial-autocorrelation diagnostic**
+- Reports an honest, rigorously validated finding — including a **pooled null result that conceals a statistically significant, concentrated effect**
+- Presents everything through **12 publication-quality maps** and an **interactive Streamlit dashboard**
 
 ## 🔬 Key Finding
 
-No statistically distinguishable EU-specific reduction in NO₂ was detected once genuinely compared against a non-EU control group (coefficient = −1.40 × 10⁻⁶, p = 0.663, cluster-robust standard errors by country). This null result was independently confirmed via a 23-quarter event-study analysis and a series of additional robustness checks. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in the Project Report.
+No statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level once genuinely compared against a 9-country non-EU control group (coefficient = −2.22 × 10⁻⁶, p = 0.101, cluster-robust standard errors by country). But a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the fourteen higher-baseline, more industrialized member states (coefficient = −5.46 × 10⁻⁶, p = 0.003) — corroborated by a 23-quarter event-study analysis finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control (weighted 7-country donor pool) reaches the same near-zero, same-sign *pooled* estimate through a structurally independent method, and a Moran's I spatial-autocorrelation test confirms raw NO₂ levels are strongly spatially clustered (I = 0.570, p = 0.001, as expected for a cross-border pollutant) but the DiD model's own residuals are not significantly clustered (I = 0.069, p = 0.135) — the country and month fixed effects already absorb the large majority of it. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in the Project Report.
 
-Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0210, p = 0.012). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
+Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0145, p = 0.007). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
 
 ## 🌍 Transferability Validation
 

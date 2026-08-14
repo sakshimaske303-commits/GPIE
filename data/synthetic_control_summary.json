@@ -1,0 +1,38 @@
+{
+  "donor_pool": [
+    "UK",
+    "CH",
+    "AL",
+    "BA",
+    "ME",
+    "MK",
+    "RS"
+  ],
+  "excluded_control_countries": [
+    "NO",
+    "IS"
+  ],
+  "donor_weights": {
+    "UK": 0.24608057227181712,
+    "CH": 0.4490506132068838,
+    "AL": 0.0,
+    "BA": 0.0,
+    "ME": 0.0,
+    "MK": 0.009094556463034122,
+    "RS": 0.29577425805826507
+  },
+  "pre_treatment_rmspe": 8.267536165483575e-06,
+  "post_treatment_att": -1.402246852399121e-06,
+  "placebo_gaps": {
+    "UK": -5.426701120874027e-06,
+    "CH": 6.31187387534751e-07,
+    "AL": -1.3864275298617834e-07,
+    "BA": 6.289291610088234e-07,
+    "ME": 5.277362380008578e-07,
+    "MK": -4.220931396226417e-07,
+    "RS": 7.309396783147247e-07
+  },
+  "eu27_rank_among_placebos": "2/8",
+  "pre_treatment_months_used": 23,
+  "post_treatment_months_used": 32
+}

@@ -1,0 +1,37 @@
+country,local_I,p_sim,quadrant,significant,cluster
+AL,0.3774305467833003,0.091,Low-Low,False,Not significant
+AT,0.020688023678467646,0.164,High-High,False,Not significant
+BA,0.085706373711612,0.367,Low-Low,False,Not significant
+BE,3.5312701046850856,0.003,High-High,True,High-High
+BG,0.11470124785937348,0.224,Low-Low,False,Not significant
+CH,-0.2268554611499972,0.007,Low-High,True,Low-High
+CY,0.16377538397603242,0.098,Low-Low,False,Not significant
+CZ,0.8853911406160325,0.082,High-High,False,Not significant
+DE,3.1107483960516555,0.001,High-High,True,High-High
+DK,0.3738912943022046,0.001,High-High,True,High-High
+EE,0.5383411892718899,0.021,Low-Low,True,Low-Low
+EL,0.3842730515288567,0.06,Low-Low,False,Not significant
+ES,-0.06025486714856159,0.38,Low-High,False,Not significant
+FI,0.667870013061126,0.013,Low-Low,True,Low-Low
+FR,0.006147439404100276,0.413,High-High,False,Not significant
+HR,-0.008582041220033441,0.387,Low-High,False,Not significant
+HU,-0.005636246762764615,0.445,High-Low,False,Not significant
+IE,-1.4886190124853693,0.001,Low-High,True,Low-High
+IS,1.1413352429030428,0.022,Low-Low,True,Low-Low
+IT,-0.08503499563322506,0.483,High-Low,False,Not significant
+LT,0.04030622624149633,0.487,Low-Low,False,Not significant
+LU,2.422839807688267,0.001,High-High,True,High-High
+LV,0.2998045120475698,0.232,Low-Low,False,Not significant
+ME,0.4082258041750253,0.137,Low-Low,False,Not significant
+MK,0.3782539854240942,0.08,Low-Low,False,Not significant
+MT,-0.006937455091008263,0.272,High-Low,False,Not significant
+NL,4.388081712582497,0.001,High-High,True,High-High
+NO,0.6049235373954425,0.084,Low-Low,False,Not significant
+PL,0.3048830344789922,0.211,High-High,False,Not significant
+PT,0.27727087688250096,0.221,Low-Low,False,Not significant
+RO,-0.025055749217656017,0.352,Low-High,False,Not significant
+RS,0.03605832878928946,0.229,Low-Low,False,Not significant
+SE,0.6682965787318781,0.015,Low-Low,True,Low-Low
+SI,0.006194497823717106,0.438,High-High,False,Not significant
+SK,0.3640351859080827,0.106,High-High,False,Not significant
+UK,0.24769520129320352,0.003,High-High,True,High-High

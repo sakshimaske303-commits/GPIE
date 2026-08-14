@@ -19,12 +19,15 @@ st.markdown("---")
 
 _checks = [
     "Cluster-Robust SEs (country-clustered)",
-    "Genuine External Control Group (3 non-EU countries)",
+    "Genuine External Control Group (9 non-EU countries)",
     "Placebo Test (caught &amp; fixed a flawed initial design)",
     "23-Quarter Event-Study Check",
+    "Baseline-Pollution Heterogeneity Check (significant)",
     "5 Additional Robustness Checks",
-    "Minimum Detectable Effect Quantified (28%)",
-    "Honest Null Result Disclosed",
+    "Augmented Synthetic Control (Independent Method)",
+    "Moran's I Spatial-Autocorrelation Check",
+    "Minimum Detectable Effect Quantified (12.7%)",
+    "Honest, Nuanced Result Disclosed",
 ]
 _badges = "".join(
     f"""<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,135,149,0.10);
@@ -48,11 +51,11 @@ st.markdown("### The Final Model: Two-Group Difference-in-Differences")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric("DiD Coefficient", "−1.40 × 10⁻⁶")
+    st.metric("DiD Coefficient (Pooled)", "−2.22 × 10⁻⁶")
 with col2:
-    st.metric("P-value", "0.663", "Not significant")
+    st.metric("P-value", "0.101", "Not significant")
 with col3:
-    st.metric("95% CI", "spans zero", "[-7.68e-6, +4.88e-6]")
+    st.metric("95% CI", "spans zero", "[-4.87e-6, +4.32e-7]")
 
 st.markdown(
     "<p class='caption-text'>Standard errors are clustered by country to account for "
@@ -61,12 +64,13 @@ st.markdown(
 )
 
 st.warning(
-    "**Result: No statistically distinguishable EU-specific effect detected.** "
-    "Once genuinely compared against a non-EU control group, the NO₂ decline observed in EU-27 "
-    "countries is not statistically different from the decline observed in the United Kingdom, "
-    "Norway, and Switzerland over the same period. At 80% statistical power, this design can "
-    "reliably detect an effect of roughly 28% of baseline EU NO₂ or larger — this result rules "
-    "out an effect of that size, but cannot rule out a smaller true effect."
+    "**Result: No statistically distinguishable pooled, EU-wide effect detected at the conventional 5% level.** "
+    "Once genuinely compared against a 9-country non-EU control group, the pooled NO₂ decline observed in EU-27 "
+    "countries is not statistically different from the decline observed in the control group over the same period — "
+    "though the p-value (0.101) is noticeably closer to conventional significance than a smaller control group's "
+    "estimate. At 80% statistical power, this design can reliably detect a pooled effect of roughly 12.7% of "
+    "baseline EU NO₂ or larger. A heterogeneity check below finds the pooled null conceals a statistically "
+    "significant effect concentrated in higher-baseline, more industrialized EU countries."
 )
 
 st.markdown("---")
@@ -84,14 +88,76 @@ hidden by averaging across the full post-treatment period.
 st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "event_study_plot.png"), use_container_width=True)
 
 st.markdown("""
-**Finding**: Under cluster-robust standard errors, 20 of the 23 quarters — both before and after
-the 30 June 2021 treatment date — show no statistically significant effect. Three quarters are
-nominally significant (2020Q1 pre-treatment, plausibly reflecting COVID-19 lockdown timing
-differences rather than a real pre-trend; and 2023Q1/2023Q3 post-treatment with opposite-signed
-coefficients, not forming a consistent pattern) — close to the ~1 false positive expected by
-chance across 23 independent tests. Overall, this supports the model's parallel-trends assumption
-and does not indicate a delayed effect emerging at any point through 2024.
+**Finding**: Under cluster-robust standard errors, 19 of the 23 quarters — both before and after
+the 30 June 2021 treatment date — show no statistically significant effect, and every pre-treatment
+quarter is non-significant, supporting the model's parallel-trends assumption. Four post-treatment
+quarters are nominally significant (2022Q2, 2023Q2, 2024Q2, 2024Q3) — more than the ~1 false
+positive expected by chance across 23 independent tests — and, unlike a thinner control group's
+event study, these four form a consistent pattern: all negative, all falling in the second or
+third calendar quarter. This corroborates the heterogeneity finding below rather than the pooled
+average alone.
 """)
+
+st.markdown("---")
+
+st.markdown("### Heterogeneity by Baseline Pollution Level")
+
+st.markdown("""
+The pooled EU-27 estimate could mask an effect concentrated in a subset of countries. Splitting
+the treatment group at the median pre-treatment NO₂ level into 14 higher-baseline (more
+industrialized, largely Western/Central European) and 13 lower-baseline countries, each
+re-estimated separately against the full control group:
+""")
+
+hcol1, hcol2 = st.columns(2)
+with hcol1:
+    st.metric("Higher-Baseline Subgroup", "−5.46 × 10⁻⁶", "p = 0.003 — significant")
+with hcol2:
+    st.metric("Lower-Baseline Subgroup", "+1.53 × 10⁻⁶", "p = 0.189 — not significant")
+
+st.error(
+    "**This is the clearest single piece of evidence that the pooled null is averaging a real, "
+    "concentrated effect together with little-to-no effect elsewhere, rather than reflecting a "
+    "genuine absence of any EU-specific effect.** It does not overturn the pooled estimate as this "
+    "study's headline, conservative result, and a subgroup split roughly halves the statistical "
+    "power available to the pooled model — but it is corroborated by the event-study pattern above "
+    "and is reported as a substantive finding in its own right."
+)
+
+st.markdown("---")
+
+st.markdown("### Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
+
+st.markdown("""
+Two further checks target the pooled estimate directly, using methods structurally
+independent of the DiD specification itself.
+""")
+
+sc1, sc2 = st.columns(2)
+with sc1:
+    st.markdown("**Augmented Synthetic Control**")
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "synthetic_control_gap.png"), use_container_width=True)
+    st.markdown(
+        "<p class='caption-text'>Donor pool: 7 countries (UK, Switzerland, Albania, Bosnia and "
+        "Herzegovina, Montenegro, North Macedonia, Serbia), weighted rather than averaged equally. "
+        "Norway and Iceland excluded — both still show substantial NO₂ coverage gaps even after a "
+        "clean re-fetch, a genuine high-latitude satellite limitation. "
+        "Post-treatment gap = −1×10⁻⁶, same sign and order of magnitude as the pooled DiD coefficient "
+        "(−2.22×10⁻⁶), reached through a method that doesn't use the DiD model's fixed effects at all. "
+        "With 7 donors, the in-space placebo is a genuine permutation check: the real EU-27 gap ranks "
+        "2nd of 8 by size.</p>",
+        unsafe_allow_html=True,
+    )
+with sc2:
+    st.markdown("**Moran's I Spatial Autocorrelation**")
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.png"), use_container_width=True)
+    st.markdown(
+        "<p class='caption-text'>Raw NO₂ levels are strongly spatially clustered (I=0.570, p=0.001) — "
+        "expected, pollution crosses borders. The DiD model's residuals are not significantly "
+        "clustered (I=0.069, p=0.135): country and month fixed effects already absorb most of it, "
+        "directly testing rather than assuming the country-clustered standard errors are adequate.</p>",
+        unsafe_allow_html=True,
+    )
 
 st.markdown("---")
 
@@ -117,14 +183,14 @@ st.markdown("### 📊 Full Regression Output")
 coef_data = {
     "Variable": ["DiD Interaction (treatment_group × post)", "Post (main effect)",
                  "Average Temperature", "Average Precipitation", "GDP"],
-    "Coefficient": ["−1.40 × 10⁻⁶", "—", "—", "—", "—"],
-    "P-value (cluster-robust)": ["0.663", "—", "—", "—", "—"],
+    "Coefficient": ["−2.22 × 10⁻⁶", "—", "—", "—", "—"],
+    "P-value (cluster-robust)": ["0.101", "—", "—", "—", "—"],
     "Interpretation": [
-        "Core causal estimate — not significant",
+        "Core causal estimate (pooled) — not significant at 5%; significant in the higher-baseline subgroup",
         "Common trend, shared by both groups",
         "Control variable",
         "Control variable",
-        "Control variable (removing GDP entirely makes the estimate even more null — see Methodology page)",
+        "Control variable (removing GDP barely moves the estimate — see Methodology page)",
     ],
 }
 coef_df = pd.DataFrame(coef_data)
@@ -201,11 +267,11 @@ trustworthy result — its role here is better identification, not first-time si
 
 ncol1, ncol2, ncol3 = st.columns(3)
 with ncol1:
-    st.metric("NDVI DiD Coefficient", "−0.0210")
+    st.metric("NDVI DiD Coefficient", "−0.0145")
 with ncol2:
-    st.metric("P-value", "0.012", "Significant")
+    st.metric("P-value", "0.007", "Significant")
 with ncol3:
-    st.metric("95% CI", "excludes zero", "[-0.0372, -0.0047]")
+    st.metric("95% CI", "excludes zero", "[-0.0250, -0.0039]")
 
 st.error(
     "**A statistically significant relative decline in EU-27 vegetation health versus the "

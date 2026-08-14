@@ -70,7 +70,7 @@ st.markdown("---")
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    st.metric("COUNTRIES", "30", "EU-27 + Control")
+    st.metric("COUNTRIES", "36", "EU-27 + 9-Country Control")
 with col2:
     st.metric("STUDY PERIOD", "2019–2024", "6 years")
 with col3:
@@ -126,6 +126,7 @@ Use the sidebar to explore:
 - **Causal Results** — the project's core statistical findings
 - **Global Transferability** — testing the acquisition pipeline on a non-EU country, India
 - **Methodology & Limitations** — the full validation journey, including a placebo test that reshaped the entire analytical approach
+- **Interactive Maps** — hoverable, zoomable versions of every map in this dashboard
 """)
 
 st.markdown("---")
