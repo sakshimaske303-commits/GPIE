@@ -27,13 +27,33 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ---
 
+## 🗺️ Interactive Maps
+
+Hoverable, zoomable versions of every map in this project — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
+
+| Map | Link |
+|---|---|
+| Study Design: Treatment vs. Control | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/control_group_map.html) |
+| NO₂ Concentration | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/no2_map.html) |
+| Vegetation Health (NDVI) | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/ndvi_map.html) |
+| Temperature | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/climate_map.html) |
+| GDP | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/gdp_map.html) |
+| Moran's I Spatial Clusters | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/moran_lisa_map.html) |
+| Event-Study Plot | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/event_study.html) |
+| Synthetic Control Gap | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/synthetic_control.html) |
+| Explore Trends by Country | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/explore_trends.html) |
+
+Built by `build_interactive_maps.py`.
+
+---
+
 ## 📊 What This Project Does
 
 - Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **36 countries** (EU-27 + a genuine 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
 - Builds a rigorous **Difference-in-Differences** causal inference model to isolate the Climate Law's specific effect from broader European pollution trends
 - Validates the result through a **placebo test**, a **genuine external control group**, a **quarterly event-study**, a **baseline-pollution heterogeneity check**, an **augmented synthetic control**, and a **Moran's I spatial-autocorrelation diagnostic**
 - Reports an honest, rigorously validated finding — including a **pooled null result that conceals a statistically significant, concentrated effect**
-- Presents everything through **12 publication-quality maps** and an **interactive Streamlit dashboard**
+- Presents everything through **12 publication-quality maps**, **9 hoverable interactive maps**, and an **interactive Streamlit dashboard**
 
 ## 🔬 Key Finding
 
@@ -83,11 +103,12 @@ Each stage is a separate, independently re-runnable script — there is no hidde
 
 ```text
 GPIE/
-├── dashboard/                  # Streamlit dashboard (8 pages)
+├── dashboard/                  # Streamlit dashboard (11 pages)
 ├── data/                       # Processed datasets and master merge files
 │   └── earth_observation/      # Per-dataset acquisition/processing outputs
 ├── outputs/
-│   └── plots/                  # Final generated maps and charts
+│   ├── plots/                  # Final generated maps and charts
+│   └── interactive/            # Hoverable/zoomable HTML maps (build_interactive_maps.py)
 ├── GPIE_Project_Report.md      # Polished project summary and methodology
 ├── GPIE_Research_Paper.md      # Formal academic research paper
 ├── GPIE_Development_Log.md     # Full technical development log (debugging & iteration history)
