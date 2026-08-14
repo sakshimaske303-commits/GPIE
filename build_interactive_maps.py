@@ -244,6 +244,19 @@ def build_synthetic_control():
     print(f"Saved: {OUT_DIR}/synthetic_control.html")
 
 
+def distinct_colors(n):
+    # Evenly spaced hues around the color wheel - every country gets a
+    # genuinely different color instead of a handful of colors repeating
+    # (which is what happens with a short palette cycled via modulo).
+    import colorsys
+    colors = []
+    for i in range(n):
+        h = i / n
+        r, g, b = colorsys.hls_to_rgb(h, 0.5, 0.65)
+        colors.append("#%02x%02x%02x" % (int(r * 255), int(g * 255), int(b * 255)))
+    return colors
+
+
 def build_explore_trends():
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
@@ -252,13 +265,13 @@ def build_explore_trends():
     fig = go.Figure()
     countries = sorted(df["country_name"].unique())
     default = ["Germany", "France", "United Kingdom", "Norway"]
-    palette = ["#00d4ff", "#7c3aed", "#00ffa3", "#f472b6", "#fbbf24", "#38bdf8"]
+    palette = distinct_colors(len(countries))
 
     for i, name in enumerate(countries):
         cdf = df[df["country_name"] == name].sort_values("time")
         fig.add_trace(go.Scatter(
             x=cdf["time"], y=cdf["mean_no2"], name=name, mode="lines",
-            line=dict(color=palette[i % len(palette)]),
+            line=dict(color=palette[i]),
             visible=True if name in default else "legendonly",
         ))
 
