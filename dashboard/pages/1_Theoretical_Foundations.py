@@ -21,7 +21,7 @@ st.markdown("---")
 # DIAGRAM
 # ============================================================
 IMG_PATH = os.path.join(PROJECT_ROOT, "outputs", "plots", "imgg1.png")
-col_a, col_b, col_c = st.columns([1, 4, 1])
+col_a, col_b, col_c = st.columns([0.2, 5.9, 0.2])
 with col_b:
     if os.path.exists(IMG_PATH):
         st.image(IMG_PATH, use_container_width=True)
