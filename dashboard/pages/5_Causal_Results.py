@@ -174,7 +174,7 @@ with col1:
 with col2:
     st.error("**2️⃣ Placebo Test Failed**\n\nTesting a fake treatment date found an equally 'significant' effect — revealing the original result was actually a general pollution-decline trend")
 with col3:
-    st.success("**3️⃣ Control Group Added**\n\nA genuine non-EU comparison group was built, producing this session's honest, rigorously validated finding")
+    st.success("**3️⃣ Control Group Added**\n\nA genuine non-EU comparison group was built, producing this project's honest, rigorously validated finding")
 
 st.markdown("---")
 

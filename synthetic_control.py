@@ -1,16 +1,6 @@
-"""
-GPIE — Augmented Synthetic Control (Abadie et al. 2010 / Ben-Michael, Feller
-& Rothstein 2021 ridge augmentation), targeting the small-N control group
-limitation the DiD design can't get around on its own.
-
-Donor pool is 7 non-EU countries (UK, Switzerland, Albania, Bosnia and
-Herzegovina, Montenegro, North Macedonia, Serbia). Norway (43% pre-treatment
-NO2 coverage) and Iceland (70%) are excluded - both are genuine high-latitude
-satellite retrieval gaps, not a stale-file issue, confirmed by a clean
-re-fetch that left the same months missing. With 7 donors the in-space
-placebo is a real NNLS refit per held-out donor, not a degenerate 1:1 average.
-
-    python synthetic_control.py
+"""Augmented synthetic control (Abadie et al. 2010 / Ben-Michael, Feller &
+Rothstein 2021 ridge) for the small-N control group; Norway/Iceland
+excluded for genuine satellite coverage gaps, not stale files.
 """
 
 import json

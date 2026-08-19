@@ -1,9 +1,6 @@
-"""
-GPIE — 5 additional robustness checks on the DiD result: GDP removed,
+"""5 additional robustness checks on the DiD result: GDP removed,
 log-transformed outcome, treatment-date sensitivity, baseline-pollution
-split, and minimum detectable effect.
-
-    python causal_inference_robustness_checks.py
+split, minimum detectable effect.
 """
 import json
 import numpy as np

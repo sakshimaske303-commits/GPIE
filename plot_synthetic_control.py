@@ -1,9 +1,5 @@
-"""
-GPIE — Synthetic control gap plot: EU-27 actual NO2 vs. the augmented
-synthetic control (7-country donor composite). Run
-synthetic_control.py first.
-
-    python plot_synthetic_control.py
+"""Synthetic control gap plot: EU-27 actual NO2 vs. the augmented synthetic
+control composite.
 """
 
 import pandas as pd

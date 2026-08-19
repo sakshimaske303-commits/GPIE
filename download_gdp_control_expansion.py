@@ -1,11 +1,5 @@
-"""
-GPIE — GDP acquisition for the expanded control group, same World Bank
-API pattern as download_gdp_control_countries.py. New ISO3 codes for
-Iceland + the Western Balkan candidates; Norway isn't included here since
-its GDP was already pulled cleanly the first time (only its NO2 had the
-coverage gap).
-
-    python download_gdp_control_expansion.py
+"""GDP acquisition for the expanded control group (World Bank API); Norway
+skipped since its GDP data was already clean.
 """
 import os
 import csv

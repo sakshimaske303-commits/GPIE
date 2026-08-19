@@ -1,14 +1,5 @@
-"""
-GPIE — builds the master dataset: EU-27 vs. a 9-country non-EU control
-group (UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina,
-Montenegro, North Macedonia, Serbia), 2019-2024 monthly.
-
-NO2/NDVI/climate/GDP each come from two source files per variable (a base
-fetch and a supplementary fetch covering the Balkans + Iceland + a clean
-Norway re-pull); the overlay functions merge them on (country, year, month),
-with the supplementary file winning on any collision.
-
-    python master_merge_control.py
+"""Builds the master dataset: EU-27 vs. 9-country non-EU control group,
+2019-2024 monthly, merging base + supplementary source files.
 """
 import json
 import csv

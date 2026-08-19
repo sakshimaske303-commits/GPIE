@@ -1,10 +1,5 @@
-"""
-GPIE — NDVI acquisition for the expanded control group (Iceland, Albania,
-Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia, + a clean
-Norway re-fetch). Same BYOC/evalscript pattern as
-download_ndvi_sentinelhub.py, separate output file.
-
-    python download_ndvi_control_expansion.py
+"""NDVI acquisition for the expanded control group plus a clean Norway
+re-fetch, same pattern as download_ndvi_sentinelhub.py.
 """
 import os
 import json

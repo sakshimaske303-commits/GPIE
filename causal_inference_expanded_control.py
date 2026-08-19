@@ -1,11 +1,5 @@
-"""
-GPIE — re-runs the final DiD spec against the expanded control-group
-panel (data/master_dataset_control_expanded.csv), once that file exists.
-Identical model to causal_inference_final_did.py - only the input data
-changes, so any coefficient/significance shift is attributable to the
-larger control group, not a different spec.
-
-    python causal_inference_expanded_control.py
+"""Re-runs the final DiD spec on the expanded control-group panel; same
+model as causal_inference_final_did.py, different input.
 """
 import pandas as pd
 import numpy as np
