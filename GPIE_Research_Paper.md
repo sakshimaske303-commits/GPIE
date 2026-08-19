@@ -229,35 +229,35 @@ This study finds no statistically distinguishable, EU-wide pooled reduction in N
 
 ## References
 
-Abadie, A., Diamond, A., & Hainmüller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program. *Journal of the American Statistical Association*, 105(490), 493–505.
+Abadie, A., Diamond, A., & Hainmüller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program. *Journal of the American Statistical Association*, 105(490), 493–505. [https://doi.org/10.1198/jasa.2009.ap08746](https://doi.org/10.1198/jasa.2009.ap08746)
 
-Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press.
+Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press. [https://doi.org/10.1515/9781400829828](https://doi.org/10.1515/9781400829828)
 
-Anselin, L. (1995). Local Indicators of Spatial Association—LISA. *Geographical Analysis*, 27(2), 93–115.
+Anselin, L. (1995). Local Indicators of Spatial Association—LISA. *Geographical Analysis*, 27(2), 93–115. [https://doi.org/10.1111/j.1538-4632.1995.tb00338.x](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x)
 
-Bekes, G., & Kezdi, G. (2021). Impact evaluation using Difference-in-Differences. *RAUSP Management Journal*, 54(4), 519–532.
+Barré, J., Petetin, H., Colette, A., Guevara, M., Peuch, V.-H., Rouil, L., et al. (2021). Estimating lockdown-induced European NO2 changes using satellite and surface observations and air quality models. *Atmospheric Chemistry and Physics*, 21(9), 7373–7394. [https://doi.org/10.5194/acp-21-7373-2021](https://doi.org/10.5194/acp-21-7373-2021)
 
-Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The Augmented Synthetic Control Method. *Journal of the American Statistical Association*, 116(536), 1789–1803.
+Bekes, G., & Kezdi, G. (2021). Impact evaluation using Difference-in-Differences. *RAUSP Management Journal*, 54(4), 519–532. [https://doi.org/10.1108/RAUSP-05-2019-0112](https://doi.org/10.1108/RAUSP-05-2019-0112)
 
-Bertrand, M., Duflo, E., & Mullainathan, S. (2004). How Much Should We Trust Differences-in-Differences Estimates? *The Quarterly Journal of Economics*, 119(1), 249–275.
+Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The Augmented Synthetic Control Method. *Journal of the American Statistical Association*, 116(536), 1789–1803. [https://doi.org/10.1080/01621459.2021.1929245](https://doi.org/10.1080/01621459.2021.1929245)
 
-Bikbov, A. et al. (2024). Estimating lockdown-induced European NO2 changes using satellite and surface observations and air quality models. *Atmospheric Chemistry and Physics*.
+Bertrand, M., Duflo, E., & Mullainathan, S. (2004). How Much Should We Trust Differences-in-Differences Estimates? *The Quarterly Journal of Economics*, 119(1), 249–275. [https://doi.org/10.1162/003355304772839588](https://doi.org/10.1162/003355304772839588)
 
-Callaway, B., Goodman-Bacon, A., & Sant'Anna, P. (2024). Difference-in-Differences with a continuous treatment. *NBER Working Paper*.
+Callaway, B., Goodman-Bacon, A., & Sant'Anna, P. (2024). Difference-in-Differences with a Continuous Treatment. *NBER Working Paper No. 32117*. [https://www.nber.org/papers/w32117](https://www.nber.org/papers/w32117)
 
-Mathew, A., Shekar, P. R., Nair, A. T., Mallick, J., Rathod, C., Bindajam, A. A., Alharbi, M. M., & Abdo, H. G. (2024). Unveiling urban air quality dynamics during COVID-19: a Sentinel-5P TROPOMI hotspot analysis. *Scientific Reports*, 14, 21624.
+Mathew, A., Shekar, P. R., Nair, A. T., Mallick, J., Rathod, C., Bindajam, A. A., Alharbi, M. M., & Abdo, H. G. (2024). Unveiling urban air quality dynamics during COVID-19: a Sentinel-5P TROPOMI hotspot analysis. *Scientific Reports*, 14, 21624. [https://doi.org/10.1038/s41598-024-72276-4](https://doi.org/10.1038/s41598-024-72276-4)
 
-Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. *Biometrika*, 37(1/2), 17–23.
+Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. *Biometrika*, 37(1/2), 17–23. [https://doi.org/10.2307/2332142](https://doi.org/10.2307/2332142)
 
-Riveros-Gavilanes, J. (2023). Testing Parallel Trends in Differences-in-Differences and Event Study Designs: A Research Approach Based on Pre-Treatment Period Significance.
+Riveros-Gavilanes, J. M. (2023). Testing Parallel Trends in Differences-in-Differences and Event Study Designs: A Research Approach Based on Pre-Treatment Period Significance. *Journal of Research, Innovation and Technologies*, 2(2), 226–237. [https://doi.org/10.57017/jorit.v2.2(4).07](https://doi.org/10.57017/jorit.v2.2(4).07)
 
-Roth, J., Sant'Anna, P., Bilinski, A., & Poe, J. (2023). What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature. *Journal of Econometrics*.
+Roth, J., Sant'Anna, P., Bilinski, A., & Poe, J. (2023). What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature. *Journal of Econometrics*, 235(2), 2218–2244. [https://doi.org/10.1016/j.jeconom.2023.03.008](https://doi.org/10.1016/j.jeconom.2023.03.008)
 
-Tong, C., Dai, Y., Cole, M., Elliott, R. J. R., Bartington, S. E., Liu, B., & Shi, Z. (2025). Further improvement in London's air quality demands more than the Ultra Low Emission Zone policy. *npj Clean Air*, 1, 29.
+Tong, C., Dai, Y., Cole, M., Elliott, R. J. R., Bartington, S. E., Liu, B., & Shi, Z. (2025). Further improvement in London's air quality demands more than the Ultra Low Emission Zone policy. *npj Clean Air*, 1, 29. [https://doi.org/10.1038/s44407-025-00030-9](https://doi.org/10.1038/s44407-025-00030-9)
 
-Wang, P. et al. (2020). Nitrogen Dioxide (NO2) Pollution Monitoring with Sentinel-5P Satellite Imagery over Europe during the Coronavirus Pandemic Outbreak. *Remote Sensing*, 12(21), 3575.
+Vîrghileanu, M., Săvulescu, I., Mihai, B.-A., Nistor, C., & Dobre, R. (2020). Nitrogen Dioxide (NO2) Pollution Monitoring with Sentinel-5P Satellite Imagery over Europe during the Coronavirus Pandemic Outbreak. *Remote Sensing*, 12(21), 3575. [https://doi.org/10.3390/rs12213575](https://doi.org/10.3390/rs12213575)
 
-Zeldow, B., & Hatfield, L. (2024). Advances in Difference-in-Differences Methods for Policy Evaluation Research. *PMC*.
+Wang, G., Hamad, R., & White, J. S. (2024). Advances in Difference-in-Differences Methods for Policy Evaluation Research. *Epidemiology*, 35(5), 628–637. [https://doi.org/10.1097/EDE.0000000000001755](https://doi.org/10.1097/EDE.0000000000001755)
 
 ----------------------------------------------------------------------------------------------------
 
