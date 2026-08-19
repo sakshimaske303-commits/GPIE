@@ -1,4 +1,4 @@
-# 🛰️ GPIE — Green Policy Intelligence Engine
+# GPIE — Green Policy Intelligence Engine
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21756661.svg)](https://doi.org/10.5281/zenodo.21756661)
 
@@ -10,24 +10,24 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ---
 
-## 📄 Project Documentation
+## Project Documentation
 
 | Document | What's Inside |
 |---|---|
-| ⚡ [Executive Summary](./GPIE_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
-| 📘 [Project Report](./GPIE_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
-| 📗 [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
-| 📙 [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
+| [Executive Summary](./GPIE_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
+| [Project Report](./GPIE_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
+| [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
 ---
 
-## 🔗 Live Dashboard
+## Live Dashboard
 
 **[View the interactive dashboard →](https://f5cf6fijj9gm564r6aapt6.streamlit.app/)**
 
 ---
 
-## 🗺️ Interactive Maps
+## Interactive Maps
 
 Hoverable, zoomable versions of every map in this project — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
 
@@ -47,7 +47,7 @@ Built by `build_interactive_maps.py`.
 
 ---
 
-## 📊 What This Project Does
+## What This Project Does
 
 - Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **36 countries** (EU-27 + a genuine 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
 - Builds a rigorous **Difference-in-Differences** causal inference model to isolate the Climate Law's specific effect from broader European pollution trends
@@ -55,13 +55,13 @@ Built by `build_interactive_maps.py`.
 - Reports an honest, rigorously validated finding — including a **pooled null result that conceals a statistically significant, concentrated effect**
 - Presents everything through **12 publication-quality maps**, **9 hoverable interactive maps**, and an **interactive Streamlit dashboard**
 
-## 🔬 Key Finding
+## Key Finding
 
 No statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level once genuinely compared against a 9-country non-EU control group (coefficient = −2.22 × 10⁻⁶, p = 0.101, cluster-robust standard errors by country). But a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the fourteen higher-baseline, more industrialized member states (coefficient = −5.46 × 10⁻⁶, p = 0.003) — corroborated by a 23-quarter event-study analysis finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control (weighted 7-country donor pool) reaches the same near-zero, same-sign *pooled* estimate through a structurally independent method, and a Moran's I spatial-autocorrelation test confirms raw NO₂ levels are strongly spatially clustered (I = 0.570, p = 0.001, as expected for a cross-border pollutant) but the DiD model's own residuals are not significantly clustered (I = 0.069, p = 0.135) — the country and month fixed effects already absorb the large majority of it. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in the Project Report.
 
 Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0145, p = 0.007). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
 
-## 🌍 Transferability Validation
+## Transferability Validation
 
 GPIE's original design goal was a **globally transferable methodology**, not one limited to the EU-27. To provide direct evidence of this — rather than leaving it as an unverified claim — the project's NO₂ acquisition pipeline was tested standalone on **India** (2019–2024), using the same Sentinel Hub Statistical API infrastructure and evalscript logic built for the EU-27 study, with zero modification to the core acquisition code.
 
@@ -69,7 +69,7 @@ All 6 years acquired successfully, returning physically realistic NO₂ values c
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```text
  DATA SOURCES                    PREPROCESSING                 MODELLING                   PRESENTATION
@@ -90,7 +90,7 @@ All 6 years acquired successfully, returning physically realistic NO₂ values c
 
 Each stage is a separate, independently re-runnable script — there is no hidden manual step between raw acquisition and the final published figures; every number in the paper traces back to a script in this repository.
 
-## ♻️ Reproducibility
+## Reproducibility
 
 - **Environment**: Python 3.10+. Most dependencies install via `requirements.txt`; `geopandas`/`rasterio`/`GDAL` are easiest installed via `conda` (`conda install -c conda-forge geopandas rasterio gdal`) if the `pip` install fails on your platform.
 - **Credentials**: Sentinel Hub, Copernicus CDS, and World Bank API access require free account credentials, stored in a local `.env` file (never committed — see `.env.example` if present, or the acquisition scripts' docstrings for the expected variable names).
@@ -99,7 +99,7 @@ Each stage is a separate, independently re-runnable script — there is no hidde
 
 ---
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```text
 GPIE/
@@ -120,11 +120,11 @@ GPIE/
 └── country_boundaries.py       # Shared EU-27 + control-group boundary loader
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 Python · pandas · geopandas · statsmodels · matplotlib · Plotly · Streamlit · Sentinel Hub API · Copernicus Climate Data Store · Eurostat API · World Bank API
 
-## 📚 Data Sources
+## Data Sources
 
 | Dataset | Provider |
 |---|---|
@@ -137,7 +137,7 @@ Python · pandas · geopandas · statsmodels · matplotlib · Plotly · Streamli
 | Boundaries | Eurostat GISCO (NUTS), GADM |
 | Policy Records | EUR-Lex |
 
-## ▶️ Running Locally
+## Running Locally
 
 ```bash
 git clone https://github.com/sakshimaske303-commits/GPIE.git
@@ -147,13 +147,13 @@ cd dashboard
 streamlit run app.py
 ```
 
-## 👤 Author
+## Author
 
 **Sakshi D. Maske**
 
 Independent Geospatial Researcher
 
-## 📜 License
+## License
 
 This project is licensed under [CC BY 4.0](./LICENSE) — free to share and adapt, with attribution. See `CITATION.cff` for citation metadata.
 
