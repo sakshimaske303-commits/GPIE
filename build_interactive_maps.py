@@ -1,8 +1,5 @@
 """
-GPIE — interactive HTML companions to the static maps/plots in outputs/plots/.
-Same 36-country geometry and data, just hoverable/zoomable (folium for the
-choropleths, plotly for the time series) instead of flat PNGs. Meant to sit
-behind a map-picker dropdown on the portfolio site.
+GPIE — interactive folium/plotly versions of the static maps in outputs/plots/.
 
     python build_interactive_maps.py
 """

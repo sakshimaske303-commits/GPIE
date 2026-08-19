@@ -1,8 +1,4 @@
-"""
-GPIE — LISA cluster map (Local Moran's I) for average NO2 level.
-Run spatial_autocorrelation.py first.
-
-    python map_moran_lisa_clusters.py
+"""LISA cluster map (Local Moran's I) for average NO2 level.
 """
 
 import geopandas as gpd

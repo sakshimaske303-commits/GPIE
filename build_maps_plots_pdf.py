@@ -1,10 +1,6 @@
 """
-Compiles every map/plot in outputs/plots/ into a single PDF - one image per
-page, landscape or portrait chosen automatically to match each image's own
-aspect ratio, with a cover page and a titled caption above each image.
-
-This is a presentation compilation only (no new analysis) - built at Sakshi's
-request for a single PDF containing all GPIE maps and plots.
+Compiles every map/plot in outputs/plots/ into a single PDF, one image per page
+(orientation auto-matched per image), with a cover page and captions.
 """
 import os
 from PIL import Image

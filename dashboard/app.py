@@ -5,12 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from styles import apply_custom_style, PALETTE
 
-# ------------------------------------------------------------------
-# Robust path resolution: works both locally (running from inside
-# dashboard/) and on Streamlit Cloud (which runs from the repo root
-# without cd'ing into dashboard/ first) — the same class of fix
-# needed after PDFs 404'd only in a prior cloud deployment.
-# ------------------------------------------------------------------
+# Path resolution that works both locally and on Streamlit Cloud (no cd into dashboard/ there).
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # .../dashboard
 ROOT_DIR = os.path.dirname(BASE_DIR)                      # repo root
 

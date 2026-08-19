@@ -1,14 +1,6 @@
-"""
-GPIE — NO2 acquisition for the expanded control group: Iceland, Albania,
-Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia (all already
-have NUTS_ID geometry in the existing boundary file, no GADM needed), plus
-a full re-fetch of Norway to fix its 29/72-month gap in the original file
-instead of patching around it.
-
-Same evalscript/API pattern as download_no2_sentinelhub.py, new output
-file so it doesn't collide with the original 30-country dataset.
-
-    python download_no2_control_expansion.py
+"""NO2 acquisition for the expanded control group (Iceland, Albania, Bosnia
+and Herzegovina, Montenegro, North Macedonia, Serbia) plus a Norway
+re-fetch to fix its coverage gap.
 """
 import os
 import json

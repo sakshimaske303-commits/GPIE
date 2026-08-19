@@ -1,15 +1,5 @@
-"""
-GPIE — climate stats for the expanded control group, computed from the
-ERA5 grid files already downloaded for the original 30-country run
-(era5_processed_{year}.nc). Iceland and the Western Balkans both fall
-inside the same Europe bounding box used for that download (config.py:
-MIN_LON=-31.5, MAX_LON=35.0, MIN_LAT=27.5, MAX_LAT=71.5), so this is a
-zonal-stats pass over existing data, not a new download.
-
-Norway isn't re-processed here — its climate coverage was already fine,
-only its NO2 had a gap.
-
-    python era5_regional_stats_control_expansion.py
+"""Climate stats for the expanded control group via the existing ERA5 grid
+files (Iceland/Balkans already fall inside the same bbox).
 """
 import os
 import json

@@ -1,10 +1,5 @@
-"""
-GPIE — Moran's I spatial-autocorrelation diagnostic. Country-clustered SEs
-handle within-country serial correlation but not cross-country spatial
-correlation, which pollution physically has (it crosses borders). Checks
-whether that's actually showing up in the data and in the DiD residuals.
-
-    python spatial_autocorrelation.py
+"""Moran's I diagnostic checking whether cross-border pollution correlation
+shows up in the raw data and DiD residuals.
 """
 
 import json

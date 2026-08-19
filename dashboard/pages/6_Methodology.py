@@ -42,14 +42,7 @@ with col2:
 
 st.markdown("---")
 
-# ============================================================
-# PROOF-OF-WORK POPOVERS — tiny, pulsing "📸" buttons next to the
-# exact validation step they back up. Click to reveal the
-# screenshot inline; nothing pushes the page layout around. Drop
-# the PNGs into outputs/proof_screenshots/ (see filenames below)
-# and these activate automatically — until then each falls back to
-# a quiet "not added yet" note instead of breaking the page.
-# ============================================================
+# Proof-of-work popover buttons - drop screenshots into outputs/proof_screenshots/ to activate.
 st.markdown(f"""
 <style>
     div[data-testid="stPopover"] button {{

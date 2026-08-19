@@ -1,15 +1,6 @@
-"""
-GPIE — builds the expanded control-group dataset: the original 30-country
-panel plus Iceland, Albania, Bosnia and Herzegovina, Montenegro, North
-Macedonia and Serbia, with Norway's NO2 series replaced by the clean
-re-fetch (fixes the 29/72-month gap the original file had).
-
-Same flatten/lookup logic as master_merge_control.py, just overlaying the
-*_control_expansion.json/csv files on top of the originals before the
-final merge. Doesn't touch master_dataset_control.csv - writes a new file
-so the original stays available for comparison.
-
-    python master_merge_control_expanded.py
+"""Builds the expanded control-group dataset (original 30 + Iceland/Balkans,
+Norway NO2 replaced); writes a separate file, doesn't touch
+master_dataset_control.csv.
 """
 import json
 import csv
