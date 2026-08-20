@@ -33,27 +33,27 @@ economies in the Western Balkans:
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("🇬🇧 **United Kingdom**\n\nExited the EU in 2020 — outside EU regulatory scope from 2021 onward")
+    st.info("**United Kingdom**\n\nExited the EU in 2020 — outside EU regulatory scope from 2021 onward")
 with col2:
-    st.info("🇳🇴 **Norway**\n\nNever an EU member — economically developed, geographically proximate")
+    st.info("**Norway**\n\nNever an EU member — economically developed, geographically proximate")
 with col3:
-    st.info("🇨🇭 **Switzerland**\n\nNever an EU member — comparable industrial base and climate")
+    st.info("**Switzerland**\n\nNever an EU member — comparable industrial base and climate")
 
 col4, col5, col6 = st.columns(3)
 with col4:
-    st.info("🇮🇸 **Iceland**\n\nNever an EU member — EEA-linked, high-latitude comparator")
+    st.info("**Iceland**\n\nNever an EU member — EEA-linked, high-latitude comparator")
 with col5:
-    st.info("🇦🇱 **Albania**\n\nEU accession candidate — not yet subject to Green Deal legislation")
+    st.info("**Albania**\n\nEU accession candidate — not yet subject to Green Deal legislation")
 with col6:
-    st.info("🇧🇦 **Bosnia and Herzegovina**\n\nEU accession candidate — Western Balkans comparator")
+    st.info("**Bosnia and Herzegovina**\n\nEU accession candidate — Western Balkans comparator")
 
 col7, col8, col9 = st.columns(3)
 with col7:
-    st.info("🇲🇪 **Montenegro**\n\nEU accession candidate — Western Balkans comparator")
+    st.info("**Montenegro**\n\nEU accession candidate — Western Balkans comparator")
 with col8:
-    st.info("🇲🇰 **North Macedonia**\n\nEU accession candidate — Western Balkans comparator")
+    st.info("**North Macedonia**\n\nEU accession candidate — Western Balkans comparator")
 with col9:
-    st.info("🇷🇸 **Serbia**\n\nEU accession candidate — largest Western Balkans economy in the control group")
+    st.info("**Serbia**\n\nEU accession candidate — largest Western Balkans economy in the control group")
 
 st.markdown("---")
 

@@ -16,7 +16,7 @@ st.markdown(
 )
 st.markdown("---")
 
-st.markdown("### 📊 Download the Master Dataset")
+st.markdown("### Download the Master Dataset")
 st.markdown("""
 The complete, cleaned dataset used for this project's causal-inference model — 36 countries,
 2019–2024, monthly resolution — is available below for independent verification or reuse.
@@ -44,7 +44,7 @@ st.markdown(f"<p class='caption-text'>Showing first 50 of {len(df):,} total rows
 
 st.markdown("---")
 
-st.markdown("### 📚 Data Sources & Citations")
+st.markdown("### Data Sources & Citations")
 st.markdown("""
 | Dataset | Provider | Access Method |
 |---|---|---|
