@@ -74,7 +74,7 @@ PROOF_DIR = os.path.join(PROJECT_ROOT, "outputs", "proof_screenshots")
 
 def proof_popover(filename, caption):
     path = os.path.join(PROOF_DIR, filename)
-    with st.popover("📸"):
+    with st.popover("View"):
         if os.path.exists(path):
             st.image(path, caption=caption, use_container_width=True)
         else:
@@ -184,7 +184,7 @@ with s5b:
 
 st.markdown("---")
 
-st.markdown("### 🎯 Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
+st.markdown("### Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
 
 st.markdown("""
 The control group's construction invites two specific objections: that equal weighting might
@@ -220,7 +220,7 @@ EU-27 aggregate.
 
 st.markdown("---")
 
-st.markdown("### ⚠️ Honest Limitations")
+st.markdown("### Honest Limitations")
 
 st.warning("""
 **Statistical power**: Even with a 9-country control group (7 for the synthetic control

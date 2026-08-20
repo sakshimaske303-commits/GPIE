@@ -16,7 +16,7 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-### 🌍 Transferability Validation
+### Transferability Validation
 
 GPIE's original design goal was a **globally transferable methodology**, not one limited to the
 EU-27 study region. To provide direct evidence of this rather than leaving it as an unverified

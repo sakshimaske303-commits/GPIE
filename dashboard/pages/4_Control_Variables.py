@@ -24,7 +24,7 @@ result. GDP accounts for economic activity levels, temperature and precipitation
 weather-driven pollution variation, and land cover / elevation provide environmental baseline context.
 """)
 
-tab1, tab2, tab3, tab4 = st.tabs(["💶 GDP", "🌲 Land Cover", "⛰️ Elevation", "🌡️ Climate"])
+tab1, tab2, tab3, tab4 = st.tabs(["GDP", "Land Cover", "Elevation", "Climate"])
 
 with tab1:
     st.markdown("""

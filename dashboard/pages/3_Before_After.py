@@ -24,7 +24,7 @@ of data. Each pair of panels uses an **identical color scale**, so any visible c
 represents a genuine change, not a scaling artifact.
 """)
 
-tab1, tab2 = st.tabs(["🌫️ NO₂ (Nitrogen Dioxide)", "🌿 NDVI (Vegetation Health)"])
+tab1, tab2 = st.tabs(["NO₂ (Nitrogen Dioxide)", "NDVI (Vegetation Health)"])
 
 with tab1:
     st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_before_after_map.png"), use_container_width=True)
@@ -34,14 +34,14 @@ with tab1:
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
-        #### 🔵 What the Map Shows
+        #### What the Map Shows
 
         A general decline in NO₂ is visible across most of Europe between 2019 and 2024 —
         including both EU-27 countries **and** the 9-country non-EU control group.
         """)
     with col2:
         st.markdown("""
-        #### 🎯 Why This Matters
+        #### Why This Matters
 
         The fact that **both groups show a similar decline pattern** is an important visual preview 
         of GPIE's core statistical finding — explored in full on the *Causal Results* page.
@@ -55,14 +55,14 @@ with tab2:
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
-        #### 🌱 What the Map Shows
+        #### What the Map Shows
 
         Vegetation health across Europe shows relatively stable patterns between 2019 and 2024, 
         with no dramatic shift comparable to the NO₂ decline visible in the other tab.
         """)
     with col2:
         st.markdown("""
-        #### 🎯 Why This Matters
+        #### Why This Matters
 
         This visual subtlety doesn't mean nothing happened statistically — GPIE's corrected model,
         using the same control-group design as NO₂, actually detects a **significant** relative

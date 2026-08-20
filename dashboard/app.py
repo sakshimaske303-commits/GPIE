@@ -44,7 +44,7 @@ st.markdown(
                 padding: 16px 32px;
                 box-shadow: 0 4px 20px rgba(248, 131, 121, 0.35);
             ">
-                <span style="font-size:2.1rem; line-height:1;">📦</span>
+                
                 <div style="text-align:left;">
                     <div style="color:{PALETTE['chantilly']}; font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:0.4px; display:flex; align-items:center; gap:8px;">
                         <span>ARCHIVED &amp; CITABLE ON ZENODO</span>
@@ -81,7 +81,7 @@ st.markdown(
                 border: 1px solid rgba(0, 135, 149, 0.3); border-left: 4px solid {PALETTE['coral']};
                 border-radius: 10px;">
         <p style="color:{PALETTE['coral']}; text-transform:uppercase; letter-spacing:1.5px;
-                  font-weight:700; font-size:0.85rem; margin-bottom:8px;">⚡ Why This Matters</p>
+                  font-weight:700; font-size:0.85rem; margin-bottom:8px;">Why This Matters</p>
         <p style="color:{PALETTE['text']}; font-size:1rem; line-height:1.6; margin:0;">
             Governments announce landmark climate policy and then report their own progress against it —
             that self-reported progress is rarely independently audited against physical, satellite-observed
@@ -146,7 +146,7 @@ with doc_col1:
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="⚡ Executive Summary",
+                label="Executive Summary",
                 data=f,
                 file_name="GPIE_Executive_Summary.pdf",
                 mime="application/pdf",
@@ -160,7 +160,7 @@ with doc_col2:
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="📗 Research Paper",
+                label="Research Paper",
                 data=f,
                 file_name="GPIE_Research_Paper.pdf",
                 mime="application/pdf",
@@ -174,7 +174,7 @@ with doc_col3:
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="📘 Project Report",
+                label="Project Report",
                 data=f,
                 file_name="GPIE_Project_Report.pdf",
                 mime="application/pdf",
@@ -188,7 +188,7 @@ with doc_col4:
     try:
         with open(pdf_path, "rb") as f:
             st.download_button(
-                label="📙 Development Log",
+                label="Development Log",
                 data=f,
                 file_name="GPIE_Development_Log.pdf",
                 mime="application/pdf",

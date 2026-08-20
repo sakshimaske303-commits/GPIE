@@ -15,7 +15,7 @@ st.markdown(
 )
 st.markdown("---")
 
-tab1, tab2 = st.tabs(["🌫️ NO₂ (Nitrogen Dioxide)", "🌿 NDVI (Vegetation Health)"])
+tab1, tab2 = st.tabs(["NO₂ (Nitrogen Dioxide)", "NDVI (Vegetation Health)"])
 
 with tab1:
     st.markdown("""

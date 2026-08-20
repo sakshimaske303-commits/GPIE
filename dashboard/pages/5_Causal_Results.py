@@ -39,7 +39,7 @@ _badges = "".join(
 st.markdown(
     f"""
     <p style="color:{PALETTE['coral']}; text-transform:uppercase; letter-spacing:1.5px;
-              font-weight:700; font-size:0.85rem; margin-bottom:6px;">🔍 Robustness At a Glance</p>
+              font-weight:700; font-size:0.85rem; margin-bottom:6px;">Robustness At a Glance</p>
     <div style="display:flex; flex-wrap:wrap; margin-bottom: 6px;">{_badges}</div>
     """,
     unsafe_allow_html=True,
@@ -178,7 +178,7 @@ with col3:
 
 st.markdown("---")
 
-st.markdown("### 📊 Full Regression Output")
+st.markdown("### Full Regression Output")
 
 coef_data = {
     "Variable": ["DiD Interaction (treatment_group × post)", "Post (main effect)",
@@ -204,7 +204,7 @@ st.markdown(
 
 st.markdown("---")
 
-st.markdown("### 📉 EU-27 vs. Control Group — Average NO₂ Comparison")
+st.markdown("### EU-27 vs. Control Group — Average NO₂ Comparison")
 
 
 @st.cache_data
@@ -253,7 +253,7 @@ st.markdown(
 
 st.markdown("---")
 
-st.markdown("### 🌿 Secondary Outcome: NDVI (Vegetation Health)")
+st.markdown("### Secondary Outcome: NDVI (Vegetation Health)")
 
 st.markdown("""
 The same two-group, control-adjusted design used for NO₂ was also applied to NDVI. An earlier
