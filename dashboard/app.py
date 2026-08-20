@@ -4,6 +4,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from styles import apply_custom_style, PALETTE
+from doc_viewer import render_doc_viewer
 
 # Path resolution that works both locally and on Streamlit Cloud (no cd into dashboard/ there).
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # .../dashboard
@@ -138,63 +139,28 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-doc_col1, doc_col2, doc_col3, doc_col4 = st.columns(4)
+_all_docs = [
+    {"label": "Executive Summary", "filename": "GPIE_Executive_Summary.pdf"},
+    {"label": "Research Paper", "filename": "GPIE_Research_Paper.pdf"},
+    {"label": "Project Report", "filename": "GPIE_Project_Report.pdf"},
+    {"label": "Development Log", "filename": "GPIE_Development_Log.pdf"},
+]
+_docs = [d for d in _all_docs if os.path.exists(os.path.join(BASE_DIR, "static", d["filename"]))]
+_missing = [d for d in _all_docs if d not in _docs]
 
-with doc_col1:
-    pdf_path = os.path.join(ROOT_DIR, "GPIE_Executive_Summary.pdf")
-    try:
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="Executive Summary",
-                data=f,
-                file_name="GPIE_Executive_Summary.pdf",
-                mime="application/pdf",
-                use_container_width=True
-            )
-    except FileNotFoundError:
-        st.warning("GPIE_Executive_Summary.pdf not found.")
-
-with doc_col2:
-    pdf_path = os.path.join(ROOT_DIR, "GPIE_Research_Paper.pdf")
-    try:
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="Research Paper",
-                data=f,
-                file_name="GPIE_Research_Paper.pdf",
-                mime="application/pdf",
-                use_container_width=True
-            )
-    except FileNotFoundError:
-        st.warning("GPIE_Research_Paper.pdf not found.")
-
-with doc_col3:
-    pdf_path = os.path.join(ROOT_DIR, "GPIE_Project_Report.pdf")
-    try:
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="Project Report",
-                data=f,
-                file_name="GPIE_Project_Report.pdf",
-                mime="application/pdf",
-                use_container_width=True
-            )
-    except FileNotFoundError:
-        st.warning("GPIE_Project_Report.pdf not found.")
-
-with doc_col4:
-    pdf_path = os.path.join(ROOT_DIR, "GPIE_Development_Log.pdf")
-    try:
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                label="Development Log",
-                data=f,
-                file_name="GPIE_Development_Log.pdf",
-                mime="application/pdf",
-                use_container_width=True
-            )
-    except FileNotFoundError:
-        st.warning("GPIE_Development_Log.pdf not found.")
+if _docs:
+    render_doc_viewer(
+        docs=_docs,
+        colors={
+            "navy_dark": PALETTE["slate"],
+            "navy_med": "#182A2D",
+            "magenta": PALETTE["coral"],
+            "teal": PALETTE["lagoon"],
+            "text_light": PALETTE["text"],
+        },
+    )
+for d in _missing:
+    st.warning(f"{d['filename']} not found.")
 
 st.markdown(
     f"""
