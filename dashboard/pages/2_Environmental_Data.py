@@ -1,10 +1,20 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
+
+
+def render_map(png_name, html_name, height=520):
+    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            components.html(f.read(), height=height)
+    else:
+        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
@@ -25,7 +35,7 @@ with tab1:
     vehicle traffic and industrial activity. This map shows the **2019–2024 average** tropospheric 
     NO₂ column density, derived from **Sentinel-5P TROPOMI** satellite observations.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_choropleth_map.png"), use_container_width=True)
+    render_map("no2_choropleth_map.png", "no2_choropleth_map.html")
     st.markdown(
         "<p class='caption-text'>Source: Sentinel-5P TROPOMI, accessed via Sentinel Hub Statistical API</p>",
         unsafe_allow_html=True,
@@ -39,7 +49,7 @@ with tab2:
     vegetation / water) to +1 (dense, healthy vegetation). This map shows the **2019–2024 average** 
     NDVI, derived from **Copernicus Global Land Service (CGLS)** data.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "ndvi_choropleth_map.png"), use_container_width=True)
+    render_map("ndvi_choropleth_map.png", "ndvi_choropleth_map.html")
     st.markdown(
         "<p class='caption-text'>Source: CGLS NDVI 300m, accessed via Sentinel Hub Statistical API</p>",
         unsafe_allow_html=True,

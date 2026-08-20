@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import plotly.graph_objects as go
 import sys
@@ -150,7 +151,12 @@ with sc1:
     )
 with sc2:
     st.markdown("**Moran's I Spatial Autocorrelation**")
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.png"), use_container_width=True)
+    moran_html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.html")
+    if os.path.exists(moran_html_path):
+        with open(moran_html_path, "r", encoding="utf-8") as f:
+            components.html(f.read(), height=480)
+    else:
+        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.png"), use_container_width=True)
     st.markdown(
         "<p class='caption-text'>Raw NO₂ levels are strongly spatially clustered (I=0.570, p=0.001) — "
         "expected, pollution crosses borders. The DiD model's residuals are not significantly "

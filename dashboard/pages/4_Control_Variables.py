@@ -1,10 +1,20 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
+
+
+def render_map(png_name, html_name, height=520):
+    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            components.html(f.read(), height=height)
+    else:
+        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
@@ -35,7 +45,7 @@ with tab1:
     outsize most others), this map uses a **log₁₀ color scale** to make differences across all
     36 countries visually interpretable.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "gdp_choropleth_map.png"), use_container_width=True)
+    render_map("gdp_choropleth_map.png", "gdp_choropleth_map.html")
     st.markdown(
         "<p class='caption-text'>Source: Eurostat (EU-27), World Bank Open Data (control group)</p>",
         unsafe_allow_html=True,
@@ -50,7 +60,7 @@ with tab2:
     causal model, it is fully absorbed by country fixed effects rather than entered as an explicit 
     regressor.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "land_cover_dominant_class_map.png"), use_container_width=True)
+    render_map("land_cover_dominant_class_map.png", "land_cover_dominant_class_map.html")
     st.markdown(
         "<p class='caption-text'>Source: ESA WorldCover 10m v200 (2021) — EU-27 only</p>",
         unsafe_allow_html=True,
@@ -64,7 +74,7 @@ with tab3:
     settlement patterns. Like land cover, elevation is a **static, time-invariant variable**, fully 
     absorbed by country fixed effects in the causal model rather than entered as an explicit regressor.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "dem_elevation_map.png"), use_container_width=True)
+    render_map("dem_elevation_map.png", "dem_elevation_map.html")
     st.markdown(
         "<p class='caption-text'>Source: Copernicus DEM GLO-30 — EU-27 only</p>",
         unsafe_allow_html=True,
@@ -78,7 +88,7 @@ with tab4:
     accounting for weather-driven variation in NO₂ concentration independent of policy effects — for 
     example, colder months tend to show higher pollution readings due to heating-related emissions.
     """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "climate_temperature_map.png"), use_container_width=True)
+    render_map("climate_temperature_map.png", "climate_temperature_map.html")
     st.markdown(
         "<p class='caption-text'>Source: ERA5 Reanalysis, Copernicus Climate Data Store</p>",
         unsafe_allow_html=True,

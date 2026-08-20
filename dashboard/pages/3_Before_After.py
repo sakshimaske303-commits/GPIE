@@ -1,10 +1,24 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 from styles import apply_custom_style, PALETTE
+
+
+def render_map(png_name, html_name, height=560):
+    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            components.html(f.read(), height=height)
+        st.markdown(
+            "<p class='caption-text' style='text-align:center;'>Use the layer control (top-right) to switch between 2019 and 2024.</p>",
+            unsafe_allow_html=True,
+        )
+    else:
+        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
@@ -27,7 +41,7 @@ represents a genuine change, not a scaling artifact.
 tab1, tab2 = st.tabs(["NO₂ (Nitrogen Dioxide)", "NDVI (Vegetation Health)"])
 
 with tab1:
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_before_after_map.png"), use_container_width=True)
+    render_map("no2_before_after_map.png", "no2_before_after_map.html")
 
     st.markdown("---")
 
@@ -48,7 +62,7 @@ with tab1:
         """)
 
 with tab2:
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "ndvi_before_after_map.png"), use_container_width=True)
+    render_map("ndvi_before_after_map.png", "ndvi_before_after_map.html")
 
     st.markdown("---")
 
