@@ -1,7 +1,8 @@
 # Independent Verification of the European Climate Law's Effect on Nitrogen Dioxide Pollution: A Satellite-Derived, Difference-in-Differences Analysis
 
-# Sakshi D. Maske
-Independent Geospatial Researcher
+**Sakshi D. Maske**
+
+*Independent Geospatial Researcher*
 
 ## Abstract
 
