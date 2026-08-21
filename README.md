@@ -109,6 +109,7 @@ GPIE/
 ├── outputs/
 │   ├── plots/                  # Final generated maps and charts
 │   └── interactive/            # Hoverable/zoomable HTML maps (build_interactive_maps.py)
+├── archive/                    # Dev-time scratch/inspection/smoke-test scripts, not part of the pipeline
 ├── GPIE_Project_Report.md      # Polished project summary and methodology
 ├── GPIE_Research_Paper.md      # Formal academic research paper
 ├── GPIE_Development_Log.md     # Full technical development log (debugging & iteration history)
