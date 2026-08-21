@@ -1,3 +1,18 @@
+"""Single-cohort DiD model (all 27 EU countries, before vs. after 30 June 2021,
+no external control group) WITH an explicit linear time_trend control added as a
+robustness diagnostic (see the comment on `time_trend` below). This is the
+time-trend-controlled specification discussed in GPIE_Research_Paper.md's
+treatment-of-secular-trend discussion (coefficient becomes statistically
+indistinguishable from zero once the trend is controlled for).
+
+Note for reproducibility: this file previously WAS the project's "Initial Model"
+(before `time_trend` was added) - the p = 0.041 (cluster-robust) / p = 0.026
+(classical) figure that README.md, GPIE_Project_Report.md, GPIE_Research_Paper.md,
+and the dashboard's 5_Causal_Results.py error-box all attribute to "the Initial
+Model" is NOT reproduced by running this file as it stands today. That original,
+pre-time_trend specification now lives in `causal_inference_initial_model.py`
+instead, added specifically to restore that traceability.
+"""
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm

@@ -1,5 +1,12 @@
 """Re-runs the final DiD spec on the expanded control-group panel; same
 model as causal_inference_final_did.py, different input.
+
+Note: `master_merge_control.py` was later updated to build the full 9-country
+control panel directly into `data/master_dataset_control.csv`, so as of this
+edit that file and `data/master_dataset_control_expanded.csv` (this script's
+input) are identical, and this script now reproduces the exact same result as
+`causal_inference_final_did.py`. Kept for its explicit country-list printout
+and as a historical record of the expansion run (see CONTROL_EXPANSION_README.md).
 """
 import pandas as pd
 import numpy as np

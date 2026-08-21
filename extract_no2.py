@@ -1,3 +1,6 @@
+# NOTE: used by run_pipeline.py; the project's final NO2 dataset traces to
+# download_no2_sentinelhub.py instead — see the note at the top of
+# run_pipeline.py.
 import harp
 import os
 
