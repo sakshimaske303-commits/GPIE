@@ -100,10 +100,15 @@ with s1a:
         **The problem**: because all 27 countries were treated simultaneously, there was no untreated
         comparison group — making it mathematically impossible to distinguish a genuine policy effect
         from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
+
+        **Reproducing this figure**: `causal_inference.py` was later extended with an explicit
+        `time_trend` diagnostic control (see Step 2 rationale below), so it no longer reproduces this
+        p = 0.026 / p = 0.041 result on its own. The original specification — identical data and fixed
+        effects, without `time_trend` — lives in `causal_inference_initial_model.py`.
         """)
 with s1b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code — the initial single-cohort model (all 27 EU countries, before vs. after the Climate Law).")
+    proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code, showing the time_trend diagnostic control added after this initial single-cohort result — see causal_inference_initial_model.py for the original specification.")
 
 s2a, s2b = st.columns([0.94, 0.06])
 with s2a:
@@ -121,25 +126,20 @@ with s2b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
     proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020, proving the original model was capturing a general trend.")
 
-s3a, s3b = st.columns([0.94, 0.06])
-with s3a:
-    with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
-        st.markdown("""
-        Nine non-EU European countries were added as a control group — **UK, Norway, Switzerland,
-        Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia** —
-        selected for being geographically and economically comparable to the EU-27 while not being
-        subject to EU Green Deal legislation, spanning both established Western European economies
-        and EU-accession-candidate economies in the Western Balkans. This required:
-        - New boundary data (GADM Level 0 for UK/Norway/Switzerland; NUTS directly for the remaining six)
-        - Extended satellite data acquisition for all 36 countries
-        - A second GDP data source (World Bank API) for non-EU countries
+with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
+    st.markdown("""
+    Nine non-EU European countries were added as a control group — **UK, Norway, Switzerland,
+    Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia** —
+    selected for being geographically and economically comparable to the EU-27 while not being
+    subject to EU Green Deal legislation, spanning both established Western European economies
+    and EU-accession-candidate economies in the Western Balkans. This required:
+    - New boundary data (GADM Level 0 for UK/Norway/Switzerland; NUTS directly for the remaining six)
+    - Extended satellite data acquisition for all 36 countries
+    - A second GDP data source (World Bank API) for non-EU countries
 
-        This enabled a genuine two-group Difference-in-Differences model — the version presented on
-        the *Causal Results* page.
-        """)
-with s3b:
-    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("03_control_group_boundaries_qgis.png", "EU-27 (NUTS boundaries) plus the nine control countries (GADM for UK/Norway/Switzerland, NUTS for the rest) — loaded together in QGIS, showing the full 36-country treatment-vs-control footprint.")
+    This enabled a genuine two-group Difference-in-Differences model — the version presented on
+    the *Causal Results* page.
+    """)
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""

@@ -1,5 +1,15 @@
 # Control Group Expansion — Run Order
 
+> **Update (post-expansion consolidation):** `master_merge_control.py` was later updated to build
+> the full 9-country control panel directly, so `data/master_dataset_control.csv` and
+> `data/master_dataset_control_expanded.csv` are now identical files. Step 5's note below ("doesn't
+> touch the original master_dataset_control.csv") describes this expansion run as it happened at
+> the time, but is no longer an accurate description of the current pipeline —
+> `master_dataset_control.csv` now *is* the expanded, 9-country file, and `causal_inference_final_did.py`
+> (which reads `master_dataset_control.csv`) and `causal_inference_expanded_control.py` (which reads
+> `master_dataset_control_expanded.csv`) now run the identical model on identical data. The rest of
+> this document is kept as a historical record of how the expansion was actually run.
+
 Adds Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia to the control group, and re-fetches Norway's NO2 to fix its 29/72-month gap. Runs on my own machine — this sandbox has no network route to Sentinel Hub / World Bank.
 
 ## Setup

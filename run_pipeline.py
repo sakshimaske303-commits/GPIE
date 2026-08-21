@@ -1,3 +1,10 @@
+# NOTE: this OData-catalogue + local `harp` preprocessing pipeline
+# (download_no2.py -> extract_no2.py) isn't what produced the final NO2
+# dataset. The final dataset traces to download_no2_sentinelhub.py ->
+# flatten_no2.py -> data/earth_observation/no2/final/
+# no2_stats_by_country_monthly_flat.json, which master_merge.py actually
+# reads. Kept as-is (nothing here is functionally broken), flagged only so
+# it isn't mistaken for the active acquisition path.
 import os
 import logging
 from datetime import datetime
