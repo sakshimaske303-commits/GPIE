@@ -15,7 +15,6 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 | Document | What's Inside |
 |---|---|
 | [Executive Summary](./GPIE_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
-| [Project Report](./GPIE_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
 | [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
 | [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
@@ -49,23 +48,23 @@ Built by `build_interactive_maps.py`.
 
 ## What This Project Does
 
-- Acquires and processes **8 independent datasets** (NO₂, NDVI, climate, GDP, land cover, elevation, policy records, administrative boundaries) across **36 countries** (EU-27 + a genuine 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
-- Builds a rigorous **Difference-in-Differences** causal inference model to isolate the Climate Law's specific effect from broader European pollution trends
-- Validates the result through a **placebo test**, a **genuine external control group**, a **quarterly event-study**, a **baseline-pollution heterogeneity check**, an **augmented synthetic control**, and a **Moran's I spatial-autocorrelation diagnostic**
-- Reports an honest, rigorously validated finding — including a **pooled null result that conceals a statistically significant, concentrated effect**
-- Presents everything through **12 publication-quality maps**, **9 hoverable interactive maps**, and an **interactive Streamlit dashboard**
+- Stores and analyses **8 independent datasets** across **36 countries** (EU-27 + an authentic 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
+- Conducts a well-developed **Difference-in-Differences** causal inference model to separate the Climate Law's specific effect from the rest of European pollution
+- Performs a placebo test, genuine external control group, quarterly event study, baseline-pollution heterogeneity check, augmented synthetic control and Moran's I spatial autocorrelation diagnostic
+- Reports an honest, rigorously established finding — a pooled null result that conceals a statistically significant, tightly defined, concentrated effect
+- Presents all of it through a series of **12 publication-quality maps**, **9 hoverable interactive maps**, and an interactive Streamlit dashboard
 
 ## Key Finding
 
-No statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level once genuinely compared against a 9-country non-EU control group (coefficient = −2.22 × 10⁻⁶, p = 0.101, cluster-robust standard errors by country). But a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the fourteen higher-baseline, more industrialized member states (coefficient = −5.46 × 10⁻⁶, p = 0.003) — corroborated by a 23-quarter event-study analysis finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control (weighted 7-country donor pool) reaches the same near-zero, same-sign *pooled* estimate through a structurally independent method, and a Moran's I spatial-autocorrelation test confirms raw NO₂ levels are strongly spatially clustered (I = 0.570, p = 0.001, as expected for a cross-border pollutant) but the DiD model's own residuals are not significantly clustered (I = 0.069, p = 0.135) — the country and month fixed effects already absorb the large majority of it. Full methodology, including an initial (later invalidated) positive result and the placebo test that revealed it was unreliable, is documented in the dashboard's Methodology page and in the Project Report.
+No statistically distinguishable pooled, EU-wide NO₂ reduction was identified at the conventional 5% level when genuinely compared to a 9-country non-EU control group (coefficient = −2.22 × 10⁻⁶; p = 0.101; cluster-robust standard errors by country). However, a heterogeneity check reveals a statistically significant reduction concentrated in the fourteen member states with the higher background pollution levels (coefficient = −5.46 × 10⁻⁶, p = 0.003), supported by the event-study analysis (four quarters with a significant reduction, all negative, clustering in Q2/Q3 of 2022–2024). A spatially independent approach, the augmented synthetic control (weighted pool of 7 countries), also estimates the near-zero, same-sign *pooled* estimate, and a Moran's I spatial-autocorrelation test confirms that raw NO₂ is strongly spatially clustered as expected for a cross-border pollutant (I = 0.570, p = 0.001), but that the DiD's own residuals are not significantly spatially clustered (I = 0.069, p = 0.135) — the country and month fixed effects capture the bulk of the spatial clustering. The dashboard's Methodology page provides the complete methodology, including the initial, later-invalidated positive result, and the placebo test that revealed it was unreliable.
 
-Applying the same two-group, cluster-robust design to the secondary NDVI (vegetation health) outcome — previously assessed only with the original, since-invalidated single-cohort design — revealed a statistically significant relative decline in EU-27 NDVI versus the control group (coefficient = −0.0145, p = 0.007). This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
+The same two-group, cluster-robust design was used for the secondary outcome of NDVI (vegetation health); this was previously evaluated only with the original version - now invalidated - of this design, and was used to obtain a coefficient of −0.0145 (p = 0.007), showing a statistically significant relative drop in NDVI in the EU-27 nations compared to the control group. This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
 
 ## Transferability Validation
 
-GPIE's original design goal was a **globally transferable methodology**, not one limited to the EU-27. To provide direct evidence of this — rather than leaving it as an unverified claim — the project's NO₂ acquisition pipeline was tested standalone on **India** (2019–2024), using the same Sentinel Hub Statistical API infrastructure and evalscript logic built for the EU-27 study, with zero modification to the core acquisition code.
+GPIE's original design goal was a methodology that would be transferable globally, not just limited regionally to the EU-27. To confirm this, the project's NO₂ acquisition pipeline was tested, without any modifications to the underlying code and running on the same Sentinel Hub Statistical API infrastructure and evalscript logic used for the EU-27 study, on **India** (2019–2024).
 
-All 6 years acquired successfully, returning physically realistic NO₂ values consistent with the EU-27 dataset's observed range. This confirms the framework's data-acquisition architecture is genuinely portable to other countries and regions — a standalone proof-of-concept, not a comparative analysis. See `test_india_transferability.py`.
+All 6 years successfully acquired, with physically realistic NO₂ values in the same range as reported from the EU-27 dataset. This validates that the framework's data-acquisition architecture is genuinely portable to another country/region — a standalone proof-of-concept, not a comparative analysis. See `test_india_transferability.py`.
 
 ---
 
@@ -85,7 +84,7 @@ All 6 years acquired successfully, returning physically realistic NO₂ values c
  (boundaries)          │                                                   Robustness checks        (dashboard/app.py)
  EUR-Lex (policy)      ┘                                                                                    │
                                                                                                               ▼
-                                                                                              Research Paper / Project Report
+                                                                                                       Research Paper
 ```
 
 Each stage is a separate, independently re-runnable script — there is no hidden manual step between raw acquisition and the final published figures; every number in the paper traces back to a script in this repository.
@@ -110,7 +109,6 @@ GPIE/
 │   ├── plots/                  # Final generated maps and charts
 │   └── interactive/            # Hoverable/zoomable HTML maps (build_interactive_maps.py)
 ├── archive/                    # Dev-time scratch/inspection/smoke-test scripts, not part of the pipeline
-├── GPIE_Project_Report.md      # Polished project summary and methodology
 ├── GPIE_Research_Paper.md      # Formal academic research paper
 ├── GPIE_Development_Log.md     # Full technical development log (debugging & iteration history)
 ├── download_*.py               # Dataset acquisition scripts

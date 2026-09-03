@@ -1,5 +1,5 @@
-"""Reproduces the "Initial Model" result cited by README.md, GPIE_Project_Report.md
-("Initial model." section), GPIE_Research_Paper.md (Section 4.1), and the dashboard's
+"""Reproduces the "Initial Model" result cited by README.md,
+GPIE_Research_Paper.md (Section 4.1), and the dashboard's
 5_Causal_Results.py error-box: the first single-cohort DiD model (all 27 EU countries,
 before vs. after 30 June 2021, no external control group), BEFORE the later linear
 time_trend diagnostic control was added.
@@ -10,7 +10,7 @@ own docstring). That is a legitimate, separately-documented result in its own ri
 (GPIE_Research_Paper.md's discussion of the time-trend-controlled specification) - but
 it means running the CURRENT `causal_inference.py` no longer reproduces the "Initial
 Model, p = 0.041 (cluster-robust) / p = 0.026 (classical, as originally computed)"
-figure that README/Project Report/Research Paper/dashboard all attribute to the
+figure that README/Research Paper/dashboard all attribute to the
 project's first model, and that no separate script on disk reproduced. This file
 restores that traceability: it is `causal_inference.py`'s original specification
 (identical data, identical fixed effects, identical controls) with only the later

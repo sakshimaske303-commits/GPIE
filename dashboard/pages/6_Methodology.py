@@ -176,7 +176,7 @@ with s5a:
         with cluster-robust standard errors, already significant too (p = 0.0017, not the originally
         reported p = 0.128) — so the control-group correction's role for NDVI is better identification
         of an EU-specific effect, not first-time detection of significance. Full details and all
-        reported numbers are in the Research Paper and Project Report documents in the project repository.
+        reported numbers are in the Research Paper document in the project repository.
         """)
 with s5b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
