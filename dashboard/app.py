@@ -4,7 +4,6 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from styles import apply_custom_style, PALETTE
-from doc_viewer import render_doc_viewer
 
 # Path resolution that works both locally and on Streamlit Cloud (no cd into dashboard/ there).
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # .../dashboard
@@ -144,20 +143,21 @@ _all_docs = [
     {"label": "Research Paper", "filename": "GPIE_Research_Paper.pdf"},
     {"label": "Development Log", "filename": "GPIE_Development_Log.pdf"},
 ]
-_docs = [d for d in _all_docs if os.path.exists(os.path.join(BASE_DIR, "static", d["filename"]))]
-_missing = [d for d in _all_docs if d not in _docs]
+_existing = [d for d in _all_docs if os.path.exists(os.path.join(BASE_DIR, "static", d["filename"]))]
+_missing = [d for d in _all_docs if d not in _existing]
 
-if _docs:
-    render_doc_viewer(
-        docs=_docs,
-        colors={
-            "navy_dark": PALETTE["slate"],
-            "navy_med": "#182A2D",
-            "magenta": PALETTE["coral"],
-            "teal": PALETTE["lagoon"],
-            "text_light": PALETTE["text"],
-        },
-    )
+if _existing:
+    _cols = st.columns(len(_existing))
+    for _col, _d in zip(_cols, _existing):
+        with _col:
+            with open(os.path.join(BASE_DIR, "static", _d["filename"]), "rb") as _f:
+                st.download_button(
+                    label=f"⬇ {_d['label']}",
+                    data=_f.read(),
+                    file_name=_d["filename"],
+                    mime="application/pdf",
+                    use_container_width=True,
+                )
 for d in _missing:
     st.warning(f"{d['filename']} not found.")
 
