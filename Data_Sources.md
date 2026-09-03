@@ -25,14 +25,13 @@ Purpose : Monitor atmospheric NO₂ concentration before and after Green Deal im
 
 ### DS03
 
-Dataset Name : Sentinel-2 NDVI
-Satellite : Sentinel-2
-Instrument : MSI (MultiSpectral Instrument)
+Dataset Name : Copernicus Global Land Service (CGLS) NDVI
+Provider : Copernicus Global Land Service, via Sentinel Hub Statistical API (BYOC collection)
 Parameter : Normalized Difference Vegetation Index (NDVI)
-Data Type : Raster
-Format : GeoTIFF (.tif)
-Spatial Resolution : 10 m
-Temporal Resolution : 5 Days
+Data Type : Zonal Statistics (server-side aggregated)
+Format : JSON
+Spatial Resolution : 300 m
+Temporal Resolution : 10-Daily (Dekadal)
 Purpose : Monitor vegetation health and greenness before and after Green Deal implementation.
 
 ### DS04
