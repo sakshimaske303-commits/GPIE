@@ -156,6 +156,15 @@ def build_moran_lisa_map():
 
 
 def build_event_study():
+    # NOTE (fixed): this used to build its own X matrix without the
+    # avg_temp_c / avg_precip_mm / gdp_million_eur controls that
+    # causal_inference_event_study.py uses for the canonical event-study
+    # result reported in the paper - so this chart could (and did) show a
+    # different significance pattern than the paper's own Figure 3. Now
+    # matches that script's specification (same controls, same dropna,
+    # same cluster-robust SEs) so this interactive chart and the paper stay
+    # in sync. If causal_inference_event_study.py's spec changes again,
+    # update this function to match.
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
     df["month_of_year"] = df["month"]
@@ -163,6 +172,8 @@ def build_event_study():
 
     import statsmodels.api as sm
     d = df.copy()
+    controls = ["avg_temp_c", "avg_precip_mm", "gdp_million_eur"]
+    d = d.dropna(subset=["mean_no2"] + controls).copy()
     d["eu_x_quarter"] = d["treatment_group"].astype(str) + "_" + d["quarter"]
     quarters = sorted(d["quarter"].unique())
     ref_q = "2021Q2"
@@ -177,7 +188,7 @@ def build_event_study():
         interaction_cols[f"eu_x_{q}"] = ((d["treatment_group"] == 1) & (d["quarter"] == q)).astype(float)
     inter_df = pd.DataFrame(interaction_cols)
 
-    X = pd.concat([inter_df, quarter_dummies, country_dummies], axis=1)
+    X = pd.concat([inter_df, d[controls].astype(float), quarter_dummies, country_dummies], axis=1)
     X = sm.add_constant(X)
     model_df = pd.concat([d[["mean_no2"]], X], axis=1).dropna()
     y = model_df["mean_no2"].astype(float)

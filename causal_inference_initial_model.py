@@ -1,6 +1,6 @@
 """Reproduces the "Initial Model" result cited by README.md,
 GPIE_Research_Paper.md (Section 4.1), and the dashboard's
-5_Causal_Results.py error-box: the first single-cohort DiD model (all 27 EU countries,
+7_Causal_Results.py error-box: the first single-cohort DiD model (all 27 EU countries,
 before vs. after 30 June 2021, no external control group), BEFORE the later linear
 time_trend diagnostic control was added.
 

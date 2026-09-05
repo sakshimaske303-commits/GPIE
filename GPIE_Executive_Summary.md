@@ -22,11 +22,11 @@ Governments report on their own climate results, and they often do not actually 
 
 ## The Method
 
-Standard errors are clustered by country throughout a two-group Difference-in-Differences (DiD) design that compares EU-27 countries against a genuine 9-country non-EU control group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia — across 8 independently-sourced datasets (NO₂ via Sentinel-5P TROPOMI, NDVI via CGLS, climate via ERA5, GDP via Eurostat/World Bank, land cover, elevation, administrative boundaries, and EU policy records), spanning 36 countries and 2019–2024. Two independent checks, through structurally different methods, corroborate the pooled DiD result: an augmented synthetic control (weighted 7-country donor pool) and a Moran's I spatial-autocorrelation diagnostic.
+Standard errors are clustered by country throughout a two-group Difference-in-Differences (DiD) design that compares EU-27 countries against a deliberately constructed 9-country non-EU control group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia — across 8 independently-sourced datasets (NO₂ via Sentinel-5P TROPOMI, NDVI via CGLS, climate via ERA5, GDP via Eurostat/World Bank, land cover, elevation, administrative boundaries, and EU policy records), spanning 36 countries and 2019–2024. Two independent checks, through structurally different methods, corroborate the pooled DiD result: an augmented synthetic control (weighted 7-country donor pool) and a Moran's I spatial-autocorrelation diagnostic.
 
 ## The Finding
 
-This project's core finding is really about reporting a nuanced result honestly — a pooled null that conceals a real, concentrated effect — rather than the flawed "significant" result an earlier single-cohort design had produced. Once genuinely compared against the 9-country non-EU control group, no statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level; but a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the 14 higher-baseline, more industrialized member states (p=0.003), corroborated by a 23-quarter event-study finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control confirms the pooled near-zero estimate independently, and a spatial-autocorrelation test confirms the model's fixed effects absorb most of the spatial clustering present in raw pollution levels.
+This project's core finding is really about reporting a nuanced result honestly — a pooled null that is consistent with a real, concentrated effect — rather than the flawed "significant" result an earlier single-cohort design had produced. Once compared against the 9-country non-EU control group, no statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level; but a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the 14 higher-baseline, more industrialized member states (p=0.003), corroborated by a 23-quarter event-study finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control corroborates the pooled near-zero estimate through a methodologically distinct approach, and a spatial-autocorrelation test confirms the model's fixed effects absorb most of the spatial clustering present in raw pollution levels.
 
 | Metric | NO2 (Primary, Pooled) | NO2 (Higher-Baseline Subgroup) | NDVI (Secondary) |
 |---|---|---|---|
@@ -39,11 +39,11 @@ The NDVI result is only a secondary finding and thus isn't conclusive evidence o
 ## Validation & Robustness Checklist
 
 - ✓ Cluster-robust standard errors, clustered by country (Bertrand, Duflo & Mullainathan, 2004)
-- ✓ Authentic external control group - 9 (UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia)
+- ✓ Deliberately constructed external control group - 9 countries (UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia)
 - ✓ Placebo test — caught and fixed a flawed initial single-cohort design (which had wrongly shown significance)
-- ✓ 23-quarter event-study validation — confirms parallel pre-trends and finds 4 significant, same-signed post-treatment quarters
+- ✓ 23-quarter event-study validation — supports the parallel-trends assumption (every pre-treatment quarter non-significant) and finds 4 significant, same-signed post-treatment quarters
 - ✓ 5 additional robustness checks — GDP removed, log-transformed outcome, treatment-date shifted ±6/±12 months, pollution-level subgroup split (significant), and a formal minimum-detectable-effect calculation
-- ✓ Augmented synthetic control (7-country donor pool, weighted) — reaches the same near-zero, same-sign pooled estimate through a method independent of the DiD specification
+- ✓ Augmented synthetic control (7-country donor pool, weighted) — reaches the same near-zero, same-sign pooled estimate through a method that is methodologically distinct from the DiD specification
 - ✓ Moran's I spatial-autocorrelation test — raw NO2 is spatially clustered (I=0.570, p=0.001) as expected, but DiD residuals are not significantly clustered (I=0.069, p=0.135)
 - ✓ Honest, nuanced result reported — pooled null and concentrated significant subgroup effect both disclosed, neither smoothed over
 
@@ -53,7 +53,7 @@ The honest conclusion here is not "the policy had no effect" nor "the policy wor
 
 ## Global Transferability
 
-This framework's architecture is portable beyond a single region, not a one-country tool — confirmed by separately testing the NO₂ acquisition pipeline, with zero modification to the core code, on India (2019–2024), which returned physically realistic values consistent with the EU-27 dataset's observed range.
+This framework's architecture is portable beyond a single region, not a one-country tool — confirmed by separately testing the NO₂ acquisition pipeline, using the same Sentinel Hub infrastructure and evalscript logic with no modification to the core acquisition logic, on India (2019–2024), which returned physically realistic values consistent with the EU-27 dataset's observed range.
 
 ---
 
