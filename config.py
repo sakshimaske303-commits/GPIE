@@ -19,6 +19,15 @@ STUDY_AREA = "European Union"
 # ------------------------------------------
 # Temporal Extent
 # ------------------------------------------
+# NOTE: these four values (and START_DATE/END_DATE below) are leftover from
+# this project's original single-month test run and were never updated to
+# match the real study period. They are NOT the actual study window - the
+# final analysis covers January 2019 to December 2024. The final NO2
+# acquisition script (download_no2_sentinelhub.py) does not read these
+# values at all; it loops over `range(2019, 2025)` directly. Kept here only
+# because a few of the older, superseded acquisition scripts still import
+# them for a one-off test run - do not treat this as the project's live
+# configuration for the study period.
 
 STUDY_START_YEAR = 2019
 STUDY_START_MONTH = 1

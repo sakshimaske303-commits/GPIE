@@ -159,7 +159,7 @@ with s5a:
         correlated (uncorrected OLS standard errors understate true uncertainty).
 
         Five further robustness checks were run against the corrected, pooled NO₂ model. Removing
-        GDP entirely barely moves the coefficient (rules out GDP as a biasing "bad control"); shifting
+        GDP entirely barely moves the coefficient (the headline estimate isn't sensitive to removing GDP as a potential "bad control"); shifting
         the assumed treatment date by ±6/±12 months finds one alternate date (−6 months) nominally
         significant on its own (p = 0.021), flagged honestly as a genuine dating-uncertainty signal
         rather than smoothed over; splitting EU-27 countries by baseline pollution level finds a

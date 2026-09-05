@@ -8,7 +8,7 @@ indistinguishable from zero once the trend is controlled for).
 Note for reproducibility: this file previously WAS the project's "Initial Model"
 (before `time_trend` was added) - the p = 0.041 (cluster-robust) / p = 0.026
 (classical) figure that README.md, GPIE_Research_Paper.md,
-and the dashboard's 5_Causal_Results.py error-box all attribute to "the Initial
+and the dashboard's 7_Causal_Results.py error-box all attribute to "the Initial
 Model" is NOT reproduced by running this file as it stands today. That original,
 pre-time_trend specification now lives in `causal_inference_initial_model.py`
 instead, added specifically to restore that traceability.
