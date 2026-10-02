@@ -1,0 +1,6 @@
+*.pdf binary
+*.png binary
+*.jpg binary
+*.npz binary
+*.nc binary
+*.tif binary
