@@ -1,6 +1,5 @@
-"""Climate stats for the expanded control group via the existing ERA5 grid
-files (Iceland/Balkans already fall inside the same bbox).
-"""
+"""I compute climate stats for the extra control countries from my existing ERA5 files.
+Iceland and the Balkans are already inside the same bounding box."""
 import os
 import json
 import geopandas as gpd
@@ -14,9 +13,7 @@ EXPANSION_COUNTRIES = ["IS", "AL", "BA", "ME", "MK", "RS"]
 
 
 def load_expansion_geometries():
-    """All 6 new countries already have NUTS_ID geometry in the boundary
-    file (no GADM fallback needed - confirmed against the existing
-    NUTS_LEVL_0_2024_4326.geojson)."""
+    """All 6 new countries are in my NUTS boundary file, so I do not need GADM here."""
     nuts = gpd.read_file(NUTS_BOUNDARY_PATH)
     geometries = []
 

@@ -1,13 +1,5 @@
-"""Re-runs the final DiD spec on the expanded control-group panel; same
-model as causal_inference_final_did.py, different input.
-
-Note: `master_merge_control.py` was later updated to build the full 9-country
-control panel directly into `data/master_dataset_control.csv`, so as of this
-edit that file and `data/master_dataset_control_expanded.csv` (this script's
-input) are identical, and this script now reproduces the exact same result as
-`causal_inference_final_did.py`. Kept for its explicit country-list printout
-and as a historical record of the expansion run (see CONTROL_EXPANSION_README.md).
-"""
+"""I run my final DiD model on the expanded control-group file.
+Old version, kept for the record. It gives the same result as causal_inference_final_did.py."""
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -19,6 +11,7 @@ def load_and_prepare():
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
 
+    # Cutoff 2021-06-30 makes July 2021 my first post-treatment month.
     treatment_date = pd.Timestamp("2021-06-30")
     df["post"] = (df["time"] > treatment_date).astype(float)
     df["did_interaction"] = df["treatment_group"] * df["post"]

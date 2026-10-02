@@ -5,10 +5,7 @@ SEARCH_URL = "https://land.copernicus.eu/api/@search"
 
 
 def find_ndvi_dataset():
-    """
-    Searches the CLMS catalogue for the NDVI 300m V3 dataset and
-    returns its UID and DatasetDownloadInformationID.
-    """
+    """Search the CLMS catalogue for NDVI 300m and print each UID and download info ID."""
     access_token = get_clms_access_token()
     headers = {
         "Accept": "application/json",

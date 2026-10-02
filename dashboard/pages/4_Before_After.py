@@ -9,16 +9,8 @@ from styles import apply_custom_style, PALETTE
 
 
 def render_map(png_name, html_name, height=560):
-    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
-    if os.path.exists(html_path):
-        with open(html_path, "r", encoding="utf-8") as f:
-            components.html(f.read(), height=height)
-        st.markdown(
-            "<p class='caption-text' style='text-align:center;'>Use the layer control (top-right) to switch between 2019 and 2024.</p>",
-            unsafe_allow_html=True,
-        )
-    else:
-        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
+    # I always show the PNG from my map_*.py scripts. The old HTML maps use outdated data.
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
@@ -50,15 +42,17 @@ with tab1:
         st.markdown("""
         #### What the Map Shows
 
-        A general decline in NO₂ is visible across most of Europe between 2019 and 2024 —
-        including both EU-27 countries **and** the 9-country non-EU control group.
+        Lower NO₂ is visible in 2024 than in 2019 across much of the EU-27, most clearly in the
+        Benelux countries and Germany, while the Western Balkan comparison countries change little
+        (country-level annual means; descriptive only).
         """)
     with col2:
         st.markdown("""
         #### Why This Matters
 
-        The fact that **both groups show a similar decline pattern** is an important visual preview 
-        of GPIE's core statistical finding — explored in full on the *Causal Results* page.
+        A before/after map cannot show what the Climate Law did. The *Causal Results* page tests
+        whether the EU-27's decline differs from the comparison group's — it does — and whether its
+        timing matches the law — it does not.
         """)
 
 with tab2:
@@ -79,8 +73,8 @@ with tab2:
         #### Why This Matters
 
         This visual subtlety doesn't mean nothing happened statistically — GPIE's corrected model,
-        using the same control-group design as NO₂, actually detects a **significant** relative
-        decline in EU-27 NDVI (coefficient = −0.0145, p = 0.007). Effects like this can be real but modest in magnitude,
+        using the same comparison-group design as NO₂, detects a **significant** relative
+        decline in EU-27 NDVI (coefficient = −0.0194, p = 0.005). Effects like this can be real but modest in magnitude,
         easy to miss by eye but still statistically detectable — which is exactly why the causal
         model exists rather than relying on a visual scan alone. See the *Methodology* page for
         why this finding is treated as exploratory rather than fully causal.

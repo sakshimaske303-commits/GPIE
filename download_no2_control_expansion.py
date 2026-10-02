@@ -1,7 +1,6 @@
-"""NO2 acquisition for the expanded control group (Iceland, Albania, Bosnia
-and Herzegovina, Montenegro, North Macedonia, Serbia) plus a Norway
-re-fetch to fix its coverage gap.
-"""
+# Old version, kept for the record. I now use download_no2_sentinelhub.py.
+# It takes the latest mosaic of each month, not a monthly mean.
+"""I fetch NO2 stats for the extra control countries, plus Norway again to fix its gap."""
 import os
 import json
 import time
@@ -13,7 +12,7 @@ from config import MIN_LON, MIN_LAT, MAX_LON, MAX_LAT
 STATISTICAL_API_URL = "https://sh.dataspace.copernicus.eu/api/v1/statistics"
 OUTPUT_DIR = "data/earth_observation/no2/final"
 
-# New non-EU control candidates + Norway (re-fetched clean to fix its gap)
+# Extra non-EU control countries, plus Norway.
 EXPANSION_COUNTRIES = ["IS", "AL", "BA", "ME", "MK", "RS", "NO"]
 
 

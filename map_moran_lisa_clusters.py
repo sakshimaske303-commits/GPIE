@@ -1,6 +1,6 @@
-"""LISA cluster map (Local Moran's I) for average NO2 level.
-"""
+"""I map the LISA clusters (Local Moran's I) of average NO2 level."""
 
+import json
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -21,6 +21,10 @@ CLUSTER_COLORS = {
 def make_map():
     os.makedirs("outputs/plots", exist_ok=True)
     gdf = gpd.read_file(DATA_PATH)
+    with open("data/spatial_autocorrelation_summary.json") as f:
+        summ = json.load(f)
+    lvl = summ["level_full_period"]
+    res = summ["did_residuals_monthly"]
 
     bounds = (-25, 34, 35, 72)
     fig, ax = plt.subplots(figsize=(13, 12))
@@ -39,8 +43,9 @@ def make_map():
 
     ax.set_title(
         "Local Moran's I: Where NO₂ Levels Cluster Spatially (Full-Period Average, 36 Countries)\n"
-        "Global Moran's I = 0.570, p = 0.001 — pollution levels are strongly spatially clustered;\n"
-        "DiD model residuals are not (I = 0.069, p = 0.135), consistent with fixed effects absorbing it",
+        f"Global Moran's I on average NO₂ level = {lvl['I']:.3f} (p = {lvl['p_sim']:.3f});\n"
+        f"DiD residuals, month by month: median I = {res['median_I']:.3f}, significantly positive in "
+        f"{res['n_months_significant_positive_p05']} of {res['n_months']} months",
         fontsize=12, fontweight="bold", pad=15
     )
 

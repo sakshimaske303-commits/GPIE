@@ -2,37 +2,42 @@
   "donor_pool": [
     "UK",
     "CH",
+    "NO",
+    "IS",
     "AL",
     "BA",
     "ME",
     "MK",
     "RS"
   ],
-  "excluded_control_countries": [
-    "NO",
-    "IS"
-  ],
+  "excluded_control_countries": [],
   "donor_weights": {
-    "UK": 0.24608057227181712,
-    "CH": 0.4490506132068838,
+    "UK": 0.2825385104145677,
+    "CH": 0.3154965578878038,
+    "NO": 0.0,
+    "IS": 0.0,
     "AL": 0.0,
     "BA": 0.0,
     "ME": 0.0,
-    "MK": 0.009094556463034122,
-    "RS": 0.29577425805826507
+    "MK": 0.0,
+    "RS": 0.40196493169762854
   },
-  "pre_treatment_rmspe": 8.267536165483575e-06,
-  "post_treatment_att": -1.402246852399121e-06,
+  "pre_treatment_rmspe": 2.5599470309008445e-06,
+  "post_treatment_att": -8.099298576622782e-07,
+  "post_treatment_att_to_pre_rmspe_ratio": 0.31638539699677465,
+  "method": "convex SCM weights (NNLS + sum-to-one) with pre-period intercept adjustment",
   "placebo_gaps": {
-    "UK": -5.426701120874027e-06,
-    "CH": 6.31187387534751e-07,
-    "AL": -1.3864275298617834e-07,
-    "BA": 6.289291610088234e-07,
-    "ME": 5.277362380008578e-07,
-    "MK": -4.220931396226417e-07,
-    "RS": 7.309396783147247e-07
+    "UK": -3.85389742187147e-06,
+    "CH": 1.4829342510908261e-06,
+    "NO": 1.0661018346349828e-06,
+    "IS": -1.126378429867216e-06,
+    "AL": 3.938881483083416e-07,
+    "BA": 5.664120730042083e-07,
+    "ME": -3.377958933368545e-07,
+    "MK": -5.436785678114899e-07,
+    "RS": 7.964161343733104e-07
   },
-  "eu27_rank_among_placebos": "2/8",
-  "pre_treatment_months_used": 23,
-  "post_treatment_months_used": 32
+  "eu27_rank_among_placebos": "5/10",
+  "pre_treatment_months_used": 27,
+  "post_treatment_months_used": 36
 }

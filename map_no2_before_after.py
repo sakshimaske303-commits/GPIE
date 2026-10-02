@@ -56,9 +56,7 @@ def make_map():
 
     merged = gdf.merge(no2_2019, on="country", how="left").merge(no2_2024, on="country", how="left")
 
-    # Shared color scale across both panels, so the two maps are
-    # directly visually comparable rather than each auto-scaling
-    # to its own min/max (which would hide the actual magnitude of change).
+    # I use one color scale for both panels so the size of the change is visible.
     vmin = min(merged["no2_2019"].min(), merged["no2_2024"].min())
     vmax = max(merged["no2_2019"].max(), merged["no2_2024"].max())
 
@@ -85,7 +83,7 @@ def make_map():
         ax.set_axis_off()
         ax.set_title(f"NO₂ — {year_label}", fontsize=14, fontweight="bold")
 
-    # Single shared colorbar for both panels
+    # One colorbar for both panels
     sm = plt.cm.ScalarMappable(cmap="plasma", norm=plt.Normalize(vmin=vmin, vmax=vmax))
     sm._A = []
     cbar = fig.colorbar(sm, ax=axes, orientation="horizontal", shrink=0.4, pad=0.04)
@@ -93,11 +91,11 @@ def make_map():
 
     fig.suptitle(
         "NO₂ Levels Before vs. After the European Climate Law: EU-27 and Control Group (2019 vs. 2024)\n"
-        "Thick borders mark the 9-country non-EU control group — comparable decline pattern across both groups",
+        "Thick borders mark the 9-country non-EU control group — descriptive comparison; see the DiD model for inference",
         fontsize=13, fontweight="bold"
     )
 
-    plt.figtext(0.5, 0.02, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Statistical API",
+    plt.figtext(0.5, 0.02, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Process API",
                 ha="center", fontsize=8, color="gray")
 
     plt.savefig(OUTPUT_PATH, dpi=200)

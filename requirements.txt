@@ -1,14 +1,22 @@
 streamlit
 pandas
 numpy
-geopandas
-plotly
-matplotlib
+scipy
+scikit-learn
 statsmodels
+geopandas
+shapely
+libpysal
+esda
+plotly
+folium
+matplotlib
+reportlab
+pillow
 rasterio
 rasterstats
 xarray
-shapely
+cdsapi
 requests
 python-dotenv
 PyJWT
@@ -18,4 +26,6 @@ beautifulsoup4
 # reliably pip-installable on all platforms - it usually needs a matching
 # system-level GDAL install first, or is easiest via conda:
 #   conda install -c conda-forge gdal
-# then this requirements.txt can be pip-installed as usual for everything else.
+# HARP (used only by the superseded OData/Level-2 test pipeline,
+# extract_no2.py / run_pipeline.py) is conda-only:
+#   conda install -c conda-forge harp

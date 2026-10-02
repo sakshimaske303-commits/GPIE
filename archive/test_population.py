@@ -6,14 +6,12 @@ def run_single_country_test():
     print("INITIALIZING WORLDPOP SINGLE TILE SANDBOX TEST")
     print("=" * 60)
     
-    # Testing parameters: Luxembourg (LUX) for year 2019
     test_country = "LUX"
     test_year = 2019
     
     expected_filename = f"{test_country.lower()}_ppp_{test_year}.tif"
     expected_filepath = os.path.join(POP_RAW_DIR, expected_filename)
     
-    # Sandbox operational test run trigger
     status = download_country_population(test_country, test_year)
     
     print("\n" + "-" * 50)

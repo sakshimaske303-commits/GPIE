@@ -9,11 +9,7 @@ VRT_PATH = os.path.join(WORLDCOVER_PROCESSED_DIR, "worldcover_2021_mosaic.vrt")
 
 
 def build_mosaic_vrt():
-    """
-    Builds a Virtual Raster (VRT) mosaic from all downloaded WorldCover tiles.
-    This does not duplicate pixel data - it's a lightweight index file
-    that lets GDAL/QGIS/Python treat all tiles as one continuous raster.
-    """
+    """One VRT mosaic over all WorldCover tiles. It is only an index file, no pixels are copied."""
     os.makedirs(WORLDCOVER_PROCESSED_DIR, exist_ok=True)
 
     tile_paths = glob.glob(os.path.join(WORLDCOVER_RAW_DIR, "*.tif"))

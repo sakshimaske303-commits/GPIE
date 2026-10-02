@@ -14,25 +14,24 @@ identifiers:
 doi: "10.5281/zenodo.21756661"
 abstract: >-
   GPIE is a geospatial causal-inference framework that tests whether the European
-  Climate Law (Regulation (EU) 2021/1119, effective 30 June 2021) produced a
+  Climate Law (Regulation (EU) 2021/1119, adopted 30 June 2021, in force 29 July
+  2021) produced a
   statistically distinguishable reduction in tropospheric NO2 pollution across the
   EU-27, using Sentinel-5P TROPOMI satellite observations (2019-2024) and a
-  Difference-in-Differences causal-inference design with a genuine 9-country non-EU
-  control group (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and
-  Herzegovina, Montenegro, North Macedonia, Serbia). The corrected two-group model
-  finds no statistically significant pooled EU-wide effect at the conventional 5%
-  level (p = 0.101, cluster-robust standard errors), but a heterogeneity check
-  finds a statistically significant reduction concentrated in higher-baseline,
-  more industrialized EU member states (p = 0.003), corroborated by a 23-quarter
-  event-study analysis, a series of additional robustness checks, and an augmented
-  synthetic control (weighted 7-country donor pool) reaching the same near-zero
-  pooled estimate through a structurally independent method. A Moran's I
-  spatial-autocorrelation test confirms raw NO2 levels are strongly spatially
-  clustered (I=0.570, p=0.001) but the DiD model's residuals are not significantly
-  clustered (I=0.069, p=0.135), consistent with the country and month fixed effects
-  absorbing most of that dependence. Applying the same design to a secondary NDVI
-  (vegetation health) outcome finds a statistically significant relative decline
-  (p = 0.007), reported as an exploratory finding.
+  Difference-in-Differences design with a 9-country non-EU comparison group
+  (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina,
+  Montenegro, North Macedonia, Serbia). With NO2 aggregated to true monthly means,
+  EU-27 NO2 fell relative to the comparison group (pooled DiD -1.52e-6 mol/m2,
+  about 4.9% of the pre-treatment EU mean, p = 0.013, cluster-robust), mainly in
+  the 14 higher-baseline member states. The design cannot attribute this to the
+  Climate Law: 7 of 9 pre-treatment quarters differ significantly in the event
+  study, every alternative cutoff date is significant, an EU-specific linear
+  trend absorbs the treatment-date term (p = 0.243), a synthetic control ranks
+  the EU-27 gap 5th of 10 among placebos, and the DiD residuals are spatially
+  correlated. The evidence fits a gradual faster decline in the EU-27 rather than
+  a break at the law's date. A secondary NDVI outcome shows a relative decline
+  (p = 0.005), reported as an exploratory association. Earlier versions, based on
+  end-of-month NO2 snapshots, reported a pooled null and are superseded.
 keywords:
   - causal inference
   - difference-in-differences

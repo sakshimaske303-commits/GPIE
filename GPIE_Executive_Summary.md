@@ -8,52 +8,58 @@
 
 ## Project Overview
 
-Creating GPIE was a response to the question, which is seldom addressed in the EU climate discussion: did the European Climate Law actually impact the pollution situation – not only through a government assessment of success, but through an objective physical verification? The project was very much a case of two origin stories: first a EUR-Lex scraping job to nail down the exact moment in time at which the law became "legal," and second, NO₂ readings from the Sentinel-5P satellite to determine if the NO₂ trend really did "bend" at that date. My first model said yes, simply, and I almost stopped there — but a placebo test on a fake treatment date came back equally strong, meaning I had actually found a trend of overall pollution decline across Europe unrelated to the Climate Law specifically, so that "positive" result had to be treated as a design failure rather than pushed forward as a finding. Correcting it meant building a real outside comparison group instead of accepting the false positive: I started with three non-EU countries close enough to Europe to be genuinely comparable — the UK, Norway, and Switzerland — then judged three too thin to trust the result against and expanded it to nine by adding Iceland and five Western Balkan EU-accession candidates. That expanded, nine-country control group is what the estimates above are ultimately built on. If I had to name the project's real headline, it isn't the null result or the significant subgroup finding on its own — it's that the validation process caught and fixed a wrong answer before that wrong answer became the reported one.
+GPIE started from a question that is seldom asked in the EU climate discussion: did the European Climate Law change pollution in a way that can be checked physically, not only through governments' own assessments? The project had two starting points: a EUR-Lex scraper to pin down the legal dates of the law, and Sentinel-5P NO₂ readings to see whether the NO₂ trend bent at that point. My first model said yes, and I almost stopped there — but a placebo test on a fake treatment date came back just as strong, which meant the model was picking up Europe's general NO₂ decline rather than anything specific to the Climate Law. So I built an outside comparison group: first three non-EU countries (UK, Norway, Switzerland), then nine, adding Iceland and five Western Balkan EU-accession candidates. The results below are built on that nine-country group. Later, a second correction changed the picture again: the satellite values themselves had been end-of-month snapshots rather than monthly means. The project's real headline is the validation process — twice it caught a wrong answer before that answer stayed the reported one.
 
 ## Overview
 
-In GPIE's research philosophy, claims made by the government are hypotheses, in the sense that in order to test this, they must be confronted with observational evidence rather than taken as fact, and the whole framework is based on the concept of “Trust but verify.” GPIE is a geospatial causal-inference tool designed to define its own metrics and measure the environmental impact of the European Green Deal and its flagship legislation – the European Climate Law Regulation (EU) 2021/1119 – in accordance with a robust statistical approach, instead of relying on self-reported government statements on policy success.
-
-This method is designed to be applicable to any country or policy environment: the European Green Deal has been selected as the case study because of its broad policy scope, the wide availability of high-quality open data and its international nature.
+GPIE treats government claims as hypotheses to be tested against observational evidence ("Trust, but verify"). It is a geospatial causal-inference workflow that measures the environmental effect of the European Green Deal's flagship legislation — the European Climate Law, Regulation (EU) 2021/1119 — with a statistical design rather than relying on self-reported policy success. The European Green Deal was chosen as the case study because of its scope, the availability of open data and its international relevance.
 
 ## The Question
 
-Governments report on their own climate results, and they often do not actually measure independent results from these policies, GPIE is an audit on top of this based on satellite data and not on the assumption that the policy was met. The specific question it answers: Does the European Union (EU-27) Climate Law (30 June 2021) have any measurable statistically significant impact on NO₂ air pollution beyond natural variations?
+Did the European Climate Law (adopted 30 June 2021, in force 29 July 2021) produce a statistically distinguishable reduction in NO₂ pollution across the EU-27, beyond the change seen in comparable non-EU countries?
 
 ## The Method
 
-Standard errors are clustered by country throughout a two-group Difference-in-Differences (DiD) design that compares EU-27 countries against a deliberately constructed 9-country non-EU control group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia — across 8 independently-sourced datasets (NO₂ via Sentinel-5P TROPOMI, NDVI via CGLS, climate via ERA5, GDP via Eurostat/World Bank, land cover, elevation, administrative boundaries, and EU policy records), spanning 36 countries and 2019–2024. Two independent checks, through structurally different methods, corroborate the pooled DiD result: an augmented synthetic control (weighted 7-country donor pool) and a Moran's I spatial-autocorrelation diagnostic.
+A two-group Difference-in-Differences (DiD) design compares the EU-27 with a 9-country non-EU comparison group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia and Serbia — on a monthly country panel, 2019–2024, with July 2021 as the first post-treatment month. NO₂ comes from Sentinel-5P TROPOMI as true monthly means (one raster per day, QA ≥ 0.75, pooled per country); controls are ERA5 temperature and precipitation and GDP (Eurostat/World Bank), with country and calendar-month fixed effects and standard errors clustered by country. NDVI (CGLS) is a secondary outcome. Additional checks: placebo date, 23-quarter event study, GDP exclusion, log outcome, treatment-date shifts, an EU-specific trend, a post-hoc baseline split, a synthetic control, Moran's I, and a set of identification checks (year-month fixed effects, EU-specific seasonality, wind/boundary-layer and COVID-19 controls, wild cluster bootstrap and randomization inference).
 
 ## The Finding
 
-This project's core finding is really about reporting a nuanced result honestly — a pooled null that is consistent with a real, concentrated effect — rather than the flawed "significant" result an earlier single-cohort design had produced. Once compared against the 9-country non-EU control group, no statistically distinguishable pooled, EU-wide reduction in NO₂ was detected at the conventional 5% level; but a heterogeneity check splitting the EU-27 by baseline pollution level finds a statistically significant reduction concentrated in the 14 higher-baseline, more industrialized member states (p=0.003), corroborated by a 23-quarter event-study finding four significant post-treatment quarters, all negative, clustering in Q2/Q3 of 2022–2024. An augmented synthetic control corroborates the pooled near-zero estimate through a methodologically distinct approach, and a spatial-autocorrelation test confirms the model's fixed effects absorb most of the spatial clustering present in raw pollution levels.
+NO₂ fell more in the EU-27 than in the comparison group, by about 5% of the EU's pre-treatment level, and the decline is concentrated in the 14 more polluted member states. But the design cannot attribute this to the Climate Law: nothing changes in the first two years after the law and the whole decline appears from July 2023 (−2.18e-6, p = 0.008), every alternative cutoff date is just as significant, and a steady EU-specific trend absorbs the treatment-date effect (p = 0.243). The estimate itself is sturdy: it holds with year-month fixed effects and EU-specific seasonality (−1.34e-6, p = 0.016; wild cluster bootstrap p = 0.018), with wind, boundary-layer and COVID-19 stringency controls, and when the COVID-19 or energy-crisis months are dropped — though not under randomization inference (p = 0.16) or without the GDP control (p = 0.074). The evidence fits a relative decline that emerges about two years after the law, not a step change at it.
 
-| Metric | NO2 (Primary, Pooled) | NO2 (Higher-Baseline Subgroup) | NDVI (Secondary) |
+| Metric | NO2 (Primary, Pooled) | NO2 (Higher-Baseline, post-hoc) | NDVI (Secondary) |
 |---|---|---|---|
-| DiD Coefficient | -2.22e-6 | -5.46e-6 | -0.0145 |
-| P-value (cluster-robust) | 0.101 — not significant | 0.003 — significant | 0.007 — significant |
-| 95% Confidence Interval | [-4.87e-6, +4.32e-7] | — | [-0.0250, -0.0039] |
+| DiD Coefficient | -1.52e-6 (log: -4.2%) | -2.85e-6 (log: -6.4%) | -0.0194 |
+| P-value (cluster-robust) | 0.013 (log: 0.034) | 0.002 (log: 0.006) | 0.005 |
+| 95% Confidence Interval | [-2.73e-6, -3.16e-7] | — | [-0.0330, -0.0058] |
+| With EU-specific trend | +8.7e-7, p = 0.243 | — | — |
 
-The NDVI result is only a secondary finding and thus isn't conclusive evidence of changes in vegetation health caused by the Climate Law — because this analysis doesn't factor in changes of land use or drought-induced changes in vegetation stress.
+The NDVI result is an exploratory association, not evidence that the Climate Law changed vegetation health: land-use change, drought stress and agricultural policy are not controlled for.
 
 ## Validation & Robustness Checklist
 
 - ✓ Cluster-robust standard errors, clustered by country (Bertrand, Duflo & Mullainathan, 2004)
-- ✓ Deliberately constructed external control group - 9 countries (UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia)
-- ✓ Placebo test — caught and fixed a flawed initial single-cohort design (which had wrongly shown significance)
-- ✓ 23-quarter event-study validation — supports the parallel-trends assumption (every pre-treatment quarter non-significant) and finds 4 significant, same-signed post-treatment quarters
-- ✓ 5 additional robustness checks — GDP removed, log-transformed outcome, treatment-date shifted ±6/±12 months, pollution-level subgroup split (significant), and a formal minimum-detectable-effect calculation
-- ✓ Augmented synthetic control (7-country donor pool, weighted) — reaches the same near-zero, same-sign pooled estimate through a method that is methodologically distinct from the DiD specification
-- ✓ Moran's I spatial-autocorrelation test — raw NO2 is spatially clustered (I=0.570, p=0.001) as expected, but DiD residuals are not significantly clustered (I=0.069, p=0.135)
-- ✓ Honest, nuanced result reported — pooled null and concentrated significant subgroup effect both disclosed, neither smoothed over
+- ✓ External comparison group — 9 non-EU countries (some share EU climate instruments: EU ETS for Norway/Iceland, linked Swiss ETS, Western Balkans Green Agenda)
+- ✓ Placebo test — exposed the flawed initial single-cohort design
+- ✓ 23-quarter event study — 7 of 9 pre-treatment quarters significant with a common seasonal cycle; not significant once the EU has its own seasonal cycle (joint p = 0.292)
+- ✓ Year-month fixed effects + EU-specific seasonality — −1.34e-6 (p = 0.016); unchanged by wind speed, boundary-layer height and COVID-19 stringency controls
+- ✓ 12-month blocks — no effect Jul 2021–Jun 2023 (p = 0.98, 0.44); decline only from Jul 2023 (−2.18e-6, p = 0.008)
+- ✓ Few-cluster inference — wild cluster bootstrap p = 0.018; randomization inference p = 0.16; stable when any one comparison country is dropped
+- ✓ COVID-19 window and energy-crisis months excluded — estimate remains (−2.25e-6, p = 0.011; −2.08e-6, p = 0.005)
+- ✓ TROPOMI processor versions checked — reprocessed v2.4.0 to July 2022, operational v2.4–2.7 after; no version change at the treatment date
+- ✓ Treatment date ±6/±12 months — every date significant (p = 0.004 to 0.028): no break specific to the law's date
+- ✓ EU-specific trend — treatment term no longer significant (p = 0.243); trend −7.9e-7 per year (p = 0.016)
+- ✓ GDP excluded (−1.49e-6, p = 0.053); log outcome (−4.2%, p = 0.034); baseline split (decline only in higher-baseline group)
+- ✓ Synthetic control (9 donors, intercept-adjusted) — gap −8.1e-7, rank 5 of 10 among placebo countries
+- ✓ Moran's I — raw NO₂ clustered (I = 0.578, p = 0.001); DiD residuals clustered in 59 of 72 months (median I = 0.347), so p-values are likely too small
+- ✓ All of the above reported, including the results that limit the headline
 
 ## Honest Limitation
 
-The honest conclusion here is not "the policy had no effect" nor "the policy worked" — it's that the pooled EU-wide average across all 27 member states is not conventionally significant, while a real effect concentrated in higher-baseline member states and specific post-treatment quarters is, a genuinely open finding this design can characterize but not fully resolve without a longer panel or sub-national data. Even with a 9-country control group (7 for the synthetic control specification, since Norway's and Iceland's NO2 coverage remain too incomplete to use as donors even after a clean re-fetch), the pooled model's confidence interval still spans zero; at 80% statistical power, this design can reliably detect a pooled effect of roughly 12.7% of baseline EU NO₂ or larger.
+The headline coefficient is statistically significant, but that is not the same as a Climate Law effect: the checks above show the timing does not line up with the law. This version also corrects an earlier data problem. NO₂ "monthly" values had been single end-of-month snapshots (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval); they are now true monthly means, and every number changed — the earlier pooled null (p = 0.101) is superseded. Remaining limits: significance that depends on the GDP control and is not confirmed by randomization inference, nine comparison clusters, spatially correlated residuals, a comparison group that differs structurally from the EU-27, and Malta represented by only three 0.1° pixels.
 
 ## Global Transferability
 
-This framework's architecture is portable beyond a single region, not a one-country tool — confirmed by separately testing the NO₂ acquisition pipeline, using the same Sentinel Hub infrastructure and evalscript logic with no modification to the core acquisition logic, on India (2019–2024), which returned physically realistic values consistent with the EU-27 dataset's observed range.
+The NO₂ acquisition step was run on India's national boundary (2019–2024) with the same request builder, evalscript and QA threshold as the EU study. The test records how many months returned data and how the values compare with the EU-27 distribution. Result: all 72 months returned data; India's monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m² (median 3.32 × 10⁻⁵), with no negative months, and all 72 values fall inside the 5th–95th percentile range of EU-27 country-months (1.34 × 10⁻⁵ to 6.34 × 10⁻⁵ mol/m²). It shows the data pipeline runs outside Europe; transferring the causal design would need its own comparison group.
 
 ---
 

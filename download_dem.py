@@ -55,7 +55,6 @@ def download_tile(lat, lon, not_found_cache, max_retries=3):
     filepath = os.path.join(DEM_RAW_DIR, f"{tile_name}.tif")
 
     if os.path.exists(filepath) and os.path.getsize(filepath) > 1_000_000:
-        #print(f"Skipping (local file exists): {tile_name}")
         return "skipped"
 
     if tile_name in not_found_cache:

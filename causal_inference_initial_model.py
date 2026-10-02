@@ -1,37 +1,22 @@
-"""Reproduces the "Initial Model" result cited by README.md,
-GPIE_Research_Paper.md (Section 4.1), and the dashboard's
-7_Causal_Results.py error-box: the first single-cohort DiD model (all 27 EU countries,
-before vs. after 30 June 2021, no external control group), BEFORE the later linear
-time_trend diagnostic control was added.
-
-Why this file exists: `causal_inference.py` was edited after this project's docs were
-written to add an explicit `time_trend` control as a robustness diagnostic (see its
-own docstring). That is a legitimate, separately-documented result in its own right
-(GPIE_Research_Paper.md's discussion of the time-trend-controlled specification) - but
-it means running the CURRENT `causal_inference.py` no longer reproduces the "Initial
-Model, p = 0.041 (cluster-robust) / p = 0.026 (classical, as originally computed)"
-figure that README/Research Paper/dashboard all attribute to the
-project's first model, and that no separate script on disk reproduced. This file
-restores that traceability: it is `causal_inference.py`'s original specification
-(identical data, identical fixed effects, identical controls) with only the later
-`time_trend` addition removed, so the documented Initial Model figure has a script
-that reproduces it exactly again.
-
-Cross-checked independently (from-scratch OLS + cluster-robust SE, outside
-statsmodels): coefficient = -2.285028e-06, p = 0.0263 (classical/homoskedastic
-SEs), p = 0.0414 (cluster-robust, clustered by country) - matching the
-documented p = 0.026 / p = 0.041 to 3+ significant figures.
-"""
+"""My first model: EU-27 before vs after 30 June 2021, no control group and no time trend.
+It gives p = 0.026 with classical SEs and p = 0.041 with SEs clustered by country."""
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 
-DATA_PATH = "data/master_dataset.csv"
+import sys
+
+# Default is my original EU-27 panel. --corrected uses the EU-27 rows of the current panel.
+CORRECTED = "--corrected" in sys.argv
+DATA_PATH = "data/master_dataset_control.csv" if CORRECTED else "data/master_dataset.csv"
 
 
 def load_and_prepare():
     df = pd.read_csv(DATA_PATH)
+    if CORRECTED:
+        df = df[df["treatment_group"] == 1].rename(columns={"country": "NUTS_ID"}).copy()
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
+    # Cutoff 2021-06-30 makes July 2021 my first post-treatment month.
     treatment_date = pd.Timestamp("2021-06-30")
     df["treatment"] = (df["time"] > treatment_date).astype(float)
     df["month_of_year"] = df["month"]
@@ -59,16 +44,13 @@ def run_did_model(df):
 
     model = sm.OLS(y, X)
 
-    # As originally computed: classical (non-clustered) standard errors.
+    # Classical (non-clustered) standard errors, as I first computed them.
     results_classical = model.fit()
     print("\n=== TREATMENT EFFECT (classical SEs, as originally computed) ===")
     print("Coefficient:", results_classical.params["treatment"])
     print("P-value:", results_classical.pvalues["treatment"])
 
-    # Cluster-robust standard errors, clustered by country - the corrected
-    # figure used everywhere else in this project (see Dev Log for the
-    # correction, and causal_inference_final_did.py for the final two-group
-    # model this initial single-cohort result was superseded by).
+    # I cluster by country because monthly errors within a country are correlated.
     results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["NUTS_ID"]})
     print("\n=== TREATMENT EFFECT (cluster-robust SEs) ===")
     print("Coefficient:", results.params["treatment"])

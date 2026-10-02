@@ -4,15 +4,12 @@ from get_eu_country_list import get_eu_country_codes
 
 POP_RAW_DIR = "data/earth_observation/population/raw"
 
-# Verified WorldPop REST API pattern (Global 1 dataset: 2000-2020)
+# WorldPop REST API. This dataset covers 2000-2020 only.
 REST_API_URL = "https://www.worldpop.org/rest/data/pop/wpgp"
 
 
 def get_download_url(iso3, year):
-    """
-    Queries the WorldPop REST API for a country's population file URL.
-    Returns the https download URL, or None if not found.
-    """
+    """The https URL of a country's population file, or None if not found."""
     try:
         response = requests.get(REST_API_URL, params={"iso3": iso3}, timeout=30)
         if response.status_code != 200:
@@ -22,7 +19,7 @@ def get_download_url(iso3, year):
         for entry in data.get("data", []):
             if str(year) in entry.get("title", ""):
                 ftp_url = entry["files"][0]
-                # Convert ftp:// to https:// (WorldPop mirrors both)
+                # WorldPop mirrors the ftp files on https, so I swap the prefix.
                 https_url = ftp_url.replace(
                     "ftp://ftp.worldpop.org.uk",
                     "https://data.worldpop.org"
@@ -35,10 +32,7 @@ def get_download_url(iso3, year):
 
 
 def download_country_population(iso3, year):
-    """
-    Downloads one country's population GeoTIFF for a given year.
-    Skips if already downloaded. Returns True on success.
-    """
+    """One country's population GeoTIFF for one year. Returns True on success."""
     os.makedirs(POP_RAW_DIR, exist_ok=True)
     filename = f"{iso3.lower()}_ppp_{year}.tif"
     filepath = os.path.join(POP_RAW_DIR, filename)
@@ -72,9 +66,7 @@ def download_country_population(iso3, year):
 
 
 def download_all_eu_population(years):
-    """
-    Downloads population data for all 27 EU countries for the verified years.
-    """
+    """Population data for all 27 EU countries."""
     countries = get_eu_country_codes()
     total = len(countries) * len(years)
     done = 0
@@ -89,8 +81,7 @@ def download_all_eu_population(years):
 
 
 def main():
-    # Only executing for verified, scientifically reliable years.
-    # 2021-2024 data allocation is explicitly left as an open task for future HDX/STAC integration.
+    # I only use 2019 and 2020 here. I have not added a source for 2021-2024 yet.
     verified_years = [2019, 2020]
     download_all_eu_population(years=verified_years)
 

@@ -48,7 +48,7 @@ st.markdown("### Data Sources & Citations")
 st.markdown("""
 | Dataset | Provider | Access Method |
 |---|---|---|
-| NO₂ (Sentinel-5P) | European Space Agency / Copernicus | Sentinel Hub Statistical API |
+| NO₂ (Sentinel-5P) | European Space Agency / Copernicus | Sentinel Hub Process API (daily) |
 | NDVI (CGLS) | Copernicus Land Monitoring Service | Sentinel Hub Statistical API |
 | Climate (ERA5) | ECMWF / Copernicus Climate Data Store | CDS API |
 | Land Cover | ESA WorldCover | AWS Open Data |

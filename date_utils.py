@@ -25,10 +25,7 @@ def generate_weekly_ranges(start_date, end_date):
         start = week_end + timedelta(days=1)
 
 def generate_monthly_ranges(start_year, start_month, end_year, end_month):
-    """
-    Yields (start_date, end_date, year, month) tuples for each month
-    in the given range, in the ISO format required by the Copernicus API.
-    """
+    """Yield (start, end, year, month) for each month, in the ISO format Copernicus needs."""
     year = start_year
     month = start_month
 

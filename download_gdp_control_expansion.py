@@ -1,6 +1,4 @@
-"""GDP acquisition for the expanded control group (World Bank API); Norway
-skipped since its GDP data was already clean.
-"""
+"""I fetch World Bank GDP for the extra control countries. I already have Norway."""
 import os
 import csv
 import requests
@@ -18,8 +16,7 @@ COUNTRIES = {
 
 WORLD_BANK_URL = "https://api.worldbank.org/v2/country/{code}/indicator/NY.GDP.MKTP.CD"
 
-# Same approximate annual USD/EUR averages used in download_gdp_control_countries.py,
-# kept identical for consistency across the control-group GDP series.
+# Same yearly USD per EUR rates as download_gdp_control_countries.py, so the series match.
 USD_TO_EUR_RATE = {
     2019: 1.12,
     2020: 1.14,

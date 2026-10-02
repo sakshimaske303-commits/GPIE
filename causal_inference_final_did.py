@@ -9,10 +9,11 @@ def load_and_prepare():
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
 
+    # Cutoff 2021-06-30 makes July 2021 my first post-treatment month.
     treatment_date = pd.Timestamp("2021-06-30")
     df["post"] = (df["time"] > treatment_date).astype(float)
 
-    # The core DiD term: 1 only for EU countries AFTER the policy date
+    # My DiD term: 1 only for EU countries after the cutoff.
     df["did_interaction"] = df["treatment_group"] * df["post"]
 
     df["month_of_year"] = df["month"]
@@ -27,11 +28,7 @@ def run_did_model(df):
     country_dummies = pd.get_dummies(model_df["country"], prefix="country", drop_first=True).astype(float)
     month_dummies = pd.get_dummies(model_df["month_of_year"], prefix="month", drop_first=True).astype(float)
 
-    # Note: treatment_group and post are included as main effects (standard
-    # DiD practice), alongside the interaction term which is the actual
-    # causal estimate of interest. Country fixed effects absorb the
-    # treatment_group main effect's country-level component; post's
-    # variation is captured via month dummies plus this explicit term.
+    # I leave out treatment_group itself because the country fixed effects absorb it.
     X = pd.concat([
         model_df[["did_interaction", "post"] + controls].astype(float),
         country_dummies,
@@ -45,10 +42,8 @@ def run_did_model(df):
 
     model = sm.OLS(y, X)
 
-    # Cluster-robust standard errors, clustered by country: with panel data
-    # (repeated monthly observations per country), errors are serially
-    # correlated within a country over time, so default OLS standard errors
-    # understate true uncertainty (Bertrand, Duflo & Mullainathan, 2004).
+    # I cluster by country because monthly errors within a country are correlated
+    # (Bertrand, Duflo & Mullainathan, 2004).
     results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
     print("Model fit complete!")
 

@@ -11,10 +11,7 @@ SH_CLIENT_SECRET = os.getenv("SH_CLIENT_SECRET")
 
 
 def get_sentinelhub_token():
-    """
-    Authenticates with Sentinel Hub using OAuth Client Credentials flow.
-    Returns the access token string.
-    """
+    """Get a Sentinel Hub access token with the OAuth client credentials flow."""
     if not SH_CLIENT_ID or not SH_CLIENT_SECRET:
         raise ValueError("Missing SH_CLIENT_ID or SH_CLIENT_SECRET in .env file")
 
@@ -34,5 +31,5 @@ def get_sentinelhub_token():
 
 if __name__ == "__main__":
     token = get_sentinelhub_token()
-    print("Token received successfully!")
-    print(token[:50], "...")
+    # I print only the length because the token is a live credential.
+    print(f"Token received successfully ({len(token)} characters).")

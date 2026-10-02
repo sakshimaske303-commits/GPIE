@@ -253,7 +253,7 @@ PALETTE = {
     "chantilly": "#F2D4D7",
     "coral": "#F88379",
     "lagoon": "#008795",
-    # legacy key names kept so any existing page code referencing these still works
+    # Old key names, kept because my pages still use them.
     "cyan": "#008795",
     "purple": "#F88379",
     "green": "#F2D4D7",

@@ -6,10 +6,7 @@ RAW_DIR = "data/earth_observation/climate/raw"
 
 
 def unzip_era5_file(zip_path_disguised_as_nc):
-    """
-    CDS sometimes returns a zip file even when netcdf format is requested,
-    with a .nc extension. This extracts the actual .nc file(s) inside.
-    """
+    """CDS sometimes sends a zip named .nc. I extract the real .nc files from it."""
     extract_dir = zip_path_disguised_as_nc.replace(".nc", "_extracted")
 
     if os.path.exists(extract_dir):

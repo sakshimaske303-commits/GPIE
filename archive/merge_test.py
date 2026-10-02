@@ -1,7 +1,6 @@
 import json
 import pandas as pd
 
-# Load all four processed datasets
 with open("data/earth_observation/climate/final/era5_stats_by_country_monthly.json") as f:
     climate = pd.DataFrame(json.load(f))
 

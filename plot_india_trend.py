@@ -43,15 +43,15 @@ def make_plot():
     ax.plot(df["time"], df["mean_no2"], marker="o", color="#e34a33", linewidth=2, markersize=5)
 
     ax.set_title(
-        "GPIE Transferability Test: India NO₂ Trend (2019–2024)\n"
-        "Standalone proof-of-concept — same acquisition pipeline built for the EU-27 study",
+        "GPIE Transferability Test: NO₂ Monthly Means over India (GADM national boundary), 2019–2024\n"
+        "Acquisition proof-of-concept with the EU-27 request builder — not a causal analysis",
         fontsize=13, fontweight="bold", pad=15
     )
     ax.set_xlabel("Date")
     ax.set_ylabel("Mean Tropospheric NO₂ (mol/m²)")
     ax.grid(alpha=0.3)
 
-    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Statistical API",
+    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Process API",
                 ha="center", fontsize=8, color="gray")
 
     plt.tight_layout()

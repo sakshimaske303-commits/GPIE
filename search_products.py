@@ -38,7 +38,6 @@ def search_products(start_date, end_date):
         timeout=30
     )
     print(response.url)
-    #print(response.text)
 
     print("Status Code:", response.status_code)
 
@@ -49,7 +48,6 @@ def search_products(start_date, end_date):
     print("Total Products Returned :", len(data["value"]))
 
     for product in data["value"]:
-     #print(product["GeoFootprint"])
      print("=" * 60)
      print("Product :", product["Name"])
      print("Date    :", product["ContentDate"]["Start"])

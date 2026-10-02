@@ -2,17 +2,12 @@ import os
 
 
 def file_exists(filepath):
-    """
-    Returns True if file already exists.
-    """
+    """True if the file is already there."""
     return os.path.exists(filepath)
 
 
 def is_complete_file(filepath, expected_size):
-    """
-    Returns True if file exists and its size matches
-    the expected size from Copernicus metadata.
-    """
+    """True if the file is there and its size matches the size in the Copernicus metadata."""
 
     if not os.path.exists(filepath):
         return False
@@ -23,18 +18,14 @@ def is_complete_file(filepath, expected_size):
 
 
 def remove_file(filepath):
-    """
-    Deletes a corrupted or incomplete file.
-    """
+    """Delete a broken or incomplete file."""
 
     if os.path.exists(filepath):
         os.remove(filepath)
 
 
 def get_file_size(filepath):
-    """
-    Returns file size in bytes.
-    """
+    """File size in bytes, 0 if the file is missing."""
 
     if not os.path.exists(filepath):
         return 0

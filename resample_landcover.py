@@ -6,20 +6,15 @@ OUTPUT_PATH = "data/earth_observation/land_cover/processed/worldcover_2021_500m.
 
 
 def resample_for_stats():
-    """
-    Resamples the 10m WorldCover mosaic to 100m resolution.
-    Country-level land cover percentages don't need 10m precision,
-    and this reduces the data volume by ~100x, making zonal statistics
-    computation feasible without exhausting memory.
-    """
-    print("Resampling to 100m resolution... (this will take a few minutes)")
+    """Resample the 10m WorldCover mosaic to a coarser grid so the zonal stats fit in memory."""
+    print("Resampling to about 500m resolution... (this will take a few minutes)")
 
     result = gdal.Warp(
         OUTPUT_PATH,
         INPUT_VRT,
         xRes=0.005,  # roughly 500m in degrees
         yRes=0.005,
-        resampleAlg="near",  # nearest-neighbor: preserves categorical class values
+        resampleAlg="near",  # nearest-neighbor keeps the class codes intact
         creationOptions=["COMPRESS=LZW"],
     )
 

@@ -1,47 +1,47 @@
 {
   "gdp_removed": {
-    "coefficient": -2.2259627192573755e-06,
-    "p_value": 0.15582077398830957,
-    "n": 2321
+    "coefficient": -1.4897613611492004e-06,
+    "p_value": 0.05260546274131359,
+    "n": 2572
   },
   "log_transform": {
-    "coefficient": 0.004747575110601274,
-    "p_value": 0.909659537276046,
-    "n": 2297,
-    "n_excluded_nonpositive": 24
+    "coefficient": -0.04175558393926593,
+    "p_value": 0.03413636546532013,
+    "n": 2564,
+    "n_excluded_nonpositive": 8
   },
   "treatment_date_sensitivity": {
     "-12mo": {
       "date": "2020-06-30",
-      "coefficient": -2.516017237210498e-06,
-      "p_value": 0.10798875927530734
+      "coefficient": -1.7011555820313503e-06,
+      "p_value": 0.027892567435081055
     },
     "-6mo": {
       "date": "2020-12-31",
-      "coefficient": -2.725612648027597e-06,
-      "p_value": 0.021398813814129954
+      "coefficient": -1.140052038191457e-06,
+      "p_value": 0.027037144527887684
     },
     "true": {
       "date": "2021-06-30",
-      "coefficient": -2.218944929424712e-06,
-      "p_value": 0.10085557242558418
+      "coefficient": -1.520620266583355e-06,
+      "p_value": 0.013370009661423843
     },
     "+6mo": {
       "date": "2021-12-31",
-      "coefficient": -1.691321979837327e-06,
-      "p_value": 0.07284054845950899
+      "coefficient": -1.385148250352885e-06,
+      "p_value": 0.019850673537941697
     },
     "+12mo": {
       "date": "2022-06-30",
-      "coefficient": -1.190009185010328e-06,
-      "p_value": 0.2321807121239191
+      "coefficient": -1.7979984983872377e-06,
+      "p_value": 0.003750196139118714
     }
   },
   "baseline_pollution_split": {
     "higher_baseline": {
-      "coefficient": -5.457178713531387e-06,
-      "p_value": 0.0032275959476594967,
-      "n": 1503,
+      "coefficient": -2.8511873497964868e-06,
+      "p_value": 0.0024584003014431303,
+      "n": 1643,
       "countries": [
         "AT",
         "BE",
@@ -52,17 +52,19 @@
         "HU",
         "IT",
         "LU",
+        "MT",
         "NL",
         "PL",
-        "RO",
         "SI",
         "SK"
-      ]
+      ],
+      "log_coefficient": -0.0639310066988982,
+      "log_p_value": 0.006179630045677025
     },
     "lower_baseline": {
-      "coefficient": 1.5335881405389906e-06,
-      "p_value": 0.188558045036876,
-      "n": 1391,
+      "coefficient": 8.588455593351854e-08,
+      "p_value": 0.7577740180006177,
+      "n": 1564,
       "countries": [
         "BG",
         "CY",
@@ -74,16 +76,29 @@
         "IE",
         "LT",
         "LV",
-        "MT",
         "PT",
+        "RO",
         "SE"
-      ]
+      ],
+      "log_coefficient": -0.015005839418211616,
+      "log_p_value": 0.40882757538587766
+    },
+    "pre_treatment_means": {
+      "control_group": 2.0806938599642355e-05,
+      "higher_baseline_eu": 4.099425137695006e-05
     }
   },
+  "eu_specific_trend": {
+    "coefficient": 8.674138756307424e-07,
+    "p_value": 0.2426563008126218,
+    "eu_trend_per_year": -7.914979274115911e-07,
+    "eu_trend_p_value": 0.016175083107555197
+  },
   "minimum_detectable_effect": {
-    "se": 1.3524215385770807e-06,
-    "mde": 3.788923896154471e-06,
-    "baseline_mean": 2.9926467184258162e-05,
-    "mde_pct_of_baseline": 12.660779078352121
+    "se": 6.147004076482807e-07,
+    "mde": 1.7221354415613085e-06,
+    "baseline_mean_pre_treatment": 3.128147564360462e-05,
+    "mde_pct_of_baseline": 5.505288373163408,
+    "headline_coef_pct_of_baseline": 4.861088664448091
   }
 }

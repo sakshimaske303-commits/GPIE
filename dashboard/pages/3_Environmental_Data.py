@@ -9,12 +9,8 @@ from styles import apply_custom_style, PALETTE
 
 
 def render_map(png_name, html_name, height=520):
-    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
-    if os.path.exists(html_path):
-        with open(html_path, "r", encoding="utf-8") as f:
-            components.html(f.read(), height=height)
-    else:
-        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
+    # I always show the PNG from my map_*.py scripts. The old HTML maps use outdated data.
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
@@ -37,7 +33,7 @@ with tab1:
     """)
     render_map("no2_choropleth_map.png", "no2_choropleth_map.html")
     st.markdown(
-        "<p class='caption-text'>Source: Sentinel-5P TROPOMI, accessed via Sentinel Hub Statistical API</p>",
+        "<p class='caption-text'>Source: Sentinel-5P TROPOMI, accessed via Sentinel Hub Process API (daily rasters)</p>",
         unsafe_allow_html=True,
     )
 

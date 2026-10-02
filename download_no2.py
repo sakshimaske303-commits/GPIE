@@ -1,6 +1,4 @@
-# NOTE: used by run_pipeline.py; the project's final NO2 dataset traces to
-# download_no2_sentinelhub.py instead — see the note at the top of
-# run_pipeline.py.
+# run_pipeline.py uses this. My final NO2 data comes from download_no2_sentinelhub.py.
 import requests
 import os
 import time

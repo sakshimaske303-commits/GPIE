@@ -19,7 +19,6 @@ def flatten_no2():
         monthly_entries = country_year_record["data"]["data"]
 
         for entry in monthly_entries:
-            # Extract month number from the interval start date
             start_date = entry["interval"]["from"]
             month = datetime.fromisoformat(start_date.replace("Z", "+00:00")).month
 

@@ -5,11 +5,7 @@ import requests
 
 
 def get_clms_access_token(service_key_path="clms_service_key.json"):
-    """
-    Builds a signed JWT from the CLMS service key and exchanges it
-    for a short-lived access token.
-    Returns the access token string.
-    """
+    """Sign a JWT with my CLMS service key and swap it for an access token."""
     with open(service_key_path, "r") as f:
         service_key = json.load(f)
 

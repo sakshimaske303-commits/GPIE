@@ -1,13 +1,12 @@
-"""5 additional robustness checks on the DiD result: GDP removed,
-log-transformed outcome, treatment-date sensitivity, baseline-pollution
-split, minimum detectable effect.
-"""
+"""I run extra robustness checks on my DiD: no GDP, log outcome, shifted treatment dates,
+baseline-pollution split, EU-specific trend and minimum detectable effect."""
 import json
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
 DATA_PATH = "data/master_dataset_control.csv"
+# Cutoff 2021-06-30 makes July 2021 my first post-treatment month.
 TRUE_TREATMENT_DATE = pd.Timestamp("2021-06-30")
 
 
@@ -117,6 +116,39 @@ def check_baseline_split(df):
         pval = results.pvalues["did_interaction"]
         print(f"{label}: coefficient={coef:.4e}  p={pval:.3f}  (n={len(model_df)})")
         out[label] = {"coefficient": coef, "p_value": pval, "n": int(results.nobs), "countries": sorted(eu_subset)}
+
+        # Higher-baseline EU starts at about twice the control NO2 level, so I also check
+        # the log scale to see if the effect holds as a relative change.
+        log_df = model_df[model_df["mean_no2"] > 0].copy()
+        log_df["log_no2"] = np.log(log_df["mean_no2"])
+        log_res = fit_did(log_df, "log_no2", controls)
+        out[label]["log_coefficient"] = log_res.params["did_interaction"]
+        out[label]["log_p_value"] = log_res.pvalues["did_interaction"]
+        print(f"{label} (log outcome): coefficient={log_res.params['did_interaction']:.4f}  "
+              f"p={log_res.pvalues['did_interaction']:.3f}")
+
+    ctrl_pre = d[(d["time"] <= TRUE_TREATMENT_DATE) & (d["treatment_group"] == 0)]["mean_no2"].mean()
+    hi_pre = d[(d["time"] <= TRUE_TREATMENT_DATE) & (d["country"].isin(higher))]["mean_no2"].mean()
+    out["pre_treatment_means"] = {"control_group": ctrl_pre, "higher_baseline_eu": hi_pre}
+    return out
+
+
+def check_eu_specific_trend(df):
+    """I add a common and an EU-specific linear trend. If the DiD term is only a steady
+    faster EU decline, it should shrink towards zero here."""
+    print("\n--- EU-specific linear trend ---")
+    controls = ["avg_temp_c", "avg_precip_mm", "gdp_million_eur"]
+    d = df.copy()
+    d["post"] = (d["time"] > TRUE_TREATMENT_DATE).astype(float)
+    d["did_interaction"] = d["treatment_group"] * d["post"]
+    d["trend_years"] = (d["time"] - d["time"].min()).dt.days / 365.25
+    d["eu_trend_years"] = d["treatment_group"] * d["trend_years"]
+    model_df = d.dropna(subset=["mean_no2"] + controls).copy()
+    results = fit_did(model_df, "mean_no2", controls + ["trend_years", "eu_trend_years"])
+    out = {"coefficient": results.params["did_interaction"], "p_value": results.pvalues["did_interaction"],
+           "eu_trend_per_year": results.params["eu_trend_years"], "eu_trend_p_value": results.pvalues["eu_trend_years"]}
+    print(f"DiD with EU-specific trend: coefficient={out['coefficient']:.4e}  p={out['p_value']:.3f}; "
+          f"EU-specific trend = {out['eu_trend_per_year']:.3e}/yr (p={out['eu_trend_p_value']:.3f})")
     return out
 
 
@@ -133,13 +165,16 @@ def check_minimum_detectable_effect(df, headline_coef):
     # 80% power, two-sided 5% test: MDE = SE * (z_{1-alpha/2} + z_{power})
     mde = se * (1.959964 + 0.841621)
 
-    baseline_mean = model_df.loc[model_df["treatment_group"] == 1, "mean_no2"].mean()
+    # I express the MDE as a share of the EU-27 mean NO2 in the pre-treatment months.
+    baseline_mean = model_df.loc[(model_df["treatment_group"] == 1) & (model_df["post"] == 0), "mean_no2"].mean()
     mde_pct = abs(mde / baseline_mean) * 100
+    coef_pct = abs(headline_coef / baseline_mean) * 100
     print(f"Standard error: {se:.4e}")
     print(f"Minimum detectable effect (80% power): {mde:.4e}")
     print(f"Baseline EU-27 mean NO2: {baseline_mean:.4e}")
-    print(f"MDE as % of baseline: {mde_pct:.1f}%")
-    return {"se": se, "mde": mde, "baseline_mean": baseline_mean, "mde_pct_of_baseline": mde_pct}
+    print(f"MDE as % of baseline: {mde_pct:.1f}%  (headline coefficient = {coef_pct:.1f}% of baseline)")
+    return {"se": se, "mde": mde, "baseline_mean_pre_treatment": baseline_mean,
+            "mde_pct_of_baseline": mde_pct, "headline_coef_pct_of_baseline": coef_pct}
 
 
 def main():
@@ -151,6 +186,7 @@ def main():
     out["log_transform"] = check_log_transform(df)
     out["treatment_date_sensitivity"] = check_treatment_date_sensitivity(df)
     out["baseline_pollution_split"] = check_baseline_split(df)
+    out["eu_specific_trend"] = check_eu_specific_trend(df)
     out["minimum_detectable_effect"] = check_minimum_detectable_effect(
         df, headline_coef=out["treatment_date_sensitivity"]["true"]["coefficient"]
     )

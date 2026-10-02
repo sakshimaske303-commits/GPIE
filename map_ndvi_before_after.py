@@ -88,7 +88,7 @@ def make_map():
         fontsize=13, fontweight="bold", y=0.98
     )
 
-    # Colorbar placed in its own reserved space at the bottom, well below the maps
+    # I give the colorbar its own space below the maps so it does not overlap them.
     fig.subplots_adjust(bottom=0.18, top=0.88, wspace=0.05)
     cbar_ax = fig.add_axes([0.3, 0.08, 0.4, 0.025])
     sm = plt.cm.ScalarMappable(cmap="YlGn", norm=plt.Normalize(vmin=vmin, vmax=vmax))

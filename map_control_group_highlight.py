@@ -18,8 +18,7 @@ EU27_COUNTRIES = {
     "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
     "SI", "ES", "SE",
 }
-# UK/NO/CH ship as separate GADM files; the rest already carry a NUTS_ID
-# in the boundary geojson, so they're pulled straight from there.
+# UK/NO/CH come from separate GADM files; the rest have a NUTS_ID in the boundary geojson.
 CONTROL_COUNTRIES_NUTS = {"IS", "AL", "BA", "ME", "MK", "RS"}
 CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 

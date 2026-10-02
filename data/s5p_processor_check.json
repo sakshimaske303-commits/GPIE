@@ -1,0 +1,600 @@
+[
+  {
+    "date": "2019-01-15",
+    "catalogue": {
+      "RPRO v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 4.056093032891315e-05,
+      "eu_valid_pixels": 14153,
+      "control_mean": 2.7581196119001375e-05,
+      "control_valid_pixels": 1218
+    },
+    "RPRO": {
+      "eu_mean": 4.056093032891315e-05,
+      "eu_valid_pixels": 14153,
+      "control_mean": 2.7581196119001375e-05,
+      "control_valid_pixels": 1218
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2019-04-15",
+    "catalogue": {},
+    "default": {
+      "eu_mean": 2.0519120170638534e-05,
+      "eu_valid_pixels": 10831,
+      "control_mean": 9.785972253366092e-06,
+      "control_valid_pixels": 1402
+    },
+    "RPRO": {
+      "eu_mean": 2.0519120170638534e-05,
+      "eu_valid_pixels": 10831,
+      "control_mean": 9.785972253366092e-06,
+      "control_valid_pixels": 1402
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2019-07-15",
+    "catalogue": {
+      "RPRO v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": -3.9048049221027525e-05,
+      "eu_valid_pixels": 258,
+      "control_mean": -1.616444243469372e-05,
+      "control_valid_pixels": 52
+    },
+    "RPRO": {
+      "eu_mean": -3.9048049221027525e-05,
+      "eu_valid_pixels": 258,
+      "control_mean": -1.616444243469372e-05,
+      "control_valid_pixels": 52
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2019-10-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 3.450729694564679e-05,
+      "eu_valid_pixels": 25635,
+      "control_mean": 2.3136426387282588e-05,
+      "control_valid_pixels": 4490
+    },
+    "RPRO": {
+      "eu_mean": 3.450729694564679e-05,
+      "eu_valid_pixels": 25635,
+      "control_mean": 2.3136426387282588e-05,
+      "control_valid_pixels": 4490
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2020-01-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 4.5934904678623496e-05,
+      "eu_valid_pixels": 19895,
+      "control_mean": 2.5222202276654614e-05,
+      "control_valid_pixels": 3967
+    },
+    "RPRO": {
+      "eu_mean": 4.5934904678623496e-05,
+      "eu_valid_pixels": 19895,
+      "control_mean": 2.5222202276654614e-05,
+      "control_valid_pixels": 3967
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2020-04-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 3.435029798357932e-05,
+      "eu_valid_pixels": 26326,
+      "control_mean": 2.749257483468902e-05,
+      "control_valid_pixels": 7247
+    },
+    "RPRO": {
+      "eu_mean": 3.435029798357932e-05,
+      "eu_valid_pixels": 26326,
+      "control_mean": 2.749257483468902e-05,
+      "control_valid_pixels": 7247
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2020-07-15",
+    "catalogue": {
+      "RPRO v2.4.0": 3
+    },
+    "default": {
+      "eu_mean": 1.8905584099318462e-05,
+      "eu_valid_pixels": 16195,
+      "control_mean": 1.7279930641120233e-05,
+      "control_valid_pixels": 1507
+    },
+    "RPRO": {
+      "eu_mean": 1.8905584099318462e-05,
+      "eu_valid_pixels": 16195,
+      "control_mean": 1.7279930641120233e-05,
+      "control_valid_pixels": 1507
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2020-10-15",
+    "catalogue": {
+      "RPRO v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 2.3826949535221052e-05,
+      "eu_valid_pixels": 15035,
+      "control_mean": 1.758079994814139e-05,
+      "control_valid_pixels": 5241
+    },
+    "RPRO": {
+      "eu_mean": 2.3826949535221052e-05,
+      "eu_valid_pixels": 15035,
+      "control_mean": 1.758079994814139e-05,
+      "control_valid_pixels": 5241
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2021-01-15",
+    "catalogue": {
+      "RPRO v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 4.085260439522225e-05,
+      "eu_valid_pixels": 9993,
+      "control_mean": 5.28856926891178e-05,
+      "control_valid_pixels": 1094
+    },
+    "RPRO": {
+      "eu_mean": 4.085260439522225e-05,
+      "eu_valid_pixels": 9993,
+      "control_mean": 5.28856926891178e-05,
+      "control_valid_pixels": 1094
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2021-04-15",
+    "catalogue": {
+      "RPRO v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 1.703005619497082e-05,
+      "eu_valid_pixels": 16549,
+      "control_mean": 1.818682924889676e-05,
+      "control_valid_pixels": 5526
+    },
+    "RPRO": {
+      "eu_mean": 1.703005619497082e-05,
+      "eu_valid_pixels": 16549,
+      "control_mean": 1.818682924889676e-05,
+      "control_valid_pixels": 5526
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2021-07-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 2.1615866983311405e-05,
+      "eu_valid_pixels": 24251,
+      "control_mean": 1.631672546133589e-05,
+      "control_valid_pixels": 6924
+    },
+    "RPRO": {
+      "eu_mean": 2.1615866983311405e-05,
+      "eu_valid_pixels": 24251,
+      "control_mean": 1.631672546133589e-05,
+      "control_valid_pixels": 6924
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2021-10-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 3.322091558005606e-05,
+      "eu_valid_pixels": 23744,
+      "control_mean": 3.759224400745108e-05,
+      "control_valid_pixels": 3191
+    },
+    "RPRO": {
+      "eu_mean": 3.322091558005606e-05,
+      "eu_valid_pixels": 23744,
+      "control_mean": 3.759224400745108e-05,
+      "control_valid_pixels": 3191
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2022-01-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 3.8919527025097653e-05,
+      "eu_valid_pixels": 25227,
+      "control_mean": 4.800029184987756e-05,
+      "control_valid_pixels": 1858
+    },
+    "RPRO": {
+      "eu_mean": 3.8919527025097653e-05,
+      "eu_valid_pixels": 25227,
+      "control_mean": 4.800029184987756e-05,
+      "control_valid_pixels": 1858
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2022-04-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 2.2660164236501545e-05,
+      "eu_valid_pixels": 27921,
+      "control_mean": 1.9737876340415488e-05,
+      "control_valid_pixels": 6622
+    },
+    "RPRO": {
+      "eu_mean": 2.2660164236501545e-05,
+      "eu_valid_pixels": 27921,
+      "control_mean": 1.9737876340415488e-05,
+      "control_valid_pixels": 6622
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2022-07-15",
+    "catalogue": {
+      "RPRO v2.4.0": 2
+    },
+    "default": {
+      "eu_mean": 2.2967452018452347e-05,
+      "eu_valid_pixels": 25030,
+      "control_mean": 1.7982271193227927e-05,
+      "control_valid_pixels": 4301
+    },
+    "RPRO": {
+      "eu_mean": 2.2967452018452347e-05,
+      "eu_valid_pixels": 25030,
+      "control_mean": 1.7982271193227927e-05,
+      "control_valid_pixels": 4301
+    },
+    "OFFL": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "default_equals": "RPRO"
+  },
+  {
+    "date": "2022-10-15",
+    "catalogue": {
+      "OFFL v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 3.0168896494080435e-05,
+      "eu_valid_pixels": 17349,
+      "control_mean": 2.0855939757690332e-05,
+      "control_valid_pixels": 5018
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 3.0168896494080435e-05,
+      "eu_valid_pixels": 17349,
+      "control_mean": 2.0855939757690332e-05,
+      "control_valid_pixels": 5018
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2023-01-15",
+    "catalogue": {
+      "OFFL v2.4.0": 1
+    },
+    "default": {
+      "eu_mean": 2.2070743725985555e-05,
+      "eu_valid_pixels": 10799,
+      "control_mean": 1.7849406319497506e-05,
+      "control_valid_pixels": 3323
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 2.2070743725985555e-05,
+      "eu_valid_pixels": 10799,
+      "control_mean": 1.7849406319497506e-05,
+      "control_valid_pixels": 3323
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2023-04-15",
+    "catalogue": {
+      "OFFL v2.5.0": 1
+    },
+    "default": {
+      "eu_mean": 2.05181740416547e-05,
+      "eu_valid_pixels": 19800,
+      "control_mean": 1.6294706879089385e-05,
+      "control_valid_pixels": 5086
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 2.05181740416547e-05,
+      "eu_valid_pixels": 19800,
+      "control_mean": 1.6294706879089385e-05,
+      "control_valid_pixels": 5086
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2023-07-15",
+    "catalogue": {
+      "OFFL v2.5.0": 1
+    },
+    "default": {
+      "eu_mean": 2.3294998921362597e-05,
+      "eu_valid_pixels": 28936,
+      "control_mean": 1.884681302080761e-05,
+      "control_valid_pixels": 3297
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 2.3294998921362597e-05,
+      "eu_valid_pixels": 28936,
+      "control_mean": 1.884681302080761e-05,
+      "control_valid_pixels": 3297
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2023-10-15",
+    "catalogue": {
+      "OFFL v2.5.0": 2
+    },
+    "default": {
+      "eu_mean": 1.9852226307741717e-05,
+      "eu_valid_pixels": 20687,
+      "control_mean": 2.7446166948281772e-05,
+      "control_valid_pixels": 4403
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 1.9852226307741717e-05,
+      "eu_valid_pixels": 20687,
+      "control_mean": 2.7446166948281772e-05,
+      "control_valid_pixels": 4403
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2024-01-15",
+    "catalogue": {
+      "OFFL v2.6.0": 2
+    },
+    "default": {
+      "eu_mean": 4.2011959022611366e-05,
+      "eu_valid_pixels": 8532,
+      "control_mean": 2.803561586036077e-05,
+      "control_valid_pixels": 2827
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 4.2011959022611366e-05,
+      "eu_valid_pixels": 8532,
+      "control_mean": 2.803561586036077e-05,
+      "control_valid_pixels": 2827
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2024-04-15",
+    "catalogue": {
+      "OFFL v2.6.0": 2
+    },
+    "default": {
+      "eu_mean": 1.847641839458828e-05,
+      "eu_valid_pixels": 22938,
+      "control_mean": 1.1121779272515063e-05,
+      "control_valid_pixels": 7467
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 1.847641839458828e-05,
+      "eu_valid_pixels": 22938,
+      "control_mean": 1.1121779272515063e-05,
+      "control_valid_pixels": 7467
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2024-07-15",
+    "catalogue": {
+      "OFFL v2.6.0": 2
+    },
+    "default": {
+      "eu_mean": 2.2137868857139585e-05,
+      "eu_valid_pixels": 27616,
+      "control_mean": 1.4062269947794487e-05,
+      "control_valid_pixels": 4659
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 2.2137868857139585e-05,
+      "eu_valid_pixels": 27616,
+      "control_mean": 1.4062269947794487e-05,
+      "control_valid_pixels": 4659
+    },
+    "default_equals": "OFFL"
+  },
+  {
+    "date": "2024-10-15",
+    "catalogue": {
+      "OFFL v2.7.1": 1
+    },
+    "default": {
+      "eu_mean": 2.506487691296565e-05,
+      "eu_valid_pixels": 24058,
+      "control_mean": 2.1269430267954948e-05,
+      "control_valid_pixels": 3664
+    },
+    "RPRO": {
+      "eu_mean": null,
+      "eu_valid_pixels": 0,
+      "control_mean": null,
+      "control_valid_pixels": 0
+    },
+    "OFFL": {
+      "eu_mean": 2.506487691296565e-05,
+      "eu_valid_pixels": 24058,
+      "control_mean": 2.1269430267954948e-05,
+      "control_valid_pixels": 3664
+    },
+    "default_equals": "OFFL"
+  }
+]

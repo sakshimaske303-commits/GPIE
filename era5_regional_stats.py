@@ -9,7 +9,7 @@ import numpy as np
 PROCESSED_DIR = "data/earth_observation/climate/processed"
 NUTS_BOUNDARY_PATH = "data/earth_observation/boundaries/raw/NUTS_LEVL_0_2024_4326.geojson"
 
-# GADM boundaries for the 3 non-EU control-group countries
+# GADM boundaries for my first 3 non-EU control countries.
 GADM_PATHS = {
     "UK": "data/earth_observation/boundaries/raw/gadm41_GBR_0.json",
     "NO": "data/earth_observation/boundaries/raw/gadm41_NOR_0.json",
@@ -20,28 +20,23 @@ OUTPUT_PATH = "data/earth_observation/climate/final/era5_stats_all_countries_mon
 
 
 def load_all_country_geometries():
-    """
-    Combines NUTS (EU-27) and GADM (UK, NO, CH) boundaries into a single
-    list of (country_code, geometry-mapping) pairs, so the zonal-stats
-    loop below can treat all 30 countries identically.
-    """
+    """NUTS (EU-27) and GADM (UK, NO, CH) boundaries as one list of (code, geometry) pairs."""
     geometries = []
 
-    control_codes = set(GADM_PATHS.keys())  # UK, NO, CH — will be added from GADM instead
+    control_codes = set(GADM_PATHS.keys())  # UK, NO, CH come from GADM instead
 
     nuts = gpd.read_file(NUTS_BOUNDARY_PATH)
     for _, row in nuts.iterrows():
         nuts_id = row["NUTS_ID"]
         if nuts_id in control_codes:
-            # Skip — NUTS also contains EFTA members (Norway, Switzerland),
-            # but we use the GADM version for these to keep the boundary
-            # source consistent with the rest of the control-group pipeline.
+            # NUTS also has Norway and Switzerland, but I use GADM for the control countries
+            # so their boundary source stays the same everywhere.
             continue
         geometries.append((nuts_id, mapping(row["geometry"])))
 
     for country_code, path in GADM_PATHS.items():
         gadm = gpd.read_file(path)
-        # GADM level-0 files contain a single feature covering the whole country
+        # A GADM level-0 file has one feature for the whole country.
         geom = gadm.iloc[0]["geometry"]
         geometries.append((country_code, mapping(geom)))
 
@@ -49,10 +44,7 @@ def load_all_country_geometries():
 
 
 def compute_regional_stats(year, country_geometries):
-    """
-    Computes average temperature and total precipitation per country
-    (EU-27 via NUTS + UK/NO/CH via GADM), for each month of the given year.
-    """
+    """Monthly mean temperature and mean precipitation per ERA5 cell (mm) for each country."""
     file_path = os.path.join(PROCESSED_DIR, f"era5_processed_{year}.nc")
     if not os.path.exists(file_path):
         print(f"Missing processed file for {year}, skipping.")

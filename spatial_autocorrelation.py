@@ -1,6 +1,4 @@
-"""Moran's I diagnostic checking whether cross-border pollution correlation
-shows up in the raw data and DiD residuals.
-"""
+"""I use Moran's I to check for spatial correlation in the NO2 levels and the DiD residuals."""
 
 import json
 import numpy as np
@@ -35,6 +33,7 @@ def moran_on_values(gdf, w, value_col):
 
 
 def run():
+    np.random.seed(12345)  # fixed seed so my permutation p-values are reproducible
     df = pd.read_csv(DATA_PATH)
     countries = sorted(df["country"].unique())
     print(f"Building geometry for {len(countries)} countries...")
@@ -42,11 +41,8 @@ def run():
     gdf = gdf[gdf.geometry.notna() & ~gdf.geometry.is_empty].reset_index(drop=True)
     print(f"Geometries loaded: {len(gdf)}")
 
-    # KNN weights on centroids, not contiguity - several countries here are
-    # islands or non-contiguous (CY, MT, IE, IS-equivalent gaps) and would
-    # end up disconnected under Queen/Rook contiguity. Projected to EPSG:3035
-    # (ETRS89-LAEA Europe) first so centroid/distance math isn't done on raw
-    # lon/lat degrees.
+    # I use KNN on centroids because islands (CY, MT, IE) have no neighbours under contiguity.
+    # I project to EPSG:3035 first so distances are in metres, not degrees.
     gdf_proj = gdf.to_crs("EPSG:3035")
     centroids = gdf_proj.geometry.centroid
     coords = np.column_stack([centroids.x, centroids.y])
@@ -55,7 +51,7 @@ def run():
 
     results = {}
 
-    # 1. Cross-sectional level: full-period average NO2 per country
+    # 1. Full-period average NO2 per country
     avg_no2 = df.groupby("country")["mean_no2"].mean().reset_index()
     gdf_no2 = gdf.merge(avg_no2, on="country")
     mi_level = moran_on_values(gdf_no2, w, "mean_no2")
@@ -63,7 +59,7 @@ def run():
           f"(999 permutations)")
     results["level_full_period"] = {"I": mi_level.I, "p_sim": mi_level.p_sim, "z_sim": mi_level.z_sim}
 
-    # 2. Pre- vs. post-treatment level, separately
+    # 2. Pre and post treatment levels, separately
     for label, mask in [("pre_treatment", (df.year < 2021) | ((df.year == 2021) & (df.month <= 6))),
                          ("post_treatment", (df.year > 2021) | ((df.year == 2021) & (df.month > 6)))]:
         avg = df[mask].groupby("country")["mean_no2"].mean().reset_index()
@@ -72,10 +68,11 @@ def run():
         print(f"Moran's I, {label} average NO2: I={mi.I:.4f}, p={mi.p_sim:.4f}")
         results[f"level_{label}"] = {"I": mi.I, "p_sim": mi.p_sim, "z_sim": mi.z_sim}
 
-    # 3. DiD residuals - does the model's unexplained variation still cluster
-    # spatially, which country-clustered SEs alone wouldn't catch?
+    # 3. DiD residuals. Country fixed effects force each country's mean residual to zero,
+    # so I test the residuals month by month and rebuild the weights for each month.
     did_df = df.copy()
     did_df["time"] = pd.to_datetime(did_df["year"].astype(str) + "-" + did_df["month"].astype(str).str.zfill(2))
+    # Cutoff 2021-06-30 makes July 2021 my first post-treatment month.
     treatment_date = pd.Timestamp("2021-06-30")
     did_df["post"] = (did_df["time"] > treatment_date).astype(float)
     did_df["did_interaction"] = did_df["treatment_group"] * did_df["post"]
@@ -91,15 +88,37 @@ def run():
 
     model_df = model_df.copy()
     model_df["residual"] = fit.resid
-    avg_resid = model_df.groupby("country")["residual"].mean().reset_index()
-    gdf_resid = gdf.merge(avg_resid, on="country")
-    mi_resid = moran_on_values(gdf_resid, w, "residual")
-    print(f"\nMoran's I, DiD model residuals (country-averaged): I={mi_resid.I:.4f}, p={mi_resid.p_sim:.4f}")
-    results["did_residuals"] = {"I": mi_resid.I, "p_sim": mi_resid.p_sim, "z_sim": mi_resid.z_sim}
+    max_country_mean = model_df.groupby("country")["residual"].mean().abs().max()
+    print(f"\n(Check) largest |country-mean residual| = {max_country_mean:.2e} "
+          f"- ~0 by construction under country fixed effects, hence the per-month test below.")
 
-    # Local Moran's I (LISA) on the full-period level - which specific
-    # countries are driving the global clustering result, not just whether
-    # clustering exists in aggregate.
+    centroid_xy = dict(zip(gdf["country"], coords))
+    monthly = []
+    for t, grp in model_df.groupby("time"):
+        grp = grp[grp["country"].isin(centroid_xy)]
+        if len(grp) < 10:
+            continue
+        ids = list(grp["country"])
+        w_t = KNN.from_array(np.array([centroid_xy[c] for c in ids]), k=K_NEIGHBORS, ids=ids)
+        w_t.transform = "r"
+        mi_t = Moran(grp.set_index("country").loc[w_t.id_order, "residual"].values, w_t)
+        monthly.append({"time": str(t.date()), "n_countries": len(ids), "I": mi_t.I, "p_sim": mi_t.p_sim})
+    monthly_df = pd.DataFrame(monthly)
+    monthly_df.to_csv("data/moran_residuals_by_month.csv", index=False)
+    n_sig_pos = int(((monthly_df["p_sim"] < 0.05) & (monthly_df["I"] > 0)).sum())
+    print(f"\nMoran's I on DiD residuals, month by month ({len(monthly_df)} months): "
+          f"median I = {monthly_df['I'].median():.3f}, mean I = {monthly_df['I'].mean():.3f}; "
+          f"{n_sig_pos} months significantly positive at p<0.05")
+    results["did_residuals_monthly"] = {
+        "n_months": int(len(monthly_df)),
+        "median_I": float(monthly_df["I"].median()),
+        "mean_I": float(monthly_df["I"].mean()),
+        "n_months_significant_positive_p05": n_sig_pos,
+        "share_months_significant_positive_p05": n_sig_pos / len(monthly_df),
+        "max_abs_country_mean_residual": float(max_country_mean),
+    }
+
+    # Local Moran's I (LISA) shows which countries drive the global clustering.
     vals = gdf_no2.set_index("country").loc[w.id_order, "mean_no2"].values
     lisa = Moran_Local(vals, w)
     quadrant_labels = {1: "High-High", 2: "Low-High", 3: "Low-Low", 4: "High-Low"}

@@ -9,9 +9,7 @@ def load_and_prepare():
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
 
-    # Bin time into quarters relative to the treatment date, for a
-    # manageable number of event-time dummies (24 monthly periods would
-    # be too many to interpret cleanly; quarters give a readable trend).
+    # I use quarters because 72 monthly dummies are too many to read; 24 quarters are enough.
     df["quarter"] = df["time"].dt.to_period("Q").astype(str)
 
     df["month_of_year"] = df["month"]
@@ -23,16 +21,13 @@ def run_event_study(df):
     model_df = df.dropna(subset=["mean_no2"] + controls).copy()
     print(f"Rows after dropna: {len(model_df)}")
 
-    # Reference quarter: 2021Q2 (the quarter just before treatment,
-    # 30 June 2021 falls at the end of Q2) - all effects are measured
-    # relative to this baseline quarter.
+    # 2021Q2 is the last quarter before treatment, so I measure every effect against it.
     reference_quarter = "2021Q2"
 
     quarters = sorted(model_df["quarter"].unique())
     quarters_to_include = [q for q in quarters if q != reference_quarter]
 
-    # Build EU x quarter interaction dummies (only for EU/treatment_group=1 rows
-    # will these be non-zero, since treatment_group=0 rows get multiplied by 0)
+    # EU x quarter dummies. They are zero for every control-country row.
     event_dummies = pd.DataFrame(index=model_df.index)
     for q in quarters_to_include:
         col_name = f"eu_x_{q}"
@@ -57,9 +52,7 @@ def run_event_study(df):
 
     model = sm.OLS(y, X)
 
-    # Cluster-robust standard errors, clustered by country (see
-    # causal_inference_final_did.py for rationale) - kept consistent across
-    # every model in this project.
+    # I cluster by country because monthly errors within a country are correlated.
     results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
     print("Model fit complete!")
 

@@ -1,81 +1,82 @@
+
 import os
 import json
 import requests
-from auth_sentinelhub import get_sentinelhub_token  # reuse existing auth, that's fine
+import pandas as pd
+from shapely.geometry import shape, mapping
+import math
+from auth_sentinelhub import get_sentinelhub_token
+from s5p_process_daily import run_daily, monthly_from_log, RES_DEG
 
-STATISTICAL_API_URL = "https://sh.dataspace.copernicus.eu/api/v1/statistics"
 OUTPUT_DIR = "data/global_transferability_test"
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, "india_no2_test.json")
+LOG_PATH = os.path.join(OUTPUT_DIR, "india_no2_daily_log.jsonl")
+SUMMARY_PATH = os.path.join(OUTPUT_DIR, "india_no2_sanity_check.json")
+GADM_IND_PATH = "data/earth_observation/boundaries/raw/gadm41_IND_0.json"
+GADM_IND_URL = "https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_IND_0.json"
+MASTER_PATH = "data/master_dataset_control.csv"
 
-# India's approximate bounding box (simple rectangle, no need for exact boundary)
-INDIA_GEOMETRY = {
-    "type": "Polygon",
-    "coordinates": [[
-        [68.0, 6.0], [97.5, 6.0], [97.5, 37.5], [68.0, 37.5], [68.0, 6.0]
-    ]]
-}
 
-def request_no2_stats(access_token, year):
-    headers = {"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"}
+def load_india_geometry():
+    if not os.path.exists(GADM_IND_PATH):
+        print(f"Downloading India boundary: {GADM_IND_URL}")
+        r = requests.get(GADM_IND_URL, timeout=300)
+        r.raise_for_status()
+        os.makedirs(os.path.dirname(GADM_IND_PATH), exist_ok=True)
+        with open(GADM_IND_PATH, "wb") as f:
+            f.write(r.content)
+    with open(GADM_IND_PATH, encoding="utf-8") as f:
+        geom = shape(json.load(f)["features"][0]["geometry"])
+    geom = geom.simplify(0.01, preserve_topology=True)
+    return mapping(geom)
 
-    evalscript = """
-    //VERSION=3
-    function setup() {
-      return {
-        input: [{ bands: ["NO2", "dataMask"] }],
-        output: [
-          { id: "no2", bands: 1, sampleType: "FLOAT32" },
-          { id: "dataMask", bands: 1 }
-        ]
-      };
+
+def flatten(results):
+    rows = []
+    for rec in results:
+        for entry in rec["data"]["data"]:
+            stats = entry["outputs"]["no2"]["bands"]["B0"]["stats"]
+            rows.append({"date": entry["interval"]["from"][:10], "mean_no2": stats.get("mean")})
+    return pd.DataFrame(rows)
+
+
+def sanity_check(df):
+    eu = pd.read_csv(MASTER_PATH)
+    eu = eu[eu["treatment_group"] == 1]["mean_no2"].dropna()
+    s = df["mean_no2"].dropna()
+    summary = {
+        "months_requested": int(len(df)),
+        "months_with_data": int(len(s)),
+        "india_min": float(s.min()), "india_median": float(s.median()), "india_max": float(s.max()),
+        "india_negative_months": int((s < 0).sum()),
+        "eu27_country_month_p5": float(eu.quantile(0.05)),
+        "eu27_country_month_p95": float(eu.quantile(0.95)),
+        "india_share_within_eu27_p5_p95": float(((s >= eu.quantile(0.05)) & (s <= eu.quantile(0.95))).mean()),
     }
-    function evaluatePixel(sample) {
-      return { no2: [sample.NO2], dataMask: [sample.dataMask] };
-    }
-    """
-
-    payload = {
-        "input": {
-            "bounds": {
-                "geometry": INDIA_GEOMETRY,
-                "properties": {"crs": "http://www.opengis.net/def/crs/EPSG/0/4326"},
-            },
-            "data": [{
-                "type": "sentinel-5p-l2",
-                "dataFilter": {"timeRange": {"from": f"{year}-01-01T00:00:00Z", "to": f"{year+1}-01-01T00:00:00Z"}},
-                "processing": {"minQa": 75}
-            }],
-        },
-        "aggregation": {
-            "timeRange": {"from": f"{year}-01-01T00:00:00Z", "to": f"{year+1}-01-01T00:00:00Z"},
-            "aggregationInterval": {"of": "P1M"},
-            "evalscript": evalscript,
-        },
-    }
-
-    response = requests.post(STATISTICAL_API_URL, headers=headers, json=payload)
-    if response.status_code != 200:
-        print(f"Failed for India, {year} ({response.status_code}): {response.text[:300]}")
-        return None
-    return response.json()
+    with open(SUMMARY_PATH, "w") as f:
+        json.dump(summary, f, indent=2)
+    print(json.dumps(summary, indent=2))
+    print(f"Saved: {SUMMARY_PATH}")
 
 
 def main():
-    access_token = get_sentinelhub_token()
+    geometry = load_india_geometry()
+    sh = shape(geometry)
+    min_lon, min_lat, max_lon, max_lat = sh.bounds
+    bbox = (math.floor(min_lon / RES_DEG) * RES_DEG, math.floor(min_lat / RES_DEG) * RES_DEG,
+            math.ceil(max_lon / RES_DEG) * RES_DEG, math.ceil(max_lat / RES_DEG) * RES_DEG)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    all_results = []
 
-    for year in range(2019, 2025):
-        print(f"Requesting NO2 stats: India, {year}")
-        result = request_no2_stats(access_token, year)
-        if result:
-            all_results.append({"country": "India", "year": year, "data": result})
+    failures = run_daily(get_sentinelhub_token, bbox, {"IN": geometry}, LOG_PATH)
+    monthly = monthly_from_log(LOG_PATH, ["IN"], "no2")
+    results = [{"country": "India", "year": r["year"], "data": r["data"]} for r in monthly]
 
-    output_path = os.path.join(OUTPUT_DIR, "india_no2_test.json")
-    with open(output_path, "w") as f:
-        json.dump(all_results, f, indent=2)
-
-    print(f"\nSaved: {output_path}")
-    print("This confirms the GPIE acquisition pipeline is portable beyond the EU-27 study region.")
+    with open(OUTPUT_PATH, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"\nSaved: {OUTPUT_PATH}")
+    if failures:
+        print("Some days failed. The output is incomplete until a second run fills them.")
+    sanity_check(flatten(results))
 
 
 if __name__ == "__main__":

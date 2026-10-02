@@ -6,9 +6,7 @@ import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 
 
-# ==========================
-# FUNCTIONS
-# ==========================
+# Functions
 
 def fetch_page(url):
     response = requests.get(url, timeout=20)
@@ -112,8 +110,6 @@ def scrape_policies():
 
     results = soup.find_all("div", class_="SearchResult")
 
-    #print(response.status_code)
-    #print(len(results))
 
     documents = []
     for result in results:

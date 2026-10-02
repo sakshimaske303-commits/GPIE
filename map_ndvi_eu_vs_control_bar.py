@@ -1,8 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from causal_inference_ndvi import load_and_prepare, run_did_model
 
-# NDVI companion to the NO2 EU-vs-control bar chart, same two-group DiD design.
+# NDVI version of my NO2 EU-vs-control bar chart, same two-group DiD design.
 DATA_PATH = "data/master_dataset_control.csv"
 OUTPUT_PATH = "outputs/plots/ndvi_eu_vs_control_bar_chart.png"
 
@@ -11,12 +12,15 @@ def make_chart():
     os.makedirs("outputs/plots", exist_ok=True)
 
     df = pd.read_csv(DATA_PATH)
-    df["period"] = df["year"].apply(lambda y: "Pre-2021\n(2019-2020)" if y <= 2020 else "Post-2021\n(2021-2024)")
+    # Same split as my DiD model: July 2021 is the first post month
+    # (Climate Law adopted 30 June 2021, in force 29 July 2021).
+    is_pre = (df["year"] * 100 + df["month"]) <= 202106
+    df["period"] = is_pre.map({True: "Pre-treatment\n(Jan 2019 - Jun 2021)", False: "Post-treatment\n(Jul 2021 - Dec 2024)"})
     df["group_label"] = df["treatment_group"].map({1: "EU-27 (Treatment)", 0: "Control Group"})
 
     grouped = df.groupby(["group_label", "period"])["mean_ndvi"].mean().reset_index()
 
-    periods = ["Pre-2021\n(2019-2020)", "Post-2021\n(2021-2024)"]
+    periods = ["Pre-treatment\n(Jan 2019 - Jun 2021)", "Post-treatment\n(Jul 2021 - Dec 2024)"]
     groups = ["EU-27 (Treatment)", "Control Group"]
     colors = {"EU-27 (Treatment)": "#2c7fb8", "Control Group": "#e34a33"}
 
@@ -38,10 +42,11 @@ def make_chart():
     ax.set_xticks(list(x))
     ax.set_xticklabels(periods)
     ax.set_ylabel("Mean NDVI (Vegetation Health Index)")
+    res = run_did_model(load_and_prepare())
     ax.set_title(
-        "NDVI: EU-27 vs. 9-Country Control Group, Before vs. After the European Climate Law\n"
-        "Two-group DiD model: coefficient = -0.0145, p = 0.007 (cluster-robust) -\n"
-        "a statistically significant relative decline, not visible in NO2's equivalent comparison",
+        "NDVI: EU-27 vs. 9-Country Control Group, Before vs. After the Climate Law date\n"
+        f"Raw group means (descriptive). Two-group DiD estimate: {res.params['did_interaction']:.4f}, "
+        f"p = {res.pvalues['did_interaction']:.3f} (cluster-robust) - exploratory, not attributed to the Climate Law",
         fontsize=11, fontweight="bold"
     )
     ax.legend(loc="lower right")

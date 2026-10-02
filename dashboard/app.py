@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from styles import apply_custom_style, PALETTE
 
-# Path resolution that works both locally and on Streamlit Cloud (no cd into dashboard/ there).
+# I build paths from this file so they work both locally and on Streamlit Cloud.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # .../dashboard
 ROOT_DIR = os.path.dirname(BASE_DIR)                      # repo root
 
@@ -105,11 +105,12 @@ st.markdown(
             Governments announce landmark climate policy and then report their own progress against it —
             that self-reported progress is rarely independently audited against physical, satellite-observed
             evidence. GPIE builds that independent audit layer for the EU's Climate Law. Its most important
-            result isn't a discovery — it's a disciplined <strong>non-finding</strong>: once tested against a
-            genuine control group instead of a simple before/after comparison, the claimed pollution effect
-            could not be statistically distinguished from a general European trend. An honest "no detectable
-            effect" is itself a policy-relevant result, not a failed study — and the same acquisition pipeline
-            was separately proven to transfer cleanly to India, confirming this isn't a one-country tool.
+            result is a disciplined <strong>distinction</strong>: satellite data show NO₂ falling about 5%
+            more in the EU-27 than in neighbouring non-EU countries, but the timing checks show a gradual
+            EU-wide trend, not a step change at the Climate Law. "Pollution fell" and "this law made it fall"
+            are different claims, and only the first is supported. Along the way the project corrected itself
+            twice — a placebo test rejected its first model, and its satellite aggregation was rebuilt from
+            end-of-month snapshots into true monthly means (see Methodology).
         </p>
     </div>
     """,
@@ -125,29 +126,29 @@ produced a measurable environmental effect — using satellite-derived evidence 
 relying solely on self-reported government claims.
 
 Rather than assuming a policy worked, GPIE follows a **"Trust, But Verify"** protocol: 
-integrating Earth Observation data (Sentinel-5P TROPOMI, Sentinel-2/CGLS), climate 
+integrating Earth Observation data (Sentinel-5P TROPOMI, CGLS NDVI), climate 
 reanalysis (ERA5), economic indicators, and rigorous causal-inference methodology to 
 test policy claims against independently observed evidence.
 
 ### Navigate the Analysis
 
 Use the sidebar to explore:
-- **Study Design** — the treatment vs. control comparison architecture
-- **Theoretical Foundations** — the retrieval physics behind the NO₂ column, and why it makes an unbiased dependent variable
+- **Study Design** — the treatment vs. comparison-group architecture
+- **Theoretical Foundations** — the retrieval physics behind the NO₂ column, and what makes it an independent outcome
 - **Environmental Data** — NO₂ and vegetation health across Europe
-- **Before vs. After** — pollution levels, 2019 vs. 2024
-- **Economic Context** — GDP and land cover as control variables
+- **Before After** — country-level NO₂ and NDVI, 2019 vs. 2024
+- **Control Variables** — GDP and climate controls, plus land cover and elevation as context
+- **Methodology** — the full validation journey and limitations, including the placebo test that reshaped the analysis
 - **Causal Results** — the project's core statistical findings
-- **Global Transferability** — testing the acquisition pipeline on a non-EU country, India
-- **Methodology & Limitations** — the full validation journey, including a placebo test that reshaped the entire analytical approach
-- **Interactive Maps** — hoverable, zoomable versions of every map in this dashboard
+- **India Transferability** — running the acquisition step on a non-EU country
+- **Interactive Maps** — hoverable, zoomable versions of the main maps and charts
+- **Explore Trends** — country-by-country NO₂ and NDVI time series
+- **About Data** — the master dataset and data sources
 """)
 
 st.markdown("---")
 
-# ============================================================
-# FULL PROJECT DOCUMENTATION
-# ============================================================
+# Full project documentation
 st.markdown(
     f"""
     <p style="text-align:center; color:{PALETTE['coral']}; text-transform:uppercase;

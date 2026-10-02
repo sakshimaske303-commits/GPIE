@@ -16,7 +16,7 @@ EU27_COUNTRIES = {
     "SI", "ES", "SE",
 }
 
-# Standard, distinguishable colors per land cover class
+# One color per land cover class
 CLASS_COLORS = {
     "Tree cover": "#1a7a1a",
     "Shrubland": "#a8a832",
@@ -67,7 +67,7 @@ def make_map():
     merged = gdf.merge(dominant_df, on="country", how="left")
 
     merged["color"] = merged["dominant_class"].map(CLASS_COLORS)
-    merged["color"] = merged["color"].fillna("#cccccc")  # grey fallback for any unmatched/missing entry
+    merged["color"] = merged["color"].fillna("#cccccc")  # grey for a missing class
 
     bounds = (-25, 34, 35, 72)
 

@@ -1,49 +1,30 @@
-# ==========================================
-# GPIE Configuration File
-# ==========================================
+# GPIE configuration
 
-# ------------------------------------------
-# Project Information
-# ------------------------------------------
+# Project information
 
 PROJECT_NAME = "Green Policy Intelligence Engine"
 
 DEMONSTRATION_CASE = "European Green Deal"
 
-# ------------------------------------------
-# Study Area
-# ------------------------------------------
+# Study area
 
 STUDY_AREA = "European Union"
 
-# ------------------------------------------
-# Temporal Extent
-# ------------------------------------------
-# NOTE: these four values (and START_DATE/END_DATE below) are leftover from
-# this project's original single-month test run and were never updated to
-# match the real study period. They are NOT the actual study window - the
-# final analysis covers January 2019 to December 2024. The final NO2
-# acquisition script (download_no2_sentinelhub.py) does not read these
-# values at all; it loops over `range(2019, 2025)` directly. Kept here only
-# because a few of the older, superseded acquisition scripts still import
-# them for a one-off test run - do not treat this as the project's live
-# configuration for the study period.
+# Study window: January 2019 - December 2024 (72 months).
+# My Sentinel Hub scripts loop over range(2019, 2025) directly and do not read these.
 
 STUDY_START_YEAR = 2019
 STUDY_START_MONTH = 1
 
-STUDY_END_YEAR = 2019
-STUDY_END_MONTH = 1
+STUDY_END_YEAR = 2024
+STUDY_END_MONTH = 12
 
-# Kept for backward compatibility with scripts that import these directly
-
+# One-month window. Only my old OData/HARP test pipeline (run_pipeline.py) uses it.
 START_DATE = "2019-01-01T00:00:00.000Z"
 
 END_DATE   = "2019-01-31T23:59:59.999Z"
 
-# ------------------------------------------
-# Europe Bounding Box (Catalogue Discovery)
-# ------------------------------------------
+# Europe bounding box
 
 MIN_LON = -31.5
 MIN_LAT = 27.5
@@ -61,9 +42,7 @@ EU_BBOX_WKT = (
     "))"
 )
 
-# ------------------------------------------
-# Sentinel-5P Product Configuration
-# ------------------------------------------
+# Sentinel-5P product
 
 COLLECTION = "SENTINEL-5P"
 
@@ -73,25 +52,19 @@ PRODUCT_VERSION = "RPRO"
 
 QUALITY_THRESHOLD = 0.75
 
-# ------------------------------------------
-# API Configuration
-# ------------------------------------------
+# API
 
 CATALOG_URL = "https://catalogue.dataspace.copernicus.eu/odata/v1/Products"
 
 DOWNLOAD_URL = "https://download.dataspace.copernicus.eu/odata/v1/Products"
 
-# ------------------------------------------
-# Download Configuration
-# ------------------------------------------
+# Download
 
 TOP = 1000
 
 BATCH_TYPE = "WEEKLY"
 
-# ------------------------------------------
-# Folder Structure
-# ------------------------------------------
+# Folders
 
 RAW_DATA_DIR = "data/earth_observation/no2/raw"
 

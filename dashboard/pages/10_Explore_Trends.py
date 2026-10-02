@@ -48,7 +48,7 @@ def load_data():
 
 df = load_data()
 
-# --- Controls ---
+# Controls
 col1, col2 = st.columns([2, 1])
 with col1:
     all_countries = sorted(df["country_name"].unique())
@@ -116,7 +116,7 @@ if selected_codes:
 
     st.markdown(
         "<p class='caption-text'>Dotted lines indicate control-group (non-EU) countries. "
-        "Dashed vertical line marks the European Climate Law's entry into force (30 June 2021).</p>",
+        "Dashed vertical line marks the treatment cutoff: the European Climate Law was adopted on 30 June 2021 and entered into force on 29 July 2021.</p>",
         unsafe_allow_html=True,
     )
 else:

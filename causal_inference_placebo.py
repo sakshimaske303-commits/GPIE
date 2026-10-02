@@ -2,17 +2,21 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 
-DATA_PATH = "data/master_dataset.csv"
+import sys
+
+# Default is my original EU-27 panel. --corrected uses the EU-27 rows of the current panel.
+CORRECTED = "--corrected" in sys.argv
+DATA_PATH = "data/master_dataset_control.csv" if CORRECTED else "data/master_dataset.csv"
 
 
 def load_and_prepare(fake_treatment_date):
     df = pd.read_csv(DATA_PATH)
+    if CORRECTED:
+        df = df[df["treatment_group"] == 1].rename(columns={"country": "NUTS_ID"}).copy()
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
 
-    # PLACEBO: using a fake date instead of the real June 2021 treatment date.
-    # A model that finds a "significant effect" here even though nothing
-    # actually happened on this date would suggest the real result is
-    # picking up a spurious trend rather than a genuine policy effect.
+    # Placebo: I use a fake cutoff. A significant effect here would mean my real result
+    # is picking up a trend and not the policy.
     df["treatment"] = (df["time"] > fake_treatment_date).astype(float)
     df["month_of_year"] = df["month"]
     return df
@@ -37,9 +41,7 @@ def run_did_model(df):
     print("Fitting model...")
     model = sm.OLS(y, X)
 
-    # Cluster-robust standard errors, clustered by country (see
-    # causal_inference_final_did.py for rationale) - kept consistent across
-    # every model in this project.
+    # I cluster by country because monthly errors within a country are correlated.
     results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["NUTS_ID"]})
     print("Model fit complete!")
 
@@ -52,9 +54,7 @@ def run_did_model(df):
 
 
 def main():
-    # Fake treatment date: 30 June 2020, a full year before the real
-    # treatment date, well after the study's baseline period begins,
-    # and with no relevant Green Deal policy event on this date.
+    # Fake date is one year before the real cutoff. No Green Deal policy event falls on it.
     fake_date = pd.Timestamp("2020-06-30")
 
     df = load_and_prepare(fake_date)

@@ -9,6 +9,7 @@ __pycache__/
 
 # Raw satellite/climate data (large, publicly re-downloadable)
 data/earth_observation/no2/raw/
+data/earth_observation/no2/gridded/
 data/earth_observation/ndvi/raw/
 data/earth_observation/dem/raw/
 data/earth_observation/land_cover/raw/
@@ -29,3 +30,6 @@ data/earth_observation/dem/processed/*.vrt
 .DS_Store
 Thumbs.db
 .env
+
+# Local working files, not part of the project
+OUTPUTS2/

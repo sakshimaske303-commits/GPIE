@@ -16,10 +16,7 @@ OUTPUT_JSON_PATH = os.path.join(DEM_FINAL_DIR, "dem_stats_by_country.json")
 
 
 def build_mosaic_vrt():
-    """
-    Builds a Virtual Raster mosaic from all downloaded DEM tiles,
-    same lightweight-index approach used for DS04 Land Cover.
-    """
+    """One VRT mosaic over all DEM tiles, the same way I do it for land cover."""
     os.makedirs(DEM_PROCESSED_DIR, exist_ok=True)
 
     tile_paths = glob.glob(os.path.join(DEM_RAW_DIR, "*.tif"))
@@ -38,12 +35,7 @@ def build_mosaic_vrt():
 
 
 def resample_for_stats():
-    """
-    Resamples the DEM mosaic to 500m using bilinear resampling.
-    Unlike DS04 (categorical land cover, nearest-neighbor required),
-    elevation is a continuous variable, so averaging-based resampling
-    (bilinear) is scientifically appropriate here.
-    """
+    """Resample the DEM mosaic to 500m. Elevation is continuous, so I use bilinear (not nearest)."""
     print("Resampling DEM to 500m resolution...")
 
     result = gdal.Warp(
@@ -65,9 +57,7 @@ def resample_for_stats():
 
 
 def compute_elevation_stats():
-    """
-    Computes elevation statistics (mean, min, max, std) per NUTS country.
-    """
+    """Elevation mean, min, max and std per NUTS country."""
     print("Computing zonal elevation statistics per NUTS region...")
 
     stats = rasterstats.zonal_stats(

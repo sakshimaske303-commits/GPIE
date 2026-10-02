@@ -1,7 +1,4 @@
-"""
-Compiles every map/plot in outputs/plots/ into a single PDF, one image per page
-(orientation auto-matched per image), with a cover page and captions.
-"""
+"""I put every map and plot from outputs/plots/ into one PDF with a cover page and captions."""
 import os
 from PIL import Image
 from reportlab.lib.pagesizes import letter, landscape, portrait
@@ -20,37 +17,38 @@ IMAGES = [
     ("no2_choropleth_map.png", "NO2 Choropleth Map",
      "Mean tropospheric NO2 concentration by country, Sentinel-5P TROPOMI."),
     ("no2_before_after_map.png", "NO2 Before vs. After the European Climate Law",
-     "Average NO2 across the EU-27, 2019 (pre-treatment) vs. 2024 (post-treatment)."),
+     "Country-level annual mean NO2, all 36 countries, 2019 (pre-treatment) vs. 2024 (post-treatment). Descriptive only."),
     ("eu_vs_control_bar_chart.png", "NO2: EU-27 vs. Control Group",
-     "Mean NO2, pre- and post-treatment, EU-27 vs. 9-country control group - coefficient = -2.22e-06, p = 0.101."),
+     "Raw mean NO2, EU-27 vs. 9-country control group, Jan 2019-Jun 2021 vs. Jul 2021-Dec 2024 (descriptive; DiD estimate in title)."),
     ("event_study_plot.png", "Event-Study: Quarter-by-Quarter NO2 Effect",
-     "23-quarter Difference-in-Differences event-study estimates, cluster-robust SEs - 4 significant "
-     "post-treatment quarters, all negative, clustering in Q2/Q3 of 2022-2024."),
+     "23 quarter-specific EU x quarter coefficients relative to 2021Q2, cluster-robust 95% CIs "
+     "(counts of significant quarters in the figure title)."),
     ("ndvi_choropleth_map.png", "NDVI Choropleth Map",
      "Mean vegetation health index (NDVI) by country."),
     ("ndvi_before_after_map.png", "NDVI Before vs. After the European Climate Law",
-     "Average NDVI across the EU-27, pre- vs. post-treatment."),
+     "Country-level annual mean NDVI, all 36 countries, 2019 vs. 2024. Descriptive only."),
     ("ndvi_eu_vs_control_bar_chart.png", "NDVI: EU-27 vs. Control Group",
-     "Two-group DiD model: coefficient = -0.0145, p = 0.007 (cluster-robust) - a statistically "
-     "significant relative decline."),
+     "Raw mean NDVI, EU-27 vs. control group, pre vs. post (descriptive); exploratory DiD estimate in title, "
+     "not attributed to the Climate Law."),
     ("gdp_choropleth_map.png", "GDP Choropleth Map",
-     "Control variable - GDP by country."),
+     "Control variable - GDP by country (annual, repeated across months in the panel)."),
     ("land_cover_dominant_class_map.png", "Dominant Land Cover Class Map",
-     "Control variable - dominant land-cover classification by country."),
+     "Descriptive context - dominant land-cover class (static; absorbed by country fixed effects, not a model regressor)."),
     ("dem_elevation_map.png", "Elevation (DEM) Map",
-     "Control variable - digital elevation model."),
+     "Descriptive context - mean elevation (static; absorbed by country fixed effects, not a model regressor)."),
     ("climate_temperature_map.png", "Climate / Temperature Map",
      "Control variable - average temperature by country."),
-    ("india_transferability_trend.png", "India Transferability Validation",
-     "NO2 acquisition pipeline independently tested on India, 2019-2024."),
-    ("synthetic_control_gap.png", "Augmented Synthetic Control: EU-27 vs. 7-Country Donor Composite",
-     "Post-treatment gap = -1e-6, same near-zero direction as the DiD estimate (-2.22e-06, p=0.101), "
-     "reached independently via a 7-country donor pool (Norway and Iceland excluded, high-latitude NO2 coverage gaps)."),
+    ("india_transferability_trend.png", "India Transferability Test",
+     "NO2 monthly means over India's national boundary (GADM 4.1), 2019-2024, using the EU-27 request builder. "
+     "Acquisition test only, not a causal analysis."),
+    ("synthetic_control_gap.png", "Synthetic Control: EU-27 vs. 9-Country Donor Composite",
+     "Convex donor weights with pre-period intercept adjustment; complete-data months only. Gap, pre-period "
+     "RMSPE and DiD estimate in the figure title. All nine comparison countries are donors."),
     ("moran_lisa_cluster_map.png", "Local Moran's I (LISA) Spatial Cluster Map",
-     "NO2 levels cluster spatially across 36 countries (I=0.570, p=0.001); DiD residuals do not "
-     "(I=0.069, p=0.135) - fixed effects absorb it."),
+     "LISA clusters of full-period average NO2 (descriptive). Global and month-by-month residual Moran's I "
+     "results in the figure title."),
     ("policies_by_year.png", "Policies by Year",
-     "Count of EU environmental/climate policies enacted per year."),
+     "Count of records per year in the 10-record EUR-Lex sample scraped for this project (not a complete policy inventory)."),
     ("policy_type_distribution.png", "Policy Type Distribution",
      "Breakdown of policy dataset by policy type."),
     ("policy_types_by_year.png", "Policy Types by Year",
@@ -96,7 +94,6 @@ def make_pdf():
         page_w, page_h = page_size
         c.setPageSize((page_w, page_h))
 
-        # Title
         c.setFont("Helvetica-Bold", 13)
         c.drawCentredString(page_w / 2, page_h - MARGIN - 14, title)
         c.setFont("Helvetica", 9)

@@ -1,22 +1,25 @@
 {
   "level_full_period": {
-    "I": 0.5697560831024636,
+    "I": 0.5781404500011011,
     "p_sim": 0.001,
-    "z_sim": 6.413970666287483
+    "z_sim": 6.073385443000066
   },
   "level_pre_treatment": {
-    "I": 0.5824807100499677,
+    "I": 0.5943677166415828,
     "p_sim": 0.001,
-    "z_sim": 6.516341828380774
+    "z_sim": 7.04592123149948
   },
   "level_post_treatment": {
-    "I": 0.5499255282804636,
+    "I": 0.5628190517588111,
     "p_sim": 0.001,
-    "z_sim": 6.185527901506336
+    "z_sim": 6.1934064073804125
   },
-  "did_residuals": {
-    "I": 0.06891984640704783,
-    "p_sim": 0.134,
-    "z_sim": 1.073460298763978
+  "did_residuals_monthly": {
+    "n_months": 72,
+    "median_I": 0.3466295738919822,
+    "mean_I": 0.3324606093503436,
+    "n_months_significant_positive_p05": 59,
+    "share_months_significant_positive_p05": 0.8194444444444444,
+    "max_abs_country_mean_residual": 2.420070623797765e-14
   }
 }

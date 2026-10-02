@@ -13,7 +13,7 @@ DOWNLOAD_INFO_ID = "e4662555-eb53-4e45-a3d2-45f6eb044d85"
 REQUEST_URL = "https://land.copernicus.eu/api/@datarequest_post"
 STATUS_URL = "https://land.copernicus.eu/api/@datarequest_status_get"
 
-# NUTS uses 2-letter ISO2 codes, not ISO3 - need the mapping back
+# NUTS uses 2-letter ISO2 codes, not ISO3, so I map back.
 ISO3_TO_ISO2 = {
     "AUT": "AT", "BEL": "BE", "BGR": "BG", "HRV": "HR", "CYP": "CY",
     "CZE": "CZ", "DNK": "DK", "EST": "EE", "FIN": "FI", "FRA": "FR",

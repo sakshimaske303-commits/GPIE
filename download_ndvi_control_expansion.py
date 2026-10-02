@@ -1,6 +1,6 @@
-"""NDVI acquisition for the expanded control group plus a clean Norway
-re-fetch, same pattern as download_ndvi_sentinelhub.py.
-"""
+# Old version, kept for the record. I now use download_ndvi_sentinelhub.py.
+# It takes the latest mosaic of each month, not a monthly mean.
+"""I fetch NDVI stats for the extra control countries, plus Norway again."""
 import os
 import json
 import time

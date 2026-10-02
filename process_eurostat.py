@@ -7,22 +7,18 @@ OUTPUT_PATH = "data/earth_observation/economy/final/gdp_by_country_year.csv"
 
 
 def decode_jsonstat():
-    """
-    Decodes the JSON-stat 2.0 format into a flat, readable table:
-    one row per (country, year) with the GDP value.
-    """
+    """Decode JSON-stat 2.0 into a flat table: one GDP row per (country, year)."""
     with open(INPUT_PATH, "r") as f:
         data = json.load(f)
 
     dims = data["dimension"]
-    dim_order = data["id"]  # order in which dimensions combine, e.g. ['freq','unit','geo','time']
-    sizes = data["size"]    # number of categories in each dimension, in the same order
+    dim_order = data["id"]  # dimension order, e.g. ['freq','unit','geo','time']
+    sizes = data["size"]    # categories per dimension, same order
 
-    # Build ordered label lists for each dimension
     dim_categories = {}
     for dim_name in dim_order:
         category_index = dims[dim_name]["category"]["index"]
-        # category_index maps label -> position; invert it to get position -> label
+        # category_index maps label -> position, so I sort by position to get the labels in order.
         ordered_labels = sorted(category_index.items(), key=lambda x: x[1])
         dim_categories[dim_name] = [label for label, _ in ordered_labels]
 
@@ -36,7 +32,7 @@ def decode_jsonstat():
     for flat_index_str, gdp_value in values.items():
         flat_index = int(flat_index_str)
 
-        # Decode the flat index back into per-dimension indices
+        # The flat index is row-major, so I peel off one dimension at a time from the last.
         remaining = flat_index
         indices = {}
         for dim_name in reversed(dim_order):

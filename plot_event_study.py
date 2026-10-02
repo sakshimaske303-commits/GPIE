@@ -44,12 +44,9 @@ def run_event_study(df):
 
     model = sm.OLS(y, X)
 
-    # Cluster-robust standard errors, clustered by country (see
-    # causal_inference_final_did.py for rationale) - kept consistent across
-    # every model in this project.
+    # I cluster standard errors by country, the same as in all my other models.
     results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
 
-    # Extract coefficients, confidence intervals, p-values, and quarter labels
     plot_data = []
     for q in quarters_to_include:
         col = f"eu_x_{q}"
@@ -57,11 +54,11 @@ def run_event_study(df):
         ci_low, ci_high = results.conf_int().loc[col]
         pval = results.pvalues[col]
         plot_data.append({"quarter": q, "coef": coef, "ci_low": ci_low, "ci_high": ci_high,
-                           "significant": pval < 0.05})
+                           "p": pval, "significant": pval < 0.05})
 
-    # Add the reference quarter itself as zero (by construction)
+    # The reference quarter is zero by construction.
     plot_data.append({"quarter": reference_quarter, "coef": 0.0, "ci_low": 0.0, "ci_high": 0.0,
-                       "significant": False})
+                       "p": None, "significant": False})
 
     plot_df = pd.DataFrame(plot_data).sort_values("quarter").reset_index(drop=True)
     return plot_df
@@ -79,37 +76,43 @@ def make_plot(plot_df):
     ci_high = plot_df["ci_high"].values
     sig_mask = plot_df["significant"].values
 
-    # Error bars representing the 95% confidence interval (cluster-robust)
+    # Error bars are the cluster-robust 95% confidence interval.
     yerr = [coefs - ci_low, ci_high - coefs]
 
     ax.errorbar(x, coefs, yerr=yerr, fmt="o", color="#2c7fb8", ecolor="#a6bddb",
                 elinewidth=2, capsize=4, markersize=6, label="EU x Quarter effect (p ≥ 0.05)")
 
-    # Highlight the small number of nominally significant quarters distinctly,
-    # rather than omitting them - honest reporting includes them, with context
-    # in the accompanying text (see GPIE_Research_Paper.md Section 4.4).
+    # I mark the few nominally significant quarters in red instead of hiding them.
     if sig_mask.any():
         sig_x = [xi for xi, s in zip(x, sig_mask) if s]
         sig_y = coefs[sig_mask]
         ax.scatter(sig_x, sig_y, color="#e34a33", s=90, zorder=5, marker="o",
                    edgecolor="#7a1d0f", linewidth=1.2, label="Nominally significant (p < 0.05)")
 
-    # Zero reference line
     ax.axhline(0, color="gray", linestyle="--", linewidth=1)
 
-    # Treatment date marker (30 June 2021, between 2021Q2 and 2021Q3)
+    # Cutoff sits between 2021Q2 and 2021Q3: the law was adopted 30 June 2021,
+    # so July 2021 is my first post-treatment month.
     treatment_idx = plot_df[plot_df["quarter"] == "2021Q2"].index[0]
     ax.axvline(treatment_idx + 0.5, color="red", linestyle=":", linewidth=1.5,
-               label="European Climate Law (30 June 2021)")
+               label="Climate Law (adopted 30 Jun 2021, in force 29 Jul 2021)")
 
     ax.set_xticks(x)
     ax.set_xticklabels(plot_df["quarter"], rotation=45, ha="right")
     ax.set_ylabel("Estimated EU-27 vs. Control Effect on Mean NO₂\n(relative to 2021Q2, mol/m²)")
     ax.set_xlabel("Quarter")
+    # I build the title from the estimates so it cannot go out of date.
+    est = plot_df[plot_df["p"].notna()]
+    pre = est[est["quarter"] < "2021Q2"]
+    post = est[est["quarter"] > "2021Q2"]
+    n_sig_post = int(post["significant"].sum())
+    n_sig_pre = int(pre["significant"].sum())
+    n_neg_post = int((post["significant"] & (post["coef"] < 0)).sum())
     ax.set_title(
-        "Event-Study: EU-27 vs. 9-Country Control Group NO₂ Difference Over Time\n"
-        "19 of 23 quarters non-significant (cluster-robust SEs); 4 nominally significant post-treatment "
-        "quarters, all negative, cluster in Q2/Q3 of 2022-2024"
+        "Event-Study: EU-27 vs. 9-Country Control Group NO₂ Difference by Quarter (cluster-robust 95% CIs)\n"
+        f"{len(est) - n_sig_pre - n_sig_post} of {len(est)} quarters not significant at 5%; "
+        f"pre-treatment significant: {n_sig_pre} of {len(pre)}; "
+        f"post-treatment significant: {n_sig_post} of {len(post)} ({n_neg_post} negative)"
     )
 
     ax.legend(loc="upper right")

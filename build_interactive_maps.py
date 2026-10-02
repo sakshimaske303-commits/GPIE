@@ -1,8 +1,4 @@
-"""
-GPIE — interactive folium/plotly versions of the static maps in outputs/plots/.
-
-    python build_interactive_maps.py
-"""
+"""I build interactive folium and plotly versions of my static maps and plots."""
 import json
 import os
 
@@ -156,15 +152,8 @@ def build_moran_lisa_map():
 
 
 def build_event_study():
-    # NOTE (fixed): this used to build its own X matrix without the
-    # avg_temp_c / avg_precip_mm / gdp_million_eur controls that
-    # causal_inference_event_study.py uses for the canonical event-study
-    # result reported in the paper - so this chart could (and did) show a
-    # different significance pattern than the paper's own Figure 3. Now
-    # matches that script's specification (same controls, same dropna,
-    # same cluster-robust SEs) so this interactive chart and the paper stay
-    # in sync. If causal_inference_event_study.py's spec changes again,
-    # update this function to match.
+    # I use the same controls, dropna and clustered SEs as causal_inference_event_study.py
+    # so this chart matches my main event-study result.
     df = pd.read_csv(DATA_PATH)
     df["time"] = pd.to_datetime(df["year"].astype(str) + "-" + df["month"].astype(str).str.zfill(2))
     df["month_of_year"] = df["month"]
@@ -239,12 +228,12 @@ def build_synthetic_control():
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=df["date"], y=df["eu27_actual"], name="EU-27 (actual)",
                               line=dict(color="#2c7fb8", width=2)))
-    fig.add_trace(go.Scatter(x=df["date"], y=df["synthetic_control"], name="Synthetic control (7-donor composite)",
+    fig.add_trace(go.Scatter(x=df["date"], y=df["synthetic_control"], name="Synthetic control (9-donor composite)",
                               line=dict(color="#d7191c", width=2, dash="dash")))
     fig.add_vline(x="2021-06-30", line_dash="dot", line_color="gray")
     fig.update_layout(
-        title="Augmented Synthetic Control: EU-27 vs. 7-Country Donor Composite<br>"
-              "<sup>Hover for exact monthly values. Dotted line = European Climate Law effective date.</sup>",
+        title="Synthetic Control (intercept-adjusted): EU-27 vs. 9-Country Donor Composite<br>"
+              "<sup>Hover for exact monthly values. Dotted line = treatment cutoff (Climate Law adopted 30 Jun 2021, in force 29 Jul 2021).</sup>",
         xaxis_title="Date", yaxis_title="Mean NO2 (mol/m²)",
         template="plotly_white", height=550, hovermode="x unified",
     )
@@ -253,9 +242,7 @@ def build_synthetic_control():
 
 
 def distinct_colors(n):
-    # Evenly spaced hues around the color wheel - every country gets a
-    # genuinely different color instead of a handful of colors repeating
-    # (which is what happens with a short palette cycled via modulo).
+    # I space the hues evenly so no two countries share a color.
     import colorsys
     colors = []
     for i in range(n):
@@ -286,7 +273,7 @@ def build_explore_trends():
     fig.add_vline(x="2021-06-30", line_dash="dash", line_color="#f87171")
     fig.update_layout(
         title="Explore NO2 Trends by Country (2019-2024)<br>"
-              "<sup>Click legend entries to toggle countries. Dashed line = European Climate Law effective date.</sup>",
+              "<sup>Click legend entries to toggle countries. Dashed line = treatment cutoff (Climate Law adopted 30 Jun 2021, in force 29 Jul 2021).</sup>",
         xaxis_title="Date", yaxis_title="Mean NO2 (mol/m²)",
         template="plotly_white", height=600, hovermode="x unified",
     )

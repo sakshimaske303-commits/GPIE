@@ -2,10 +2,8 @@ import json
 from download_nuts import download_nuts_country_boundaries, NUTS_RAW_DIR
 import os
 
-# ------------------------------------------
-# Official EU-27 member states (ISO2 -> ISO3 mapping)
-# Note: Greece uses 'EL' in NUTS/Eurostat, not 'GR'
-# ------------------------------------------
+# EU-27 member states, ISO2 -> ISO3.
+# Greece is 'EL' in NUTS and Eurostat, not 'GR'.
 EU27_ISO2_TO_ISO3 = {
     "AT": "AUT", "BE": "BEL", "BG": "BGR", "HR": "HRV", "CY": "CYP",
     "CZ": "CZE", "DK": "DNK", "EE": "EST", "FI": "FIN", "FR": "FRA",
@@ -17,11 +15,7 @@ EU27_ISO2_TO_ISO3 = {
 
 
 def get_eu_country_codes():
-    """
-    Reads the downloaded NUTS country-level GeoJSON and extracts
-    ISO3 country codes for the 27 EU member states only.
-    Returns a list of ISO3 codes (e.g. ["DEU", "FRA", "ITA", ...]).
-    """
+    """Sorted ISO3 codes of the EU-27 countries found in my NUTS file."""
     filepath = os.path.join(NUTS_RAW_DIR, "NUTS_LEVL_0_2024_4326.geojson")
 
     if not os.path.exists(filepath):

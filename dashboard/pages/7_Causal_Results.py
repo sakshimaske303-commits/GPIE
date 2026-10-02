@@ -20,14 +20,14 @@ st.markdown("---")
 
 _checks = [
     "Cluster-Robust SEs (country-clustered)",
-    "Genuine External Control Group (9 non-EU countries)",
-    "Placebo Test (caught &amp; fixed a flawed initial design)",
+    "External Comparison Group (9 non-EU countries)",
+    "Placebo Test (exposed a flawed initial design)",
     "23-Quarter Event-Study Check",
-    "Baseline-Pollution Heterogeneity Check (significant)",
-    "5 Additional Robustness Checks",
-    "Augmented Synthetic Control (Independent Method)",
+    "Baseline-Pollution Split (post-hoc)",
+    "Treatment-Date &amp; EU-Trend Checks",
+    "Synthetic Control (intercept-adjusted)",
     "Moran's I Spatial-Autocorrelation Check",
-    "Minimum Detectable Effect Quantified (12.7%)",
+    "Minimum Detectable Effect Quantified (~5.5%)",
     "Honest, Nuanced Result Disclosed",
 ]
 _badges = "".join(
@@ -52,11 +52,11 @@ st.markdown("### The Final Model: Two-Group Difference-in-Differences")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric("DiD Coefficient (Pooled)", "−2.22 × 10⁻⁶")
+    st.metric("DiD Coefficient (Pooled)", "−1.52 × 10⁻⁶", "≈ 4.9% of EU pre-treatment mean", delta_color="off")
 with col2:
-    st.metric("P-value", "0.101", "Not significant")
+    st.metric("P-value", "0.013", "Significant at 5%", delta_color="off")
 with col3:
-    st.metric("95% CI", "spans zero", "[-4.87e-6, +4.32e-7]")
+    st.metric("95% CI", "excludes zero", "[-2.73e-6, -3.16e-7]", delta_color="off")
 
 st.markdown(
     "<p class='caption-text'>Standard errors are clustered by country to account for "
@@ -65,38 +65,35 @@ st.markdown(
 )
 
 st.warning(
-    "**Result: No statistically distinguishable pooled, EU-wide effect detected at the conventional 5% level.** "
-    "Once genuinely compared against a 9-country non-EU control group, the pooled NO₂ decline observed in EU-27 "
-    "countries is not statistically different from the decline observed in the control group over the same period — "
-    "though the p-value (0.101) is noticeably closer to conventional significance than a smaller control group's "
-    "estimate. At 80% statistical power, this design can reliably detect a pooled effect of roughly 12.7% of "
-    "baseline EU NO₂ or larger. A heterogeneity check below finds the pooled null conceals a statistically "
-    "significant effect concentrated in higher-baseline, more industrialized EU countries."
+    "**Result: NO₂ fell more in the EU-27 than in the comparison group — but the timing does not point to the "
+    "Climate Law.** The pooled estimate is significant (p = 0.013; −4.2% on the log scale, p = 0.034). However, "
+    "nothing changes in the first two years after the law and the whole decline appears from July 2023, every "
+    "alternative cutoff date (±6/±12 months) is also significant, and once a steady EU-specific trend is allowed "
+    "the treatment-date effect disappears (+8.7 × 10⁻⁷, p = 0.243). The data fit a relative decline that emerges "
+    "about two years after the law, not a step change at it. (Earlier versions of this dashboard reported a pooled null, p = 0.101; that was "
+    "based on end-of-month NO₂ snapshots and is superseded — see Methodology.)"
 )
 
 st.markdown("---")
 
 st.markdown("""
-### Event-Study Validation
+### Event Study
 
-To test this result's robustness, the treatment effect was estimated **separately for every 
+To check the timing of this result, the treatment effect was estimated **separately for every 
 individual quarter** from 2019 to 2024, rather than as a single average. This serves two purposes: 
-verifying that EU and control-group countries followed similar trends **before** treatment 
-(supporting the model's core assumption), and checking whether a delayed effect might have been 
+checking whether EU and comparison countries already diverged **before** treatment, and checking whether a delayed effect might have been 
 hidden by averaging across the full post-treatment period.
 """)
 
 st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "event_study_plot.png"), use_container_width=True)
 
 st.markdown("""
-**Finding**: Under cluster-robust standard errors, 19 of the 23 quarters — both before and after
-the 30 June 2021 treatment date — show no statistically significant effect, and every pre-treatment
-quarter is non-significant, supporting the model's parallel-trends assumption. Four post-treatment
-quarters are nominally significant (2022Q2, 2023Q2, 2024Q2, 2024Q3) — more than the ~1 false
-positive expected by chance across 23 independent tests — and, unlike a thinner control group's
-event study, these four form a consistent pattern: all negative, all falling in the second or
-third calendar quarter. This corroborates the heterogeneity finding below rather than the pooled
-average alone.
+**Finding**: 7 of the 9 pre-treatment quarters differ significantly from the reference quarter, so the
+EU-27 and the comparison group were **not** on parallel trends before the law. The coefficients follow a
+seasonal pattern — positive in Q1/Q4, negative in Q2/Q3 — that continues after treatment (8 of 14
+post-treatment quarters significant, 6 negative). This is what a larger seasonal NO₂ cycle in the more
+polluted EU countries would produce; it is not a dated policy response. The coefficients come from a single
+regression with a shared reference quarter, so they are not independent tests.
 """)
 
 st.markdown("---")
@@ -104,83 +101,115 @@ st.markdown("---")
 st.markdown("### Heterogeneity by Baseline Pollution Level")
 
 st.markdown("""
-The pooled EU-27 estimate could mask an effect concentrated in a subset of countries. Splitting
-the treatment group at the median pre-treatment NO₂ level into 14 higher-baseline (more
-industrialized, largely Western/Central European) and 13 lower-baseline countries, each
-re-estimated separately against the full control group:
+The pooled EU-27 estimate could mask differences between countries. This post-hoc check splits
+the EU-27 at the median pre-treatment NO₂ level into 14 higher-baseline and 13 lower-baseline
+countries, each estimated separately against the full comparison group:
 """)
 
 hcol1, hcol2 = st.columns(2)
 with hcol1:
-    st.metric("Higher-Baseline Subgroup", "−5.46 × 10⁻⁶", "p = 0.003 — significant")
+    st.metric("Higher-Baseline Subgroup (level)", "−2.85 × 10⁻⁶", "p = 0.002", delta_color="off")
+    st.caption("Log scale: −6.4%, p = 0.006")
 with hcol2:
-    st.metric("Lower-Baseline Subgroup", "+1.53 × 10⁻⁶", "p = 0.189 — not significant")
+    st.metric("Lower-Baseline Subgroup (level)", "+0.09 × 10⁻⁶", "p = 0.758", delta_color="off")
+    st.caption("Log scale: −1.5%, p = 0.409")
 
-st.error(
-    "**This is the clearest single piece of evidence that the pooled null is averaging a real, "
-    "concentrated effect together with little-to-no effect elsewhere, rather than reflecting a "
-    "genuine absence of any EU-specific effect.** It does not overturn the pooled estimate as this "
-    "study's headline, conservative result, and a subgroup split roughly halves the statistical "
-    "power available to the pooled model — but it is corroborated by the event-study pattern above "
-    "and is reported as a substantive finding in its own right."
+st.warning(
+    "**The relative decline is concentrated in the more polluted member states, on both the level and the "
+    "log scale.** This describes where NO₂ fell, not why: the split was chosen after seeing the pooled result, "
+    "is defined by the outcome itself, and the same timing problems (pre-treatment differences, significant "
+    "alternative dates, EU-specific trend) apply to it."
 )
 
 st.markdown("---")
 
-st.markdown("### Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
+st.markdown("### Additional Checks: Synthetic Control &amp; Spatial Diagnostics")
 
 st.markdown("""
-Two further checks target the pooled estimate directly, using methods structurally
-independent of the DiD specification itself.
+Two further checks on the pooled estimate.
 """)
 
 sc1, sc2 = st.columns(2)
 with sc1:
-    st.markdown("**Augmented Synthetic Control**")
+    st.markdown("**Synthetic Control (intercept-adjusted)**")
     st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "synthetic_control_gap.png"), use_container_width=True)
     st.markdown(
-        "<p class='caption-text'>Donor pool: 7 countries (UK, Switzerland, Albania, Bosnia and "
-        "Herzegovina, Montenegro, North Macedonia, Serbia), weighted rather than averaged equally. "
-        "Norway and Iceland excluded — both still show substantial NO₂ coverage gaps even after a "
-        "clean re-fetch, a genuine high-latitude satellite limitation. "
-        "Post-treatment gap = −1×10⁻⁶, same sign and order of magnitude as the pooled DiD coefficient "
-        "(−2.22×10⁻⁶), reached through a method that doesn't use the DiD model's fixed effects at all. "
-        "With 7 donors, the in-space placebo is a genuine permutation check: the real EU-27 gap ranks "
-        "2nd of 8 by size.</p>",
+        "<p class='caption-text'>Donor pool: all 9 comparison countries, weighted rather than averaged equally "
+        "(weights: Serbia 40%, Switzerland 32%, UK 28%). Post-treatment gap = −8.1×10⁻⁷ over 36 complete-data "
+        "months; pre-treatment fit error (RMSPE) = 2.56×10⁻⁶. In the in-space placebo the EU-27 gap ranks 5th of "
+        "10 — it does not stand out from untreated countries.</p>",
         unsafe_allow_html=True,
     )
 with sc2:
     st.markdown("**Moran's I Spatial Autocorrelation**")
-    moran_html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.html")
-    if os.path.exists(moran_html_path):
-        with open(moran_html_path, "r", encoding="utf-8") as f:
-            components.html(f.read(), height=480)
-    else:
-        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.png"), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "moran_lisa_cluster_map.png"), use_container_width=True)
     st.markdown(
-        "<p class='caption-text'>Raw NO₂ levels are strongly spatially clustered (I=0.570, p=0.001) — "
-        "expected, pollution crosses borders. The DiD model's residuals are not significantly "
-        "clustered (I=0.069, p=0.135): country and month fixed effects already absorb most of it, "
-        "directly testing rather than assuming the country-clustered standard errors are adequate.</p>",
+        "<p class='caption-text'>Raw NO₂ levels are strongly spatially clustered (I=0.578, p=0.001) — "
+        "pollution crosses borders. The DiD residuals, tested month by month, are also clustered "
+        "(median I = 0.347; significant in 59 of 72 months), so the fixed effects do not remove the "
+        "cross-border dependence and the country-clustered p-values are likely too small.</p>",
         unsafe_allow_html=True,
     )
+
+st.markdown("---")
+
+st.markdown("### Identification and Inference Checks")
+
+st.markdown("""
+These checks re-estimate the two-group model with **year-month fixed effects** and an **EU-specific seasonal
+cycle**, add meteorological and COVID-19 controls, and test the result with methods suited to a small number
+of comparison countries (`causal_inference_identification_checks.py`).
+""")
+
+_checks = pd.DataFrame([
+    ["Headline model (common seasonal cycle)", "−1.52 × 10⁻⁶", "0.013"],
+    ["Year-month FE + EU-specific seasonality", "−1.34 × 10⁻⁶", "0.016"],
+    ["  + wind speed and boundary-layer height", "−1.36 × 10⁻⁶", "0.016"],
+    ["  + COVID-19 stringency index (34 countries)", "−1.48 × 10⁻⁶", "0.014"],
+    ["  without GDP", "−1.31 × 10⁻⁶", "0.074"],
+    ["  excluding Mar 2020 – Jun 2021 (COVID-19 window)", "−2.25 × 10⁻⁶", "0.011"],
+    ["  excluding Jul 2021 – Dec 2022 (energy-crisis months)", "−2.08 × 10⁻⁶", "0.005"],
+    ["  excluding 2023 – 2024", "−2.6 × 10⁻⁷", "0.545"],
+], columns=["Specification", "Coefficient (mol/m²)", "p (cluster-robust)"])
+st.dataframe(_checks, hide_index=True, use_container_width=True)
+
+_blocks = pd.DataFrame([
+    ["Jan – Jun 2019 (pre)", "+1.93 × 10⁻⁶", "0.168"],
+    ["Jul 2019 – Jun 2020 (pre)", "+1.5 × 10⁻⁷", "0.773"],
+    ["Jul 2020 – Jun 2021 (reference)", "0", "—"],
+    ["Jul 2021 – Jun 2022", "+1 × 10⁻⁸", "0.982"],
+    ["Jul 2022 – Jun 2023", "−5.1 × 10⁻⁷", "0.441"],
+    ["Jul 2023 – Jun 2024", "−2.18 × 10⁻⁶", "0.008"],
+    ["Jul – Dec 2024", "−1.25 × 10⁻⁶", "0.137"],
+], columns=["12-month block", "EU vs. comparison (mol/m²)", "p"])
+st.dataframe(_blocks, hide_index=True, use_container_width=True)
+
+st.markdown(
+    "<p class='caption-text'>With an EU-specific seasonal cycle the pre-treatment blocks are not significant "
+    "(joint p = 0.292), so the quarterly pre-treatment differences were largely seasonal. But the first two "
+    "post-treatment years show nothing, and the decline appears only from July 2023. Wild cluster bootstrap "
+    "p = 0.018; randomization inference p = 0.16. The NO₂ values come from one consistent reprocessed record "
+    "(v2.4.0) up to July 2022 and operational v2.4–2.7 products afterwards, so there is no processor change at "
+    "the treatment date.</p>",
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 
 st.markdown("### How This Result Was Reached")
 
 st.markdown("""
-This finding was not the project's first result — it emerged only after a rigorous validation 
-process that fundamentally changed the analytical approach:
+This finding was not the project's first result — it emerged after two corrections that
+changed the analysis:
 """)
 
 col1, col2, col3 = st.columns(3)
 with col1:
     st.error("**1️⃣ Initial Model**\n\nSingle-cohort design (all EU countries, no control group) found a seemingly significant effect (p=0.026 as originally computed with classical SEs; p=0.041 cluster-robust, still significant — see Methodology). Reproducible via `causal_inference_initial_model.py`.")
 with col2:
-    st.error("**2️⃣ Placebo Test Failed**\n\nTesting a fake treatment date found an equally 'significant' effect — revealing the original result was actually a general pollution-decline trend")
+    st.error("**2️⃣ Placebo Test Failed**\n\nTesting a fake treatment date found an equally 'significant' effect — the single-cohort design could not separate the policy date from Europe's ongoing NO₂ decline")
 with col3:
-    st.success("**3️⃣ Control Group Added**\n\nA genuine non-EU comparison group was built, producing this project's honest, rigorously validated finding")
+    st.success("**3️⃣ Control Group Added, Data Corrected**\n\nA non-EU comparison group was built, and the NO₂ series was later rebuilt as true monthly means (it had been end-of-month snapshots). The estimates on this page use both corrections.")
 
 st.markdown("---")
 
@@ -189,10 +218,10 @@ st.markdown("### Full Regression Output")
 coef_data = {
     "Variable": ["DiD Interaction (treatment_group × post)", "Post (main effect)",
                  "Average Temperature", "Average Precipitation", "GDP"],
-    "Coefficient": ["−2.22 × 10⁻⁶", "—", "—", "—", "—"],
-    "P-value (cluster-robust)": ["0.101", "—", "—", "—", "—"],
+    "Coefficient": ["−1.52 × 10⁻⁶", "—", "—", "—", "—"],
+    "P-value (cluster-robust)": ["0.013", "—", "—", "—", "—"],
     "Interpretation": [
-        "Core causal estimate (pooled) — not significant at 5%; significant in the higher-baseline subgroup",
+        "Core estimate (pooled) — significant at 5%, but not robust to an EU-specific trend or alternative dates",
         "Common trend, shared by both groups",
         "Control variable",
         "Control variable",
@@ -220,13 +249,15 @@ def load_comparison_data():
 
 
 comp_df = load_comparison_data()
-comp_df["period"] = comp_df["year"].apply(lambda y: "Pre-2021 (2019–2020)" if y <= 2020 else "Post-2021 (2021–2024)")
+# Same split as the model: July 2021 is the first post-treatment month.
+comp_df["period"] = ((comp_df["year"] * 100 + comp_df["month"]) <= 202106).map(
+    {True: "Pre (Jan 2019 – Jun 2021)", False: "Post (Jul 2021 – Dec 2024)"})
 
 grouped = comp_df.groupby(["treatment_group", "period"])["mean_no2"].mean().reset_index()
 grouped["group_label"] = grouped["treatment_group"].map({1: "EU-27 (Treatment)", 0: "Control Group"})
 
 fig_bar = go.Figure()
-colors = {"Pre-2021 (2019–2020)": "#7c3aed", "Post-2021 (2021–2024)": "#00d4ff"}
+colors = {"Pre (Jan 2019 – Jun 2021)": "#7c3aed", "Post (Jul 2021 – Dec 2024)": "#00d4ff"}
 
 for period in grouped["period"].unique():
     period_data = grouped[grouped["period"] == period]
@@ -252,8 +283,9 @@ fig_bar.update_layout(
 st.plotly_chart(fig_bar, use_container_width=True)
 
 st.markdown(
-    "<p class='caption-text'>Both groups show a similar decline pattern from the pre- to post-treatment period — "
-    "visually consistent with the DiD model's non-significant interaction term.</p>",
+    "<p class='caption-text'>Raw group means (descriptive): the EU-27 mean falls by about 5% while the comparison-group "
+    "mean is almost unchanged. The DiD model confirms the difference is significant; the timing checks above show it "
+    "is not tied to the Climate Law's date.</p>",
     unsafe_allow_html=True,
 )
 
@@ -267,26 +299,25 @@ single-cohort NDVI model (mirroring NO₂'s already-invalidated original design)
 reported as finding no effect (p=0.128) — a later verification pass found that figure had used
 classical, not cluster-robust, standard errors; correctly re-estimated, that same initial model
 was already significant (p=0.0017). Either way, a single-cohort design can't reliably isolate a
-policy-specific effect from a general trend, so the control-group correction below remains the
-trustworthy result — its role here is better identification, not first-time significance:
+policy-specific effect from a general trend, so the two-group estimate below is the one reported:
 """)
 
 ncol1, ncol2, ncol3 = st.columns(3)
 with ncol1:
-    st.metric("NDVI DiD Coefficient", "−0.0145")
+    st.metric("NDVI DiD Coefficient", "−0.0194")
 with ncol2:
-    st.metric("P-value", "0.007", "Significant")
+    st.metric("P-value", "0.005", "Significant", delta_color="off")
 with ncol3:
-    st.metric("95% CI", "excludes zero", "[-0.0250, -0.0039]")
+    st.metric("95% CI", "excludes zero", "[-0.0330, -0.0058]", delta_color="off")
 
 st.error(
     "**A statistically significant relative decline in EU-27 vegetation health versus the "
-    "control group, following the Climate Law's effective date.** This is not interpreted as "
+    "comparison group after the Climate Law date.** This is not interpreted as "
     "evidence the Climate Law itself reduced vegetation health — the Climate Law is an "
     "emissions-focused instrument, not a land-use policy, and this analysis does not control for "
     "land-use change, drought/precipitation-driven vegetation stress, or agricultural-policy "
-    "shifts between treatment and control regions. It is reported as an honest, statistically "
-    "robust secondary finding meriting further investigation, not a causal claim."
+    "shifts between treatment and control regions. It is reported as an exploratory association, "
+    "not a causal claim."
 )
 
 st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "ndvi_eu_vs_control_bar_chart.png"), use_container_width=True)

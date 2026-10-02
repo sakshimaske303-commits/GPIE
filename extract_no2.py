@@ -1,20 +1,11 @@
-# NOTE: used by run_pipeline.py; the project's final NO2 dataset traces to
-# download_no2_sentinelhub.py instead — see the note at the top of
-# run_pipeline.py.
+# run_pipeline.py uses this. My final NO2 data comes from download_no2_sentinelhub.py.
 import harp
 import os
 
 
 def preprocess_file(input_filepath, output_dir):
-    """
-    Preprocesses a single Sentinel-5P Level-2 NO2 file:
-    - Applies QA filter (qa_value >= 0.75)
-    - Extracts required variables
-    - Bins to 0.05 degree grid
-    - Saves as Intermediate Level-3 NetCDF
-
-    Returns the output filepath on success, None on failure.
-    """
+    """Filter one Sentinel-5P NO2 file by QA, bin it to a 0.05 degree grid, save as Level-3.
+    Returns the output path, or None."""
     try:
         operations = (
             "tropospheric_NO2_column_number_density_validity>75;"

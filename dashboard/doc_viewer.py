@@ -1,29 +1,10 @@
-"""
-Reusable no-download document viewer for Streamlit apps.
-Renders a row of buttons; clicking one opens the PDF (served from
-Streamlit's static file server) in a new browser tab, where the browser's
-own PDF viewer displays it inline.
-
-Why a new tab, not an embedded modal: an earlier version of this component
-embedded the PDF inside an iframe drawn directly into the page (via
-window.parent.document), which worked locally but failed once deployed --
-Streamlit Community Cloud blocks iframe-embedding of app content as a
-clickjacking protection, so the request came back as a browser-level
-"refused to connect", not a missing-file or CORS error. Opening the same
-same-origin static-file URL as a normal top-level navigation (a new tab)
-sidesteps that restriction entirely, since no framing is involved.
-"""
+"""Row of buttons that open my PDFs in a new browser tab (Streamlit Cloud blocks iframe embeds)."""
 import streamlit.components.v1 as components
 import json
 
 
 def render_doc_viewer(docs, colors, height=70):
-    """
-    docs: list of {"label": str, "filename": str} -- filename must be the
-          exact name of a file placed in the app's static/ folder.
-    colors: dict with keys navy_dark, navy_med, magenta, teal, text_light
-    height: px height of the button row component.
-    """
+    """docs is a list of {"label", "filename"}; each filename must be a file in the static/ folder."""
     docs_json = json.dumps(docs)
     colors_json = json.dumps(colors)
     html = f"""

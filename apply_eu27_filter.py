@@ -51,6 +51,10 @@ def filter_gdp():
 
     filtered = df[df["geo"].isin(EU27)]
 
+    # The Eurostat file has many units. I keep only MIO_EUR (current prices, million EUR).
+    if "unit" in filtered.columns:
+        filtered = filtered[filtered["unit"] == "MIO_EUR"].drop(columns=["unit"])
+
     filtered = filtered.rename(columns={"value": "gdp_million_eur"})
 
     filtered.to_csv(path, index=False)
@@ -93,12 +97,7 @@ def filter_no2():
 
 
 def filter_climate_all_countries():
-    """
-    Filters the all-countries (EU-27 + UK/NO/CH) climate file down to
-    exactly those 30 countries, excluding other non-EU NUTS entities
-    (Turkey, Iceland, Kosovo, etc.) that aren't part of the causal-
-    inference control-group design.
-    """
+    """Keep only EU-27 plus UK, NO and CH in the all-countries climate file."""
     path = "data/earth_observation/climate/final/era5_stats_all_countries_monthly.json"
     backup_path = path.replace(".json", "_full.json")
 

@@ -60,7 +60,7 @@ def make_map():
 
     merged.plot(
         column="avg_ndvi",
-        cmap="YlGn",  # yellow-to-green, intuitive for vegetation health
+        cmap="YlGn",  # yellow to green reads well for vegetation
         linewidth=0.6,
         edgecolor="#333333",
         ax=ax,

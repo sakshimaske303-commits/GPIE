@@ -2,11 +2,7 @@ from config import MIN_LON, MIN_LAT, MAX_LON, MAX_LAT
 
 
 def generate_bbox_grid(min_lon, min_lat, max_lon, max_lat, n_cols, n_rows):
-    """
-    Splits the given bounding box into an n_cols x n_rows grid.
-    Returns a list of [north, east, south, west] boxes,
-    in the format required by the CLMS BoundingBox parameter.
-    """
+    """Split the box into a grid of [north, east, south, west] cells, the order CLMS needs."""
     lon_step = (max_lon - min_lon) / n_cols
     lat_step = (max_lat - min_lat) / n_rows
 

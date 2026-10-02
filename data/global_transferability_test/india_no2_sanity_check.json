@@ -1,0 +1,11 @@
+{
+  "months_requested": 72,
+  "months_with_data": 72,
+  "india_min": 2.2749162067472356e-05,
+  "india_median": 3.315249433863298e-05,
+  "india_max": 4.160221891755044e-05,
+  "india_negative_months": 0,
+  "eu27_country_month_p5": 1.3365518757653604e-05,
+  "eu27_country_month_p95": 6.336702696422455e-05,
+  "india_share_within_eu27_p5_p95": 1.0
+}

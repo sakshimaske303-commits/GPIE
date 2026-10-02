@@ -6,16 +6,12 @@ from config import MIN_LON, MIN_LAT, MAX_LON, MAX_LAT
 
 WORLDCOVER_RAW_DIR = "data/earth_observation/land_cover/raw"
 
-# Public AWS Open Data bucket (no authentication required)
+# Public AWS Open Data bucket, no login needed.
 BASE_URL = "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map"
 
 
 def generate_tile_name(lat, lon):
-    """
-    Builds the ESA WorldCover tile name for the 3x3 degree cell
-    whose lower-left corner is (lat, lon), rounded down to the
-    nearest multiple of 3.
-    """
+    """WorldCover tile name for the 3x3 degree cell, corner rounded down to a multiple of 3."""
     lat_floor = (lat // 3) * 3
     lon_floor = (lon // 3) * 3
 
@@ -30,10 +26,7 @@ def generate_tile_name(lat, lon):
 
 
 def download_tile(lat, lon, max_retries=3):
-    """
-    Downloads a single WorldCover tile if it exists and isn't already complete.
-    Returns "downloaded", "skipped", "not_found", or "failed".
-    """
+    """Download one tile. Returns "downloaded", "skipped", "not_found" or "failed"."""
     tile_name = generate_tile_name(lat, lon)
     url = f"{BASE_URL}/{tile_name}.tif"
 
@@ -73,10 +66,7 @@ def download_tile(lat, lon, max_retries=3):
 
 
 def download_worldcover_for_bbox(min_lon, min_lat, max_lon, max_lat):
-    """
-    Downloads all WorldCover tiles intersecting the given bounding box.
-    Iterates in steps of 3 degrees (WorldCover's native tile grid).
-    """
+    """Download every tile that touches the box, in steps of 3 degrees (the WorldCover grid)."""
     lat_start = int((min_lat // 3) * 3)
     lat_end = int((max_lat // 3) * 3)
     lon_start = int((min_lon // 3) * 3)

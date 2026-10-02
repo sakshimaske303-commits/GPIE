@@ -55,10 +55,7 @@ def make_map():
 
     merged = gdf.merge(avg_gdp, on="country", how="left")
 
-    # GDP is highly right-skewed (a few large economies dwarf most others),
-    # so a raw linear color scale compresses most countries into a nearly
-    # indistinguishable pale range. Log-transforming spreads the color
-    # scale more evenly across the actual data distribution.
+    # GDP is very right-skewed, so I use log10 to spread the colors across countries.
     merged["log_gdp"] = np.log10(merged["avg_gdp"])
 
     bounds = (-25, 34, 35, 72)

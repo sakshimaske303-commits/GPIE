@@ -19,7 +19,7 @@ def load_json(path):
 
 
 def load_gdp_lookup():
-    """GDP is country-year (no month) -> lookup dict keyed by (NUTS_ID, year)"""
+    """GDP is yearly, so the lookup is keyed by (NUTS_ID, year)."""
     lookup = {}
     with open(GDP_PATH) as f:
         reader = csv.DictReader(f)
@@ -30,7 +30,7 @@ def load_gdp_lookup():
 
 
 def load_static_lookup(data, id_field="NUTS_ID"):
-    """Land Cover / DEM are static (country only) -> lookup dict keyed by NUTS_ID"""
+    """Land cover and DEM are static per country, so the lookup is keyed by NUTS_ID."""
     lookup = {}
     for record in data:
         lookup[record[id_field]] = record
@@ -45,7 +45,7 @@ def build_master_dataset():
     landcover_lookup = load_static_lookup(load_json(LANDCOVER_PATH))
     dem_lookup = load_static_lookup(load_json(DEM_PATH))
 
-    # Build lookups for the monthly datasets, keyed by (NUTS_ID, year, month)
+    # Monthly lookups are keyed by (NUTS_ID, year, month)
     ndvi_lookup = {(r["NUTS_ID"], r["year"], r["month"]): r for r in ndvi_data}
 
     climate_lookup = {}
@@ -56,7 +56,7 @@ def build_master_dataset():
 
     master_rows = []
 
-    # NO2 is the base table (most granular, drives the merge)
+    # NO2 is my base table; everything else is joined onto it.
     for row in no2_data:
         nuts_id = row["NUTS_ID"]
         year = row["year"]
@@ -69,33 +69,31 @@ def build_master_dataset():
             "mean_no2": row.get("mean_no2"),
         }
 
-        # NDVI join
         ndvi_row = ndvi_lookup.get((nuts_id, year, month))
         merged_row["mean_ndvi"] = ndvi_row["mean_ndvi"] if ndvi_row else None
 
-        # Climate join
         climate_row = climate_lookup.get((nuts_id, year, month))
         merged_row["avg_temp_c"] = climate_row["avg_temperature_c"] if climate_row else None
         merged_row["avg_precip_mm"] = climate_row["avg_precipitation_mm"] if climate_row else None
 
-        # GDP join (country-year only, repeats across months of the same year)
+        # GDP is yearly, so it repeats across the months of a year.
         merged_row["gdp_million_eur"] = gdp_lookup.get((nuts_id, year))
 
-        # Land Cover join (static, country only, repeats across all rows for that country)
+        # Land cover is static, so it repeats on every row of a country.
         lc_row = landcover_lookup.get(nuts_id)
         if lc_row:
             for key, val in lc_row.items():
                 if key == "NUTS_ID":
                     continue
                 if isinstance(val, dict):
-                    # This is the nested class-percentage dictionary — flatten it
+                    # Nested class-percentage dict, so I flatten it into columns.
                     for class_name, percent in val.items():
                         clean_name = class_name.lower().replace("/", "_").replace(" ", "_")
                         merged_row[f"landcover_{clean_name}"] = percent
                 else:
                     merged_row[f"landcover_{key}"] = val
 
-        # DEM join (static, country only, repeats across all rows for that country)
+        # DEM is static too.
         dem_row = dem_lookup.get(nuts_id)
         if dem_row:
             for key, val in dem_row.items():
@@ -104,21 +102,18 @@ def build_master_dataset():
 
         master_rows.append(merged_row)
 
-    # Write to CSV
     if master_rows:
-        # Collect fieldnames from ALL rows (not just the first), since
-        # different countries may have different land cover classes present.
+        # I take fieldnames from all rows because countries have different land cover classes.
         all_fieldnames = set()
         for row in master_rows:
             all_fieldnames.update(row.keys())
 
-        # Keep a stable, readable column order: core fields first, then the rest alphabetically
+        # Core fields first, then the rest alphabetically
         priority_fields = ["NUTS_ID", "year", "month", "mean_no2", "mean_ndvi", "avg_temp_c", "avg_precip_mm", "gdp_million_eur"]
         remaining_fields = sorted(f for f in all_fieldnames if f not in priority_fields)
         fieldnames = priority_fields + remaining_fields
 
-        # Land cover columns: missing means the class is genuinely absent (0%),
-        # not unknown data — fill accordingly before writing.
+        # A missing land cover class means it is absent (0%), not unknown, so I fill 0.
         landcover_cols = [f for f in fieldnames if f.startswith("landcover_")]
         for row in master_rows:
             for col in landcover_cols:

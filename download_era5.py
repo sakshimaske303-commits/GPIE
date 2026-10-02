@@ -7,7 +7,7 @@ DATASET = "reanalysis-era5-single-levels-monthly-means"
 
 VARIABLES = ["2m_temperature", "total_precipitation"]
 
-# [North, West, South, East] - matches project's European Bounding Box
+# [North, West, South, East], my European bounding box.
 AREA = [71.5, -31.5, 27.5, 35.0]
 
 STUDY_START_YEAR = 2019
@@ -15,11 +15,7 @@ STUDY_END_YEAR = 2024
 
 
 def download_era5_year(client, year):
-    """
-    Downloads monthly-averaged ERA5 temperature and precipitation
-    for all 12 months of a given year, for the European bounding box.
-    Skips if already downloaded. Returns True on success.
-    """
+    """Monthly ERA5 temperature and precipitation for one year. Returns True on success."""
     os.makedirs(ERA5_RAW_DIR, exist_ok=True)
     filename = f"era5_monthly_{year}.nc"
     filepath = os.path.join(ERA5_RAW_DIR, filename)

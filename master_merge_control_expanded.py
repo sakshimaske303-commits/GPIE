@@ -1,7 +1,5 @@
-"""Builds the expanded control-group dataset (original 30 + Iceland/Balkans,
-Norway NO2 replaced); writes a separate file, doesn't touch
-master_dataset_control.csv.
-"""
+"""I build the expanded control-group dataset (original 30 + Iceland/Balkans, Norway NO2 replaced).
+It goes to a separate file, so master_dataset_control.csv is not touched."""
 import json
 import csv
 import os
@@ -61,8 +59,7 @@ def flatten_nested_stats(raw_data, variable_key):
 
 
 def overlay_by_key(original_flat, expansion_flat, variable_key):
-    """Expansion records win on (country, year, month) collisions - this is
-    how Norway's re-fetched NO2 replaces its gappy original series."""
+    """Expansion rows win on a key clash, so Norway's refetched NO2 replaces the gappy original."""
     merged = {}
     for r in original_flat:
         merged[(r["country"], r["year"], r["month"])] = r

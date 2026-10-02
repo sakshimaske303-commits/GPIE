@@ -1,12 +1,14 @@
-"""Builds the master dataset: EU-27 vs. 9-country non-EU control group,
-2019-2024 monthly, merging base + supplementary source files.
-"""
+"""I build the master dataset: EU-27 vs. my 9-country non-EU control group, monthly 2019-2024."""
 import json
 import csv
 import os
 from datetime import datetime
 
-# Input paths
+# If the 36-country monthly-mean file exists I use it alone.
+# The base + supplementary files below are only a fallback (old SIMPLE-mosaicking data).
+NO2_MONTHLY_MEAN_PATH = "data/earth_observation/no2/final/no2_stats_monthly_mean_36.json"
+NDVI_MONTHLY_MEAN_PATH = "data/earth_observation/ndvi/final/ndvi_stats_monthly_mean_36.json"
+
 NO2_BASE_PATH = "data/earth_observation/no2/final/no2_stats_all_countries.json"
 NO2_SUPP_PATH = "data/earth_observation/no2/final/no2_stats_control_expansion.json"
 
@@ -39,11 +41,8 @@ def load_json(path):
 
 
 def flatten_nested_stats(raw_data, variable_key):
-    """
-    Flattens the raw nested Sentinel Hub Statistical API response
-    (used for both NO2 and NDVI) into per-country-year-month records.
-    variable_key is "no2" or "ndvi", matching the evalscript output id.
-    """
+    """Flatten the nested Statistical API response into country-year-month rows.
+    variable_key is "no2" or "ndvi", the evalscript output id."""
     flat_records = []
     for country_year_record in raw_data:
         country_code = country_year_record["NUTS_ID"]
@@ -66,8 +65,7 @@ def flatten_nested_stats(raw_data, variable_key):
 
 
 def overlay_by_key(base_flat, supp_flat):
-    """Supplementary records win on (country, year, month) collisions -
-    this is how Norway's clean-refetch NO2 replaces its original series."""
+    """Supplementary rows win on a key clash, so Norway's refetched NO2 replaces the original."""
     merged = {}
     for r in base_flat:
         merged[(r["country"], r["year"], r["month"])] = r
@@ -88,7 +86,7 @@ def overlay_climate(base_data, supp_data):
 
 
 def load_combined_gdp_lookup():
-    """Combines EU-27 (Eurostat) and control-group (World Bank) GDP into one lookup."""
+    """EU-27 (Eurostat) and control-group (World Bank) GDP in one lookup."""
     lookup = {}
 
     for path in (GDP_EU_PATH, GDP_CONTROL_PATH, GDP_SUPP_PATH):
@@ -104,14 +102,20 @@ def load_combined_gdp_lookup():
     return lookup
 
 
-def build_master_dataset():
-    no2_base = flatten_nested_stats(load_json(NO2_BASE_PATH), "no2")
-    no2_supp = flatten_nested_stats(load_json(NO2_SUPP_PATH), "no2")
-    no2_flat = overlay_by_key(no2_base, no2_supp)
+def load_variable(monthly_mean_path, base_path, supp_path, key):
+    if os.path.exists(monthly_mean_path):
+        print(f"{key}: using {monthly_mean_path} (monthly means, 36 countries)")
+        return flatten_nested_stats(load_json(monthly_mean_path), key)
+    print(f"WARNING {key}: {monthly_mean_path} not found - falling back to the historical "
+          f"SIMPLE-mosaicking files ({base_path} + {supp_path}).")
+    base = flatten_nested_stats(load_json(base_path), key)
+    supp = flatten_nested_stats(load_json(supp_path), key)
+    return overlay_by_key(base, supp)
 
-    ndvi_base = flatten_nested_stats(load_json(NDVI_BASE_PATH), "ndvi")
-    ndvi_supp = flatten_nested_stats(load_json(NDVI_SUPP_PATH), "ndvi")
-    ndvi_flat = overlay_by_key(ndvi_base, ndvi_supp)
+
+def build_master_dataset():
+    no2_flat = load_variable(NO2_MONTHLY_MEAN_PATH, NO2_BASE_PATH, NO2_SUPP_PATH, "no2")
+    ndvi_flat = load_variable(NDVI_MONTHLY_MEAN_PATH, NDVI_BASE_PATH, NDVI_SUPP_PATH, "ndvi")
 
     print(f"NO2 flattened: {len(no2_flat)} records")
     print(f"NDVI flattened: {len(ndvi_flat)} records")

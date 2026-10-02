@@ -5,7 +5,7 @@ import requests
 
 OUTPUT_PATH = "data/earth_observation/economy/final/gdp_control_countries.csv"
 
-# World Bank ISO3 codes for the 3 control-group countries
+# World Bank ISO3 codes for my first 3 control countries.
 COUNTRIES = {
     "GBR": "UK",
     "NOR": "NO",
@@ -14,12 +14,8 @@ COUNTRIES = {
 
 WORLD_BANK_URL = "https://api.worldbank.org/v2/country/{code}/indicator/NY.GDP.MKTP.CD"
 
-# Approximate average annual EUR/USD exchange rates (USD per 1 EUR).
-# World Bank GDP data is reported in current USD; the rest of this
-# project's GDP data (Eurostat) is in EUR, so a conversion is applied
-# here for consistency. These are approximate annual averages, not
-# precise daily/monthly rates - documented explicitly as an
-# approximation, acceptable for a control variable in this model.
+# Approximate yearly USD per 1 EUR. World Bank GDP is in USD, my Eurostat GDP is in EUR.
+# Yearly averages are rough, but good enough for a control variable.
 USD_TO_EUR_RATE = {
     2019: 1.12,
     2020: 1.14,
@@ -44,7 +40,7 @@ def fetch_gdp(iso3_code):
 
     data = response.json()
 
-    # World Bank API returns [metadata, records] - records is what we need
+    # The World Bank API returns [metadata, records]. I only need the records.
     if len(data) < 2 or data[1] is None:
         print(f"No data returned for {iso3_code}")
         return []

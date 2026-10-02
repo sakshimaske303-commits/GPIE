@@ -25,7 +25,7 @@ CONTROL_COUNTRIES = set(GADM_PATHS.keys()) | CONTROL_COUNTRIES_NUTS
 
 
 def build_geometry_gdf():
-    """Combines NUTS (EU-27 + 6 control countries) and GADM (UK/NO/CH) into one GeoDataFrame."""
+    """NUTS (EU-27 + 6 control countries) and GADM (UK/NO/CH) shapes in one GeoDataFrame."""
     records = []
 
     with open(NUTS_PATH, encoding="utf-8") as f:
@@ -45,7 +45,7 @@ def build_geometry_gdf():
 
 
 def compute_avg_no2():
-    """Average NO2 per country across the full 2019-2024 study period."""
+    """Average NO2 per country over 2019-2024."""
     df = pd.read_csv(DATA_PATH)
     avg_no2 = df.groupby("country")["mean_no2"].mean().reset_index()
     avg_no2.columns = ["country", "avg_no2"]
@@ -63,9 +63,7 @@ def make_map():
         lambda c: "EU-27" if c in EU27_COUNTRIES else "Control Group"
     )
 
-    # Restrict plot extent to mainland Europe (drops overseas territories
-    # from view without altering underlying geometry), for a clean,
-    # readable map focused on the actual study region.
+    # I limit the view to mainland Europe; overseas territories stay in the geometry.
     bounds = (-25, 34, 35, 72)
 
     fig, ax = plt.subplots(figsize=(13, 12))
@@ -86,9 +84,7 @@ def make_map():
         missing_kwds={"color": "#888888", "edgecolor": "#333333", "hatch": "///", "label": "No data"},
     )
 
-    # Outline control-group countries distinctly with a thicker border,
-    # so they remain visually identifiable despite sharing the same
-    # color scale as EU-27 countries.
+    # Thick border on control countries, since they share the color scale with the EU-27.
     control_gdf = merged[merged["group"] == "Control Group"]
     control_gdf.boundary.plot(ax=ax, color="#1a1a1a", linewidth=1.8)
 
@@ -97,12 +93,12 @@ def make_map():
     ax.set_axis_off()
 
     ax.set_title(
-        "Tropospheric NO₂ Concentration: EU-27 vs. 9-Country Control Group\n"
-        "Thick borders mark non-EU control-group countries — visually comparable NO₂ levels support the DiD null result",
+        "Tropospheric NO₂ Column Density: EU-27 vs. 9-Country Control Group\n"
+        "Thick borders mark non-EU control-group countries — descriptive map, 2019–2024 mean (mol/m²)",
         fontsize=12, fontweight="bold", pad=15
     )
 
-    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Statistical API",
+    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) — Source: Sentinel-5P TROPOMI, Sentinel Hub Process API",
                 ha="center", fontsize=8, color="gray")
 
     plt.tight_layout()

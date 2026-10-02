@@ -19,7 +19,7 @@ def main():
     with open(EXISTING_FILE) as f:
         all_results = json.load(f)
 
-    # Remove any partial/failed entries for these countries, if present
+    # I remove partial or failed entries for these countries first.
     all_results = [r for r in all_results if r["NUTS_ID"] not in FAILED_COUNTRIES]
 
     for country_code in FAILED_COUNTRIES:

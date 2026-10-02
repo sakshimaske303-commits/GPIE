@@ -10,11 +10,7 @@ CLIPPED_OUTPUT_PATH = os.path.join(WORLDCOVER_PROCESSED_DIR, "worldcover_2021_cl
 
 
 def clip_to_eu_boundary():
-    """
-    Clips the WorldCover mosaic to the actual EU country boundaries
-    (from DS09 NUTS data), removing the extra ocean/North Africa area
-    that was included in the original satellite-orbit bounding box.
-    """
+    """Clip the WorldCover mosaic to the NUTS country boundaries (drops ocean and North Africa)."""
     if not os.path.exists(NUTS_BOUNDARY_PATH):
         print(f"NUTS boundary file not found at: {NUTS_BOUNDARY_PATH}")
         return None

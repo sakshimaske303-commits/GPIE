@@ -4,7 +4,7 @@
 
 **Independently verifying environmental policy claims using satellite data.**
 
-GPIE is a geospatial causal-inference framework that tests whether the European Green Deal's flagship legislation — the **European Climate Law** (effective 30 June 2021) — produced a measurable, statistically distinguishable reduction in NO₂ pollution across the EU-27, using satellite observations rather than self-reported government claims.
+GPIE is a geospatial causal-inference framework that tests whether the European Green Deal's flagship legislation — the **European Climate Law** (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021; July 2021 is the first post-treatment month) — produced a measurable, statistically distinguishable reduction in NO₂ pollution across the EU-27, using satellite observations rather than self-reported government claims.
 
 Built on a **"Trust, But Verify"** research philosophy: policy claims are treated as hypotheses to be independently tested, not facts to be assumed.
 
@@ -14,7 +14,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 | Document | What's Inside |
 |---|---|
-| [Executive Summary](./GPIE_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
+| [Executive Summary](./GPIE_Executive_Summary.pdf) | Short snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
 | [Research Paper](./GPIE_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
 | [Development Log](./GPIE_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
@@ -28,7 +28,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## Interactive Maps
 
-Hoverable, zoomable versions of every map in this project — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
+Hoverable, zoomable versions of the main maps and charts (6 maps + 3 charts) — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
 
 | Map | Link |
 |---|---|
@@ -39,7 +39,7 @@ Hoverable, zoomable versions of every map in this project — same underlying da
 | GDP | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/gdp_map.html) |
 | Moran's I Spatial Clusters | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/moran_lisa_map.html) |
 | Event-Study Plot | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/event_study.html) |
-| Synthetic Control Gap | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/synthetic_control.html) |
+| Synthetic Control Gap (intercept-adjusted) | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/synthetic_control.html) |
 | Explore Trends by Country | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/explore_trends.html) |
 
 Built by `build_interactive_maps.py`.
@@ -48,23 +48,41 @@ Built by `build_interactive_maps.py`.
 
 ## What This Project Does
 
-- Stores and analyses **8 independent datasets** across **36 countries** (EU-27 + a deliberately constructed 9-country non-EU control group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024
-- Conducts a well-developed **Difference-in-Differences** causal inference model to separate the Climate Law's specific effect from the rest of European pollution
-- Performs a placebo test, external control-group construction, quarterly event study, baseline-pollution heterogeneity check, augmented synthetic control and Moran's I spatial autocorrelation diagnostic
-- Reports an honest, rigorously established finding — a pooled null result that is consistent with a statistically significant, tightly defined, concentrated effect
-- Presents all of it through a series of **12 publication-quality maps**, **9 hoverable interactive maps**, and an interactive Streamlit dashboard
+- Compiles **8 data sources** across **36 countries** (EU-27 + a 9-country non-EU comparison group: UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), 2019–2024. The headline model uses NO₂, ERA5 temperature/precipitation, GDP and boundaries; NDVI is a secondary outcome; land cover, elevation, population and the EUR-Lex records are descriptive context only (see `Data_Sources.md`)
+- Estimates a two-group **Difference-in-Differences** model to separate any EU-specific change from the shared European NO₂ trend
+- Runs a placebo test, quarterly event study, GDP-exclusion, log-outcome, treatment-date and baseline-split checks, a synthetic control and a Moran's I spatial diagnostic, plus identification checks (year-month fixed effects, EU-specific seasonality, wind/boundary-layer and COVID-19 controls, wild cluster bootstrap, randomization inference)
+- Reports what the data show (EU-27 NO₂ fell faster than in the comparison group) and what they do not show (a break at the Climate Law's date), including the checks that limit the causal reading
+- Presents it through 18 static figures (`GPIE_Maps_and_Plots.pdf`), 9 interactive maps/charts, and a Streamlit dashboard
 
 ## Key Finding
 
-No statistically distinguishable pooled, EU-wide NO₂ reduction was identified at the conventional 5% level when compared to a 9-country non-EU control group (coefficient = −2.22 × 10⁻⁶; p = 0.101; cluster-robust standard errors by country). However, a heterogeneity check reveals a statistically significant reduction concentrated in the fourteen member states with the higher background pollution levels (coefficient = −5.46 × 10⁻⁶, p = 0.003), supported by the event-study analysis (four quarters with a significant reduction, all negative, clustering in Q2/Q3 of 2022–2024). A methodologically distinct approach, the augmented synthetic control (weighted pool of 7 countries), also estimates the near-zero, same-sign *pooled* estimate, and a Moran's I spatial-autocorrelation test confirms that raw NO₂ is strongly spatially clustered as expected for a cross-border pollutant (I = 0.570, p = 0.001), but that the DiD's own residuals are not significantly spatially clustered (I = 0.069, p = 0.135) — the country and month fixed effects capture the bulk of the spatial clustering. The dashboard's Methodology page provides the complete methodology, including the initial, later-invalidated positive result, and the placebo test that revealed it was unreliable.
+Measured with true monthly satellite means, NO₂ fell more in the EU-27 than in the 9-country non-EU comparison group: the pooled DiD estimate is −1.52 × 10⁻⁶ mol/m² (about 4.9% of the EU's pre-treatment mean; p = 0.013, cluster-robust), or −4.2% on the log scale (p = 0.034). The decline is concentrated in the 14 EU countries with higher pre-treatment NO₂ (p = 0.002; log −6.4%, p = 0.006) and absent in the lower-baseline group.
 
-The same two-group, cluster-robust design was used for the secondary outcome of NDVI (vegetation health); this was previously evaluated only with the original version - now invalidated - of this design, and was used to obtain a coefficient of −0.0145 (p = 0.007), showing a statistically significant relative drop in NDVI in the EU-27 nations compared to the control group. This is reported as an honest, exploratory secondary finding, not as evidence the Climate Law itself affected vegetation health.
+**The design cannot attribute this to the Climate Law:**
+
+- **Late onset:** with year-month fixed effects and EU-specific seasonality the estimate is −1.34 × 10⁻⁶ (p = 0.016), but there is no effect in the first two years after the law (Jul 2021–Jun 2023: p = 0.98 and 0.44); the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.008).
+- **Event study:** 7 of 9 pre-treatment quarters differ significantly under a common seasonal cycle; this is largely seasonal and disappears once the EU has its own seasonal cycle (joint p = 0.292).
+- **Treatment date:** every alternative cutoff (±6 and ±12 months) is also significant, including two dates before the law existed.
+- **EU-specific trend:** allowing a steady EU-specific trend removes the treatment-date effect (+8.7 × 10⁻⁷, p = 0.243); the trend itself is significant (−7.9 × 10⁻⁷ per year, p = 0.016).
+- **Synthetic control** (9 donors, intercept-adjusted): gap −8.1 × 10⁻⁷, ranking 5th of 10 among placebo countries.
+- **Inference:** wild cluster bootstrap p = 0.018, but randomization inference p = 0.16; without the GDP control p = 0.074.
+- **Spatial dependence:** DiD residuals are spatially correlated in 59 of 72 months (median Moran's I = 0.347), so the clustered p-values are likely too small.
+
+The estimate is otherwise sturdy: wind speed, boundary-layer height and COVID-19 stringency controls do not move it, dropping the COVID-19 window or the energy-crisis months leaves it in place, and no single comparison country drives it (`causal_inference_identification_checks.py` → `data/identification_checks.json`).
+
+So the evidence points to a relative NO₂ decline in the EU-27 that emerges about two years after the Climate Law, not a step change at it.
+
+> **Correction note:** earlier versions of this project reported a pooled null (p = 0.101). Those results were based on NO₂ values that turned out to be single end-of-month snapshots rather than monthly means (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval). The acquisition was rebuilt (`s5p_process_daily.py`: one raster per day, pooled into monthly means) and every number was re-estimated.
+
+The dashboard's Methodology page documents the full sequence, including the initial single-cohort result and the placebo test that invalidated it.
+
+The same design applied to the secondary outcome NDVI gives −0.0194 (p = 0.005), a relative decline in the EU-27. It is reported as an exploratory association, not as evidence the Climate Law affected vegetation.
 
 ## Transferability Validation
 
-GPIE's original design goal was a methodology that would be transferable globally, not just limited regionally to the EU-27. To confirm this, the project's NO₂ acquisition pipeline was tested — using the same Sentinel Hub Statistical API infrastructure and evalscript logic as the EU-27 study, with no modification to the core acquisition logic (a separate script defines India's own geometry and request handling) — on **India** (2019–2024).
+The NO₂ acquisition step was run on **India** (2019–2024) with the same daily Process API method and QA threshold as the EU study (`s5p_process_daily.py`), using India's GADM 4.1 national boundary. `test_india_transferability.py` writes a sanity-check summary (months with data, value range, comparison with the EU-27 distribution) to `data/global_transferability_test/india_no2_sanity_check.json`. Result: all 72 months returned data; India's monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m² (median 3.32 × 10⁻⁵), with no negative months, and all 72 values fall inside the 5th–95th percentile range of EU-27 country-months (1.34 × 10⁻⁵ to 6.34 × 10⁻⁵ mol/m²). This shows the data pipeline runs outside Europe; it is not a causal analysis.
 
-All 6 years successfully acquired, with physically realistic NO₂ values in the same range as reported from the EU-27 dataset. This validates that the framework's data-acquisition architecture is portable to another country/region — a standalone proof-of-concept, not a comparative analysis. See `test_india_transferability.py`.
+*(An earlier version used a rectangular bounding box, 68–97.5° E / 6–37.5° N, which also covered neighbouring countries and ocean. That output is superseded.)*
 
 ---
 
@@ -87,13 +105,19 @@ All 6 years successfully acquired, with physically realistic NO₂ values in the
                                                                                                        Research Paper
 ```
 
-Each stage is a separate, independently re-runnable script — there is no hidden manual step between raw acquisition and the final published figures; every number in the paper traces back to a script in this repository.
+Each stage is a separate script and every number in the paper is produced by a script in this repository. The repository also keeps superseded scripts from earlier stages of the project (marked as such in their headers); the current run order is below.
 
 ## Reproducibility
 
 - **Environment**: Python 3.10+. Most dependencies install via `requirements.txt`; `geopandas`/`rasterio`/`GDAL` are easiest installed via `conda` (`conda install -c conda-forge geopandas rasterio gdal`) if the `pip` install fails on your platform.
-- **Credentials**: Sentinel Hub, Copernicus CDS, and World Bank API access require free account credentials, stored in a local `.env` file (never committed — see `.env.example` if present, or the acquisition scripts' docstrings for the expected variable names).
-- **Run order**: `download_*.py` (per dataset) → `process_*.py` (standardization) → `*_stats.py` (country-month aggregation) → `causal_inference*.py` (models) → `map_*.py` (figures) → `dashboard/app.py` (interactive presentation). Every intermediate output is written to `data/` or `outputs/plots/` so any stage can be re-run independently without repeating earlier stages.
+- **Credentials**: Sentinel Hub (`SH_CLIENT_ID`, `SH_CLIENT_SECRET`) and Copernicus CDS access need free accounts; credentials go in a local `.env` file (never committed). The World Bank and Eurostat APIs need no credentials.
+- **Current run order (NO₂/NDVI → models → figures):**
+  1. `download_no2_sentinelhub.py` (daily Process API rasters → resumable daily log → `no2_stats_monthly_mean_36.json`), `download_ndvi_sentinelhub.py` (→ `ndvi_stats_monthly_mean_36.json`); `diagnose_sentinelhub.py` checks which Sentinel Hub endpoints currently work; `check_s5p_processor_versions.py` checks which TROPOMI processor versions the NO₂ values come from
+  2. Climate/GDP inputs: `download_era5.py` → `unzip_era5.py` → `process_era5.py` → `era5_regional_stats.py` + `era5_regional_stats_control_expansion.py`; `download_eurostat_gdp.py` → `process_eurostat.py` → `apply_eu27_filter.py`; `download_gdp_control_countries.py` + `download_gdp_control_expansion.py`; robustness controls: `download_era5_wind_blh.py` (→ `data/era5_wind_blh_country_monthly.csv`), `data/covid/oxcgrt_stringency_national.csv` (Oxford stringency index)
+  3. `master_merge_control.py` → `data/master_dataset_control.csv`
+  4. `causal_inference_final_did.py`, `causal_inference_ndvi.py`, `causal_inference_event_study.py`, `causal_inference_robustness_checks.py`, `causal_inference_identification_checks.py`, `synthetic_control.py`, `spatial_autocorrelation.py`; historical single-cohort models: `causal_inference_initial_model.py`, `causal_inference_placebo.py`, `causal_inference.py`
+  5. Figures: `map_*.py`, `plot_*.py`, `build_interactive_maps.py`, `build_maps_plots_pdf.py`; dashboard: `dashboard/app.py`
+- Superseded scripts kept for the record: `run_pipeline.py`/`download_no2.py`/`extract_no2.py` (OData + HARP Level-2 test pipeline), `download_*_control_expansion.py` for NO₂/NDVI (single-mosaic acquisition), `master_merge.py`, `master_merge_control_expanded.py`.
 - **Full audit trail**: every fix, bug, and methodology change made after the first working version — including this project's cluster-robust standard error correction and the NDVI re-analysis — is logged chronologically in the Development Log, so any reported number can be traced back to the change that produced it.
 
 ---
@@ -114,6 +138,8 @@ GPIE/
 ├── download_*.py               # Dataset acquisition scripts
 ├── process_*.py                # Dataset processing scripts
 ├── *_stats.py                  # Statistical processing utilities
+├── s5p_process_daily.py        # NO₂: daily Process API rasters → country monthly means
+├── sentinelhub_stats.py        # NDVI: Statistical API monthly-mean request builder
 ├── causal_inference*.py        # Main, placebo & event-study models
 ├── map_*.py                    # Map generation scripts
 └── country_boundaries.py       # Shared EU-27 + control-group boundary loader
@@ -121,7 +147,7 @@ GPIE/
 
 ## Tech Stack
 
-Python · pandas · geopandas · statsmodels · matplotlib · Plotly · Streamlit · Sentinel Hub API · Copernicus Climate Data Store · Eurostat API · World Bank API
+Python · pandas · geopandas · statsmodels · scipy · libpysal/esda · matplotlib · Plotly · folium · Streamlit · Sentinel Hub API · Copernicus Climate Data Store · Eurostat API · World Bank API
 
 ## Data Sources
 

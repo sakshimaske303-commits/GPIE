@@ -7,7 +7,7 @@ POP_RAW_DIR = "data/earth_observation/population/raw"
 POP_FINAL_DIR = "data/earth_observation/population/final"
 OUTPUT_PATH = os.path.join(POP_FINAL_DIR, "population_stats_by_country.json")
 
-# ISO3 (lowercase, matches WorldPop filenames) -> NUTS_ID (ISO2, matches project convention)
+# ISO3 (lowercase, as in WorldPop filenames) -> NUTS_ID (the ISO2 codes I use everywhere)
 ISO3_TO_NUTS = {
     "aut": "AT", "bel": "BE", "bgr": "BG", "hrv": "HR", "cyp": "CY",
     "cze": "CZ", "dnk": "DK", "est": "EE", "fin": "FI", "fra": "FR",
@@ -21,11 +21,8 @@ YEARS = [2019, 2020]
 
 
 def compute_country_population(filepath):
-    """
-    Sums all valid pixel values in a per-country population raster using GDAL
-    directly (bypasses a rasterio/NumPy 2.5 compatibility issue observed
-    with certain multi-tile/multi-strip TIFF structures).
-    """
+    """Sum the valid pixels of one country raster. I read with GDAL because rasterio
+    fails with NumPy 2.5 on some multi-tile/multi-strip TIFFs."""
     try:
         dataset = gdal.Open(filepath)
         if dataset is None:

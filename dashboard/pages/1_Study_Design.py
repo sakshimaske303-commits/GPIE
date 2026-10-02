@@ -26,25 +26,28 @@ trend that would have happened anyway.
 
 ### The Solution: An External Control Group
 
-GPIE addresses this by introducing nine **non-EU European countries** as a control group —
-geographically and economically comparable nations that are **not** subject to EU Green Deal
-legislation, spanning both established Western European economies and EU-accession-candidate
-economies in the Western Balkans:
+GPIE addresses this by introducing nine **non-EU European countries** as a comparison group —
+geographically and economically comparable nations that are **not directly bound** by the Climate Law,
+spanning both established Western European economies and EU-accession-candidate economies in the
+Western Balkans. They are not fully untreated by EU climate policy: Norway and Iceland are in the
+EU ETS via the EEA, Switzerland's ETS has been linked to the EU ETS since 2020, and the Western Balkans
+committed to align with the Green Deal in the 2020 Sofia Green Agenda. Any such overlap would bias the
+estimate toward zero:
 """)
 
 col1, col2, col3 = st.columns(3)
 with col1:
     st.info("**United Kingdom**\n\nExited the EU in 2020 — outside EU regulatory scope from 2021 onward")
 with col2:
-    st.info("**Norway**\n\nNever an EU member — economically developed, geographically proximate")
+    st.info("**Norway**\n\nNever an EU member — EEA member, participates in the EU ETS")
 with col3:
-    st.info("**Switzerland**\n\nNever an EU member — comparable industrial base and climate")
+    st.info("**Switzerland**\n\nNever an EU member — Swiss ETS linked to the EU ETS since 2020")
 
 col4, col5, col6 = st.columns(3)
 with col4:
-    st.info("**Iceland**\n\nNever an EU member — EEA-linked, high-latitude comparator")
+    st.info("**Iceland**\n\nNever an EU member — EEA member, participates in the EU ETS")
 with col5:
-    st.info("**Albania**\n\nEU accession candidate — not yet subject to Green Deal legislation")
+    st.info("**Albania**\n\nEU accession candidate — not bound by the Climate Law (Green Agenda signatory)")
 with col6:
     st.info("**Bosnia and Herzegovina**\n\nEU accession candidate — Western Balkans comparator")
 
@@ -76,11 +79,13 @@ st.markdown("""
 ### The Difference-in-Differences (DiD) Logic
 
 By comparing the *change* in each group rather than raw values, any general European-wide trend
-(technology improvements, broader decarbonization) common to both groups cancels out — isolating
-only the portion of change specifically attributable to being subject to EU climate legislation.
+(technology improvements, broader decarbonization) common to both groups cancels out — leaving the
+portion of change specific to the EU-27, under the assumption that both groups would otherwise have
+followed parallel trends.
 
-**Treatment date**: 30 June 2021 — the date the **European Climate Law** (Regulation (EU) 2021/1119) 
-entered into force, establishing a legally binding EU-wide climate-neutrality target.
+**Treatment date**: the **European Climate Law** (Regulation (EU) 2021/1119) was adopted on
+30 June 2021, published in the Official Journal on 9 July 2021 and entered into force on
+29 July 2021. July 2021 is the first post-treatment month in every model.
 """)
 
 st.markdown("---")

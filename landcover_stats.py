@@ -5,7 +5,7 @@ WORLDCOVER_VRT = "data/earth_observation/land_cover/processed/worldcover_2021_50
 NUTS_BOUNDARY_PATH = "data/earth_observation/boundaries/raw/NUTS_LEVL_0_2024_4326.geojson"
 OUTPUT_PATH = "data/earth_observation/land_cover/final/landcover_stats_by_country.json"
 
-# WorldCover class codes (from official legend)
+# WorldCover class codes from the official legend.
 CLASS_NAMES = {
     10: "Tree cover", 20: "Shrubland", 30: "Grassland",
     40: "Cropland", 50: "Built-up", 60: "Bare/sparse vegetation",
@@ -15,11 +15,8 @@ CLASS_NAMES = {
 
 
 def compute_landcover_stats():
-    """
-    Computes land cover class percentages for each NUTS country region,
-    reading directly from the VRT mosaic without materializing a full
-    clipped raster (avoids the storage issue of a continent-wide 10m file).
-    """
+    """Land cover class percentages per country. I read the mosaic directly, because a clipped
+    10 m raster for all of Europe is too big to store."""
     print("Computing zonal statistics per NUTS region... (this will take a while)")
 
     stats = rasterstats.zonal_stats(

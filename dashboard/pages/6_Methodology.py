@@ -18,16 +18,17 @@ st.markdown("---")
 st.markdown("""
 ### Data Sources
 
-GPIE integrates eight independently-sourced datasets, all acquired at the country level for
-2019–2024 (36 countries: EU-27 + a 9-country non-EU control group — UK, Norway, Switzerland,
-Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia) — a ninth,
-WorldPop population, was also acquired but excluded as a model input (see Limitations below):
+GPIE compiles eight data sources for 2019–2024 (36 countries: EU-27 + a 9-country non-EU comparison
+group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia,
+Serbia). The headline model uses NO₂, ERA5 temperature/precipitation and GDP; NDVI is a secondary
+outcome; land cover, elevation and EUR-Lex records are descriptive context. A ninth source, WorldPop
+population, was acquired for 2019–2020 only and is not used:
 """)
 
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("""
-    - **NO₂** — Sentinel-5P TROPOMI (Sentinel Hub Statistical API)
+    - **NO₂** — Sentinel-5P TROPOMI (Sentinel Hub Process API, daily rasters)
     - **NDVI** — CGLS 300m (Sentinel Hub Statistical API)
     - **Climate** — ERA5 Reanalysis (temperature, precipitation)
     - **GDP** — Eurostat (EU-27) + World Bank (control group)
@@ -42,7 +43,7 @@ with col2:
 
 st.markdown("---")
 
-# Proof-of-work popover buttons - drop screenshots into outputs/proof_screenshots/ to activate.
+# Proof popover buttons. They show my screenshots from outputs/proof_screenshots/.
 st.markdown(f"""
 <style>
     div[data-testid="stPopover"] button {{
@@ -87,7 +88,8 @@ with s1a:
     with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
         st.markdown("""
         The first causal model compared all 27 EU countries before vs. after the European Climate Law
-        (30 June 2021), using country and seasonal fixed effects. This found a statistically significant
+        (adopted 30 June 2021, in force 29 July 2021; July 2021 = first post month), using country and
+        seasonal fixed effects. This found a statistically significant
         reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
 
         **A later verification correction**: this initial-model figure had not been re-estimated with the
@@ -118,36 +120,40 @@ with s2a:
         artificially shifted to 30 June 2020 — a date with no relevant policy event.
 
         **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
-        more significant than the real result. This proved the original model was capturing a general
-        trend, not a policy-specific effect. Adding an explicit linear time trend confirmed this: once
-        the trend was controlled for, the original "significant" effect disappeared entirely (p = 0.186, cluster-robust).
+        more significant than the real result. This showed the single-cohort design could not separate a
+        policy-dated break from Europe's continuing NO₂ decline. Adding an explicit linear time trend points
+        the same way: with the trend controlled for, the original estimate is no longer significant
+        (p = 0.186, cluster-robust). (The placebo was run on the full 2019–2024 panel, not on pre-treatment
+        data only.)
         """)
 with s2b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020, proving the original model was capturing a general trend.")
+    proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020.")
 
-with st.expander("**Step 3 — Building a Genuine Control Group**", expanded=False):
+with st.expander("**Step 3 — Building an External Comparison Group**", expanded=False):
     st.markdown("""
-    Nine non-EU European countries were added as a control group — **UK, Norway, Switzerland,
+    Nine non-EU European countries were added as a comparison group — **UK, Norway, Switzerland,
     Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia** —
-    selected for being geographically and economically comparable to the EU-27 while not being
-    subject to EU Green Deal legislation, spanning both established Western European economies
-    and EU-accession-candidate economies in the Western Balkans. This required:
+    selected for being geographically and economically comparable to the EU-27 and not directly bound
+    by the Climate Law. They are not fully untreated by EU climate policy: Norway and Iceland are in
+    the EU ETS via the EEA, Switzerland's ETS has been linked to the EU ETS since 2020, and the Western
+    Balkans committed to align with the Green Deal in the 2020 Sofia Green Agenda. This required:
     - New boundary data (GADM Level 0 for UK/Norway/Switzerland; NUTS directly for the remaining six)
     - Extended satellite data acquisition for all 36 countries
     - A second GDP data source (World Bank API) for non-EU countries
 
-    This enabled a genuine two-group Difference-in-Differences model — the version presented on
-    the *Causal Results* page.
+    This enabled the two-group Difference-in-Differences model presented on the *Causal Results* page.
     """)
 
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
     The overall DiD result was further validated by estimating the treatment effect separately for
-    all 23 individual quarters (2019Q1–2024Q4), rather than as a single average. Every pre-treatment
-    quarter is non-significant, supporting the parallel-trends assumption. Four post-treatment
-    quarters (2022Q2, 2023Q2, 2024Q2, 2024Q3) are nominally significant, all negative, all falling
-    in Q2 or Q3 — a consistent pattern, not scattered noise, corroborating the heterogeneity check below.
+    23 quarters (2019Q1–2024Q4, relative to 2021Q2), rather than as a single average. Seven of the nine
+    pre-treatment quarters differ significantly from the reference quarter, so the parallel-trends
+    assumption is not supported. The coefficients follow a seasonal pattern (positive in Q1/Q4, negative
+    in Q2/Q3) before and after treatment — consistent with a larger seasonal NO₂ cycle in the more
+    polluted EU countries — rather than a response dated to the law. The 23 coefficients come from one
+    regression, so they are not independent tests.
     """)
 
 s5a, s5b = st.columns([0.94, 0.06])
@@ -158,24 +164,21 @@ with s5a:
         correction for panel data where a country's repeated monthly observations are serially
         correlated (uncorrected OLS standard errors understate true uncertainty).
 
-        Five further robustness checks were run against the corrected, pooled NO₂ model. Removing
-        GDP entirely barely moves the coefficient (the headline estimate isn't sensitive to removing GDP as a potential "bad control"); shifting
-        the assumed treatment date by ±6/±12 months finds one alternate date (−6 months) nominally
-        significant on its own (p = 0.021), flagged honestly as a genuine dating-uncertainty signal
-        rather than smoothed over; splitting EU-27 countries by baseline pollution level finds a
-        **statistically significant effect in the 14 higher-baseline countries** (p = 0.003) and none
-        in the 13 lower-baseline countries; a log-transformed outcome shrinks toward zero, consistent
-        with the effect being concentrated rather than a uniform percentage decline everywhere; and a
-        formal minimum-detectable-effect calculation found this design can reliably detect a *pooled*
-        effect of ~12.7% of baseline NO₂ or larger.
+        Further robustness checks were run against the pooled NO₂ model (−1.52 × 10⁻⁶, p = 0.013).
+        Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.053; a sensitivity check, not a
+        formal bad-control test). The log-outcome model gives −4.2% (p = 0.034). Shifting the treatment date
+        by ±6/±12 months gives a significant estimate at **every** date (p between 0.004 and 0.028),
+        including two dates before the law existed — by the logic of Step 2, the design does not tie the
+        EU-specific decline to the Climate Law's date. Adding an EU-specific linear trend removes the
+        treatment-date effect (+8.7 × 10⁻⁷, p = 0.243) while the trend itself is significant (−7.9 × 10⁻⁷
+        per year, p = 0.016): a steady faster decline, not a step. A post-hoc split by baseline pollution
+        finds the decline in the 14 higher-baseline countries (p = 0.002; log −6.4%, p = 0.006) and none in
+        the 13 lower-baseline countries (p = 0.758). The minimum detectable *pooled* effect at 80% power is
+        ~5.5% of the EU-27's pre-treatment NO₂.
 
-        Applying this same rigor to the **secondary NDVI outcome** — which had only ever been tested
-        with the original, single-cohort design — produced a statistically significant relative decline
-        once the same control-group correction was applied (see *Causal Results* page). A verification
-        pass later found that outcome's own initial single-cohort model was, once correctly re-estimated
-        with cluster-robust standard errors, already significant too (p = 0.0017, not the originally
-        reported p = 0.128) — so the control-group correction's role for NDVI is better identification
-        of an EU-specific effect, not first-time detection of significance. Full details and all
+        The **secondary NDVI outcome** shows a significant relative decline under the two-group design
+        (see *Causal Results* page). Its initial single-cohort model, re-estimated with cluster-robust
+        standard errors, was already significant (p = 0.0017, not the originally reported p = 0.128). Full details and all
         reported numbers are in the Research Paper document in the project repository.
         """)
 with s5b:
@@ -184,7 +187,7 @@ with s5b:
 
 st.markdown("---")
 
-st.markdown("### Independent Corroboration: Synthetic Control &amp; Spatial Diagnostics")
+st.markdown("### Additional Checks: Synthetic Control &amp; Spatial Diagnostics")
 
 st.markdown("""
 The control group's construction invites two specific objections: that equal weighting might
@@ -192,30 +195,27 @@ mismatch the treated series' true counterfactual trajectory, and that country-le
 might not be spatially independent observations. Both were tested directly rather than left as
 theoretical concerns.
 
-**Augmented Synthetic Control** (Abadie, Diamond &amp; Hainmüller, 2010; ridge-augmented per
-Ben-Michael, Feller &amp; Rothstein, 2021) fits convex donor weights to match the EU-27's
-pre-treatment NO₂ trajectory, rather than averaging control countries equally. Norway's and
-Iceland's NO₂ series both have real, high-latitude coverage gaps that persist even after a clean
-re-fetch — Norway 43% pre-treatment coverage, Iceland 70% — so the donor pool is the remaining
-seven control countries (UK, Switzerland, Albania, Bosnia and Herzegovina, Montenegro, North
-Macedonia, Serbia). The post-treatment gap between actual and synthetic EU-27 is −1×10⁻⁶ — the same
-sign and order of magnitude as the pooled DiD coefficient (−2.22×10⁻⁶), reached through a method
-that doesn't rely on the DiD model's fixed-effects specification at all. With 7 donors, the
-in-space placebo is a genuine permutation-style check: the real EU-27 gap ranks 2nd of 8 by size.
+**Synthetic control** (Abadie, Diamond &amp; Hainmueller, 2010) fits convex donor weights to match the
+EU-27's pre-treatment NO₂ series, plus a constant (intercept) adjustment. (An earlier version called this
+a ridge-augmented synthetic control; the ridge term reduced to that constant shift, so it is now labelled
+as what it does.) All nine comparison countries are donors (weights: Serbia 40%, Switzerland 32%, UK 28%).
+Using the 27 pre / 36 post months where every series is observed, the post-treatment gap is −8.1×10⁻⁷ and
+the pre-treatment fit error (RMSPE) is 2.56×10⁻⁶. The EU-27 gap ranks 5th of 10 in the in-space placebo, so
+it does not stand out from the gaps of untreated countries.
 
-**Moran's I spatial-autocorrelation diagnostic** (KNN-4 weights on country centroids, robust to
-island geometries like Cyprus, Malta, Ireland, and Iceland) tests whether country-clustered standard
-errors are missing cross-border spatial dependence. Raw NO₂ levels are strongly clustered (Global
-Moran's I = 0.570, p = 0.001) — expected for an atmospheric pollutant. The DiD model's own
-residuals are not significantly clustered (I = 0.069, p = 0.135): the country and month fixed
-effects already absorb the large majority of that dependence. Local Moran's I (LISA) identifies a
-High-High cluster (Benelux, Germany, Denmark, UK) and a Low-Low cluster (Nordic/Baltic countries
-plus Iceland), with Switzerland and Ireland as significant Low-High outliers.
+**Moran's I spatial-autocorrelation diagnostic** (KNN-4 weights on country centroids, used because
+Cyprus, Malta and Iceland have no land neighbours in the sample) checks for cross-border dependence,
+which country-clustered standard errors do not handle. Raw NO₂ levels are strongly clustered (Global
+Moran's I = 0.578, p = 0.001). The DiD residuals, tested month by month, are also clustered (median
+I = 0.347; significant in 59 of 72 months), so the fixed effects do not remove the spatial dependence and
+the clustered p-values are likely too small. (An earlier version reported I = 0.069, p = 0.135 on
+country-averaged residuals; with country fixed effects those averages are exactly zero, so that test was
+uninformative.) Local Moran's I (LISA) identifies a
+High-High cluster (Benelux, Germany, Switzerland, UK) and a Low-Low cluster (Estonia, Finland, Sweden,
+Norway, Iceland), with Denmark and Ireland as significant Low-High outliers.
 
-Neither check overturns the pooled null result — that was never the point. Both close off a
-specific way the control group's construction could otherwise be second-guessed, though neither
-speaks directly to the higher-baseline heterogeneity finding above, since both evaluate the pooled
-EU-27 aggregate.
+Neither check supports reading the pooled estimate as a Climate Law effect: the synthetic control
+finds nothing distinctive about the EU-27, and the spatial result means the reported p-values are too small.
 """)
 
 st.markdown("---")
@@ -223,35 +223,34 @@ st.markdown("---")
 st.markdown("### Honest Limitations")
 
 st.warning("""
-**Statistical power**: Even with a 9-country control group (7 for the synthetic control
-specification above, since Norway's and Iceland's NO₂ coverage remain too incomplete to use as
-donors even after a clean re-fetch), the pooled model's confidence interval — [-4.87 × 10⁻⁶, +4.32 × 10⁻⁷]
-— still spans zero. Quantified directly: at 80% power, this design's minimum detectable effect for
-the pooled estimate is roughly **12.7% of the EU-27's pre-treatment average NO₂**, down
-substantially from what a smaller control group could resolve. This means the honest conclusion is
-not *"the policy had no effect"* nor *"the policy worked,"* but rather: the pooled, EU-wide average
-effect is not conventionally significant, while a real effect concentrated in higher-baseline
-member states and specific post-treatment quarters is — a genuinely open finding this design can
-characterize but not fully resolve without a longer panel or sub-national data. The synthetic
-control reaches the same pooled conclusion through weighted rather than equal donor weighting,
-now with a real 7-donor permutation-style placebo — corroborating, not resolving, the underlying
-question of how far the effect extends beyond the higher-baseline subgroup.
+**Data correction**: earlier versions of this project built "monthly" NO₂ from Sentinel Hub's
+Statistical API with monthly intervals. Sentinel Hub clips Sentinel-5P requests to the last 24 hours of
+each interval, so those values were effectively end-of-month snapshots — which explained the patchy
+coverage and impossible values (negative country means on 31 December 2023). The NO₂ series is now built
+from one raster per day (Process API, 0.1° grid, QA ≥ 0.75) pooled into true monthly means, and NDVI from
+monthly means of the dekadal composites. Every number on this dashboard was re-estimated; the earlier
+pooled null (p = 0.101) is superseded.
+
+**What the result does and does not show**: NO₂ fell about 5% more in the EU-27 than in the comparison
+group, and the pooled estimate is significant (p = 0.013). The honest conclusion is not *"the Climate Law
+worked"*: pre-treatment quarters already differ, every alternative date is significant, and an EU-specific
+trend absorbs the effect. The design shows a gradual faster decline in the EU-27, not a break at the law.
+With nine comparison clusters and spatially correlated residuals, the p-values are also likely too small.
 """)
 
 st.warning("""
 **The NDVI secondary-outcome finding is exploratory, not causal.** Once given the same
 control-group correction as NO₂, NDVI shows a statistically significant relative decline
-(p = 0.007) — but this analysis does not control for land-use change, drought/precipitation-driven
+(−0.0194, p = 0.005) — but this analysis does not control for land-use change, drought/precipitation-driven
 vegetation stress, or agricultural-policy shifts between treatment and control regions, any of
-which could plausibly drive the result independent of the Climate Law. It is reported as a
-genuine, robust finding meriting further investigation, not as evidence the Climate Law affected
-vegetation.
+which could plausibly drive the result independent of the Climate Law. It is reported as an
+exploratory association, not as evidence the Climate Law affected vegetation.
 """)
 
 st.info("""
 **Module 9 (Economic Efficiency Ranking) was deliberately scoped out.** Ranking policies by
 "cost-per-unit-environmental-improvement" presupposes a measurable improvement to rank against —
-since Module 8 found no statistically significant effect, constructing such a ranking would
+since Module 8 did not establish an NO₂ improvement attributable to a specific policy, constructing such a ranking would
 require manufacturing significance the data does not support. This decision is itself treated as
 a finding consistent with GPIE's "Trust, But Verify" design principle.
 """)
