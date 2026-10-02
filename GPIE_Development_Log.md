@@ -39,6 +39,7 @@ But for this project, I chose to write it down as a proper, ongoing story. Wante
 31. [Entry 31](#entry-31)
 32. [Entry 32](#entry-32)
 33. [Entry 33](#entry-33)
+34. [Entry 34](#entry-34)
 
 ---
 
@@ -390,3 +391,23 @@ I also had one worry about the satellite data. The TROPOMI NO2 processor had a b
 Now the part tht does not go my way. When I split the post period into 12 month blocks, the first two years after the law show nothing at all (p = 0.98 and p = 0.44). The whole effect comes from July 2023 onward (-2.18×10⁻⁶, p = 0.008). If I drop 2023 and 2024 the estimate is basically zero. Significance also depends on the GDP control (without it p = 0.074). So the result is sturdier than I expected against seasonality, weather, COVID nd the choice of comparison countries, but the timing problem is now even clearer than before. Whatever lowered EU NO2 relative to its neighbours did it about two years after the Climate Law.
 
 I added all of this to the paper as a new section (4.10), updated the abstract, discussion, limitations nd conclusion, and carried it through the README, executive summary, data sources nd the dashboard results page. I also added four references for the new methods and checked each DOI. The honest position now is tht my estimate is real enough to survive most checks, but it does not belong to the Climate Law's date. Tht points to the next step, which is to stop treating the law as the treatment and look at what actually changed from 2023.
+
+---
+
+## Entry 34
+
+At the end of Entry 33 I said the next step was to look at what actually changed from 2023. To do tht I needed to see inside the countries, because a country mean cannot tell me whether the drop is in big cities, around power plants, or everywhere. So I went back to the satellite data one more time. My country series only kept each country's daily total and threw the pixels away. This time I saved every daily raster for the whole study box (2,192 days, 0.1 degree pixels) nd built a monthly grid from them. Before using it I rebuilt the country monthly means from the grid and compared them with my existing country series. All 2,572 country months match exactly, so the grid nd the country data are the same data at two different scales.
+
+Then I asked a simple question. Does NO2 fall more where the EU is, or where the pollution was high to begin with? I sorted every pixel into eight classes by its pre treatment NO2 level and looked at the change from July 2023 in each class, separately for EU pixels and for pixels in my nine comparison countries.
+
+The answer was not what I expected. The decline grows steadily with how polluted the pixel was, and it does this in both groups. The cleanest pixels barely moved. The most polluted ones lost more than 20%. And at the same starting level the comparison pixels fell as much as the EU pixels, sometimes more (for example -18.8% vs -19.0% in the 5 to 7 class, and -23.0% vs -21.4% in the highest class). Across all 51,072 pixels the change is about a quarter of the pre treatment level (R² = 0.70), and once I account for tht, being in the EU makes no difference (p = 0.221).
+
+So I re ran my DiD on country by class by month cells. Without matching on the starting level it gives me back my country estimate exactly (-1.34×10⁻⁶, p = 0.012). When I only compare EU pixels with comparison pixels of the same class, it drops to -0.21×10⁻⁶ with p = 0.341. About 84% of my estimate is gone. I also defined the classes from 2019 alone nd estimated on 2020 to 2024 so the two do not overlap, and got the same thing (-0.20×10⁻⁶, p = 0.401).
+
+What this means is tht my country level result was mostly a composition effect. EU countries simply contain many more highly polluted places than my comparison group (Norway, Iceland nd the Balkans are mostly clean). Polluted places fell the most everywhere in Europe. A country average turns tht into something tht looks like an EU effect. None of my earlier checks could catch this, because every one of them used country averages. It is not a significance problem, it is a unit of analysis problem.
+
+One limit I have to be honest about. Almost all the highly polluted comparison pixels are in the UK, with a few in Switzerland nd Serbia. The UK kept EU derived vehicle and industry standards after it left. So this check separates EU membership from pollution level. It does not separate EU made regulation from no regulation.
+
+I added this as Section 4.11 in the paper with two new figures (the change by starting level, nd a pixel map of the change), and updated the abstract, discussion, limitations nd conclusion, plus the README, executive summary, dashboard and the maps PDF. The map itself says it clearly. The decline covers the polluted belt from England through the Low Countries nd western Germany down to the Po Valley, plus the big cities, and it does not stop at the EU border.
+
+This changes what the paper is about. I started by asking whether the Climate Law lowered NO2. What I can actually show now is how a country level satellite DiD produced a significant "policy effect" tht survived a long list of robustness checks, and then disappeared once I compared like with like at pixel level. Tht is a less flattering result for my original question, but I think it is the more useful one.

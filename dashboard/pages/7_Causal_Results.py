@@ -196,6 +196,36 @@ st.markdown(
 
 st.markdown("---")
 
+st.markdown("### Pixel-Level Check: Pollution Level or EU Membership?")
+
+st.markdown("""
+On a 0.1° grid, NO₂ fell in proportion to how polluted each pixel was before treatment, and it fell the same
+way in comparison-group pixels with the same starting level. Comparing like with like removes most of the
+country-level estimate, so that estimate is largely a **composition effect**: EU countries contain more highly
+polluted areas (`analyse_no2_grid_baseline.py`).
+""")
+
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), use_container_width=True)
+
+_matched = pd.DataFrame([
+    ["Not matched on pre-treatment level", "−1.34 × 10⁻⁶", "0.012"],
+    ["Matched on pre-treatment level", "−0.21 × 10⁻⁶", "0.341"],
+    ["Matched, Jul 2021 – Jun 2023", "−0.00 × 10⁻⁶", "0.993"],
+    ["Matched, from Jul 2023", "−0.52 × 10⁻⁶", "0.221"],
+], columns=["Model (country × class × month cells)", "EU × post (mol/m²)", "p"])
+st.dataframe(_matched, hide_index=True, use_container_width=True)
+
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_map.png"), use_container_width=True)
+
+st.markdown(
+    "<p class='caption-text'>The highly polluted comparison pixels are mostly in the United Kingdom, which kept "
+    "EU-derived emission standards, so this check separates EU membership from pollution level, not EU-origin "
+    "regulation from its absence.</p>",
+    unsafe_allow_html=True,
+)
+
+st.markdown("---")
+
 st.markdown("### How This Result Was Reached")
 
 st.markdown("""

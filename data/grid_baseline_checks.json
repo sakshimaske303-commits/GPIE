@@ -1,0 +1,192 @@
+{
+  "pixels": {
+    "eu": 43062,
+    "control": 8010
+  },
+  "change_by_baseline_class": [
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "<1.5",
+      "pixels": 2560,
+      "pre_mean_1e-6": 12.974414687607663,
+      "change_jul2021_jun2023_pct": 4.33082135860961,
+      "change_from_jul2023_pct": -0.600372224777235
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "1.5-2",
+      "pixels": 8087,
+      "pre_mean_1e-6": 17.696794520675905,
+      "change_jul2021_jun2023_pct": 1.7290699436249748,
+      "change_from_jul2023_pct": -4.225554065021439
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "2-2.5",
+      "pixels": 8335,
+      "pre_mean_1e-6": 22.465812410237817,
+      "change_jul2021_jun2023_pct": 2.2189923187680063,
+      "change_from_jul2023_pct": -4.112932134245289
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "2.5-3",
+      "pixels": 7003,
+      "pre_mean_1e-6": 27.423871713253025,
+      "change_jul2021_jun2023_pct": 1.181543603621552,
+      "change_from_jul2023_pct": -6.877323620104559
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "3-4",
+      "pixels": 7264,
+      "pre_mean_1e-6": 34.33291873129485,
+      "change_jul2021_jun2023_pct": -2.6125997980247484,
+      "change_from_jul2023_pct": -11.006914047078789
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "4-5",
+      "pixels": 5459,
+      "pre_mean_1e-6": 44.74149299161692,
+      "change_jul2021_jun2023_pct": -6.690003085272312,
+      "change_from_jul2023_pct": -15.38137583538264
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": "5-7",
+      "pixels": 2999,
+      "pre_mean_1e-6": 56.91475483979866,
+      "change_jul2021_jun2023_pct": -7.1211394007890725,
+      "change_from_jul2023_pct": -19.012818829672387
+    },
+    {
+      "group": "EU-27",
+      "baseline_class_1e-5": ">7",
+      "pixels": 1355,
+      "pre_mean_1e-6": 87.57514839631807,
+      "change_jul2021_jun2023_pct": -6.519086282316288,
+      "change_from_jul2023_pct": -21.365419609755307
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "<1.5",
+      "pixels": 2130,
+      "pre_mean_1e-6": 10.781040814233839,
+      "change_jul2021_jun2023_pct": 0.9863781044143097,
+      "change_from_jul2023_pct": 0.46018441665753856
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "1.5-2",
+      "pixels": 1701,
+      "pre_mean_1e-6": 17.347991662467713,
+      "change_jul2021_jun2023_pct": 0.6493302720848763,
+      "change_from_jul2023_pct": -2.861401908191273
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "2-2.5",
+      "pixels": 1229,
+      "pre_mean_1e-6": 22.307224874637434,
+      "change_jul2021_jun2023_pct": 0.1451371252032235,
+      "change_from_jul2023_pct": -6.307387676450416
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "2.5-3",
+      "pixels": 717,
+      "pre_mean_1e-6": 27.323736884569012,
+      "change_jul2021_jun2023_pct": -1.3205267531581446,
+      "change_from_jul2023_pct": -11.770437777741845
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "3-4",
+      "pixels": 765,
+      "pre_mean_1e-6": 34.145655219725356,
+      "change_jul2021_jun2023_pct": -0.5722417072966358,
+      "change_from_jul2023_pct": -12.823950612959415
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "4-5",
+      "pixels": 580,
+      "pre_mean_1e-6": 45.03865386871333,
+      "change_jul2021_jun2023_pct": -3.232528584807594,
+      "change_from_jul2023_pct": -18.295507249521524
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": "5-7",
+      "pixels": 762,
+      "pre_mean_1e-6": 57.63881878625401,
+      "change_jul2021_jun2023_pct": -5.1155731951345205,
+      "change_from_jul2023_pct": -18.81220188217023
+    },
+    {
+      "group": "control",
+      "baseline_class_1e-5": ">7",
+      "pixels": 126,
+      "pre_mean_1e-6": 81.29127410071573,
+      "change_jul2021_jun2023_pct": -8.032455627787886,
+      "change_from_jul2023_pct": -23.030345859072668
+    }
+  ],
+  "pixel_regression_change_from_jul2023": {
+    "n_pixels": 51072,
+    "r_squared": 0.6998860865212705,
+    "eu": {
+      "coefficient": 0.7921829287122822,
+      "p_value": 0.22110065699779757
+    },
+    "pre": {
+      "coefficient": -0.24718344734240474,
+      "p_value": 3.912467813762131e-18
+    },
+    "eu_x_pre": {
+      "coefficient": -0.009272038338910783,
+      "p_value": 0.8282760881878908
+    }
+  },
+  "classes from Jan 2019 - Jun 2021, all months": {
+    "cells": 185,
+    "rows": 12947,
+    "not_matched": {
+      "coefficient": -1.3429254420414438,
+      "p_value": 0.011750985252162808
+    },
+    "matched_on_baseline": {
+      "coefficient": -0.21305326414422573,
+      "p_value": 0.34085323634049125
+    },
+    "matched_jul2021_jun2023": {
+      "coefficient": -0.002149017418663167,
+      "p_value": 0.9925536296245058
+    },
+    "matched_from_jul2023": {
+      "coefficient": -0.5176189752309377,
+      "p_value": 0.2205750789467561
+    }
+  },
+  "classes from 2019 only, estimated on 2020-2024": {
+    "cells": 191,
+    "rows": 11200,
+    "not_matched": {
+      "coefficient": -0.5556082606037235,
+      "p_value": 0.10844993217893227
+    },
+    "matched_on_baseline": {
+      "coefficient": -0.19542815459976717,
+      "p_value": 0.4014503714059863
+    },
+    "matched_jul2021_jun2023": {
+      "coefficient": -0.013183332105826118,
+      "p_value": 0.9563818531284181
+    },
+    "matched_from_jul2023": {
+      "coefficient": -0.47486482443639705,
+      "p_value": 0.24978391434464364
+    }
+  }
+}

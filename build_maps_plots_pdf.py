@@ -44,6 +44,11 @@ IMAGES = [
     ("synthetic_control_gap.png", "Synthetic Control: EU-27 vs. 9-Country Donor Composite",
      "Convex donor weights with pre-period intercept adjustment; complete-data months only. Gap, pre-period "
      "RMSPE and DiD estimate in the figure title. All nine comparison countries are donors."),
+    ("no2_change_by_baseline.png", "NO2 Change by Pre-Treatment Pollution Level",
+     "Change from July 2023 against the pre-treatment period, by the pixel's pre-treatment NO2 level, "
+     "for EU-27 and comparison-group pixels (0.1 degree grid)."),
+    ("no2_change_map.png", "Pixel-Level NO2 Change Map",
+     "Change in tropospheric NO2 per 0.1 degree pixel, July 2023 - December 2024 minus January 2019 - June 2021."),
     ("moran_lisa_cluster_map.png", "Local Moran's I (LISA) Spatial Cluster Map",
      "LISA clusters of full-period average NO2 (descriptive). Global and month-by-month residual Moran's I "
      "results in the figure title."),
