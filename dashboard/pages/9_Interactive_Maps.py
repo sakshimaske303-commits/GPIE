@@ -1,11 +1,10 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
-from styles import apply_custom_style, PALETTE
+from styles import apply_custom_style, PALETTE, embed_html
 
 apply_custom_style()
 
@@ -26,6 +25,8 @@ MAPS = {
     "Event-Study Plot": "event_study.html",
     "Synthetic Control Gap": "synthetic_control.html",
     "Explore Trends by Country": "explore_trends.html",
+    "Pixel-Level NO2 Change Map": "no2_pixel_change_map.html",
+    "NO2 Change by Starting Pollution Level": "no2_change_by_baseline.html",
 }
 
 choice = st.selectbox("Pick a map", list(MAPS.keys()))
@@ -34,7 +35,7 @@ map_path = os.path.join(PROJECT_ROOT, "outputs", "interactive", MAPS[choice])
 if os.path.exists(map_path):
     with open(map_path, "r", encoding="utf-8") as f:
         html = f.read()
-    components.html(html, height=650, scrolling=True)
+    embed_html(html, height=650, scrolling=True)
 else:
     st.warning(f"Map not found: outputs/interactive/{MAPS[choice]} — run build_interactive_maps.py first.")
 

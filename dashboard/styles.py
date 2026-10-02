@@ -262,3 +262,12 @@ PALETTE = {
     "text_muted": "#7FA8AC",
     "text": "#F5EDEE",
 }
+
+
+def embed_html(html, height=600, scrolling=False):
+    """Show an HTML string in an iframe. Newer Streamlit uses st.iframe, older uses components.html."""
+    if hasattr(st, "iframe"):
+        st.iframe(html, height=height)
+    else:
+        import streamlit.components.v1 as components
+        components.html(html, height=height, scrolling=scrolling)

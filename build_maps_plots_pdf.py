@@ -47,6 +47,9 @@ IMAGES = [
     ("no2_change_by_baseline.png", "NO2 Change by Pre-Treatment Pollution Level",
      "Change from July 2023 against the pre-treatment period, by the pixel's pre-treatment NO2 level, "
      "for EU-27 and comparison-group pixels (0.1 degree grid)."),
+    ("no2_change_by_country.png", "NO2 Change in Polluted Pixels by Country",
+     "Change from July 2023 in pixels that started above 3e-5 mol/m2, by country. Dots: March-October only. "
+     "The decline follows a north-west to south-east gradient, not the EU border."),
     ("no2_change_map.png", "Pixel-Level NO2 Change Map",
      "Change in tropospheric NO2 per 0.1 degree pixel, July 2023 - December 2024 minus January 2019 - June 2021."),
     ("moran_lisa_cluster_map.png", "Local Moran's I (LISA) Spatial Cluster Map",

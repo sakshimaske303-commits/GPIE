@@ -149,11 +149,11 @@ with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
     The overall DiD result was further validated by estimating the treatment effect separately for
     23 quarters (2019Q1–2024Q4, relative to 2021Q2), rather than as a single average. Seven of the nine
-    pre-treatment quarters differ significantly from the reference quarter, so the parallel-trends
-    assumption is not supported. The coefficients follow a seasonal pattern (positive in Q1/Q4, negative
-    in Q2/Q3) before and after treatment — consistent with a larger seasonal NO₂ cycle in the more
-    polluted EU countries — rather than a response dated to the law. The 23 coefficients come from one
-    regression, so they are not independent tests.
+    pre-treatment quarters differ significantly from the reference quarter. The coefficients follow a
+    seasonal pattern (positive in Q1/Q4, negative in Q2/Q3) before and after treatment — consistent with a
+    larger seasonal NO₂ cycle in the more polluted EU countries — rather than a response dated to the law.
+    Step 6 confirms this: once the EU is given its own seasonal cycle, the pre-treatment differences are no
+    longer significant. The 23 coefficients come from one regression, so they are not independent tests.
     """)
 
 s5a, s5b = st.columns([0.94, 0.06])
@@ -184,6 +184,44 @@ with s5a:
 with s5b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
     proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the final two-group Difference-in-Differences model with cluster-robust standard errors, the headline model behind the Causal Results page.")
+
+with st.expander("**Step 6 — Identification and Inference Checks**", expanded=False):
+    st.markdown("""
+    The headline model was then stress-tested on four weak points.
+
+    - **Specification.** Year-month fixed effects and an EU-specific seasonal cycle give −1.34 × 10⁻⁶
+      (p = 0.016). With them, the pre-treatment blocks are no longer significant (joint p = 0.292). Adding
+      ERA5 wind speed and boundary-layer height (which dilute NO₂) does not move the estimate.
+    - **Timing.** In 12-month blocks the first two years after the law show nothing (p = 0.98 and 0.44);
+      the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.008).
+    - **Few comparison countries.** A wild cluster bootstrap agrees with the clustered p-value (p = 0.018),
+      but randomization inference does not (p = 0.16). Dropping any one comparison country changes little.
+    - **COVID-19 and the energy crisis.** The Oxford stringency index does not move the estimate, and
+      excluding either window leaves it in place.
+
+    A check of 24 sample days also confirmed that the NO₂ values come from one reprocessed TROPOMI record
+    (v2.4.0) up to July 2022, so there is no processor change at the treatment date.
+    """)
+
+with st.expander("**Step 7 — Pixel-Level Check**", expanded=False):
+    st.markdown("""
+    Every daily 0.1° raster was kept, and the pixels were grouped by their pre-treatment NO₂ level. The
+    decline grows with that level, and comparing EU and comparison pixels within the same class cuts the
+    estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.341). Country by country the pattern is **regional,
+    not institutional**: polluted areas fell 15–25% in north-western Europe, including the United Kingdom
+    and Switzerland, and 0–6% in south-eastern Europe, including EU members. Within either region the EU
+    border makes no difference. Details are on the *Pixel Level Check* page.
+    """)
+
+with st.expander("**Step 8 — Stress Tests**", expanded=False):
+    st.markdown("""
+    A fresh review of the whole project then tested choices that had gone unstated. The country-level
+    estimate weakens without November–February (−0.81 × 10⁻⁶, p = 0.11), with countries weighted by area
+    (−0.96 × 10⁻⁶, p = 0.11) and with log GDP (−0.94 × 10⁻⁶, p = 0.21). Four country means in December 2023
+    are negative, which is physically impossible, and dropping that one month shrinks the late decline. The
+    "matched" pixel result turned out to average two opposite comparisons (against UK/Norway/Switzerland/
+    Iceland: +0.20; against the Western Balkans: −0.38), which is what led to the regional reading above.
+    """)
 
 st.markdown("---")
 
@@ -233,9 +271,14 @@ pooled null (p = 0.101) is superseded.
 
 **What the result does and does not show**: NO₂ fell about 5% more in the EU-27 than in the comparison
 group, and the pooled estimate is significant (p = 0.013). The honest conclusion is not *"the Climate Law
-worked"*: pre-treatment quarters already differ, every alternative date is significant, and an EU-specific
-trend absorbs the effect. The design shows a gradual faster decline in the EU-27, not a break at the law.
-With nine comparison clusters and spatially correlated residuals, the p-values are also likely too small.
+worked"*: nothing changes in the first two years after the law, every alternative date is significant, an
+EU-specific trend absorbs the effect, and at pixel level the decline follows how polluted a place was, not
+whether it is in the EU. With nine comparison clusters and spatially correlated residuals, the p-values are
+also likely too small.
+
+**Limit of the pixel-level check**: its highly polluted comparison pixels are mostly in the United Kingdom,
+which kept EU-derived emission standards, so it separates EU membership from pollution level, not EU-origin
+regulation from its absence.
 """)
 
 st.warning("""

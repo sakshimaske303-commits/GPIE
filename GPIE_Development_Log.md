@@ -40,6 +40,7 @@ But for this project, I chose to write it down as a proper, ongoing story. Wante
 32. [Entry 32](#entry-32)
 33. [Entry 33](#entry-33)
 34. [Entry 34](#entry-34)
+35. [Entry 35](#entry-35)
 
 ---
 
@@ -411,3 +412,23 @@ One limit I have to be honest about. Almost all the highly polluted comparison p
 I added this as Section 4.11 in the paper with two new figures (the change by starting level, nd a pixel map of the change), and updated the abstract, discussion, limitations nd conclusion, plus the README, executive summary, dashboard and the maps PDF. The map itself says it clearly. The decline covers the polluted belt from England through the Low Countries nd western Germany down to the Po Valley, plus the big cities, and it does not stop at the EU border.
 
 This changes what the paper is about. I started by asking whether the Climate Law lowered NO2. What I can actually show now is how a country level satellite DiD produced a significant "policy effect" tht survived a long list of robustness checks, and then disappeared once I compared like with like at pixel level. Tht is a less flattering result for my original question, but I think it is the more useful one.
+
+---
+
+## Entry 35
+
+I went too far in Entry 34, nd this entry is me walking part of it back. After the pixel level result I wrote tht NO2 fell "equally inside and outside the EU". Before sending the paper anywhere I wanted the whole project checked again from zero, without trusting my own summary of it. So I had it reviewed four ways (as an editor would read the paper, a number by number audit against the code, a methods review, nd a reference check). The good part is tht every script ran and every headline number reproduced. The bad part is tht the methods review found my "equally" claim does not hold, and I confirmed it myself.
+
+My matched estimate (-0.21×10⁻⁶, p = 0.341) was an average of two opposite things. Against the UK, Norway, Switzerland nd Iceland it is +0.20×10⁻⁶. Against the Western Balkans it is -0.38×10⁻⁶ (and -1.08×10⁻⁶ from July 2023, p = 0.014). When I compared the two halves of my own comparison group with each other, they differ by -1.00×10⁻⁶ (p = 0.014), which is more than the EU differs from either of them. So "no difference between EU and non EU" was really a plus and a minus cancelling out.
+
+So I looked at the polluted pixels country by country, nd the picture is much clearer tht way. Netherlands -25%, Belgium -22%, Germany -21%, UK -20%, Switzerland -18%. Then Italy -13%, Poland -11%. Then Hungary, Bulgaria, Romania, Croatia, Greece, Bosnia nd Serbia all between 0 and -6%. It is a gradient from north west to south east, and it does not care about the EU border in either direction. The UK and Switzerland are outside the EU and look like Germany. Romania, Bulgaria, Croatia and Greece are inside the EU and look like Serbia.
+
+I tested tht directly. Inside the north west, EU members vs the UK nd Switzerland: -0.41×10⁻⁶ (p = 0.44). Inside the south east, EU members vs the Western Balkans: +0.22×10⁻⁶ (p = 0.48). But inside the EU, north west members vs south east members: -1.43×10⁻⁶ (p = 0.016), and -2.79×10⁻⁶ from July 2023. So the border between regions matters and the EU border does not. My country level "EU effect" came from comparing an EU average dominated by the polluted north west with a comparison group tht is mostly clean or south eastern.
+
+The review also found things about my country level estimate tht I had never tested because I never thought of them as choices. Much of it sits in winter. Without November to February it drops from -1.34×10⁻⁶ to -0.81×10⁻⁶ (p = 0.11). Winter is exactly when the satellite has the fewest good retrievals. Four of my country means in December 2023 are negative (Denmark, Sweden, Latvia, Lithuania), which is physically impossible, and dropping just tht one month shrinks my "late decline" block a lot. My "nothing for two years, then a drop from July 2023" story from Entry 33 also depends on the winter months. Without them it is a slow drift tht starts before the law. Then weighting. I gave every country the same weight, so Malta with 3 pixels counts as much as Germany. Weighted by area the estimate is -0.96×10⁻⁶ (p = 0.11). And GDP. I used it in nominal levels, and with log GDP the estimate is -0.94×10⁻⁶ (p = 0.21).
+
+Two smaller ones. My randomization test used the raw coefficient, where the usual way is the t statistic, and tht gives p = 0.046 instead of 0.17. And my synthetic control fitted the weights first nd shifted the level after. Fitting both together puts the EU 2nd of 10 instead of 5th. So in both of those I had been a bit too harsh on my own result, nd in the others too generous. I am reporting all of it.
+
+Everything is in one new script (causal_inference_stress_tests.py) and I added Section 4.12 to the paper with a new figure, corrected the abstract, discussion, limitations nd conclusion, and fixed the same sentences in the README, executive summary and dashboard. I also fixed a few factual slips the review caught (the UK was a member in 2019, not in transition, nd Bosnia only became a candidate in December 2022).
+
+What I can honestly say now is narrower than last time but I trust it more. NO2 fell a lot in the polluted north west of Europe and very little in the south east, on both sides of the EU border, and a country level comparison turned tht into an EU effect. I cannot say why the two regions differ, nd part of the size of it comes from winter data I do not fully trust. The editor style review was also blunt tht the paper itself still reads like a diary of this project instead of an argument, with pieces of three different conclusions left in it. Tht is the next thing to fix, and it means rewriting it around this finding instead of patching it again.

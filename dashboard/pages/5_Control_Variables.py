@@ -1,18 +1,17 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
-from styles import apply_custom_style, PALETTE
+from styles import apply_custom_style, PALETTE, embed_html
 
 
 def render_map(png_name, html_name, height=520):
     html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
     if os.path.exists(html_path):
         with open(html_path, "r", encoding="utf-8") as f:
-            components.html(f.read(), height=height)
+            embed_html(f.read(), height=height)
     else:
         st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 

@@ -87,7 +87,7 @@ def build(d, time_fe=True, group_season=True, controls=BASE_CONTROLS, extra=None
 
 def drop_collinear(X):
     """Drop columns that are exact linear combinations of earlier ones."""
-    A = X.values
+    A = X.values / np.sqrt((X.values ** 2).sum(axis=0))   # scaled, so small-valued columns are not dropped
     q, r = np.linalg.qr(A)
     keep = np.abs(np.diag(r)) > 1e-9 * np.abs(np.diag(r)).max()
     return X.loc[:, keep]

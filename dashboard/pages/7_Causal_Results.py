@@ -199,10 +199,11 @@ st.markdown("---")
 st.markdown("### Pixel-Level Check: Pollution Level or EU Membership?")
 
 st.markdown("""
-On a 0.1° grid, NO₂ fell in proportion to how polluted each pixel was before treatment, and it fell the same
-way in comparison-group pixels with the same starting level. Comparing like with like removes most of the
-country-level estimate, so that estimate is largely a **composition effect**: EU countries contain more highly
-polluted areas (`analyse_no2_grid_baseline.py`).
+On a 0.1° grid the decline grows with how polluted each pixel was before treatment, and comparing EU and
+comparison pixels with the same starting level removes most of the country-level estimate. The pattern is
+**regional, not institutional**: polluted areas of north-western Europe fell 15–25% whether inside the EU or
+not (United Kingdom −20%, Switzerland −18%), and those of south-eastern Europe fell 0–6% whether inside the EU
+or not. Full detail is on the *Pixel Level Check* page.
 """)
 
 st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), use_container_width=True)
@@ -229,7 +230,7 @@ st.markdown("---")
 st.markdown("### How This Result Was Reached")
 
 st.markdown("""
-This finding was not the project's first result — it emerged after two corrections that
+This finding was not the project's first result — it emerged after three corrections that
 changed the analysis:
 """)
 

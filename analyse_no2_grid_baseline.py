@@ -60,7 +60,7 @@ def fit(d, parts, names):
     X = X.loc[:, np.abs(np.diag(r)) > 1e-9]      # drop collinear columns
     res = sm.WLS(d["no2"].values, X, weights=d["w"].values).fit(
         cov_type="cluster", cov_kwds={"groups": d["country"].values})
-    return {n: {"coefficient": float(res.params[n]), "p_value": float(res.pvalues[n])}
+    return {n: {"coefficient": float(res.params[n]), "se": float(res.bse[n]), "p_value": float(res.pvalues[n])}
             for n in names if n in res.params.index}
 
 

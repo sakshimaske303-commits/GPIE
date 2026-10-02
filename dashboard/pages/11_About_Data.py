@@ -50,7 +50,9 @@ st.markdown("""
 |---|---|---|
 | NO₂ (Sentinel-5P) | European Space Agency / Copernicus | Sentinel Hub Process API (daily) |
 | NDVI (CGLS) | Copernicus Land Monitoring Service | Sentinel Hub Statistical API |
-| Climate (ERA5) | ECMWF / Copernicus Climate Data Store | CDS API |
+| NO₂ gridded (0.1° daily rasters) | European Space Agency / Copernicus | Sentinel Hub Process API; kept locally, too large for the repository |
+| Climate (ERA5): temperature, precipitation, wind speed, boundary-layer height | ECMWF / Copernicus Climate Data Store | CDS API |
+| COVID-19 stringency index | Oxford COVID-19 Government Response Tracker | Public CSV |
 | Land Cover | ESA WorldCover | AWS Open Data |
 | Elevation (DEM) | Copernicus DEM GLO-30 | AWS Open Data |
 | GDP (EU-27) | Eurostat | REST Statistics API |

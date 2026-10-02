@@ -1,11 +1,10 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import sys
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
-from styles import apply_custom_style, PALETTE
+from styles import apply_custom_style, PALETTE, embed_html
 
 apply_custom_style()
 
@@ -65,7 +64,7 @@ st.markdown("### Geographic Distribution")
 interactive_map_path = os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_map.html")
 if os.path.exists(interactive_map_path):
     with open(interactive_map_path, "r", encoding="utf-8") as f:
-        components.html(f.read(), height=560)
+        embed_html(f.read(), height=560)
     st.markdown(
         "<p class='caption-text' style='text-align:center;'>Hover a country for its name and group. Toggle layers top-right.</p>",
         unsafe_allow_html=True,

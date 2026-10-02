@@ -241,6 +241,58 @@ def build_synthetic_control():
     print(f"Saved: {OUT_DIR}/synthetic_control.html")
 
 
+def build_change_by_baseline():
+    with open("data/grid_baseline_checks.json", encoding="utf-8") as f:
+        rows = pd.DataFrame(json.load(f)["change_by_baseline_class"])
+    fig = go.Figure()
+    for group, color in (("EU-27", "#2c7fb8"), ("control", "#d95f0e")):
+        g = rows[rows["group"] == group]
+        fig.add_trace(go.Bar(x=g["baseline_class_1e-5"], y=g["change_from_jul2023_pct"].round(1),
+                             name=f"{group} pixels", marker_color=color, customdata=g["pixels"],
+                             hovertemplate="%{y}% change<br>%{customdata:,} pixels<extra>" + group + "</extra>"))
+    fig.update_layout(
+        title="NO2 fell in proportion to how polluted a place was, inside and outside the EU<br>"
+              "<sup>0.1° pixels, Jul 2023 – Dec 2024 against Jan 2019 – Jun 2021. Hover for pixel counts.</sup>",
+        xaxis_title="Pre-treatment NO2 level of the pixel (10⁻⁵ mol/m²)",
+        yaxis_title="Change in NO2 (%)", barmode="group", template="plotly_white", height=550,
+    )
+    fig.write_html(os.path.join(OUT_DIR, "no2_change_by_baseline.html"), include_plotlyjs="cdn")
+    print(f"Saved: {OUT_DIR}/no2_change_by_baseline.html")
+
+
+def build_pixel_change_map():
+    grid_path = "data/earth_observation/no2/gridded/no2_grid_monthly.npz"
+    if not os.path.exists(grid_path):
+        print("Skipped pixel change map: the gridded NO2 file is not on this machine.")
+        return
+    import numpy as np
+    from branca.colormap import LinearColormap
+    from matplotlib import cm, colors
+    from analyse_no2_grid_baseline import BBOX, CUTOFF, LATE, load_grid, period_mean
+    from country_boundaries import get_all_country_codes, load_country_geometry
+    from s5p_process_daily import RES_DEG, build_masks
+
+    monthly, year, month = load_grid()
+    t = year * 12 + month
+    change = (period_mean(monthly, month, t > LATE) - period_mean(monthly, month, t <= CUTOFF)) * 1e6
+    masks = build_masks(BBOX, {c: load_country_geometry(c, clip_to_bbox=BBOX) for c in get_all_country_codes()}, RES_DEG)
+    inside = np.any(list(masks.values()), axis=0)
+    change = np.where(inside, change, np.nan)
+
+    limit = 15
+    rgba = cm.get_cmap("RdBu_r")(colors.Normalize(-limit, limit)(change))
+    rgba[..., 3] = np.where(np.isfinite(change), 0.85, 0.0)
+    m = folium.Map(location=[50, 10], zoom_start=4, tiles="cartodbpositron")
+    folium.raster_layers.ImageOverlay(rgba, bounds=[[BBOX[1], BBOX[0]], [BBOX[3], BBOX[2]]],
+                                      mercator_project=True, opacity=1.0).add_to(m)
+    stops = [colors.to_hex(cm.get_cmap("RdBu_r")(v)) for v in np.linspace(0, 1, 9)]
+    legend = LinearColormap(stops, vmin=-limit, vmax=limit)
+    legend.caption = "Change in NO2, Jul 2023 – Dec 2024 minus Jan 2019 – Jun 2021 (10⁻⁶ mol/m²)"
+    legend.add_to(m)
+    m.save(os.path.join(OUT_DIR, "no2_pixel_change_map.html"))
+    print(f"Saved: {OUT_DIR}/no2_pixel_change_map.html")
+
+
 def distinct_colors(n):
     # I space the hues evenly so no two countries share a color.
     import colorsys
@@ -301,6 +353,8 @@ def main():
     build_event_study()
     build_synthetic_control()
     build_explore_trends()
+    build_change_by_baseline()
+    build_pixel_change_map()
 
     print(f"\nAll interactive maps saved to {OUT_DIR}/")
 

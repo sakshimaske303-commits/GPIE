@@ -28,7 +28,7 @@ Built on a **"Trust, But Verify"** research philosophy: policy claims are treate
 
 ## Interactive Maps
 
-Hoverable, zoomable versions of the main maps and charts (6 maps + 3 charts) — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
+Hoverable, zoomable versions of the main maps and charts (7 maps + 4 charts) — same underlying data as the static figures, built with `folium`/`plotly` instead of `matplotlib`. Also embedded directly in the dashboard's **Interactive Maps** page.
 
 | Map | Link |
 |---|---|
@@ -41,6 +41,8 @@ Hoverable, zoomable versions of the main maps and charts (6 maps + 3 charts) —
 | Event-Study Plot | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/event_study.html) |
 | Synthetic Control Gap (intercept-adjusted) | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/synthetic_control.html) |
 | Explore Trends by Country | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/explore_trends.html) |
+| Pixel-Level NO₂ Change Map | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/no2_pixel_change_map.html) |
+| NO₂ Change by Starting Pollution Level | [Open →](https://sakshimaske303-commits.github.io/GPIE/outputs/interactive/no2_change_by_baseline.html) |
 
 Built by `build_interactive_maps.py`.
 
@@ -52,7 +54,7 @@ Built by `build_interactive_maps.py`.
 - Estimates a two-group **Difference-in-Differences** model to separate any EU-specific change from the shared European NO₂ trend
 - Runs a placebo test, quarterly event study, GDP-exclusion, log-outcome, treatment-date and baseline-split checks, a synthetic control and a Moran's I spatial diagnostic, plus identification checks (year-month fixed effects, EU-specific seasonality, wind/boundary-layer and COVID-19 controls, wild cluster bootstrap, randomization inference)
 - Reports what the data show (EU-27 NO₂ fell faster than in the comparison group) and what they do not show (a break at the Climate Law's date), including the checks that limit the causal reading
-- Presents it through 20 static figures (`GPIE_Maps_and_Plots.pdf`), 9 interactive maps/charts, and a Streamlit dashboard
+- Presents it through 21 static figures (`GPIE_Maps_and_Plots.pdf`), 11 interactive maps/charts, and a Streamlit dashboard
 
 ## Key Finding
 
@@ -60,9 +62,11 @@ Measured with true monthly satellite means, NO₂ fell more in the EU-27 than in
 
 **The design cannot attribute this to the Climate Law:**
 
-- **Composition effect (pixel level):** on a 0.1° grid, NO₂ fell in proportion to each pixel's pre-treatment level (about a quarter of it), equally inside and outside the EU. Comparing EU and comparison pixels with the same starting level cuts the estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.341). The country-level estimate mostly reflects that EU countries contain more highly polluted areas (`analyse_no2_grid_baseline.py`).
+- **Where the estimate comes from (pixel level):** on a 0.1° grid the decline grows with each pixel's pre-treatment level, and comparing EU and comparison pixels with the same starting level cuts the estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.341) (`analyse_no2_grid_baseline.py`).
+- **Regional, not institutional:** Polluted pixels lost 15–25% in north-western Europe, including the non-EU United Kingdom (−20%) and Switzerland (−18%), and 0–6% in south-eastern Europe, including EU members Romania, Bulgaria, Croatia and Greece as well as Serbia and Bosnia and Herzegovina. Within either region the EU border makes no difference (north-west −0.41 × 10⁻⁶, p = 0.44; south-east +0.22 × 10⁻⁶, p = 0.48); inside the EU, north-western and south-eastern members differ (−1.43 × 10⁻⁶, p = 0.016). (`causal_inference_stress_tests.py`).
+- **Fragile to overlooked choices:** without November–February the country-level estimate is −0.81 × 10⁻⁶ (p = 0.11); weighting countries by area gives −0.96 × 10⁻⁶ (p = 0.11); log GDP gives −0.94 × 10⁻⁶ (p = 0.21). Four country means in December 2023 are negative, which is physically impossible.
 - **Late onset:** with year-month fixed effects and EU-specific seasonality the estimate is −1.34 × 10⁻⁶ (p = 0.016), but there is no effect in the first two years after the law (Jul 2021–Jun 2023: p = 0.98 and 0.44); the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.008).
-- **Event study:** 7 of 9 pre-treatment quarters differ significantly under a common seasonal cycle; this is largely seasonal and disappears once the EU has its own seasonal cycle (joint p = 0.292).
+- **Event study:** 7 of 9 pre-treatment quarters differ significantly under a common seasonal cycle. With an EU-specific seasonal cycle and 12-month blocks, the pre-treatment blocks are not significant (joint p = 0.292).
 - **Treatment date:** every alternative cutoff (±6 and ±12 months) is also significant, including two dates before the law existed.
 - **EU-specific trend:** allowing a steady EU-specific trend removes the treatment-date effect (+8.7 × 10⁻⁷, p = 0.243); the trend itself is significant (−7.9 × 10⁻⁷ per year, p = 0.016).
 - **Synthetic control** (9 donors, intercept-adjusted): gap −8.1 × 10⁻⁷, ranking 5th of 10 among placebo countries.
@@ -71,7 +75,7 @@ Measured with true monthly satellite means, NO₂ fell more in the EU-27 than in
 
 The estimate is otherwise sturdy: wind speed, boundary-layer height and COVID-19 stringency controls do not move it, dropping the COVID-19 window or the energy-crisis months leaves it in place, and no single comparison country drives it (`causal_inference_identification_checks.py` → `data/identification_checks.json`).
 
-So the evidence points to a decline of NO₂ in polluted areas across Europe, EU and non-EU alike, that emerges about two years after the Climate Law. It is not an effect specific to the EU or to the law's date.
+So the evidence points to a decline of NO₂ in the polluted areas of north-western Europe, on both sides of the EU border. It is not an effect of EU membership or of the Climate Law's date.
 
 > **Correction note:** earlier versions of this project reported a pooled null (p = 0.101). Those results were based on NO₂ values that turned out to be single end-of-month snapshots rather than monthly means (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval). The acquisition was rebuilt (`s5p_process_daily.py`: one raster per day, pooled into monthly means) and every number was re-estimated.
 
@@ -116,7 +120,7 @@ Each stage is a separate script and every number in the paper is produced by a s
   1. `download_no2_sentinelhub.py` (daily Process API rasters → resumable daily log → `no2_stats_monthly_mean_36.json`), `download_ndvi_sentinelhub.py` (→ `ndvi_stats_monthly_mean_36.json`); `download_no2_gridded.py` keeps every daily 0.1° raster (→ `data/earth_observation/no2/gridded/`, not in the repository because of its size) and `analyse_no2_grid_baseline.py` runs the pixel-level check on it; `diagnose_sentinelhub.py` checks which Sentinel Hub endpoints currently work; `check_s5p_processor_versions.py` checks which TROPOMI processor versions the NO₂ values come from
   2. Climate/GDP inputs: `download_era5.py` → `unzip_era5.py` → `process_era5.py` → `era5_regional_stats.py` + `era5_regional_stats_control_expansion.py`; `download_eurostat_gdp.py` → `process_eurostat.py` → `apply_eu27_filter.py`; `download_gdp_control_countries.py` + `download_gdp_control_expansion.py`; robustness controls: `download_era5_wind_blh.py` (→ `data/era5_wind_blh_country_monthly.csv`), `data/covid/oxcgrt_stringency_national.csv` (Oxford stringency index)
   3. `master_merge_control.py` → `data/master_dataset_control.csv`
-  4. `causal_inference_final_did.py`, `causal_inference_ndvi.py`, `causal_inference_event_study.py`, `causal_inference_robustness_checks.py`, `causal_inference_identification_checks.py`, `synthetic_control.py`, `spatial_autocorrelation.py`; historical single-cohort models: `causal_inference_initial_model.py`, `causal_inference_placebo.py`, `causal_inference.py`
+  4. `causal_inference_final_did.py`, `causal_inference_ndvi.py`, `causal_inference_event_study.py`, `causal_inference_robustness_checks.py`, `causal_inference_identification_checks.py`, `causal_inference_stress_tests.py`, `synthetic_control.py`, `spatial_autocorrelation.py`; historical single-cohort models: `causal_inference_initial_model.py`, `causal_inference_placebo.py`, `causal_inference.py`
   5. Figures: `map_*.py`, `plot_*.py`, `build_interactive_maps.py`, `build_maps_plots_pdf.py`; dashboard: `dashboard/app.py`
 - Superseded scripts kept for the record: `run_pipeline.py`/`download_no2.py`/`extract_no2.py` (OData + HARP Level-2 test pipeline), `download_*_control_expansion.py` for NO₂/NDVI (single-mosaic acquisition), `master_merge.py`, `master_merge_control_expanded.py`.
 - **Full audit trail**: every fix, bug, and methodology change made after the first working version — including this project's cluster-robust standard error correction and the NDVI re-analysis — is logged chronologically in the Development Log, so any reported number can be traced back to the change that produced it.
@@ -127,7 +131,7 @@ Each stage is a separate script and every number in the paper is produced by a s
 
 ```text
 GPIE/
-├── dashboard/                  # Streamlit dashboard (11 pages)
+├── dashboard/                  # Streamlit dashboard (12 pages)
 ├── data/                       # Processed datasets and master merge files
 │   └── earth_observation/      # Per-dataset acquisition/processing outputs
 ├── outputs/

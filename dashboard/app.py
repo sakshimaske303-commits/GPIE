@@ -105,12 +105,15 @@ st.markdown(
             Governments announce landmark climate policy and then report their own progress against it —
             that self-reported progress is rarely independently audited against physical, satellite-observed
             evidence. GPIE builds that independent audit layer for the EU's Climate Law. Its most important
-            result is a disciplined <strong>distinction</strong>: satellite data show NO₂ falling about 5%
-            more in the EU-27 than in neighbouring non-EU countries, but the timing checks show a gradual
-            EU-wide trend, not a step change at the Climate Law. "Pollution fell" and "this law made it fall"
-            are different claims, and only the first is supported. Along the way the project corrected itself
-            twice — a placebo test rejected its first model, and its satellite aggregation was rebuilt from
-            end-of-month snapshots into true monthly means (see Methodology).
+            result is a disciplined <strong>distinction</strong>: at country level, satellite data show NO₂ falling
+            about 5% more in the EU-27 than in neighbouring non-EU countries, and that estimate survives a long
+            list of robustness checks. But the decline starts two years after the Climate Law, and at pixel
+            level it turns out to follow how polluted a place was, not whether it is in the EU. "Pollution
+            fell" and "this law made it fall" are different claims, and only the first is supported. Along
+            the way the project corrected itself three times — a placebo test rejected its first model, its
+            satellite aggregation was rebuilt from end-of-month snapshots into true monthly means, and a
+            pixel-level check showed the decline follows pollution level and region, not the EU border (see
+            Methodology and Pixel Level Check).
         </p>
     </div>
     """,
@@ -144,6 +147,7 @@ Use the sidebar to explore:
 - **Interactive Maps** — hoverable, zoomable versions of the main maps and charts
 - **Explore Trends** — country-by-country NO₂ and NDVI time series
 - **About Data** — the master dataset and data sources
+- **Pixel Level Check** — whether NO₂ fell where the EU is, or where pollution was high
 """)
 
 st.markdown("---")

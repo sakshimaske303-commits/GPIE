@@ -1,5 +1,4 @@
 """Row of buttons that open my PDFs in a new browser tab (Streamlit Cloud blocks iframe embeds)."""
-import streamlit.components.v1 as components
 import json
 
 
@@ -46,4 +45,4 @@ def render_doc_viewer(docs, colors, height=70):
 }})();
 </script>
 """
-    components.html(html, height=height, scrolling=False)
+    embed_html(html, height=height, scrolling=False)
