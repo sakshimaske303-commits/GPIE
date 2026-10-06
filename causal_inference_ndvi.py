@@ -41,7 +41,7 @@ def run_did_model(df):
     model = sm.OLS(y, X)
 
     # I cluster by country because monthly errors within a country are correlated.
-    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]}, use_t=True)
     print("Model fit complete!")
 
     print("\n=== DiD TREATMENT EFFECT ON NDVI (EU x Post-2021, cluster-robust SEs) ===")

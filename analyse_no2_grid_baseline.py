@@ -59,7 +59,7 @@ def fit(d, parts, names):
     q, r = np.linalg.qr(X.values / np.sqrt((X.values ** 2).sum(axis=0)))
     X = X.loc[:, np.abs(np.diag(r)) > 1e-9]      # drop collinear columns
     res = sm.WLS(d["no2"].values, X, weights=d["w"].values).fit(
-        cov_type="cluster", cov_kwds={"groups": d["country"].values})
+        cov_type="cluster", cov_kwds={"groups": d["country"].values}, use_t=True)
     return {n: {"coefficient": float(res.params[n]), "se": float(res.bse[n]), "p_value": float(res.pvalues[n])}
             for n in names if n in res.params.index}
 
@@ -142,7 +142,7 @@ def main():
     px["eu"] = (~px["country"].isin(CONTROLS)).astype(float)
     X = sm.add_constant(pd.DataFrame({"eu": px["eu"], "pre": px["pre"],
                                       "eu_x_pre": px["eu"] * (px["pre"] - px["pre"].mean())}))
-    res = sm.OLS(px["change"], X).fit(cov_type="cluster", cov_kwds={"groups": px["country"]})
+    res = sm.OLS(px["change"], X).fit(cov_type="cluster", cov_kwds={"groups": px["country"]}, use_t=True)
     out["pixel_regression_change_from_jul2023"] = {
         "n_pixels": int(len(px)), "r_squared": float(res.rsquared),
         **{k: {"coefficient": float(res.params[k]), "p_value": float(res.pvalues[k])} for k in ("eu", "pre", "eu_x_pre")}}
@@ -172,39 +172,48 @@ def main():
     tab = pd.DataFrame(table)
     fig, ax = plt.subplots(figsize=(10, 5.5))
     x = np.arange(len(LABELS))
-    for k, (group, color) in enumerate((("EU-27", "#2c7fb8"), ("control", "#d95f0e"))):
+    for k, (group, color, name) in enumerate((("EU-27", "#2c7fb8", "EU-27"), ("control", "#d95f0e", "Comparison-group"))):
         g = tab[tab["group"] == group].set_index("baseline_class_1e-5").reindex(LABELS)
         ax.bar(x + (k - 0.5) * 0.38, g["change_from_jul2023_pct"], width=0.38, color=color,
-               label=f"{group} pixels")
+               label=f"{name} pixels")
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(LABELS)
     ax.set_xlabel("Pre-treatment NO₂ level of the pixel (10⁻⁵ mol/m²)")
     ax.set_ylabel("Change in NO₂ from Jul 2023 vs. pre-treatment (%)")
-    ax.set_title("NO₂ fell in proportion to how polluted a place was, inside and outside the EU\n"
+    ax.set_title("Change in NO₂ by the pixel's pre-treatment level, EU-27 and comparison pixels\n"
                  "0.1° pixels, Jul 2023 – Dec 2024 against Jan 2019 – Jun 2021", fontsize=12)
     ax.legend(frameon=False)
     ax.grid(axis="y", alpha=0.3)
-    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) - Source: Sentinel-5P TROPOMI, Sentinel Hub Process API",
-                ha="center", fontsize=8, color="gray")
+    plt.figtext(0.5, 0.01, "Source: Sentinel-5P TROPOMI tropospheric NO₂ column", ha="center", fontsize=8, color="gray")
     plt.tight_layout(rect=(0, 0.03, 1, 1))
     plt.savefig(OUT_BINS, dpi=200)
     plt.close()
 
     # Figure 2: map of the change
     change = np.where((eu | control) & usable, (late - pre) * 1e6, np.nan)
-    fig, ax = plt.subplots(figsize=(11, 8))
-    im = ax.imshow(change, extent=(MIN_LON, MAX_LON, MIN_LAT, MAX_LAT), cmap="RdBu_r", vmin=-15, vmax=15)
+    fig, ax = plt.subplots(figsize=(10, 10))
+    im = ax.imshow(change, extent=(MIN_LON, MAX_LON, MIN_LAT, MAX_LAT), cmap="RdBu_r", vmin=-15, vmax=15,
+                   aspect=1.5)
+    from shapely.geometry import shape
+    for code in codes:                               # thin lines for EU members, thick for comparison countries
+        geom = shape(load_country_geometry(code, clip_to_bbox=BBOX))
+        outside_eu = code in CONTROLS
+        for poly in getattr(geom, "geoms", [geom]):
+            xs, ys = poly.exterior.xy
+            ax.plot(xs, ys, color="black", linewidth=1.3 if outside_eu else 0.4, zorder=3 if outside_eu else 2)
     ax.set_xlim(-12, 32)
-    ax.set_ylim(34, 62)
+    ax.set_ylim(34, 71.5)
     ax.set_xlabel("Longitude")
     ax.set_ylabel("Latitude")
+    ax.plot([], [], color="black", linewidth=1.3, label="comparison country")
+    ax.plot([], [], color="black", linewidth=0.4, label="EU-27 country")
+    ax.legend(loc="upper left", frameon=True, fontsize=9)
     ax.set_title("Change in tropospheric NO₂: Jul 2023 – Dec 2024 minus Jan 2019 – Jun 2021\n"
                  "36 study countries, 0.1° pixels", fontsize=12)
-    cb = plt.colorbar(im, ax=ax, shrink=0.75)
+    cb = plt.colorbar(im, ax=ax, shrink=0.6, extend="both")
     cb.set_label("Change in NO₂ (10⁻⁶ mol/m²)")
-    plt.figtext(0.5, 0.01, "Green Policy Intelligence Engine (GPIE) - Source: Sentinel-5P TROPOMI, Sentinel Hub Process API",
-                ha="center", fontsize=8, color="gray")
+    plt.figtext(0.5, 0.01, "Source: Sentinel-5P TROPOMI tropospheric NO₂ column", ha="center", fontsize=8, color="gray")
     plt.tight_layout(rect=(0, 0.03, 1, 1))
     plt.savefig(OUT_MAP, dpi=200)
     plt.close()

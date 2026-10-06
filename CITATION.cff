@@ -22,16 +22,18 @@ abstract: >-
   (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina,
   Montenegro, North Macedonia, Serbia). With NO2 aggregated to true monthly means,
   EU-27 NO2 fell relative to the comparison group (pooled DiD -1.52e-6 mol/m2,
-  about 4.9% of the pre-treatment EU mean, p = 0.013, cluster-robust), mainly in
+  about 4.9% of the pre-treatment EU mean, p = 0.018, cluster-robust), mainly in
   the 14 higher-baseline member states. The design cannot attribute this to the
   Climate Law: every alternative cutoff date is significant, an EU-specific
   linear trend absorbs the treatment-date term, and the estimate weakens without
-  the winter months, with area weights and with log GDP. On a 0.1 degree grid the
-  decline is regional, not institutional: polluted pixels lost 15-25% in
-  north-western Europe, including the non-EU United Kingdom and Switzerland, and
-  0-6% in south-eastern Europe, including EU members. Matching EU and comparison
-  pixels on pre-treatment level cuts the estimate to -0.21e-6 (p = 0.341). A
-  secondary NDVI outcome shows a relative decline (p = 0.005), reported as an
+  the winter months, with area weights and with log GDP. Most of the estimate
+  reflects baseline composition: under random group assignment the estimate
+  follows the pre-treatment gap between groups, and matching EU and comparison
+  pixels on pre-treatment level on a 0.1 degree grid cuts it to -0.21e-6
+  (p = 0.348). Descriptively, polluted pixels lost 15-25% in north-western
+  Europe, including the non-EU United Kingdom and Switzerland, and 0-6% in
+  south-eastern Europe, including EU members; the cause is not identified. A
+  secondary NDVI outcome shows a relative decline (p = 0.008), reported as an
   exploratory association. Earlier versions, based on end-of-month NO2 snapshots,
   reported a pooled null and are superseded.
 keywords:

@@ -32,15 +32,15 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("PIXELS COMPARED", f"{checks['pixels']['eu'] + checks['pixels']['control']:,}", "0.1° grid")
 with col2:
-    st.metric("NOT MATCHED", "−1.34 × 10⁻⁶", "p = 0.012", delta_color="off")
+    st.metric("NOT MATCHED", "−1.34 × 10⁻⁶", "p = 0.017", delta_color="off")
 with col3:
-    st.metric("MATCHED ON POLLUTION LEVEL", "−0.21 × 10⁻⁶", "p = 0.341", delta_color="off")
+    st.metric("MATCHED ON POLLUTION LEVEL", "−0.21 × 10⁻⁶", "p = 0.348", delta_color="off")
 
 st.warning(
-    "**Result: the decline is regional, not institutional.** It grows with how polluted a pixel was before "
+    "**Result: most of the country-level estimate reflects starting pollution level.** The decline grows with how polluted a pixel was before "
     "treatment, and it is large in north-western Europe on both sides of the EU border (Germany −21%, United "
     "Kingdom −20%, Switzerland −18%) and small in south-eastern Europe on both sides of it (Romania −4%, "
-    "Serbia 0%). A country average turns that regional pattern into an apparent EU effect."
+    "Serbia 0%). The cause of that regional pattern is not identified, and its size depends on winter months."
 )
 
 st.markdown("---")
@@ -120,12 +120,34 @@ regions = pd.DataFrame([
 st.dataframe(regions, hide_index=True, use_container_width=True)
 
 st.markdown("""
-Within the north-west and within the south-east, the EU border makes no detectable difference. Between the
+Within the north-west and within the south-east, the difference across the EU border is small and not
+significant, though with two comparison countries in the north-west the interval is wide. Between the
 two regions, inside the EU, the difference is larger than any EU-versus-comparison estimate. The two halves
 of the comparison group also differ from each other, so the overall matched estimate averages two opposite
 comparisons. Winter months carry much of the size of these estimates; in percentage terms the regional
 gradient is still there in March–October (the dots in the chart).
 """)
+
+ext = json.load(open(os.path.join(PROJECT_ROOT, "data", "stress_tests.json"), encoding="utf-8"))["extended_comparison"]
+tr = ext["areas"]["TR"]["above_3e-5"]
+st.markdown(
+    f"Western Turkey is outside the study sample. Its {tr['pixels']:,} polluted pixels did not change "
+    f"({tr['change_from_jul2023_pct']:+.1f}%), and matched against Turkey the EU difference stays at "
+    f"{ext['EU-27 vs western Turkey, no controls']['matched_on_baseline']['coefficient']:+.2f} × 10⁻⁶ "
+    "(one comparison country, so no valid p-value). So the matched result depends on where the comparison "
+    "pixels are."
+)
+
+st.markdown("---")
+st.markdown("### Random Group Assignment")
+
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "placebo_assignments.png"), use_container_width=True)
+st.markdown(
+    "<p class='caption-text'>Each dot is one random split of the 36 countries into 27 and 9. The DiD estimate "
+    "follows the pre-treatment NO₂ gap between the two groups (r = −0.81), so a group that starts out more "
+    "polluted gets a negative estimate even when the labels are random.</p>",
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 st.markdown("### Where NO₂ Fell")

@@ -53,7 +53,7 @@ def run_event_study(df):
     model = sm.OLS(y, X)
 
     # I cluster by country because monthly errors within a country are correlated.
-    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]}, use_t=True)
     print("Model fit complete!")
 
     print("\n=== EVENT-STUDY COEFFICIENTS (EU x Quarter, relative to 2021Q2, cluster-robust SEs) ===")

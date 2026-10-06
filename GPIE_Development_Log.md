@@ -432,3 +432,25 @@ Two smaller ones. My randomization test used the raw coefficient, where the usua
 Everything is in one new script (causal_inference_stress_tests.py) and I added Section 4.12 to the paper with a new figure, corrected the abstract, discussion, limitations nd conclusion, and fixed the same sentences in the README, executive summary and dashboard. I also fixed a few factual slips the review caught (the UK was a member in 2019, not in transition, nd Bosnia only became a candidate in December 2022).
 
 What I can honestly say now is narrower than last time but I trust it more. NO2 fell a lot in the polluted north west of Europe and very little in the south east, on both sides of the EU border, and a country level comparison turned tht into an EU effect. I cannot say why the two regions differ, nd part of the size of it comes from winter data I do not fully trust. The editor style review was also blunt tht the paper itself still reads like a diary of this project instead of an argument, with pieces of three different conclusions left in it. Tht is the next thing to fix, and it means rewriting it around this finding instead of patching it again.
+
+---
+
+## Entry 36
+
+I rewrote the paper from the first line. The old one told the story of my project in the order it happened, nd an editor reading it could not tell what the argument was. The new one asks one question, what does a country level DiD on satellite NO2 actually identify, and uses the Climate Law as the case. New title: "What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify? Baseline Composition, Winter Retrievals and the European Climate Law". NDVI, India nd the project history are out of the paper. They stay in the repo and the dashboard.
+
+Before writing I had the first rewrite reviewed again, and it caught me overclaiming a second time. I had written tht the decline is "regional, not institutional" nd "not an effect of EU membership". My own north west contrast has only two comparison countries, and its interval (-1.55 to +0.73) is wide enough to contain my whole country level estimate. So the honest sentence is tht the data do not need an EU border effect, not tht there is none. I removed tht phrase everywhere, in the paper, README, executive summary, citation file and dashboard.
+
+I also changed how I compute p values. With 36 clusters, nd only 9 on the comparison side, the normal distribution is too generous, so every current script now uses a t distribution with clusters minus one degrees of freedom. Nothing flips, but everything gets a bit weaker. The main model goes from p = 0.016 to 0.022, the first model from 0.013 to 0.018, the late block from 0.008 to 0.012. With the stricter test only 5 of 9 pre treatment quarters are significant, not 7.
+
+Three new checks went into causal_inference_stress_tests.py.
+
+First, random assignment. I split my 36 countries into 27 and 9 at random, 999 times, and ran the same DiD each time. The estimate follows the pre treatment gap between the two random groups almost on a line (r = -0.81). Whichever group starts more polluted gets a negative "effect". 9.6% of the random splits are significant at 5%, about double what it should be. My real EU assignment sits right on tht line. This is the clearest picture I have of the composition problem, and it is now Figure 3.
+
+Second, I had been saying the matched estimate (-0.21) is smaller than the unmatched one (-1.34) without testing the difference itself. A cluster bootstrap gives -1.13 with a 95% interval of -2.18 to -0.28, so the drop is real.
+
+Third, Turkey. My rasters already cover western Turkey, Ukraine nd Kosovo, I just never used them. Turkey has about 1,000 polluted pixels (Istanbul, Ankara) and they did not fall at all (-0.3%). So "polluted places fell everywhere" is not true either. Then the uncomfortable part: when I match EU pixels against Turkish pixels of the same starting level, the EU difference does not go away (-1.43×10⁻⁶, north west members -2.16, south east members -0.30). It is one comparison country, so I cannot give an honest p value nd I do not report one. But it means matching removes the EU difference against the UK, Switzerland and the Balkans, and does not remove it against Turkey. What the matched model gives back depends on where the comparison pixels are. I put tht in the paper as it is, because hiding it would be the same mistake I made in Entry 34.
+
+I also refitted the synthetic control with weights nd level shift together (gap -1.45×10⁻⁶, 2nd of 10), cleaned the figures (country borders on the pixel map, neutral titles), and added the two new figures to the maps PDF, which now has 23.
+
+What I still cannot fix from my desk: I checked the processor version on sample days only, not on every file. My weather controls are country averages, not pixel level. I have no ground monitor validation. And I have no source yet for how closely UK nd Swiss vehicle standards follow the EU ones. These are written in the limitations section as they are.

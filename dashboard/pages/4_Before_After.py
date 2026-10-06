@@ -74,7 +74,7 @@ with tab2:
 
         This visual subtlety doesn't mean nothing happened statistically — GPIE's corrected model,
         using the same comparison-group design as NO₂, detects a **significant** relative
-        decline in EU-27 NDVI (coefficient = −0.0194, p = 0.005). Effects like this can be real but modest in magnitude,
+        decline in EU-27 NDVI (coefficient = −0.0194, p = 0.008). Effects like this can be real but modest in magnitude,
         easy to miss by eye but still statistically detectable — which is exactly why the causal
         model exists rather than relying on a visual scan alone. See the *Methodology* page for
         why this finding is treated as exploratory rather than fully causal.

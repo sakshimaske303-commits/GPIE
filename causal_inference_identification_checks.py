@@ -93,9 +93,10 @@ def drop_collinear(X):
     return X.loc[:, keep]
 
 
+# All p-values use the t distribution with (countries - 1) degrees of freedom.
 def fit(d, outcome="mean_no2", **kw):
     X = drop_collinear(build(d, **kw))
-    res = sm.OLS(d[outcome].astype(float).values, X).fit(cov_type="cluster", cov_kwds={"groups": d["country"].values})
+    res = sm.OLS(d[outcome].astype(float).values, X).fit(cov_type="cluster", cov_kwds={"groups": d["country"].values}, use_t=True)
     return res, X
 
 
@@ -224,7 +225,7 @@ def main():
     dd = d.copy()
     dd["did"] = 0.0                                                    # placeholder, dropped as collinear
     X = drop_collinear(pd.concat([build(dd).drop(columns=["did"]), ev], axis=1))
-    res = sm.OLS(d["mean_no2"].values, X).fit(cov_type="cluster", cov_kwds={"groups": d["country"].values})
+    res = sm.OLS(d["mean_no2"].values, X).fit(cov_type="cluster", cov_kwds={"groups": d["country"].values}, use_t=True)
     labels = {-3: "Jan-Jun 2019", -2: "Jul 2019-Jun 2020", 0: "Jul 2021-Jun 2022", 1: "Jul 2022-Jun 2023",
               2: "Jul 2023-Jun 2024", 3: "Jul-Dec 2024"}
     out["event_time_12m_blocks"] = {"reference": "Jul 2020-Jun 2021"}

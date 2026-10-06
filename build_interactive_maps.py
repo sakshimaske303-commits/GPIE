@@ -183,7 +183,7 @@ def build_event_study():
     y = model_df["mean_no2"].astype(float)
     X_fit = model_df.drop(columns=["mean_no2"]).astype(float)
 
-    results = sm.OLS(y, X_fit).fit(cov_type="cluster", cov_kwds={"groups": d.loc[model_df.index, "country"]})
+    results = sm.OLS(y, X_fit).fit(cov_type="cluster", cov_kwds={"groups": d.loc[model_df.index, "country"]}, use_t=True)
 
     rows = []
     for q in quarters:
@@ -251,7 +251,7 @@ def build_change_by_baseline():
                              name=f"{group} pixels", marker_color=color, customdata=g["pixels"],
                              hovertemplate="%{y}% change<br>%{customdata:,} pixels<extra>" + group + "</extra>"))
     fig.update_layout(
-        title="NO2 fell in proportion to how polluted a place was, inside and outside the EU<br>"
+        title="Change in NO2 by the pixel's pre-treatment level, EU-27 and comparison pixels<br>"
               "<sup>0.1° pixels, Jul 2023 – Dec 2024 against Jan 2019 – Jun 2021. Hover for pixel counts.</sup>",
         xaxis_title="Pre-treatment NO2 level of the pixel (10⁻⁵ mol/m²)",
         yaxis_title="Change in NO2 (%)", barmode="group", template="plotly_white", height=550,

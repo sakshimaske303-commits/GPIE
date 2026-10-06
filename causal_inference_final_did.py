@@ -44,7 +44,7 @@ def run_did_model(df):
 
     # I cluster by country because monthly errors within a country are correlated
     # (Bertrand, Duflo & Mullainathan, 2004).
-    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
+    results = model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]}, use_t=True)
     print("Model fit complete!")
 
     print("\n=== DiD TREATMENT EFFECT (EU x Post-2021, cluster-robust SEs) ===")

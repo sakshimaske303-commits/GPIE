@@ -1,4 +1,4 @@
-# Independent Verification of the European Climate Law's Effect on Nitrogen Dioxide Pollution: A Satellite-Derived, Difference-in-Differences Analysis
+# What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify? Baseline Composition, Winter Retrievals and the European Climate Law
 
 **Sakshi D. Maske**
 
@@ -6,225 +6,201 @@
 
 ## Abstract
 
-This study tests whether the European Climate Law (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021) produced a measurable reduction in tropospheric NO₂ across the EU-27, using Sentinel-5P TROPOMI observations aggregated to true monthly country means (2019–2024) and a two-group Difference-in-Differences (DiD) design against nine non-EU comparison countries (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia), with country-clustered standard errors. EU-27 NO₂ fell relative to the comparison group: the pooled DiD estimate is −1.52 × 10⁻⁶ mol/m² (about 4.9% of the pre-treatment EU mean; p = 0.013), and −4.2% on the log scale (p = 0.034). The decline is concentrated in the fourteen EU countries with higher pre-treatment NO₂ (level p = 0.002; log −6.4%, p = 0.006) and is absent in the lower-baseline group. The design, however, cannot attribute this relative decline to the Climate Law. An event study with a seasonal cycle common to both groups finds significant EU–comparison differences in seven of the nine pre-treatment quarters; every alternative cutoff date tested (±6 and ±12 months) gives a significant estimate of similar size; and once an EU-specific linear trend is allowed, the treatment-date term disappears (+8.7 × 10⁻⁷, p = 0.243) while the EU-specific trend itself is significant (−7.9 × 10⁻⁷ mol/m² per year, p = 0.016). A stricter specification with year-month fixed effects and EU-specific calendar-month effects gives −1.34 × 10⁻⁶ (p = 0.016; wild cluster bootstrap p = 0.018; randomization inference p = 0.16), removes the pre-treatment differences (which were largely seasonal), and is unchanged by controls for COVID-19 stringency, wind speed and boundary-layer height; but under it the relative decline is absent in the first two years after the law and appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.008). A pixel-level analysis on a 0.1° grid then shows where the estimate comes from: the decline grows with each pixel's pre-treatment level, and comparing EU and comparison pixels within the same pre-treatment pollution class reduces the estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.341). The pattern is regional, not institutional: polluted pixels lost 15–25% in north-western Europe, including the non-EU United Kingdom (−20%) and Switzerland (−18%), and 0–6% in south-eastern Europe, including EU members Romania, Bulgaria, Croatia and Greece as well as Serbia and Bosnia and Herzegovina. Within either region the EU border makes no difference (north-west −0.41 × 10⁻⁶, p = 0.44; south-east +0.22 × 10⁻⁶, p = 0.48), while north-western EU members differ from south-eastern EU members (−1.43 × 10⁻⁶, p = 0.016). The country-level estimate is also sensitive to choices that are easy to overlook: without November–February it is −0.81 × 10⁻⁶ (p = 0.11), with countries weighted by area −0.96 × 10⁻⁶ (p = 0.11), and with log GDP −0.94 × 10⁻⁶ (p = 0.21). A synthetic control built from all nine comparison countries gives a post-treatment gap of −8.1 × 10⁻⁷ that ranks 5th of 10 among in-space placebos. Moran's I shows the DiD residuals are spatially correlated in 59 of 72 months, so the clustered p-values are likely too small. The evidence is therefore consistent with a decline of NO₂ in the polluted areas of north-western Europe, on both sides of the EU border; it is not evidence of an effect of EU membership or of the Climate Law's date. The study's first, single-cohort model, which had appeared to show a significant Climate Law effect, was rejected by a placebo test; this paper also documents a later correction to the satellite aggregation itself, in which monthly values had originally been built from a single end-of-month snapshot. NDVI shows a significant relative decline in the EU-27 (−0.0194, p = 0.005), reported as an exploratory association, not a Climate Law effect.
+Satellite observations make it easy to compare air pollution in countries that adopted a policy with countries that did not. This paper examines what such a comparison identifies, using Sentinel-5P TROPOMI tropospheric NO₂ for 2019–2024 and a country-level difference-in-differences (DiD) model of the European Climate Law that compares the EU-27 with nine neighbouring non-EU countries. NO₂ fell by 1.34 × 10⁻⁶ mol/m² more in the EU-27 (4.3% of its pre-treatment level; p = 0.022). The estimate is stable under year-month fixed effects, group-specific seasonality, meteorological and COVID-19 controls, a wild cluster bootstrap and the removal of any single comparison country. It is not stable without the winter months (p = 0.11), with countries weighted by area (p = 0.11), with log GDP (p = 0.21), or under randomization inference on the coefficient (p = 0.17), and it appears only from the third year after the law. Most of it reflects the composition of the two groups. When the treatment label is assigned to random sets of countries, the estimate tracks how much more polluted the labelled group was before treatment (r = −0.81), and the EU-27's estimate is what its pre-treatment level predicts. On a 0.1° grid, comparing EU and comparison-group pixels that started at the same NO₂ level reduces the estimate to −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24). Descriptively, polluted areas lost about 15–25% of their NO₂ in north-western Europe, including the non-EU United Kingdom and Switzerland, and little in south-eastern Europe, including several EU members, in western Turkey and in Serbia. The data cannot separate EU membership from region, shared emission standards or winter retrieval conditions. Country-level DiD on satellite NO₂ should be checked against comparisons matched on baseline pollution before it is read as a policy effect.
+
+**Keywords:** nitrogen dioxide; TROPOMI; difference-in-differences; aggregation; parallel trends; policy evaluation
 
 ## 1. Introduction
 
-In Europe, existing assessments of how the European Climate Law affects air quality typically use administrative self reporting or even basic pre- and post-comparisons, both of which are prone to results confounded by other technological, economic and behavioural changes unlikely to be directly caused by the policy itself. This is what motivated this study to seek a more causal-inference rigorously grounded assessment of the European Climate Law's impact on NO₂ than it is possible to take on faith. The European Green Deal is considered one of the most ambitious environmental policy programmes in the world, but it is unclear what kind of environmental gains it achieves, and to what extent it actually drives environmental progress beyond mere reflection or syncing with evolution. The Climate Law sets a legally binding climate-neutral by 2050 target, but scientific evidence of deliverables provided by EU policies in a form where causal-inference techniques can be applied, is far from common.
+Tropospheric nitrogen dioxide (NO₂) is one of the few air pollutants that can be observed from space every day, almost everywhere, with a single instrument. Since the launch of Sentinel-5P in 2017, the TROPOMI instrument (Veefkind et al., 2012) has made it possible to compare NO₂ across borders without relying on national monitoring networks or self-reported inventories. Satellite-derived pollution is now a common outcome in quasi-experimental studies in which the unit of analysis is an administrative area: counties exposed to a trade shock (Chen et al., 2020), cities that opened subway systems (Gendron-Carrier et al., 2022), and countries or first-level regions under COVID-19 lockdowns (Dang & Trinh, 2021; Keola & Hayakawa, 2021). The design is attractive because it is simple: compare the change in pollution in treated areas with the change in untreated ones.
 
-This study tackles that point specifically, testing whether any change associated with the European Climate Law was statistically detectable as a decline in NO₂ pollution, which is known to be from the transport and industry combustion sector for which independent observation data is available. Trust, but verify: effectiveness of a policy is treated as a hypothesis rather than a fact and it is tested with evidence.
+This paper asks what a design of this kind identifies when the treated and comparison areas differ in how polluted they are to begin with. The question matters because the change in a satellite NO₂ column depends on its level. Clean areas have little to lose, a background contribution from the free troposphere does not respond to surface emissions (Silvern et al., 2019), and the retrieval itself is biased by amounts that depend on pollution level (Verhoelst et al., 2021). If NO₂ falls more where it is higher, two groups of countries with different shares of polluted area will diverge even when comparable places change in the same way, and a difference-in-differences (DiD) in levels will record the divergence as a treatment effect.
 
-## 2. Literature Review
+The case studied is the European Climate Law (Regulation (EU) 2021/1119), adopted on 30 June 2021. It applies to all 27 member states from the same date and not to their neighbours, which gives a clean two-group design. It is also a case in which a dated effect on NO₂ is implausible: the law sets a binding target of climate neutrality by 2050 and an intermediate target for 2030, while NO₂ in Europe is governed by other instruments, among them vehicle emission standards, the Industrial Emissions Directive (2010/75/EU) and the National Emission reduction Commitments Directive ((EU) 2016/2284), and road transport is its main source (European Environment Agency, 2025). A country-level DiD around July 2021 is therefore a test of the method more than of the law: an estimate that looks like an effect needs another explanation.
 
-### 2.1 Satellite-Based Monitoring of NO₂ and Policy Impact
+The paper proceeds in three steps. It first estimates the country-level DiD and reports its behaviour under a wide set of specifications in one table, without sorting them into those that support the estimate and those that do not. It then tests whether the estimate reflects baseline composition, using a country-level interaction, a placebo exercise with random assignment of the treatment label, and a pixel-level comparison matched on pre-treatment NO₂. Finally it describes where NO₂ fell, country by country, including areas outside the study sample.
 
-Sentinel-5P's TROPOMI instrument, operated by the European Space Agency since 2017, has become a standard tool for independently observing tropospheric NO₂ concentrations at fine spatial and temporal resolution. A substantial body of research has used TROPOMI data to assess the atmospheric impact of discrete policy events, most extensively during the COVID-19 pandemic, with multiple studies documenting double-digit percentage reductions in NO₂ during lockdown periods across European and Asian cities compared against pre-lockdown baselines (Barré et al., 2021; Vîrghileanu et al., 2020; Mathew et al., 2024). Some of this literature has specifically cautioned that a simple before-after or year-over-year satellite comparison risks conflating a policy effect with meteorological variability, given the substantial interannual variation in weather conditions relative to TROPOMI's still-limited historical record — this is exactly what drove this study's decision to include temperature and precipitation as explicit control variables rather than relying on a raw pollution-level comparison.
+There are three findings. The country-level estimate is negative and significant under many standard specifications, and fragile under others that are rarely reported: the treatment of winter retrievals, country weighting and the functional form of the GDP control. Most of the estimate is accounted for by the difference in pre-treatment pollution between the two groups; comparisons matched on that level leave an estimate that is small and not distinguishable from zero. And the decline in polluted areas is geographically uneven in a way that does not follow the EU border, although the data cannot say why.
 
-Separately, causal-inference work has extended beyond acute lockdown events to structural urban policy: an evaluation of London's Ultra Low Emission Zone using ground monitoring stations and an augmented synthetic control found significant reductions in NO₂ and NOₓ after the policy's initial implementation, but no detectable effect of its 2023 expansion (Tong et al., 2025). That study is ground-based rather than satellite-based, but it shows that well-identified quasi-experimental designs can detect policy-specific air-quality effects.
+Section 2 reviews related work. Section 3 describes the data and Section 4 the methods. Section 5 presents the results, Section 6 discusses them, Section 7 lists limitations and Section 8 concludes.
 
-### 2.2 Difference-in-Differences Methodology and Its Limitations
+## 2. Related Work
 
-Difference-in-Differences remains among the most widely used quasi-experimental methods in policy evaluation, valued for isolating a treatment's effect by comparing outcome changes between a treated and untreated group rather than relying on a single group's before-after comparison alone. Recent methodological literature has emphasized that DiD designs face specific challenges (Roth et al., 2023; Wang, Hamad & White, 2024) when treatment is not clearly randomized, or when the design's core parallel-trends assumption — that treatment and comparison groups would have followed similar trajectories in the absence of intervention — cannot be adequately verified, particularly where treatment rolls out simultaneously and universally.
+### 2.1 Satellite NO₂: Trends, Retrieval and Meteorology
 
-That parallel-trends assumption is foundational to DiD's causal validity, yet is frequently difficult to establish empirically, especially over short panels. Methodological guides recommend placebo regressions — re-estimating the model with an artificial treatment date to check that no spurious "treatment effect" appears where none should exist (Fredriksson & de Oliveira, 2019). This study applies a fake-date placebo to its first model (Section 4.2); note that the placebo was estimated on the full 2019–2024 panel, so its "post" period also contains the real post-treatment months, which makes it a test of whether the single-cohort design separates a dated break from a continuing trend rather than a pure pre-period placebo. Event-study extensions, which disaggregate an average treatment effect into period-specific estimates, are similarly established practice for testing both pre-trend validity and effect-timing dynamics: research on pre-treatment significance testing frames event-study coefficients on pre-intervention periods as a direct placebo mechanism (Riveros-Gavilanes, 2023), artificially assigning treatment status to periods before the actual intervention to test for spurious differences — the same logic behind this study's 23-quarter event-study robustness check.
+TROPOMI NO₂ columns have been used widely to measure the atmospheric response to discrete events, above all the COVID-19 lockdowns, during which reductions of tens of percent were reported over European cities (Barré et al., 2021; Vîrghileanu et al., 2020). Longer satellite records show that European NO₂ has declined for two decades, at rates that differ between regions and that have slowed or reversed in places (Georgoulias et al., 2019).
 
-### 2.3 The Single-Cohort Identification Problem
+Four properties of the measurement matter for policy evaluation. Columns do not scale one-to-one with emissions: the free-tropospheric background is insensitive to surface sources (Silvern et al., 2019), and the lifetime of NOₓ varies non-linearly with its concentration (Laughner & Cohen, 2019). TROPOMI tropospheric columns are biased low against ground-based instruments, by more over highly polluted areas than over clean ones (Verhoelst et al., 2021). The processor has changed several times, with version 2.2 raising columns by 10–40% relative to earlier versions depending on pollution level and season (van Geffen et al., 2022). And weather modulates concentrations strongly, which is why satellite-based estimates that neglect it can misstate changes (Barré et al., 2021) and why meteorological normalisation is standard in the analysis of surface air-quality trends (Grange et al., 2018).
 
-The first model of the present study stumbled upon a methodological hurdle which has come with EU-wide legislation: EU legislation often applies to all member states simultaneously, without any naturally occurring control group of “no EU” countries. This is a specific limitation of DiD compared to settings where there are true within-study controls, notably where the study includes policy implementation in areas (e.g. sub national, staggered) outside its legal jurisdiction, where one would have sought a geographically and structurally comparable jurisdiction for the purpose of comparison, and motivated the introduction of a non-EU comparison group here.
+### 2.2 Quasi-Experimental Designs with Satellite Pollution
 
-## 3. Data and Methodology
+The studies cited in the introduction aggregate satellite pollution to administrative units and compare treated with untreated units over time. Two results from that literature are relevant here. Gendron-Carrier et al. (2022) find no average effect of subway openings on aerosol optical depth but a reduction in cities that were initially more polluted, which shows that effects measured on satellite pollution can depend on the starting level. Sager and Singer (2025) show that a standard DiD overstates the effect of the 2005 fine-particle standard in the United States several times over, because treated and untreated areas were on different paths. Evaluations with a direct mechanism and ground monitors can reach sharper conclusions: for London's Ultra Low Emission Zone, an augmented synthetic control found reductions in NO₂ after its 2019 introduction and no detectable effect of the 2023 expansion (Tong et al., 2025).
 
-### 3.1 Study Design
+### 2.3 Difference-in-Differences When Groups Differ in Levels
 
-36 countries are involved in the study, with 27 EU member states (treatment group) and nine countries outside the EU (comparison group), chosen for geographical proximity and economic comparability, and because the European Climate Law does not apply to them directly. They are not fully untreated by EU climate policy, however: Norway and Iceland participate in the EU Emissions Trading System through the EEA Agreement, Switzerland's emissions trading system has been linked to the EU ETS since 2020, and the five Western Balkan countries committed in the Sofia Declaration on the Green Agenda (November 2020) to align with the European Green Deal. The comparison group is therefore "non-EU" rather than a clean untreated counterfactual, and any shared policy exposure would bias the DiD estimate toward zero. The post-treatment period starts in July 2021: the European Climate Law was adopted on 30 June 2021, published in the Official Journal on 9 July 2021 and entered into force on 29 July 2021. The comparison group intentionally includes EU-accession-candidate economies in the Western Balkans (Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia) and established Western European economies (UK, Norway, Switzerland, Iceland), increasing the counterfactual beyond the income profile.
+DiD identifies a treatment effect under the assumption that treated and comparison units would have followed parallel trends without treatment (Roth et al., 2023). Three strands of recent work bear on this study. First, parallel trends is not invariant to the scale of the outcome: when groups start from different levels, trends that are parallel in levels are not parallel in logs, and the assumption can hold for all transformations only under strong conditions (Kahn-Lang & Lang, 2020; Roth & Sant'Anna, 2023). The remedy is to make the assumption conditional on pre-treatment characteristics (Abadie, 2005; Sant'Anna & Zhao, 2020), although matching on a noisy pre-treatment outcome can introduce regression to the mean (Daw & Hatfield, 2018). Second, tests of pre-treatment trends have low power, and conditioning on passing them can distort inference (Roth, 2022); sensitivity analysis is preferable to a pass-or-fail reading (Rambachan & Roth, 2023). Third, with few clusters, cluster-robust standard errors (Bertrand et al., 2004) can be too small. Recommended practice is to use the t distribution with degrees of freedom tied to the number of clusters (Cameron & Miller, 2015), the wild cluster bootstrap (Cameron et al., 2008), or randomization inference (Conley & Taber, 2011; MacKinnon & Webb, 2020).
 
-This design has the same treatment cohort with a single treatment timing – the Climate Law applied to all 27 member-states of the EU at the same time and on the same design measure for treatment. Because treatment timing is common to all treated units, the design avoids the negative-weighting problems identified for two-way fixed-effects DiD with staggered treatment timing (Goodman-Bacon, 2021; Callaway & Sant'Anna, 2021). The same simultaneous roll-out is also why there is no naturally occurring within-EU comparison group (Section 2.3).
+### 2.4 Aggregation and the Unit of Analysis
 
-In January 2020, the United Kingdom officially left the EU, and with its post-Brexit transition period ending on 31 December 2020, the entire observation period after this date will be out of EU Green Deal jurisdiction and beyond the specific scope of the Climate Law. The UK was therefore bound by EU law as a member state in 2019 and during the 2020 transition period (both part of the pre-treatment window) but not during the post-treatment period; the UK also ran its own concurrent air-quality policies (e.g. London's ULEZ expansions), which are not controlled for here. The five Western Balkan countries are candidates for EU accession (Bosnia and Herzegovina since December 2022), not member states; they follow their own harmonisation timetables and are not bound by the Climate Law.
+That relationships estimated on aggregates need not hold for the units within them has been known since Robinson's (1950) work on ecological correlation, and the dependence of statistical results on the choice of areal unit is the modifiable areal unit problem (Fotheringham & Wong, 1991). Satellite data are unusual in that the analyst chooses the unit: the same retrievals can be averaged to countries, regions or pixels. A country mean of NO₂ combines cities, industrial areas and rural background in proportions that differ greatly between countries. This paper asks how much of a country-level DiD estimate is produced by that difference.
+
+## 3. Data
+
+### 3.1 Study Area and Period
+
+The treated group is the EU-27. The comparison group consists of nine non-EU countries in Europe for which all covariates are available: the United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia and Serbia (Figure 1). The study period is January 2019 to December 2024, giving 30 pre-treatment and 42 post-treatment months around the adoption of the Climate Law on 30 June 2021 (Regulation (EU) 2021/1119; in force 29 July 2021). July 2021 is the first post-treatment month.
+
+**Figure 1.** Study design: EU-27 (treated) and the nine comparison countries.
 
 <p align="center">
-  <img src="outputs/plots/control_group_design_map.png" width="700">
+  <img src="outputs/plots/control_group_design_map.png" width="600">
 </p>
 
-**Figure 1. Difference-in-Differences study design showing the treatment group (EU-27) and the nine-country non-EU control group (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia).**
+The comparison group is not free of EU climate policy. Norway and Iceland have taken part in the EU Emissions Trading System since 2008 (European Commission, 2016), the Swiss system has been linked to it since 1 January 2020 (Swiss Federal Council, 2019), and the Western Balkan countries endorsed the Green Agenda for the Western Balkans in November 2020 (Regional Cooperation Council, 2020). The United Kingdom was an EU member in 2019 and applied EU law during the 2020 transition period. Shared exposure of this kind would bias a DiD estimate toward zero.
 
-### 3.2 Data Sources
+### 3.2 NO₂
 
-| Variable | Source | Resolution |
+The outcome is the tropospheric NO₂ vertical column density from the Sentinel-5P TROPOMI Level-2 product (mol/m²), retrieved through the Copernicus Data Space Sentinel Hub Process API. For each of the 2,192 days in the study period, one raster was requested over the study area (27.5–71.5° N, 31.5° W–35° E) on a regular 0.1° grid (665 × 440 pixels), keeping only retrievals with a quality value of at least 0.75 (Eskes & Eichmann, 2023). The native ground pixel is 3.5 × 7 km before 6 August 2019 and 3.5 × 5.5 km afterwards.
+
+Monthly means pool all valid pixel-days. For a country, the monthly mean is the sum of all valid retrievals inside its boundary divided by the number of valid pixel-days. For a pixel, it is the mean of its valid days in the month, requiring at least three. Country means rebuilt from the pixel grid reproduce the country series, so the two levels of analysis use the same data. Boundaries are Eurostat GISCO NUTS level 0 (2024), and GADM 4.1 for the United Kingdom, Norway and Switzerland.
+
+The panel has 2,592 country-months, of which 2,572 have an NO₂ value. The 20 missing country-months are in Iceland (9), Finland (6), Norway (4) and Estonia (1), all in December or January, when high-latitude retrievals are unavailable. On average 35% of pixel-days have a valid retrieval; the share is 24% in November–February and 41% in May–September. Eight country-months have a non-positive mean, all in December or January in Nordic and Baltic countries, and four of them in December 2023 (Denmark, Sweden, Latvia, Lithuania). A negative column is physically impossible and indicates retrieval error.
+
+The processor version matters for comparisons over time. On 24 sample days (the 15th of January, April, July and October in each year), the values served are from the reprocessed record up to July 2022 and from operational products afterwards; the product catalogue confirms version 2.4.0 for the reprocessed record on 23 of those days, and versions 2.4.0 (October 2022, January 2023), 2.5.0 (April–October 2023), 2.6.0 (January–July 2024) and 2.7.1 (October 2024) for the operational products. The large change to version 2.2 on 1 July 2021 (van Geffen et al., 2022), which coincides with the treatment date, therefore does not enter the series. The later operational updates do, and Section 6 returns to them.
+
+### 3.3 Covariates
+
+Monthly mean 2 m temperature, total precipitation, 10 m wind speed and boundary-layer height come from the ERA5 reanalysis (Hersbach et al., 2020), averaged over each country. Annual GDP at current prices comes from Eurostat for the EU-27 and from the World Bank for the comparison countries, converted from US dollars to euros at approximate annual average exchange rates. The national stringency index of the Oxford COVID-19 Government Response Tracker (Hale et al., 2021) is averaged to months; it covers 34 of the 36 countries (not Montenegro or North Macedonia) and is set to zero outside 2020–2022. Table 1 lists the sources.
+
+**Table 1.** Data sources.
+
+| Variable | Source | Resolution used |
 |---|---|---|
-| NO₂ (outcome) | Sentinel-5P TROPOMI L2 (QA ≥ 0.75), via Sentinel Hub Process API: one 0.1° raster per day, pooled to monthly country means. Products served are the reprocessed (RPRO) v2.4.0 record to July 2022 and operational (OFFL) v2.4–2.7 afterwards | Monthly, country-level |
-| NDVI (secondary outcome) | Copernicus Global Land Service 300 m dekadal NDVI, via Sentinel Hub Statistical API (ORBIT mosaicking, monthly means) | Monthly, country-level |
-| Temperature, precipitation (controls) | ERA5 Reanalysis, Copernicus Climate Data Store | Monthly, country-level |
-| GDP (control) | Eurostat (EU-27); World Bank (control group) | Annual, country-level |
-| 10 m wind speed, boundary-layer height (robustness controls) | ERA5 Reanalysis monthly means | Monthly, country-level |
-| COVID-19 stringency index (robustness control) | Oxford COVID-19 Government Response Tracker (Hale et al., 2021) | Daily, averaged to monthly; 34 of 36 countries |
-| Administrative boundaries | Eurostat GISCO (NUTS, EU-27 plus Iceland/Albania/Bosnia and Herzegovina/Montenegro/North Macedonia/Serbia); GADM (UK, Norway, Switzerland) | — |
-| Land cover, elevation (context only) | ESA WorldCover v200 (2021); Copernicus DEM GLO-30 | Static, country-level; absorbed by country fixed effects, not model regressors |
+| Tropospheric NO₂ column | Sentinel-5P TROPOMI Level-2, quality value ≥ 0.75 | Daily 0.1° rasters; monthly country and pixel means |
+| Temperature, precipitation, wind speed, boundary-layer height | ERA5 reanalysis | Monthly, country means |
+| GDP | Eurostat; World Bank | Annual, country |
+| COVID-19 stringency | Oxford COVID-19 Government Response Tracker | Monthly, country (34 of 36) |
+| Boundaries | Eurostat GISCO NUTS 0 (2024); GADM 4.1 | Country |
 
-The panel spans January 2019 to December 2024 (72 months), providing 30 months of pre-treatment (January 2019 – June 2021) and 42 months of post-treatment (July 2021 – December 2024) observation; July 2021, the month of entry into force, is coded as the first post-treatment month. The intended frame is 36 × 72 = 2,592 country-months; 2,572 have an NO₂ value (the 20 missing months are polar-night winter months in Iceland, Finland, Norway and Estonia). GDP is annual and is repeated across the twelve months of each year.
+Pooled over country-months, mean NO₂ before treatment is 31.3 × 10⁻⁶ mol/m² in the EU-27 and 20.8 × 10⁻⁶ in the comparison group. Pre-treatment country means range from 14 to 74 × 10⁻⁶ (Netherlands) in the EU-27, and from 5 (Iceland) to 38 × 10⁻⁶ (United Kingdom) in the comparison group.
 
-### 3.3 Model Specification
+## 4. Methods
 
-For the final model the coefficient of interest is $\beta_1$;
+### 4.1 Country-Level Models
 
-$$NO2_{it} = \beta_0 + \beta_1 (Treatment_i \times Post_t) + \beta_2 Post_t + \gamma X_{it} + \alpha_i + \delta_m + \varepsilon_{it}$$
+The baseline model is the two-group DiD most often used in applied work:
 
-where $Treatment_i$ is a binary variable denoting whether an observation belongs to the treatment group (EU-27 member countries) or the control group (the nine-country non-EU control group), $Post_t$ is a binary that equals 1 from July 2021 onward, and X_{it} is a vector of time-varying controls (temperature, precipitation, GDP), while the country fixed effects and the calendar-month (month-of-year) fixed effects absorb respectively time-invariant country differences and seasonality. Because the model has no year or year-month fixed effects, common one-off shocks such as the 2020 COVID-19 lockdowns are not absorbed; they enter only through the comparison with the control group. $\beta_1$ denotes the EU-specific effect of the Climate Law, net of control group and treatment group trends. For panel data that contains repeated monthly observations over time within each country, all standard errors are clustered by country, because classical standard errors ignore within-country serial correlation and understate uncertainty (Bertrand, Duflo & Mullainathan, 2004). Country clustering does not address correlation between neighbouring countries; that is examined separately in Section 4.9. GDP is included as a control; since economic activity could itself respond to climate policy, a specification without GDP is reported in Section 4.7.
+$$NO2_{it} = \beta \,(EU_i \times Post_t) + \gamma\, Post_t + X_{it}'\delta + \alpha_i + \mu_{m(t)} + \varepsilon_{it}$$
 
-### 3.4 Robustness Checks
+where $i$ indexes countries and $t$ months, $EU_i$ indicates EU-27 membership, $Post_t$ indicates July 2021 or later, $X_{it}$ contains temperature, precipitation and GDP, $\alpha_i$ are country fixed effects and $\mu_{m(t)}$ are calendar-month fixed effects common to both groups.
 
-Robustness checks include a **placebo test**, in which the first (single-cohort) model is re-estimated on the full panel using an artificial treatment date (30 June 2020) at which no comparable policy change took place, and an **event-study specification**, which substitutes the one post-treatment indicator for 23 quarter-specific interaction terms (2019Q1–2024Q4, compared with a 2021Q2 reference quarter), testing the pre-treatment parallel trends assumption and also for possible delayed treatment effects.
+The main model replaces the post indicator and the common seasonal cycle with year-month fixed effects $\lambda_t$ and lets the EU-27 have its own seasonal cycle $\theta_{m(t)}$:
 
-A further set of **identification and inference checks** (Section 4.10) re-estimates the two-group model with year-month fixed effects in place of the single post-treatment indicator and with EU-specific calendar-month effects, so that the two groups may have different seasonal cycles; adds ERA5 wind speed and boundary-layer height and the Oxford COVID-19 stringency index as controls; excludes the COVID-19 and energy-crisis windows; replaces the quarterly event study with 12-month blocks relative to July 2021, which are not affected by seasonality; and, because only nine of the 36 clusters are comparison countries, reports a restricted wild cluster bootstrap (Cameron, Gelbach & Miller, 2008; 9,999 replications) and randomization inference (re-assigning the EU label to 27 randomly chosen countries, 2,000 draws; MacKinnon & Webb, 2020) alongside the cluster-robust p-values.
+$$NO2_{it} = \beta \,(EU_i \times Post_t) + X_{it}'\delta + \alpha_i + \lambda_t + EU_i \times \theta_{m(t)} + \varepsilon_{it}$$
 
-Finally, a **pixel-level check** (Section 4.11) keeps every daily 0.1° raster instead of only country totals (`download_no2_gridded.py`; country means rebuilt from the grid reproduce the country series exactly). Pixels are grouped into eight classes by their pre-treatment NO₂ level, and the two-group model is re-estimated on country × class × month cells with class-specific year-month fixed effects, so that EU pixels are compared only with comparison-group pixels that started at the same pollution level. Each country keeps the same total weight as in the country-level model.
+The EU-specific seasonal terms are needed because NO₂ has a larger winter peak in more polluted countries, so a common seasonal cycle leaves a seasonal pattern in the difference between the groups. Unless stated otherwise, country-level results refer to the main model, countries are unweighted, and standard errors are clustered by country.
 
-### 3.5 Synthetic Control
+The main model is re-estimated under alternative specifications (Table 2): additional controls; exclusion of the COVID-19 and energy-crisis periods and of each comparison country in turn; exclusion of winter months, of December 2023 and of country-months with few valid retrievals; area weights; GDP in logs or omitted; a log outcome; the sample restricted to 2020–2024; and the interaction between each country's pre-treatment NO₂ level and the post indicator.
 
-DiD weights all comparison units equally. A synthetic control (Abadie, Diamond & Hainmueller, 2010) instead chooses non-negative donor weights that sum to one so that the weighted donor series tracks the EU-27's aggregate NO₂ series over the pre-treatment window (January 2019 – June 2021). The remaining mean pre-treatment gap is removed as a constant level (intercept) adjustment. An earlier version of this analysis described the method as an augmented synthetic control with a ridge bias correction (Ben-Michael, Feller & Rothstein, 2021); in practice the ridge term, fitted on raw NO₂ values of order 10⁻⁵, reduced to that constant shift, so the method is reported here as what it is. All nine comparison countries are donors. Only months in which the EU-27 aggregate and every donor are observed are used (27 pre-treatment and 36 post-treatment months; the dropped months are winter months with no valid Norwegian or Icelandic retrievals). An in-space placebo reassigns "treatment" to each donor in turn, refitting weights on the other eight.
+### 4.2 Timing
 
-### 3.6 Spatial Autocorrelation Diagnostics
+The treatment indicator is replaced with interactions between $EU_i$ and blocks of months relative to July 2021, with July 2020–June 2021 as the reference. The four full blocks cover twelve months each and are therefore not affected by seasonality; the first block (January–June 2019) and the last (July–December 2024) cover six months. Two further diagnostics shift the treatment date by 6 and 12 months in both directions and add an EU-specific linear trend, and placebo dates are placed inside the pre-treatment period.
 
-An atmospheric pollutant naturally transcends national borders, and country-clustered standard errors (Section 3.3) do not account for correlation between neighbouring countries. All 36 country centroids were used to compute Global and Local Moran's I (Moran, 1950; Anselin 1995), using a K-nearest-neighbor spatial weights matrix (k=4) which was selected over Queen/Rook contiguity because several countries in the panel have no land neighbours in the sample (Cyprus, Malta and Iceland). The global Moran's I was calculated using the country averages of the pollution data for the period before the treatment and after the treatment, and on the DiD model's residuals month by month (each month's cross-section of residuals, with KNN-4 weights rebuilt on the countries observed that month), to see whether the model leaves cross-border dependence in its errors. Averaging residuals over the whole period is not informative here, because country fixed effects force each country's mean residual to zero; and the Local Moran's I (LISA) was calculated on the full-period average NO₂ to determine which countries are responsible for spatial clustering identified through the global Moran's I.
+### 4.3 Inference
 
-## 4. Results
+P-values and confidence intervals for coefficients use the t distribution with degrees of freedom equal to the number of countries minus one (Cameron & Miller, 2015). Because only nine of the 36 clusters are comparison countries, the main estimate is also tested with a restricted wild cluster bootstrap with Rademacher weights (Cameron et al., 2008; 9,999 replications) and with randomization inference, in which the EU label is reassigned to 27 randomly chosen countries (MacKinnon & Webb, 2020; 999 assignments), reported for both the coefficient and the t-statistic. Spatial dependence in the residuals is assessed with Moran's I (Moran, 1950), computed month by month on the residuals of the baseline model with four-nearest-neighbour weights.
 
-### 4.1 Initial Single-Cohort Model
+### 4.4 Random Assignment and Baseline Composition
 
-The first model compared all 27 EU countries before and after the treatment date without an external comparison group. On the NO₂ data available at the time it found a significant decrease (coefficient = −2.29 × 10⁻⁶; p = 0.026 with classical standard errors, p = 0.041 with country-clustered standard errors). Those data were later found to be single end-of-month snapshots rather than monthly means (Section 6). Re-estimated on the corrected monthly means, the same single-cohort model gives −4.95 × 10⁻⁷ (p = 0.243, cluster-robust). Both versions are reproducible with `causal_inference_initial_model.py` (add `--corrected` for the corrected data).
+The random assignments also provide a direct test of the composition explanation. For each assignment, I record the DiD estimate and the difference in mean pre-treatment NO₂ between the countries labelled treated and the rest. If a DiD in levels responds to baseline composition, the estimates will be related to that difference even though the labels are random. The share of random assignments with a significant estimate at the 5% level measures how often the clustered t-test rejects when there is no treatment.
 
-### 4.2 Placebo Test
+### 4.5 Pixel-Level Comparison Matched on Pre-Treatment Level
 
-Moving the treatment date to 30 June 2020 produced a larger and more significant single-cohort "effect" than the real date — on the original data (−3.29 × 10⁻⁶, p = 0.004) and again on the corrected data (−1.64 × 10⁻⁶, p = 0.001). A single-cohort before/after design therefore cannot separate a policy-dated break from the continuing decline in European NO₂, and the study moved to an external comparison group. Adding a linear time trend to the single-cohort model points the same way (original data: p = 0.186; corrected data: the treatment term turns positive, +2.76 × 10⁻⁶).
+Each pixel's pre-treatment level is its mean NO₂ over January 2019–June 2021. All period means are computed by averaging within calendar months first and then across the twelve calendar months, so that every season has the same weight in every period; a period mean requires at least nine calendar months with data. Pixels with a valid pre-treatment mean (about 54,500 of the roughly 68,000 inside the 36 countries) are assigned to eight classes by that level: below 1.5, 1.5–2, 2–2.5, 2.5–3, 3–4, 4–5, 5–7 and above 7 × 10⁻⁵ mol/m². The data are collapsed to country × class × month cells; cells with fewer than five pixels are dropped, and a cell-month is used if at least three pixels and 30% of the cell's pixels have a value. The model is
 
-### 4.3 Two-Group Model
+$$NO2_{ict} = \beta \,(EU_i \times Post_t) + X_{it}'\delta + \alpha_{ic} + \lambda_{ct} + EU_i \times \theta_{m(t)} + \varepsilon_{ict}$$
 
-With the nine-country comparison group, the DiD model gives:
+where $c$ indexes classes, $\alpha_{ic}$ are country-by-class fixed effects and $\lambda_{ct}$ are class-specific year-month fixed effects. With $\lambda_{ct}$, EU pixels are compared only with comparison-group pixels of the same class in the same month. Cells are weighted by their number of pixels, rescaled so that each country has the same total weight in every month, as in the country-level model. Replacing $\lambda_{ct}$ with $\lambda_t$ gives the unmatched counterpart on the same cells. Standard errors are clustered by country. The difference between the unmatched and matched estimates is tested with a cluster bootstrap that resamples countries within each group (499 draws).
 
-| Statistic | Value |
-|---|---|
-| DiD coefficient | −1.52 × 10⁻⁶ |
-| P-value (cluster-robust, by country) | 0.013 |
-| 95% Confidence Interval | [−2.73 × 10⁻⁶, −3.16 × 10⁻⁷] |
-| R² | 0.795 |
-| N | 2,572 |
+Two checks address regression to the mean (Daw & Hatfield, 2018): classes are redefined from 2019 alone with the model estimated on 2020–2024, and the relationship between change and starting level is re-estimated with a starting level (2019) that is not part of the change (2020–June 2021 to July 2023–December 2024). The number of classes is varied between 4 and 16.
 
-**Figure 2.** Raw mean NO₂ before (January 2019 – June 2021) and after (July 2021 – December 2024) the treatment cutoff for the EU-27 and the non-EU comparison group (descriptive). The EU-27 mean falls by about 5% (3.13 → 2.97 × 10⁻⁵ mol/m²) while the comparison-group mean is almost unchanged (2.08 → 2.07 × 10⁻⁵).
+### 4.6 Descriptive Geography
 
-<p align="center">
-  <img src="outputs/plots/eu_vs_control_bar_chart.png" width="700">
-</p>
+To describe where NO₂ changed, the change from the pre-treatment period to July 2023–December 2024 is reported by pre-treatment class and, for pixels above 3 × 10⁻⁵ mol/m², by country (countries with at least 20 such pixels). The later period was chosen after the block estimates of Section 4.2 showed where the country-level estimate originates, so these comparisons are descriptive. The daily rasters also cover three areas outside the country panel: Turkey and Ukraine west of 35° E, and Kosovo. They have no covariates here and are used only descriptively and in matched models without controls. Finally, the matched model is estimated on subsets that hold region fixed: north-western EU members (Netherlands, Belgium, Luxembourg, Germany, Denmark, France, Austria, Ireland) against the United Kingdom and Switzerland; south-eastern EU members (Croatia, Hungary, Romania, Bulgaria, Greece, Slovenia) against the Western Balkans; and north-western against south-eastern EU members. This grouping was also chosen after inspecting the data.
 
-The interaction term is significant at the 5% level and corresponds to about 4.9% of the EU-27's pre-treatment mean. Whether it can be read as an effect of the Climate Law depends on the timing checks below (Sections 4.4 and 4.7), which it does not pass.
+## 5. Results
 
-### 4.4 Event Study
+### 5.1 The Country-Level Estimate
 
-The event study replaces the single post-treatment indicator with 23 EU × quarter terms relative to 2021Q2 (with quarter fixed effects). Seven of the nine pre-treatment quarters differ significantly from the reference quarter (p < 0.05), so the EU-27 and the comparison group were not moving in parallel before treatment. The pre-treatment coefficients follow a seasonal pattern — positive in the first and fourth quarters, negative in the second and third — which continues after treatment (8 of 14 post-treatment quarters significant, 6 of them negative). This is what one would expect if NO₂'s seasonal cycle is larger in the more polluted EU countries than in the comparison group, which the common quarter fixed effects cannot absorb. The event study therefore does not support the parallel-trends assumption, and the post-treatment quarters cannot be read as a dated policy response. The 23 coefficients come from one regression with a shared reference quarter, so they are not independent tests. Section 4.10 confirms the seasonal explanation: once EU-specific calendar-month effects are allowed, the pre-treatment differences are no longer significant.
+Between the pre- and post-treatment periods, mean NO₂ fell from 31.3 to 29.7 × 10⁻⁶ mol/m² in the EU-27 and from 20.8 to 20.7 × 10⁻⁶ in the comparison group. The baseline DiD estimate is −1.52 × 10⁻⁶ (p = 0.018), 4.9% of the EU-27's pre-treatment mean, and the main model gives −1.34 × 10⁻⁶ (p = 0.022), or 4.3%. Table 2 reports the estimate under all specifications.
 
-**Figure 3.** Event-study estimates (EU × quarter, relative to 2021Q2) with cluster-robust 95% confidence intervals. Red points are significant at 5%.
+**Table 2.** Country-level estimates of the EU × post coefficient (10⁻⁶ mol/m²; log outcomes in log points).
 
-<p align="center">
-  <img src="outputs/plots/event_study_plot.png" width="700">
-</p>
+| Specification | Estimate | 95% CI | p |
+|---|---|---|---|
+| *Model* | | | |
+| Baseline: country and common calendar-month fixed effects | −1.52 | −2.77 to −0.27 | 0.018 |
+| Country and year-month fixed effects | −1.53 | −2.79 to −0.28 | 0.018 |
+| Main model: + EU-specific calendar-month effects | −1.34 | −2.47 to −0.21 | 0.022 |
+| *Added controls and excluded periods (main model)* | | | |
+| + wind speed and boundary-layer height | −1.36 | −2.50 to −0.21 | 0.022 |
+| + COVID-19 stringency (34 countries) | −1.48 | −2.71 to −0.26 | 0.019 |
+| Excluding March 2020–June 2021 | −2.25 | −4.04 to −0.46 | 0.015 |
+| Excluding July 2021–December 2022 | −2.08 | −3.58 to −0.58 | 0.008 |
+| Excluding 2023–2024 | −0.26 | −1.12 to +0.61 | 0.55 |
+| 2020–2024 only | −0.59 | −1.37 to +0.19 | 0.13 |
+| *Winter and data quality* | | | |
+| Without November–February | −0.81 | −1.81 to +0.20 | 0.11 |
+| Without December–February | −1.06 | −2.14 to +0.01 | 0.053 |
+| May–September only | −0.54 | −1.43 to +0.35 | 0.23 |
+| Without December 2023 | −1.16 | −2.24 to −0.09 | 0.035 |
+| Country-months with at least 10% valid pixel-days | −1.28 | −2.38 to −0.18 | 0.024 |
+| *Weighting and functional form* | | | |
+| Countries weighted by area | −0.96 | −2.15 to +0.23 | 0.11 |
+| Log GDP in place of GDP | −0.94 | −2.44 to +0.56 | 0.21 |
+| No GDP | −1.31 | −2.80 to +0.18 | 0.082 |
+| Log outcome | −0.030 | −0.06 to +0.00 | 0.069 |
+| Log outcome, no GDP | −0.029 | −0.07 to +0.01 | 0.15 |
+| *Baseline composition* | | | |
+| + pre-treatment NO₂ level × post: EU × post | +0.58 | −0.44 to +1.60 | 0.26 |
 
-### 4.5 Secondary Outcome (NDVI)
+The estimate is stable under the changes that applied work most often reports. Year-month fixed effects and group-specific seasonality change it little. Boundary-layer height is strongly related to NO₂ (p < 0.001), but adding it and wind speed leaves the estimate unchanged, as does the stringency index. Excluding the months most affected by COVID-19 restrictions, or the months of the 2021–2022 energy-price shock, makes it larger. Leaving out each comparison country in turn gives estimates between −1.20 and −1.42 × 10⁻⁶ (p between 0.016 and 0.032). The wild cluster bootstrap gives p = 0.018.
 
-The same two-group design applied to NDVI gives −0.0194 (p = 0.005, cluster-robust), 95% CI [−0.0330, −0.0058], N = 2,574: a significant relative decline in EU-27 NDVI. In the raw group means, NDVI rose in both groups between the two periods, but more in the comparison group (0.470 → 0.501) than in the EU-27 (0.542 → 0.551). On the original data the single-cohort NDVI model had given p = 0.128 with classical and p = 0.0017 with clustered standard errors.
+It is not stable under several other changes. Without November–February it falls by 40% and is no longer significant. Winter is when valid retrievals are fewest and when the non-positive country means occur. The estimate depends on giving every country the same weight, which makes Malta (three pixels) count as much as Germany, and on entering nominal GDP in levels: with area weights or with log GDP it falls by about 30% and loses significance, and without GDP its confidence interval includes zero. On the log scale, which measures proportional change, the estimate is −3.0% (p = 0.069), and p = 0.15 without GDP. Randomization inference gives p = 0.046 when based on the t-statistic and p = 0.17 when based on the coefficient.
 
-**Figure 4.** Raw mean NDVI for the EU-27 and the comparison group, January 2019 – June 2021 vs. July 2021 – December 2024 (descriptive).
+Moran's I on the residuals is positive and significant in 59 of 72 months (median 0.35). Neighbouring countries' errors are correlated, which clustering by country does not address, so the p-values in Table 2 are, if anything, too small.
 
-<p align="center">
-  <img src="outputs/plots/ndvi_eu_vs_control_bar_chart.png" width="700">
-</p>
+### 5.2 Timing
 
-This result should not be read as evidence that the Climate Law affected vegetation. The Climate Law is an emissions-focused instrument, not a land-use policy; land-use change, drought or precipitation stress, and agricultural-policy differences between the two groups are not controlled for, and the same timing problems as for NO₂ apply. It is reported as an exploratory association.
+In blocks of months relative to the reference block July 2020–June 2021 (Figure 2), the pre-treatment estimates are +1.93 × 10⁻⁶ for January–June 2019 (95% CI −0.91 to +4.77) and +0.15 × 10⁻⁶ for July 2019–June 2020 (−0.89 to +1.19); a Wald test of both gives p = 0.29. They do not differ significantly from the reference block, but the first is imprecise and larger in size than the estimate itself, so the absence of a pre-existing trend is not established. After the law, the first two blocks show no change (+0.01 × 10⁻⁶, p = 0.98; −0.51 × 10⁻⁶, p = 0.45). The estimate comes from July 2023–June 2024 (−2.18 × 10⁻⁶, p = 0.012), with −1.25 × 10⁻⁶ (p = 0.15) in July–December 2024, and without 2023–2024 it is −0.26 × 10⁻⁶ (Table 2).
 
-**Figure 5.** Country-level average NDVI in 2019 and 2024 across the 36 study countries (descriptive).
-
-<p align="center">
-  <img src="outputs/plots/ndvi_before_after_map.png" width="700">
-</p>
-
-### 4.6 Transferability Test
-
-To check that the acquisition step is not specific to Europe, the NO₂ method (same daily Process API requests, QA threshold and monthly pooling as the EU study) is run on India's national boundary (GADM 4.1 level 0), 2019–2024. The test script records how many months returned data and compares the values with the EU-27 country-month distribution (`data/global_transferability_test/india_no2_sanity_check.json`). Result: all 72 months returned data; India's monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m² (median 3.32 × 10⁻⁵), with no negative months, and all 72 values fall inside the 5th–95th percentile range of EU-27 country-months (1.34 × 10⁻⁵ to 6.34 × 10⁻⁵ mol/m²). An earlier version of this test used a rectangular bounding box (68–97.5° E, 6–37.5° N) that also covered neighbouring countries and ocean; that output is superseded. This is an acquisition test only; applying the causal design to India would require its own comparison group.
-
-**Figure 6.** NO₂ monthly means over India's national boundary, 2019–2024, retrieved with the same method as the EU-27 study.
-
-<p align="center">
-  <img src="outputs/plots/india_transferability_trend.png" width="700">
-</p>
-
-### 4.7 Additional Robustness Checks
-
-**GDP excluded.** Removing GDP gives −1.49 × 10⁻⁶ (p = 0.053), almost the same coefficient as the headline. GDP could itself respond to policy, in which case controlling for it could absorb part of an effect (Angrist & Pischke, 2009); the near-identical coefficient shows the estimate is not sensitive to it. This is a sensitivity check, not a formal test of whether GDP is a "bad control".
-
-**Log outcome.** Excluding the 8 of 2,572 country-months with non-positive values (winter months in Nordic and Baltic countries, where few valid retrievals exist), the log model gives −0.0418 (p = 0.034), a relative decline of about 4%.
-
-**Treatment-date sensitivity.** Shifting the cutoff gives: −12 months (30 June 2020), −1.70 × 10⁻⁶, p = 0.028; −6 months, −1.14 × 10⁻⁶, p = 0.027; true date, −1.52 × 10⁻⁶, p = 0.013; +6 months, −1.39 × 10⁻⁶, p = 0.020; +12 months, −1.80 × 10⁻⁶, p = 0.004. Every date gives a significant estimate of similar size, including two dates before the Climate Law existed. By the logic used to reject the single-cohort model (Section 4.2), the two-group estimate does not identify a break at the Climate Law's date.
-
-**EU-specific trend.** Adding a common linear trend and an EU-specific linear trend (the same diagnostic as in Section 4.2) changes the treatment term to +8.67 × 10⁻⁷ (p = 0.243), while the EU-specific trend is −7.9 × 10⁻⁷ mol/m² per year (p = 0.016). The relative decline is captured by a steady faster decline in the EU-27 over the whole period, not by a step at the treatment date.
-
-**Heterogeneity by baseline pollution level (post-hoc).** Splitting the EU-27 at its median pre-treatment NO₂ level into 14 higher-baseline countries (AT, BE, CZ, DE, DK, FR, HU, IT, LU, MT, NL, PL, SI, SK) and 13 lower-baseline countries, each estimated against the full comparison group: higher-baseline −2.85 × 10⁻⁶ (p = 0.002; log −0.064, p = 0.006); lower-baseline +8.6 × 10⁻⁸ (p = 0.758; log −0.015, p = 0.409). The relative decline is concentrated in the more polluted member states on both scales. The split was chosen after seeing the pooled result and is defined by the outcome, and the same timing problems apply, so this describes where the relative decline occurred rather than what caused it.
-
-**Minimum detectable effect.** At 80% power and α = 0.05, the design can detect a pooled effect of about 5.5% of the EU-27's pre-treatment mean NO₂ (3.13 × 10⁻⁵ mol/m²); the estimate is 4.9%. This uses the clustered standard error, which Section 4.9 suggests is too small.
-
-### 4.8 Synthetic Control
-
-With all nine comparison countries as donors (Section 3.5), the weights are Serbia 40.2%, Switzerland 31.5% and United Kingdom 28.3%, with the other six donors at zero. The pre-treatment fit error (RMSPE, 27 months) is 2.56 × 10⁻⁶ and the mean post-treatment gap (36 months) is −8.1 × 10⁻⁷, about one-third of the fit error. In the in-space placebo, gaps for untreated countries range from −3.85 × 10⁻⁶ (United Kingdom) to +1.48 × 10⁻⁶ (Switzerland), and the EU-27 gap ranks 5th of 10 by absolute size. The synthetic control finds no EU-27 gap that stands out from the variation among untreated countries.
-
-**Figure 7.** Actual EU-27 NO₂ against the synthetic control (nine-country donor pool, intercept-adjusted), complete-data months only, with the gap shown below.
+**Figure 2.** EU-27 minus comparison-group NO₂ in blocks of months relative to July 2020–June 2021, with and without November–February.
 
 <p align="center">
-  <img src="outputs/plots/synthetic_control_gap.png" width="700">
+  <img src="outputs/plots/block_event_study.png" width="700">
 </p>
 
-### 4.9 Spatial Autocorrelation Diagnostics
+This timing depends on the winter months. Without November–February, the blocks after the law are −0.43, −1.15, −1.44 and −1.60 × 10⁻⁶, and July 2019–June 2020 is −0.79 × 10⁻⁶ (p = 0.04): a gradual drift that starts before the law. Removing December 2023 alone reduces the July 2023–June 2024 block from −2.18 to −1.49 × 10⁻⁶.
 
-Global Moran's I on full-period average NO₂ across the 36 countries is 0.578 (p = 0.001, 999 permutations), and similar for the pre-treatment (0.594) and post-treatment (0.563) averages. Local Moran's I identifies a High-High cluster (Belgium, Germany, Luxembourg, the Netherlands, Switzerland, United Kingdom), a Low-Low cluster (Estonia, Finland, Sweden, Norway, Iceland), and Denmark and Ireland as Low-High outliers.
+The estimate is not specific to the treatment date. Shifting the date gives −1.42 × 10⁻⁶ (p = 0.049) twelve months earlier, −1.14 × 10⁻⁶ (p = 0.038) six months earlier, −1.38 × 10⁻⁶ (p = 0.024) six months later and −1.60 × 10⁻⁶ (p = 0.010) twelve months later. With an EU-specific linear trend the treatment coefficient is +0.86 × 10⁻⁶ (p = 0.28). Placebo dates inside the pre-treatment period give p = 0.07, 0.39 and 0.89. Whether read as a late step or as a gradual drift, the relative decline is not tied to July 2021.
 
-**Figure 8.** Local Moran's I (LISA) clusters for full-period average NO₂, 36 countries (descriptive).
+### 5.3 Baseline Composition at Country Level
+
+The last row of Table 2 adds the interaction between each country's pre-treatment NO₂ level and the post indicator. The interaction is −0.18 per unit of pre-treatment NO₂ (p < 0.001): countries that started with more NO₂ lost more of it. With this term in the model the EU coefficient is +0.58 × 10⁻⁶ (p = 0.26).
+
+The random assignments show that this is a general property of the design and not of this grouping (Figure 3). Across 999 random assignments of the treatment label to 27 of the 36 countries, the DiD estimate is strongly related to how much more polluted the labelled group was before treatment (r = −0.81): each additional 10⁻⁶ mol/m² of pre-treatment gap lowers the estimate by 0.14 × 10⁻⁶. The EU-27 is 10.7 × 10⁻⁶ more polluted than the comparison group before treatment, for which this relationship predicts an estimate of about −1.5 × 10⁻⁶; the actual estimate is −1.34 × 10⁻⁶. The random assignments also give a significant estimate at the 5% level in 9.6% of cases, about twice the nominal rate, so the clustered t-test rejects too often in this panel.
+
+**Figure 3.** DiD estimates under 999 random assignments of the treatment label, against the pre-treatment NO₂ gap between the labelled and unlabelled countries. The actual EU-27 assignment is highlighted.
 
 <p align="center">
-  <img src="outputs/plots/moran_lisa_cluster_map.png" width="700">
+  <img src="outputs/plots/placebo_assignments.png" width="600">
 </p>
 
-The spatial dependence carries through to the DiD residuals. Computed month by month on each month's cross-section, Moran's I on the residuals has a median of 0.347 and is significantly positive in 59 of 72 months. Neighbouring countries' errors are correlated, which country-clustered standard errors do not account for, so the p-values reported in this paper are likely too small. (An earlier version reported I = 0.069, p = 0.135 on country-averaged residuals; with country fixed effects those averages are exactly zero, so that test was uninformative.)
+### 5.4 Pixel Level: Comparing Like with Like
 
-### 4.10 Identification and Inference Checks
+Table 3 and Figure 4 show the change between the pre-treatment period and July 2023–December 2024 by pre-treatment class, for the 51,072 pixels (43,062 in the EU-27 and 8,010 in the comparison group, counting 15 border pixels in both) with a valid mean in the pre-treatment period, in July 2021–June 2023 and in July 2023–December 2024. Most of the pixels that drop out are at high latitudes.
 
-These checks address four weaknesses of the model in Section 4.3: its common seasonal cycle, omitted meteorology, the small number of comparison clusters, and the COVID-19 and energy-price shocks that fall inside the study window.
-
-| Specification | Coefficient (mol/m²) | p (cluster-robust) |
-|---|---|---|
-| Section 4.3 model (country FE, common calendar-month FE, post indicator) | −1.52 × 10⁻⁶ | 0.013 |
-| Country FE + year-month FE | −1.53 × 10⁻⁶ | 0.013 |
-| + EU-specific calendar-month effects (the "stricter specification") | −1.34 × 10⁻⁶ | 0.016 |
-| Stricter specification + wind speed + boundary-layer height | −1.36 × 10⁻⁶ | 0.016 |
-| Stricter specification + COVID-19 stringency (34 countries) | −1.48 × 10⁻⁶ | 0.014 |
-| Stricter specification without GDP | −1.31 × 10⁻⁶ | 0.074 |
-| Stricter specification without any controls | −1.30 × 10⁻⁶ | 0.080 |
-| Stricter specification, log outcome | −0.030 | 0.061 |
-
-**Specification.** The estimate is about −1.3 × 10⁻⁶ (4.3% of the EU pre-treatment mean) in every level specification with EU-specific seasonality and GDP. Boundary-layer height is itself strongly related to NO₂ (p < 0.001) but adding it and wind speed does not move the estimate, and the stringency index is not significant (p = 0.537) and does not move it either. Conventional significance, however, depends on the GDP control: without it the confidence interval includes zero (p = 0.074), and on the log scale p = 0.061.
-
-**Timing.** With 12-month blocks relative to July 2021 (reference: July 2020–June 2021), the two pre-treatment blocks are not significant (January–June 2019: +1.93 × 10⁻⁶, p = 0.168; July 2019–June 2020: +1.5 × 10⁻⁷, p = 0.773; joint p = 0.292). The quarterly pre-treatment differences in Section 4.4 were therefore largely a seasonal artefact. The post-treatment blocks show no effect in the first two years (July 2021–June 2022: +1 × 10⁻⁸, p = 0.982; July 2022–June 2023: −5.1 × 10⁻⁷, p = 0.441) and a decline only afterwards (July 2023–June 2024: −2.18 × 10⁻⁶, p = 0.008; July–December 2024: −1.25 × 10⁻⁶, p = 0.137). Dropping 2023–2024 leaves −2.6 × 10⁻⁷ (p = 0.545). Shifted treatment dates remain significant under the stricter specification (−12 months: p = 0.041; −6: p = 0.031; +6: p = 0.019; +12: p = 0.007), and an EU-specific linear trend again absorbs the treatment term (+8.6 × 10⁻⁷, p = 0.275; trend −7.3 × 10⁻⁷ per year, p = 0.026). Placebo dates inside the pre-treatment period give p = 0.063 (31 January 2020), 0.381 (30 June 2020) and 0.894 (31 December 2020).
-
-**Inference with few comparison clusters.** The wild cluster bootstrap gives p = 0.018, close to the cluster-robust value. Randomization inference gives p = 0.160 (0.139 for the Section 4.3 model): about one in six random assignments of the "EU" label to 27 of the 36 countries produces an estimate at least as large. The two methods answer different questions, and the estimate is significant under one and not the other. The estimate does not depend on any single comparison country (leave-one-out range −1.20 to −1.42 × 10⁻⁶, all p ≤ 0.025) and holds against both halves of the comparison group: Norway, Iceland, Switzerland and the United Kingdom (−1.59 × 10⁻⁶, p = 0.042) and the Western Balkans (−1.05 × 10⁻⁶, p = 0.027).
-
-**COVID-19 and the energy crisis.** Excluding all of 2020 gives −2.10 × 10⁻⁶ (p = 0.009); excluding March 2020–June 2021 gives −2.25 × 10⁻⁶ (p = 0.011); excluding July 2021–December 2022, the months of the energy-price shock, gives −2.08 × 10⁻⁶ (p = 0.005). The relative decline is not produced by either period.
-
-**Processor versions.** A check of 24 sample days (15 January, April, July and October of each year) shows that the values used in this study come from the reprocessed v2.4.0 record up to July 2022 and from operational v2.4.0–v2.7.1 products afterwards. The large processor change of 1 July 2021 (v1.4 to v2.2; van Geffen et al., 2022), which coincides with the treatment date, therefore does not affect the series. The smaller updates from 2023 onward apply to both groups, but a differential effect on more polluted scenes cannot be excluded with these data.
-
-### 4.11 Pixel-Level Check: Baseline Pollution or EU Membership?
-
-The heterogeneity result in Section 4.7 showed that the relative decline sits in the more polluted EU countries. The gridded data allow the same question to be asked below the country level: does NO₂ fall more where the EU is, or where pollution was high?
-
-**Figure 9.** Change in NO₂ from July 2023 relative to the pre-treatment period, by the pixel's pre-treatment NO₂ level, for EU-27 and comparison-group pixels.
-
-<p align="center">
-  <img src="outputs/plots/no2_change_by_baseline.png" width="700">
-</p>
+**Table 3.** Change in NO₂ from the pre-treatment period to July 2023–December 2024, by pre-treatment class.
 
 | Pre-treatment level (10⁻⁵ mol/m²) | EU-27 pixels | EU-27 change | Comparison pixels | Comparison change |
 |---|---|---|---|---|
@@ -237,151 +213,189 @@ The heterogeneity result in Section 4.7 showed that the relative decline sits in
 | 5–7 | 2,999 | −19.0% | 762 | −18.8% |
 | > 7 | 1,355 | −21.4% | 126 | −23.0% |
 
-Changes are for July 2023–December 2024 against January 2019–June 2021, balanced by calendar month; 43,062 EU-27 and 8,010 comparison pixels have enough valid months in every period (high-latitude pixels drop out).
-
-The decline grows steadily with the pre-treatment level in both groups, from almost nothing in the cleanest class to more than 20% in the most polluted one, and in five of the eight classes the comparison-group pixels fell at least as much as the EU pixels. Across all 51,072 pixels, the change falls by 0.247 for each unit of pre-treatment NO₂ (R² = 0.70; standard errors clustered by country). Part of that slope is mechanical, because the change is measured from the same level it is regressed on: with the 2019 level as the starting point and the change measured from 2020–June 2021, the slope is −0.152 (R² = 0.47). Once the pre-treatment level is accounted for, EU pixels do not differ from comparison pixels in level (+0.79 × 10⁻⁶, p = 0.221) or in slope (p = 0.828).
-
-| Model (country × class × month cells) | EU × post (mol/m²) | p |
-|---|---|---|
-| Not matched on pre-treatment level | −1.34 × 10⁻⁶ | 0.012 |
-| Matched on pre-treatment level (class × year-month fixed effects) | −0.21 × 10⁻⁶ | 0.341 |
-| Matched, July 2021–June 2023 | −0.00 × 10⁻⁶ | 0.993 |
-| Matched, from July 2023 | −0.52 × 10⁻⁶ | 0.221 |
-
-Without matching, the cell-level model returns the country-level estimate of Section 4.10 (−1.34 × 10⁻⁶). With matching, about 84% of it disappears and what remains is not significant. Defining the classes from 2019 alone and estimating on 2020–2024, so that the classes and the estimation sample do not overlap, gives the same matched result (−0.20 × 10⁻⁶, p = 0.401).
-
-Most of the country-level estimate therefore reflects where the polluted pixels are: EU countries contain many more of them than the comparison group, and a country average turns a decline that depends on pollution level into an apparent EU effect. Section 4.12 shows that this matched result is itself an average of two different comparisons.
-
-**Figure 10.** Change in tropospheric NO₂ per 0.1° pixel, July 2023–December 2024 minus January 2019–June 2021.
+**Figure 4.** Change in NO₂ by pre-treatment class, EU-27 and comparison-group pixels.
 
 <p align="center">
-  <img src="outputs/plots/no2_change_map.png" width="700">
+  <img src="outputs/plots/no2_change_by_baseline.png" width="700">
 </p>
 
-The map shows the same thing: the decline covers the polluted belt from England through the Low Countries and western Germany to the Po Valley, together with large cities, and it does not stop at the EU border.
+In both groups the decline is larger in more polluted classes, from almost nothing in the cleanest class to more than 20% in the most polluted, and in five of the eight classes the comparison-group pixels fell at least as much as the EU pixels. The percentage decline is not constant across classes, consistent with a background column that does not respond to surface emissions. In a regression of the change on the pre-treatment level, the change falls by 0.247 mol/m² for each mol/m² of pre-treatment NO₂ (R² = 0.69). Part of this slope is mechanical, because the change is measured from the level it is regressed on; with the 2019 level as the starting point and the change measured from 2020–June 2021, the slope is −0.152 (R² = 0.47). Conditional on the pre-treatment level, EU pixels do not differ significantly from comparison pixels in level (+0.79 × 10⁻⁶, p = 0.23) or in slope (p = 0.83), with standard errors clustered by country.
 
-One caveat matters for interpretation. Of the comparison pixels above 4 × 10⁻⁵ mol/m², 86% are in the United Kingdom, with the rest mostly in Switzerland and Serbia. The United Kingdom kept EU-derived vehicle and industrial emission standards after leaving the EU, so this check separates EU membership from pollution level, not EU-origin regulation from its absence.
+Table 4 gives the cell-level DiD with and without matching on class.
 
-### 4.12 Stress Tests: Regions, Seasons and Model Choices
+**Table 4.** Pixel-level DiD on country × class × month cells (10⁻⁶ mol/m²; log outcome in log points).
 
-**The matched estimate hides two opposite comparisons.** Split by comparison sub-group, the matched estimate is +0.20 × 10⁻⁶ (p = 0.49) against the United Kingdom, Norway, Switzerland and Iceland, and −0.38 × 10⁻⁶ (p = 0.15; from July 2023 −1.08 × 10⁻⁶, p = 0.014) against the Western Balkans. Treating the first sub-group as if it were treated and comparing it with the Western Balkans gives −1.00 × 10⁻⁶ (p = 0.014): the two halves of the comparison group differ from each other more than the EU differs from either.
+| Model | Estimate | 95% CI | p |
+|---|---|---|---|
+| Not matched on class | −1.34 | | 0.017 |
+| Matched on class | −0.21 | −0.67 to +0.24 | 0.35 |
+| Difference, unmatched minus matched | −1.13 | −2.18 to −0.28 | |
+| Matched, July 2021–June 2023 | −0.00 | | 0.99 |
+| Matched, from July 2023 | −0.52 | | 0.23 |
+| Matched, without November–February | +0.04 | −0.42 to +0.51 | 0.85 |
+| Matched, classes from 2019, estimated on 2020–2024 | −0.20 | | 0.41 |
+| Matched, 4 classes | −0.39 | −0.90 to +0.11 | 0.12 |
+| Matched, 16 classes | −0.22 | −0.66 to +0.23 | 0.33 |
+| Matched, log outcome | +0.001 | −0.02 to +0.02 | 0.92 |
 
-**Figure 11.** Change in NO₂ from July 2023 in pixels that started above 3 × 10⁻⁵ mol/m², by country. Dots show the same change using March–October only.
+Without matching, the cell-level model gives −1.34 × 10⁻⁶, close to the country-level estimate; the two are not identical because the cell model uses only pixels with a valid pre-treatment mean. Comparing EU pixels only with comparison-group pixels of the same class reduces the estimate by about 84%, to −0.21 × 10⁻⁶, and the bootstrap interval for the difference between the two excludes zero. The matched estimate is similar across class definitions and when the classes are defined on years outside the estimation sample. Its confidence interval excludes effects larger than about half of the country-level estimate but includes zero and includes small effects of either sign. On the 2020–2024 sample the unmatched estimate is itself smaller (−0.56 × 10⁻⁶), so there matching removes about two thirds.
+
+The matched estimate averages over a comparison group that is itself heterogeneous. Against the United Kingdom, Norway, Switzerland and Iceland it is +0.20 × 10⁻⁶ (p = 0.49); against the Western Balkans it is −0.38 × 10⁻⁶ (p = 0.15), and −1.08 × 10⁻⁶ (p = 0.014) from July 2023. The two halves of the comparison group differ from each other by −1.00 × 10⁻⁶ (p = 0.014). The next section looks at this heterogeneity directly.
+
+### 5.5 Where NO₂ Fell
+
+Figure 5 maps the change per pixel, and Figure 6 shows the change in pixels that started above 3 × 10⁻⁵ mol/m², country by country.
+
+**Figure 5.** Change in tropospheric NO₂ per 0.1° pixel, July 2023–December 2024 minus January 2019–June 2021. Thick outlines mark the comparison countries.
+
+<p align="center">
+  <img src="outputs/plots/no2_change_map.png" width="650">
+</p>
+
+**Figure 6.** Change in NO₂ in pixels that started above 3 × 10⁻⁵ mol/m², by country (countries with at least 20 such pixels). Bars use all months; dots use March–October only. Grey bars are areas outside the study sample, west of 35° E.
 
 <p align="center">
   <img src="outputs/plots/no2_change_by_country.png" width="700">
 </p>
 
-Country by country, the change in polluted pixels follows geography, not EU membership. It is −25% in the Netherlands, −22% in Belgium, −21% in Germany, −20% in the United Kingdom and −18% in Switzerland; −13% in Italy and −11% in Poland; and between 0 and −6% in Hungary, Bulgaria, Romania, Croatia, Greece, Bosnia and Herzegovina and Serbia.
+Polluted pixels lost 25% of their NO₂ in the Netherlands, 22% in Belgium, 21% in Germany, 20% in the United Kingdom and 18% in Switzerland; 16% in France and Czechia, 14% in Austria, 13% in Italy and 11% in Poland and Spain; 9% in Slovenia; and between 0 and 6% in Hungary, Portugal, Bulgaria, Romania, Bosnia and Herzegovina, Croatia, Greece and Serbia. The two non-EU countries with large polluted areas in north-western Europe are among their EU neighbours at the top of the ranking, and the EU members of south-eastern Europe are among their non-EU neighbours at the bottom.
 
-| Matched model (country × class × month cells) | Estimate (mol/m²) | p |
-|---|---|---|
-| North-west: EU members (NL, BE, LU, DE, DK, FR, AT, IE) vs United Kingdom, Switzerland | −0.41 × 10⁻⁶ | 0.44 |
-| South-east: EU members (HR, HU, RO, BG, EL, SI) vs Western Balkans | +0.22 × 10⁻⁶ | 0.48 |
-| Inside the EU: north-west vs south-east members | −1.43 × 10⁻⁶ | 0.016 |
-| Inside the EU: north-west vs south-east, from July 2023 | −2.79 × 10⁻⁶ | 0.002 |
+The areas outside the study sample add two observations. In western Turkey, which has 1,022 pixels above 3 × 10⁻⁵ mol/m² (218 above 5 × 10⁻⁵, including Istanbul and Ankara), polluted pixels did not change (−0.3%; +5.4% in March–October). So the decline is not a mechanical property of polluted pixels: where the pre-treatment level was high but the location was outside north-western and central Europe, NO₂ did not fall. In Ukraine west of 35° E, polluted pixels lost 17%, which cannot be separated from the effects of the war that began in February 2022.
 
-Within each region the EU border makes no detectable difference; between the regions, inside the EU, the difference is larger than any EU-versus-comparison estimate in this paper. The p-values in this section use the t distribution with one degree of freedom fewer than the number of countries.
+**Table 5.** Regional contrasts, matched on pre-treatment class (10⁻⁶ mol/m²).
 
-**Winter months carry much of the estimate.** Without November–February the country-level estimate falls from −1.34 × 10⁻⁶ to −0.81 × 10⁻⁶ (p = 0.11), and with May–September only to −0.54 × 10⁻⁶ (p = 0.23); the matched pixel estimate becomes +0.04 × 10⁻⁶ (p = 0.85), and the north-west versus south-east contrast inside the EU becomes −0.29 × 10⁻⁶ (p = 0.50). Winter is when retrievals are fewest and least reliable: four of the eight non-positive country-months are December 2023 (Denmark, Sweden, Latvia, Lithuania), and dropping that single month reduces the July 2023–June 2024 block from −2.18 × 10⁻⁶ to −1.49 × 10⁻⁶. Without November–February the 12-month blocks are −0.43, −1.15, −1.44 and −1.60 × 10⁻⁶ after the law and −0.79 × 10⁻⁶ (p = 0.04) for July 2019–June 2020, a gradual drift that starts before the law, so the pattern of no change for two years followed by a decline from July 2023 depends on the winter months. In percentage terms the regional gradient in Figure 11 remains in March–October (Netherlands −20%, Germany −16%, United Kingdom −18%; Romania −0.3%, Greece −0.2%, Serbia −2%).
+| Contrast | Estimate | 95% CI | p |
+|---|---|---|---|
+| North-west: EU members vs United Kingdom, Switzerland | −0.41 | −1.55 to +0.73 | 0.44 |
+| South-east: EU members vs Western Balkans | +0.22 | −0.45 to +0.88 | 0.48 |
+| Inside the EU: north-west vs south-east members | −1.43 | −2.56 to −0.31 | 0.016 |
+| Inside the EU: north-west vs south-east, without November–February | −0.29 | −1.19 to +0.61 | 0.50 |
+| EU-27 vs western Turkey (no controls) | −1.43 | not reported | not reported |
+| North-west EU members vs western Turkey (no controls) | −2.16 | not reported | not reported |
+| South-east EU members vs western Turkey (no controls) | −0.30 | not reported | not reported |
 
-**Model choices.** The country-level estimate gives every country the same weight; weighting by area gives −0.96 × 10⁻⁶ (p = 0.11). GDP enters in nominal levels; with log GDP the estimate is −0.94 × 10⁻⁶ (p = 0.21). On 2020–2024 alone it is −0.59 × 10⁻⁶ (p = 0.14). Adding the country's pre-treatment NO₂ level interacted with the post-treatment indicator turns the EU term to +0.58 × 10⁻⁶ (p = 0.26), with the interaction at −0.18 per unit (p < 0.001), so the dependence on pollution level is visible at country level too.
+The three contrasts with western Turkey have a single comparison country, so cluster-robust standard errors are not valid for them and only the point estimates are given. They are of the same order as the estimates before matching: at the same pre-treatment level, NO₂ fell by 1.43 × 10⁻⁶ mol/m² more in the EU-27 than in western Turkey, by 2.16 more in north-western members and by 0.30 more in south-eastern members. Matching on the starting level therefore removes the EU difference when the comparison pixels are in the United Kingdom, Switzerland and the Western Balkans, and does not remove it when they are in Turkey. What the matched model returns depends on where the comparison pixels are.
 
-**Inference.** With the t distribution the stricter-model p-value is 0.022. Randomization inference gives p = 0.17 when based on the coefficient, as in Section 4.10, and p = 0.046 when based on the t-statistic, which is the more usual form.
+Table 5 holds region fixed. Within the north-west and within the south-east, the estimated difference across the EU border is small and not significant, but these contrasts rest on few comparison countries (two in the north-west) and their confidence intervals are wide: the north-west interval includes the whole country-level estimate. They show that the data do not require an effect at the EU border; they do not show that there is none. The contrast between north-western and south-eastern EU members is as large as the country-level estimate with all months and is small and not significant without November–February.
 
-**Synthetic control.** Section 4.8 fits the donor weights on levels and then removes the mean gap. Fitting the weights and the level shift together gives a gap of −1.45 × 10⁻⁶ with a pre-treatment RMSPE of 2.29 × 10⁻⁶; the EU-27 then ranks 2nd of 10 by gap and 1st by gap relative to pre-treatment fit. With ten units the smallest possible p-value is 0.10, so neither version is decisive.
+The dependence on winter is therefore as strong for the regional pattern as for the country-level estimate. In percentage terms, a difference between the two ends of the ranking remains in March–October: −20% in the Netherlands, −18% in the United Kingdom and −15% in Germany, against −0.3% in Romania, −0.2% in Greece and −2% in Serbia. But the ranking in between changes; Denmark falls from −21% to −3% and Switzerland from −18% to −9%.
 
-## 5. Discussion
+## 6. Discussion
 
-**Figure 12.** Country-level average tropospheric NO₂ column density in 2019 and 2024 for the 36 study countries (descriptive).
+The country-level analysis produced a negative and significant DiD estimate under the baseline model, and it remained so under year-month fixed effects, group-specific seasonality, meteorological and pandemic controls, a wild cluster bootstrap and leave-one-out tests. The same estimate was not significant without the winter months, with area weights, with log GDP, or under randomization inference on the coefficient. A reader shown only the first set would call the result robust, and a reader shown only the second would call it fragile. Reporting the full set is the first lesson of this exercise.
 
-<p align="center">
-  <img src="outputs/plots/no2_before_after_map.png" width="700">
-</p>
+The second is that most of the estimate reflects baseline composition. Three independent pieces of evidence agree: the country-level interaction with the pre-treatment level, the relationship between placebo estimates and the pre-treatment gap under random assignment, and the pixel-level comparison within pollution classes, where the estimate falls from −1.34 to −0.21 × 10⁻⁶ and the difference is itself significant. The mechanism is the one the DiD literature describes for groups that differ in levels (Kahn-Lang & Lang, 2020; Roth & Sant'Anna, 2023): when the change in the outcome depends on its starting level, trends cannot be parallel in levels between a heavily polluted group and a much cleaner one. Fixed effects, weather controls and resampling over clusters do not detect this, because they all preserve the composition of the two groups. The interaction of the pre-treatment level with the post indicator, the log specification and the random-assignment plot are cheap country-level diagnostics that do.
 
-The corrected data show a clear descriptive pattern: NO₂ fell in the EU-27, most of all in its more polluted western and central member states (for example the Netherlands, Germany, Belgium and Luxembourg), while the Western Balkan comparison countries were almost flat. The pooled DiD estimate captures this difference. What the design cannot establish is that the difference was caused by the European Climate Law. The EU–comparison gap was already changing before 2021 (Section 4.4), any cutoff date between mid-2020 and mid-2022 yields a similar estimate (Section 4.7), and a steady EU-specific trend explains the data at least as well as a break at the treatment date. These are the same symptoms that led this study to reject its first, single-cohort model (Section 4.2).
+What remains after matching is uncertain. The matched estimate is close to zero, but its confidence interval admits a relative decline of up to half the country-level estimate, and against the Western Balkans alone the matched estimate from July 2023 is negative and significant. This paper does not show that EU membership had no effect on NO₂. It shows that the country-level estimate is not evidence for one, and that the data, analysed like with like, do not require one.
 
-The stricter specification in Section 4.10 sharpens this picture. Most of the pre-treatment differences disappear once the two groups are allowed their own seasonal cycles, and the estimate survives controls for ventilation and COVID-19 stringency and the exclusion of the COVID-19 and energy-crisis windows. But the timing still does not match the law: nothing changes in the two years after July 2021, and the whole estimate comes from July 2023 onward. A law that sets long-term targets could plausibly act with a delay, but a delay of two years with no dated mechanism is not something this design can attribute to it, and other measures that took effect in that period are equally consistent with the data.
+The geography of the decline suggests where an explanation should be sought. NO₂ fell most in the polluted areas of north-western and central Europe, on both sides of the EU border, and little in the polluted areas of south-eastern Europe and western Turkey. Several accounts are compatible with this pattern and the present data do not discriminate between them. One is regulation of EU origin that reaches beyond the EU: vehicle emission standards (Regulation (EC) No 715/2007 for light vehicles and Regulation (EC) No 595/2009 for heavy vehicles; European Commission, n.d.) are shared by the United Kingdom and Switzerland, and if newer vehicles enter the fleet faster in richer countries, the same standards would produce a faster decline there than in south-eastern member states. A second is the pace of coal-plant closures and industrial change. A third is that part of the pattern is not real. Winter months account for a large share of the country-level estimate and of the regional contrasts; winter is when valid retrievals are fewest and when the physically impossible negative country means occur; and the decline coincides with the operational processor versions 2.5 to 2.7, with the anomalous month of December 2023 falling between the last sampled day on version 2.5.0 (October 2023) and the first on version 2.6.0 (January 2024). A change in the retrieval that affected polluted, high-latitude winter scenes more than others would produce a similar picture.
 
-The pixel-level analysis (Sections 4.11–4.12) changes what the estimate means. The decline depends on how polluted a place was and on where in Europe it is, not on which side of the EU border it lies. Polluted areas in the United Kingdom and Switzerland fell like those in Germany and the Low Countries; polluted areas in Romania, Bulgaria, Croatia and Greece barely moved, like those in Serbia and Bosnia and Herzegovina. The country-level DiD compares an EU average dominated by the polluted north-west with a comparison average dominated by clean or south-eastern countries, so a regional decline appears as an EU effect. This is an aggregation problem more than a statistical-significance problem, and the standard country-level robustness checks in Sections 4.7–4.10 did not expose it. What separates north-western from south-eastern Europe (fleet renewal, the pace of coal and industrial closures, or retrieval conditions in winter) is not identified here.
+Three practical points follow for satellite-based policy evaluation. Units should be compared at the same starting level, by matching pixels or regions on pre-treatment pollution or by modelling the dependence on the starting level explicitly. Results should be reported with and without the winter months, together with the share of valid retrievals. And choices such as country weighting and the functional form of economic controls should be reported, because here each of them alone moves the estimate across the 5% threshold.
 
-Several explanations are compatible with a gradual EU-specific decline: earlier EU air-quality and vehicle-emission standards continuing to take effect, faster fleet renewal and industrial change in western Europe, and specific measures taking effect from 2023. The COVID-19 lockdowns and the 2022 energy-price shock are less likely explanations, since excluding either window leaves the estimate in place (Section 4.10). The study does not distinguish between the remaining explanations, and the Climate Law — which sets long-term targets rather than immediate emission limits — may be only one small part of that broader policy environment.
+For the Climate Law itself, the conclusion is limited. The design cannot detect an effect of a framework law with no dated mechanism, and the relative decline it does detect is not tied to the law's date. A policy with a direct mechanism, a known start date and variation in where it applies would be a better target for the same data.
 
-The comparison group also has limits. Norway and Iceland participate in the EU ETS, Switzerland's ETS is linked to it, and the Western Balkans committed to align with the Green Deal (Section 3.1), so shared exposure would bias the estimate toward zero. On the other hand, the comparison group is structurally different from the EU-27 — lower NO₂ levels, a smaller seasonal cycle, and (in the Balkans) different economic trajectories — which is what the event study and trend checks pick up. The synthetic control, which can weight donors to resemble the EU-27, does not find an EU-27 gap that stands out from untreated countries (Section 4.8), and the spatially correlated residuals mean the clustered p-values overstate precision (Section 4.9).
+## 7. Limitations
 
-The NDVI result has the same identification weaknesses and an additional problem of mechanism: the Climate Law is not a vegetation policy. It is reported as an exploratory association.
+The matched pixel comparison has thin common support at high pollution levels. Of the comparison-group pixels above 4 × 10⁻⁵ mol/m², 86% are in the United Kingdom, with the rest mostly in Switzerland and Serbia. Western Turkey adds polluted pixels outside the country panel, but without covariates and from one country. The comparison therefore separates EU membership from pollution level and, descriptively, from region; it does not separate regulation of EU origin from its absence.
 
-## 6. Limitations
+The period from July 2023 and the regional grouping were chosen after seeing the data, so the descriptive results of Section 5.5 and the p-values in Table 5 are not confirmatory. No formal sensitivity analysis for violations of parallel trends (Rambachan & Roth, 2023) is reported.
 
-**Satellite aggregation (corrected in this version).** An earlier version of this study retrieved NO₂ and NDVI through the Sentinel Hub Statistical API with monthly intervals and default SIMPLE mosaicking; in addition, the provider documents that Sentinel-5P requests are clipped to the last 24 hours of the requested range. Each "monthly" NO₂ value was therefore effectively a snapshot of the last day of the month. That explained the earlier patchy coverage (e.g. Luxembourg missing 25 of 72 months) and impossible values (negative country means across Europe on 31 December 2023). All results in this paper use the corrected acquisition: one Process API raster per day at 0.1° with QA ≥ 0.75, pooled into monthly means over all valid pixel-days; NDVI uses monthly means of the dekadal composites. With the corrected data, coverage gaps are confined to polar-night winter months, and only 8 country-months are non-positive (Nordic and Baltic winter months with few retrievals). Changing the data reversed several of the earlier conclusions, including the headline significance, which is why every number in this version differs from the previous one.
+The outcome is a tropospheric column, not an emission rate or a surface concentration. It is observed only under mostly clear skies, the 0.1° grid resamples ground pixels of about 5 km, and no comparison with ground monitors is made. Meteorological controls are available only as country means, so the pixel-level models do not adjust for local weather, and a difference in the weather of the 2023–2024 winters between regions is not ruled out. The processor version was checked on 24 sample days, not for every file. Class-specific time effects absorb version changes that depend on pollution level in the matched models, but not in the country-level models.
 
-Further limitations: First, the unit of analysis. The country-level estimate largely reflects where polluted areas are (Sections 4.11–4.12); the matched pixel-level estimate is small and not significant, but its high-pollution comparison pixels come mostly from one country, the United Kingdom, which retained EU-derived emission standards, and no highly polluted area outside EU-style regulation is in the sample. Winter retrievals carry much of the estimate and include physically impossible negative country means (December 2023), and the country-level result is sensitive to country weighting and to the form of the GDP control (Section 4.12). Second, identification. Significant estimates at every alternative date, the EU-specific trend (Sections 4.7 and 4.10) and the absence of any effect in the first two post-treatment years (Section 4.10) mean the design cannot attribute the relative decline to the Climate Law; conventional significance also depends on the GDP control. Third, the treatment date is tied to a single legal instrument; no country-differentiated measure of Green Deal intensity was available. Fourth, the comparison group shares some EU climate instruments (Section 3.1) and differs structurally from the EU-27; it has only nine clusters, which limits the reliability of cluster-robust inference (the wild cluster bootstrap agrees with the cluster-robust p-value but randomization inference does not, Section 4.10), and the residuals are spatially correlated (Section 4.9). Fifth, the NO₂ record combines reprocessed v2.4.0 products (to July 2022) with operational v2.4–2.7 products; the minor processor updates after 2023 fall in the period where the relative decline appears. Sixth, the country-level 0.1° grid represents Malta with only three pixels, so its values are noisy. Seventh, GDP for the comparison group was converted from US dollars at annual average exchange rates. Eighth, WorldPop population data were only available for 2019–2020 in the version accessed, so population is not used. Ninth, NDVI may reflect land-use change, drought stress or agricultural policy, none of which are controlled for; land cover is a single 2021 snapshot used only as descriptive context.
-
-An originally planned ranking of interventions by cost-effectiveness was not pursued, because the analysis did not establish an NO₂ improvement attributable to a specific policy.
-
-## 7. Future Work
-
-The restrictions stated above indicate that there are a number of specific and clearly definable technical extensions which might have been developed but were deliberately excluded from this phase of the study rather than developed in an incomplete fashion.
-
-The pixel-level check in Section 4.11 is a first step in this direction. Running the design at NUTS-2 regional resolution (or using fixed size grid-cells directly within the underlying TROPOMI pixel data and excluding a border buffer through some empirical rather than qualitative argument according to spillover-attenuation) would increase the effective sample size by a factor of approx. 10, significantly enhancing the statistical power of the study, and would also enable a border-buffer exclusion as a direct empirical test of the spillover-attenuation argument. It is necessary since the current analysis keeps the country-month granularity, further compounding the SUTVA risk discussed in Section 5 from regions neighbouring the border in larger member states and averaging away any regional difference/heterogeneity when computing the country-month level averages. It would also allow spatial-lag or spatial-error specifications, which the residual spatial dependence found at country level (Section 4.9) already motivates.
-
-Policy effects that take a while to materialise and are cumulative. The event-study analysis (Section 4.4) only considers the impacts of some of the instruments in the Green Deal's range, and cannot comment on possible impacts from instruments that have been rolled out later, such as the "Fit for 55" legislative package. The following specific and testable extension to the work is to see whether the pattern discovered in each quarter of the post-treatment period (Section 4.4) is maintained, enhanced or diminished as further data can be obtained.
-
-Solving heterogeneous effect (higher baseline). The design of this study would replicate the same design without introducing a new experimental manipulation; instead, it would directly compare the treatment effect with each country's baseline level, which goes back to the pre-treatment period (rather than splitting the baseline into a "less" and a "more" group as, for instance, a median split) and directly test for a similar effect at every baseline level, while simultaneously analyzing for a baseline-pollution-level effect in the treatment responses and testing for a sector-composition effect that would be likely to co-vary with the baseline-pre-treatment periods. This would test directly whether the relative decline concentrated in the 14 higher-baseline countries (Section 4.7) follows baseline pollution continuously, and whether it reflects policy or other structural change.
-
-Testing more than one legal date (for example the 2019 Green Deal communication or the 2021 "Fit for 55" proposals), and the specific measures that took effect from 2023, when the relative decline appears (Section 4.10), would show more directly whether any part of it is linked to a dated policy change.
+Inference rests on 36 clusters, nine of them in the comparison group, the residuals are spatially correlated, and the clustered t-test rejects about twice as often as it should under random assignment. GDP is nominal and annual, and the comparison countries' GDP is converted at approximate exchange rates.
 
 ## 8. Conclusion
 
-Measured with true monthly satellite means, NO₂ fell more in the EU-27 than in nine neighbouring non-EU countries between 2019 and 2024, by about 5% of the EU's pre-treatment level, and the decline was concentrated in the more polluted member states. The estimate holds under year-month fixed effects, group-specific seasonality, meteorological and COVID-19 controls, and a wild cluster bootstrap, though not under randomization inference or without the GDP control. This study cannot attribute that relative decline to the European Climate Law: nothing changes in the first two years after the law and the decline appears only from mid-2023, the estimate is just as large at dates when the law did not yet exist, and an EU-specific trend absorbs the treatment-date effect. At pixel level the decline depends on each area's pre-treatment level, and comparing areas with the same starting level removes most of the estimate (−0.21 × 10⁻⁶, p = 0.341). The decline is regional: polluted areas of north-western Europe fell 15–25% whether inside the EU or not, and those of south-eastern Europe fell 0–6% whether inside the EU or not. The country-level estimate also weakens without the winter months, with area weights and with log GDP. A synthetic control gives no decisive answer either way, and spatially correlated residuals mean the reported p-values are, if anything, too small.
+A country-level difference-in-differences on satellite NO₂ finds that pollution fell about 4% more in the EU-27 than in nine neighbouring countries after the European Climate Law. The estimate is stable under many standard specifications and unstable under others, and most of it reflects the fact that the EU-27 was more polluted to begin with: placebo estimates under random assignment follow the pre-treatment gap between groups, and, within the study sample, comparing pixels with the same starting level leaves an estimate that is small and not distinguishable from zero. NO₂ fell most in the polluted areas of north-western and central Europe, inside and outside the EU, and little in the polluted areas of south-eastern Europe and western Turkey; the size of that contrast depends on winter retrievals of uncertain quality, and its cause is not identified.
 
-The project's methodological lessons come from the corrections it went through. A single-cohort before/after design produced a significant estimate that a placebo date showed it could not attribute to the policy. Later, the satellite aggregation itself turned out to be a single end-of-month snapshot rather than a monthly mean, and correcting it changed the headline result. Finally, an estimate that survived every country-level check turned out to depend on comparing countries with very different pollution levels. The corrections point the same way: claims about a policy's effect need checks on timing, on the data pipeline and on the unit of analysis, not just on statistical significance.
+The data used here are public, and the pixel-level comparison requires nothing beyond what the country-level analysis already downloads. Evaluations of policy with satellite air-quality data should compare like with like, and report what happens without the winter months, before presenting a country-level difference as a policy effect.
 
-The acquisition step has been run outside Europe (India, Section 4.6), so the data pipeline can be reused elsewhere; transferring the causal design would require a suitable comparison group in each new setting.
+## Data and Code Availability
+
+All data are from public sources (Table 1). The code that downloads the daily rasters, builds the country and pixel panels and produces every estimate, table and figure in this paper is available at [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE), archived at [https://doi.org/10.5281/zenodo.21756661](https://doi.org/10.5281/zenodo.21756661). The daily rasters (about 1 GB) are not stored in the repository and can be regenerated with the download script.
 
 ## References
 
-Abadie, A., Diamond, A., & Hainmueller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program. *Journal of the American Statistical Association*, 105(490), 493–505. [https://doi.org/10.1198/jasa.2009.ap08746](https://doi.org/10.1198/jasa.2009.ap08746)
-
-Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press. [https://doi.org/10.1515/9781400829828](https://doi.org/10.1515/9781400829828)
-
-Anselin, L. (1995). Local Indicators of Spatial Association—LISA. *Geographical Analysis*, 27(2), 93–115. [https://doi.org/10.1111/j.1538-4632.1995.tb00338.x](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x)
+Abadie, A. (2005). Semiparametric Difference-in-Differences Estimators. *The Review of Economic Studies*, 72(1), 1–19. [https://doi.org/10.1111/0034-6527.00321](https://doi.org/10.1111/0034-6527.00321)
 
 Barré, J., Petetin, H., Colette, A., Guevara, M., Peuch, V.-H., Rouil, L., et al. (2021). Estimating lockdown-induced European NO2 changes using satellite and surface observations and air quality models. *Atmospheric Chemistry and Physics*, 21(9), 7373–7394. [https://doi.org/10.5194/acp-21-7373-2021](https://doi.org/10.5194/acp-21-7373-2021)
 
-Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The Augmented Synthetic Control Method. *Journal of the American Statistical Association*, 116(536), 1789–1803. [https://doi.org/10.1080/01621459.2021.1929245](https://doi.org/10.1080/01621459.2021.1929245)
-
 Bertrand, M., Duflo, E., & Mullainathan, S. (2004). How Much Should We Trust Differences-in-Differences Estimates? *The Quarterly Journal of Economics*, 119(1), 249–275. [https://doi.org/10.1162/003355304772839588](https://doi.org/10.1162/003355304772839588)
-
-Callaway, B., & Sant'Anna, P. H. C. (2021). Difference-in-Differences with multiple time periods. *Journal of Econometrics*, 225(2), 200–230. [https://doi.org/10.1016/j.jeconom.2020.12.001](https://doi.org/10.1016/j.jeconom.2020.12.001)
 
 Cameron, A. C., Gelbach, J. B., & Miller, D. L. (2008). Bootstrap-Based Improvements for Inference with Clustered Errors. *The Review of Economics and Statistics*, 90(3), 414–427. [https://doi.org/10.1162/rest.90.3.414](https://doi.org/10.1162/rest.90.3.414)
 
-Fredriksson, A., & de Oliveira, G. M. (2019). Impact evaluation using Difference-in-Differences. *RAUSP Management Journal*, 54(4), 519–532. [https://doi.org/10.1108/RAUSP-05-2019-0112](https://doi.org/10.1108/RAUSP-05-2019-0112)
+Cameron, A. C., & Miller, D. L. (2015). A Practitioner's Guide to Cluster-Robust Inference. *Journal of Human Resources*, 50(2), 317–372. [https://doi.org/10.3368/jhr.50.2.317](https://doi.org/10.3368/jhr.50.2.317)
 
-Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. *Journal of Econometrics*, 225(2), 254–277. [https://doi.org/10.1016/j.jeconom.2021.03.014](https://doi.org/10.1016/j.jeconom.2021.03.014)
+Chen, S., Lin, F., Yao, X., & Zhang, P. (2020). WTO accession, trade expansion, and air pollution: Evidence from China's county-level panel data. *Review of International Economics*, 28(4), 1020–1045. [https://doi.org/10.1111/roie.12480](https://doi.org/10.1111/roie.12480)
 
-Hale, T., Angrist, N., Goldszmidt, R., Kira, B., Petherick, A., Phillips, T., et al. (2021). A global panel database of pandemic policies (Oxford COVID-19 Government Response Tracker). *Nature Human Behaviour*, 5, 529–538. [https://doi.org/10.1038/s41562-021-01079-8](https://doi.org/10.1038/s41562-021-01079-8)
+Conley, T. G., & Taber, C. R. (2011). Inference with "Difference in Differences" with a Small Number of Policy Changes. *The Review of Economics and Statistics*, 93(1), 113–125. [https://doi.org/10.1162/REST_a_00049](https://doi.org/10.1162/REST_a_00049)
+
+Dang, H.-A. H., & Trinh, T.-A. (2021). Does the COVID-19 lockdown improve global air quality? New cross-national evidence on its unintended consequences. *Journal of Environmental Economics and Management*, 105, 102401. [https://doi.org/10.1016/j.jeem.2020.102401](https://doi.org/10.1016/j.jeem.2020.102401)
+
+Daw, J. R., & Hatfield, L. A. (2018). Matching and Regression to the Mean in Difference-in-Differences Analysis. *Health Services Research*, 53(6). [https://doi.org/10.1111/1475-6773.12993](https://doi.org/10.1111/1475-6773.12993)
+
+Directive 2010/75/EU of the European Parliament and of the Council of 24 November 2010 on industrial emissions (integrated pollution prevention and control) (recast). [https://eur-lex.europa.eu/eli/dir/2010/75/oj/eng](https://eur-lex.europa.eu/eli/dir/2010/75/oj/eng)
+
+Directive (EU) 2016/2284 of the European Parliament and of the Council of 14 December 2016 on the reduction of national emissions of certain atmospheric pollutants, amending Directive 2003/35/EC and repealing Directive 2001/81/EC. *Official Journal of the European Union*, L 344, 17.12.2016, 1–31. [https://eur-lex.europa.eu/EN/legal-content/summary/eu-rules-on-national-emissions-of-certain-atmospheric-pollutants.html](https://eur-lex.europa.eu/EN/legal-content/summary/eu-rules-on-national-emissions-of-certain-atmospheric-pollutants.html)
+
+Eskes, H. J., & Eichmann, K.-U. (2023). *S5P Mission Performance Centre Nitrogen Dioxide [L2__NO2___] Readme* (S5P-MPC-KNMI-PRF-NO2, issue 2.4). KNMI / S5P Mission Performance Centre for the European Space Agency. [https://sentinels.copernicus.eu/documents/247904/3541451/Sentinel-5P-Nitrogen-Dioxide-Level-2-Product-Readme-File](https://sentinels.copernicus.eu/documents/247904/3541451/Sentinel-5P-Nitrogen-Dioxide-Level-2-Product-Readme-File)
+
+European Commission. (2016). *The EU Emissions Trading System (EU ETS)* [Factsheet]. [https://climate.ec.europa.eu/system/files/2016-12/factsheet_ets_en.pdf](https://climate.ec.europa.eu/system/files/2016-12/factsheet_ets_en.pdf)
+
+European Commission. (n.d.). *Emissions in the automotive sector*. Directorate-General for Internal Market, Industry, Entrepreneurship and SMEs. [https://single-market-economy.ec.europa.eu/sectors/automotive-industry/environmental-protection/emissions-automotive-sector_en](https://single-market-economy.ec.europa.eu/sectors/automotive-industry/environmental-protection/emissions-automotive-sector_en)
+
+European Environment Agency. (2025). Nitrogen dioxide – NO₂. In *Air quality status report 2025*. [https://www.eea.europa.eu/en/analysis/publications/air-quality-status-report-2025/nitrogen-dioxide](https://www.eea.europa.eu/en/analysis/publications/air-quality-status-report-2025/nitrogen-dioxide)
+
+Fotheringham, A. S., & Wong, D. W. S. (1991). The Modifiable Areal Unit Problem in Multivariate Statistical Analysis. *Environment and Planning A*, 23(7), 1025–1044. [https://doi.org/10.1068/a231025](https://doi.org/10.1068/a231025)
+
+Gendron-Carrier, N., Gonzalez-Navarro, M., Polloni, S., & Turner, M. A. (2022). Subways and Urban Air Pollution. *American Economic Journal: Applied Economics*, 14(1), 164–196. [https://doi.org/10.1257/app.20180168](https://doi.org/10.1257/app.20180168)
+
+Georgoulias, A. K., van der A, R. J., Stammes, P., Boersma, K. F., & Eskes, H. J. (2019). Trends and trend reversal detection in 2 decades of tropospheric NO2 satellite observations. *Atmospheric Chemistry and Physics*, 19(9), 6269–6294. [https://doi.org/10.5194/acp-19-6269-2019](https://doi.org/10.5194/acp-19-6269-2019)
+
+Grange, S. K., Carslaw, D. C., Lewis, A. C., Boleti, E., & Hueglin, C. (2018). Random forest meteorological normalisation models for Swiss PM10 trend analysis. *Atmospheric Chemistry and Physics*, 18(9), 6223–6239. [https://doi.org/10.5194/acp-18-6223-2018](https://doi.org/10.5194/acp-18-6223-2018)
+
+Hale, T., Angrist, N., Goldszmidt, R., Kira, B., Petherick, A., Phillips, T., et al. (2021). A global panel database of pandemic policies (Oxford COVID-19 Government Response Tracker). *Nature Human Behaviour*, 5(4), 529–538. [https://doi.org/10.1038/s41562-021-01079-8](https://doi.org/10.1038/s41562-021-01079-8)
+
+Hersbach, H., Bell, B., Berrisford, P., Hirahara, S., Horányi, A., Muñoz-Sabater, J., et al. (2020). The ERA5 global reanalysis. *Quarterly Journal of the Royal Meteorological Society*, 146(730), 1999–2049. [https://doi.org/10.1002/qj.3803](https://doi.org/10.1002/qj.3803)
+
+Kahn-Lang, A., & Lang, K. (2020). The Promise and Pitfalls of Differences-in-Differences: Reflections on 16 and Pregnant and Other Applications. *Journal of Business & Economic Statistics*, 38(3), 613–620. [https://doi.org/10.1080/07350015.2018.1546591](https://doi.org/10.1080/07350015.2018.1546591)
+
+Keola, S., & Hayakawa, K. (2021). Do Lockdown Policies Reduce Economic and Social Activities? Evidence from NO2 Emissions. *The Developing Economies*, 59(2), 178–205. [https://doi.org/10.1111/deve.12274](https://doi.org/10.1111/deve.12274)
+
+Laughner, J. L., & Cohen, R. C. (2019). Direct observation of changing NOx lifetime in North American cities. *Science*, 366(6466), 723–727. [https://doi.org/10.1126/science.aax6832](https://doi.org/10.1126/science.aax6832)
 
 MacKinnon, J. G., & Webb, M. D. (2020). Randomization inference for difference-in-differences with few treated clusters. *Journal of Econometrics*, 218(2), 435–450. [https://doi.org/10.1016/j.jeconom.2020.04.024](https://doi.org/10.1016/j.jeconom.2020.04.024)
 
-Mathew, A., Shekar, P. R., Nair, A. T., Mallick, J., Rathod, C., Bindajam, A. A., Alharbi, M. M., & Abdo, H. G. (2024). Unveiling urban air quality dynamics during COVID-19: a Sentinel-5P TROPOMI hotspot analysis. *Scientific Reports*, 14, 21624. [https://doi.org/10.1038/s41598-024-72276-4](https://doi.org/10.1038/s41598-024-72276-4)
-
 Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. *Biometrika*, 37(1/2), 17–23. [https://doi.org/10.2307/2332142](https://doi.org/10.2307/2332142)
 
-Riveros-Gavilanes, J. M. (2023). Testing Parallel Trends in Differences-in-Differences and Event Study Designs: A Research Approach Based on Pre-Treatment Period Significance. *Journal of Research, Innovation and Technologies*, II, 2(4), 226–237. [https://doi.org/10.57017/jorit.v2.2(4).07](https://doi.org/10.57017/jorit.v2.2(4).07)
+Rambachan, A., & Roth, J. (2023). A More Credible Approach to Parallel Trends. *The Review of Economic Studies*, 90(5), 2555–2591. [https://doi.org/10.1093/restud/rdad018](https://doi.org/10.1093/restud/rdad018)
 
-Roth, J., Sant'Anna, P., Bilinski, A., & Poe, J. (2023). What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature. *Journal of Econometrics*, 235(2), 2218–2244. [https://doi.org/10.1016/j.jeconom.2023.03.008](https://doi.org/10.1016/j.jeconom.2023.03.008)
+Regional Cooperation Council. (2020). *Sofia Declaration on the Green Agenda for the Western Balkans*. [https://www.rcc.int/docs/546/sofia-declaration-on-the-green-agenda-for-the-western-balkans](https://www.rcc.int/docs/546/sofia-declaration-on-the-green-agenda-for-the-western-balkans)
+
+Regulation (EU) 2021/1119 of the European Parliament and of the Council of 30 June 2021 establishing the framework for achieving climate neutrality and amending Regulations (EC) No 401/2009 and (EU) 2018/1999 ('European Climate Law'). *Official Journal of the European Union*, L 243, 9.7.2021, 1–17. [https://eur-lex.europa.eu/eli/reg/2021/1119/oj/eng](https://eur-lex.europa.eu/eli/reg/2021/1119/oj/eng)
+
+Robinson, W. S. (1950). Ecological Correlations and the Behavior of Individuals. *American Sociological Review*, 15(3), 351–357. [https://www.jstor.org/stable/2087176](https://www.jstor.org/stable/2087176)
+
+Roth, J. (2022). Pretest with Caution: Event-Study Estimates after Testing for Parallel Trends. *American Economic Review: Insights*, 4(3), 305–322. [https://doi.org/10.1257/aeri.20210236](https://doi.org/10.1257/aeri.20210236)
+
+Roth, J., & Sant'Anna, P. H. C. (2023). When Is Parallel Trends Sensitive to Functional Form? *Econometrica*, 91(2), 737–747. [https://doi.org/10.3982/ECTA19402](https://doi.org/10.3982/ECTA19402)
+
+Roth, J., Sant'Anna, P. H. C., Bilinski, A., & Poe, J. (2023). What's Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature. *Journal of Econometrics*, 235(2), 2218–2244. [https://doi.org/10.1016/j.jeconom.2023.03.008](https://doi.org/10.1016/j.jeconom.2023.03.008)
+
+Sager, L., & Singer, G. (2025). Clean Identification? The Effects of the Clean Air Act on Air Pollution, Exposure Disparities, and House Prices. *American Economic Journal: Economic Policy*, 17(1), 1–36. [https://doi.org/10.1257/pol.20220745](https://doi.org/10.1257/pol.20220745)
+
+Sant'Anna, P. H. C., & Zhao, J. (2020). Doubly robust difference-in-differences estimators. *Journal of Econometrics*, 219(1), 101–122. [https://doi.org/10.1016/j.jeconom.2020.06.003](https://doi.org/10.1016/j.jeconom.2020.06.003)
+
+Silvern, R. F., Jacob, D. J., Mickley, L. J., Sulprizio, M. P., Travis, K. R., Marais, E. A., et al. (2019). Using satellite observations of tropospheric NO2 columns to infer long-term trends in US NOx emissions: the importance of accounting for the free tropospheric NO2 background. *Atmospheric Chemistry and Physics*, 19(13), 8863–8878. [https://doi.org/10.5194/acp-19-8863-2019](https://doi.org/10.5194/acp-19-8863-2019)
+
+Swiss Federal Council. (2019, December 9). *Linking of emissions trading schemes: Agreement ratified by Switzerland and EU* [Media release]. [https://www.admin.ch/gov/en/start/documentation/media-releases.msg-id-77446.html](https://www.admin.ch/gov/en/start/documentation/media-releases.msg-id-77446.html)
 
 Tong, C., Dai, Y., Cole, M., Elliott, R. J. R., Bartington, S. E., Liu, B., & Shi, Z. (2025). Further improvement in London's air quality demands more than the Ultra Low Emission Zone policy. *npj Clean Air*, 1, 29. [https://doi.org/10.1038/s44407-025-00030-9](https://doi.org/10.1038/s44407-025-00030-9)
 
 van Geffen, J., Eskes, H., Compernolle, S., Pinardi, G., Verhoelst, T., Lambert, J.-C., et al. (2022). Sentinel-5P TROPOMI NO₂ retrieval: impact of version v2.2 improvements and comparisons with OMI and ground-based data. *Atmospheric Measurement Techniques*, 15(7), 2037–2060. [https://doi.org/10.5194/amt-15-2037-2022](https://doi.org/10.5194/amt-15-2037-2022)
 
+Veefkind, J. P., Aben, I., McMullan, K., Förster, H., de Vries, J., Otter, G., et al. (2012). TROPOMI on the ESA Sentinel-5 Precursor: A GMES mission for global observations of the atmospheric composition for climate, air quality and ozone layer applications. *Remote Sensing of Environment*, 120, 70–83. [https://doi.org/10.1016/j.rse.2011.09.027](https://doi.org/10.1016/j.rse.2011.09.027)
+
+Verhoelst, T., Compernolle, S., Pinardi, G., Lambert, J.-C., Eskes, H. J., Eichmann, K.-U., et al. (2021). Ground-based validation of the Copernicus Sentinel-5P TROPOMI NO2 measurements with the NDACC ZSL-DOAS, MAX-DOAS and Pandonia global networks. *Atmospheric Measurement Techniques*, 14, 481–510. [https://doi.org/10.5194/amt-14-481-2021](https://doi.org/10.5194/amt-14-481-2021)
+
 Vîrghileanu, M., Săvulescu, I., Mihai, B.-A., Nistor, C., & Dobre, R. (2020). Nitrogen Dioxide (NO2) Pollution Monitoring with Sentinel-5P Satellite Imagery over Europe during the Coronavirus Pandemic Outbreak. *Remote Sensing*, 12(21), 3575. [https://doi.org/10.3390/rs12213575](https://doi.org/10.3390/rs12213575)
-
-Wang, G., Hamad, R., & White, J. S. (2024). Advances in Difference-in-Differences Methods for Policy Evaluation Research. *Epidemiology*, 35(5), 628–637. [https://doi.org/10.1097/EDE.0000000000001755](https://doi.org/10.1097/EDE.0000000000001755)
-
-----------------------------------------------------------------------------------------------------
-
-**Full dataset, code, and reproducible pipeline**: [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE)
-**Live interactive dashboard**: [f5cf6fijj9gm564r6aapt6.streamlit.app](https://f5cf6fijj9gm564r6aapt6.streamlit.app/)

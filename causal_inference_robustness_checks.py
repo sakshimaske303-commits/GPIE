@@ -30,7 +30,7 @@ def fit_did(model_df, outcome_col, controls, treatment_col="did_interaction"):
     y = model_df[outcome_col].astype(float)
 
     model = sm.OLS(y, X)
-    return model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]})
+    return model.fit(cov_type="cluster", cov_kwds={"groups": model_df["country"]}, use_t=True)
 
 
 def check_gdp_removed(df):

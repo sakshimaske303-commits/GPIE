@@ -62,20 +62,12 @@ def make_map():
     ax.set_axis_off()
 
     legend_patches = [
-        mpatches.Patch(color="#2c7fb8", label="Treatment Group — EU-27 (27 countries)"),
-        mpatches.Patch(color="#e34a33", label="Control Group — 9 non-EU countries"),
+        mpatches.Patch(color="#2c7fb8", label="EU-27 (treated)"),
+        mpatches.Patch(color="#e34a33", label="Comparison group (9 non-EU countries)"),
     ]
     ax.legend(handles=legend_patches, loc="lower left", fontsize=11, frameon=True, framealpha=0.95)
 
-    ax.set_title(
-        "GPIE Study Design: Treatment vs. Control Group\n"
-        "Difference-in-Differences comparison — EU-27 (subject to the European Climate Law) vs. nine non-EU comparator countries\n"
-        "UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia",
-        fontsize=13, fontweight="bold", pad=15
-    )
-
-    plt.figtext(0.5, 0.02, "Green Policy Intelligence Engine (GPIE)",
-                ha="center", fontsize=8, color="gray")
+    ax.set_title("Study design: EU-27 and the nine comparison countries", fontsize=13, pad=15)
 
     plt.tight_layout()
     plt.savefig(OUTPUT_PATH, dpi=200)

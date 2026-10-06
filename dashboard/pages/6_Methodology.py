@@ -164,16 +164,16 @@ with s5a:
         correction for panel data where a country's repeated monthly observations are serially
         correlated (uncorrected OLS standard errors understate true uncertainty).
 
-        Further robustness checks were run against the pooled NO₂ model (−1.52 × 10⁻⁶, p = 0.013).
-        Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.053; a sensitivity check, not a
-        formal bad-control test). The log-outcome model gives −4.2% (p = 0.034). Shifting the treatment date
+        Further robustness checks were run against the pooled NO₂ model (−1.52 × 10⁻⁶, p = 0.018).
+        Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.061; a sensitivity check, not a
+        formal bad-control test). The log-outcome model gives −4.2% (p = 0.041). Shifting the treatment date
         by ±6/±12 months gives a significant estimate at **every** date (p between 0.004 and 0.028),
         including two dates before the law existed — by the logic of Step 2, the design does not tie the
         EU-specific decline to the Climate Law's date. Adding an EU-specific linear trend removes the
-        treatment-date effect (+8.7 × 10⁻⁷, p = 0.243) while the trend itself is significant (−7.9 × 10⁻⁷
-        per year, p = 0.016): a steady faster decline, not a step. A post-hoc split by baseline pollution
-        finds the decline in the 14 higher-baseline countries (p = 0.002; log −6.4%, p = 0.006) and none in
-        the 13 lower-baseline countries (p = 0.758). The minimum detectable *pooled* effect at 80% power is
+        treatment-date effect (+8.7 × 10⁻⁷, p = 0.251) while the trend itself is significant (−7.9 × 10⁻⁷
+        per year, p = 0.022): a steady faster decline, not a step. A post-hoc split by baseline pollution
+        finds the decline in the 14 higher-baseline countries (p = 0.006; log −6.4%, p = 0.012) and none in
+        the 13 lower-baseline countries (p = 0.761). The minimum detectable *pooled* effect at 80% power is
         ~5.5% of the EU-27's pre-treatment NO₂.
 
         The **secondary NDVI outcome** shows a significant relative decline under the two-group design
@@ -190,12 +190,12 @@ with st.expander("**Step 6 — Identification and Inference Checks**", expanded=
     The headline model was then stress-tested on four weak points.
 
     - **Specification.** Year-month fixed effects and an EU-specific seasonal cycle give −1.34 × 10⁻⁶
-      (p = 0.016). With them, the pre-treatment blocks are no longer significant (joint p = 0.292). Adding
+      (p = 0.022). With them, the pre-treatment blocks are no longer significant (joint p = 0.292). Adding
       ERA5 wind speed and boundary-layer height (which dilute NO₂) does not move the estimate.
-    - **Timing.** In 12-month blocks the first two years after the law show nothing (p = 0.98 and 0.44);
-      the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.008).
+    - **Timing.** In 12-month blocks the first two years after the law show nothing (p = 0.98 and 0.45);
+      the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.012).
     - **Few comparison countries.** A wild cluster bootstrap agrees with the clustered p-value (p = 0.018),
-      but randomization inference does not (p = 0.16). Dropping any one comparison country changes little.
+      but randomization inference does not (p = 0.17). Dropping any one comparison country changes little.
     - **COVID-19 and the energy crisis.** The Oxford stringency index does not move the estimate, and
       excluding either window leaves it in place.
 
@@ -207,10 +207,11 @@ with st.expander("**Step 7 — Pixel-Level Check**", expanded=False):
     st.markdown("""
     Every daily 0.1° raster was kept, and the pixels were grouped by their pre-treatment NO₂ level. The
     decline grows with that level, and comparing EU and comparison pixels within the same class cuts the
-    estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.341). Country by country the pattern is **regional,
-    not institutional**: polluted areas fell 15–25% in north-western Europe, including the United Kingdom
-    and Switzerland, and 0–6% in south-eastern Europe, including EU members. Within either region the EU
-    border makes no difference. Details are on the *Pixel Level Check* page.
+    estimate from −1.34 × 10⁻⁶ to −0.21 × 10⁻⁶ (p = 0.348). Country by country, polluted areas fell
+    15–25% in north-western Europe, including the United Kingdom and Switzerland, and 0–6% in south-eastern
+    Europe, including EU members. Within either region the difference across the EU border is small and not
+    significant, but with few comparison countries the intervals are wide. Details are on the *Pixel Level
+    Check* page.
     """)
 
 with st.expander("**Step 8 — Stress Tests**", expanded=False):
@@ -220,7 +221,11 @@ with st.expander("**Step 8 — Stress Tests**", expanded=False):
     (−0.96 × 10⁻⁶, p = 0.11) and with log GDP (−0.94 × 10⁻⁶, p = 0.21). Four country means in December 2023
     are negative, which is physically impossible, and dropping that one month shrinks the late decline. The
     "matched" pixel result turned out to average two opposite comparisons (against UK/Norway/Switzerland/
-    Iceland: +0.20; against the Western Balkans: −0.38), which is what led to the regional reading above.
+    Iceland: +0.20; against the Western Balkans: −0.38). With countries assigned to the two groups at random,
+    the DiD estimate follows the pre-treatment gap between the groups (r = −0.81) and is significant in 9.6%
+    of draws. Matched against western Turkey, which is outside the sample, the EU difference stays
+    (−1.43 × 10⁻⁶), so the matched result depends on where the comparison pixels are. All p-values now use
+    a t distribution with clusters − 1 degrees of freedom.
     """)
 
 st.markdown("---")
@@ -236,10 +241,10 @@ theoretical concerns.
 **Synthetic control** (Abadie, Diamond &amp; Hainmueller, 2010) fits convex donor weights to match the
 EU-27's pre-treatment NO₂ series, plus a constant (intercept) adjustment. (An earlier version called this
 a ridge-augmented synthetic control; the ridge term reduced to that constant shift, so it is now labelled
-as what it does.) All nine comparison countries are donors (weights: Serbia 40%, Switzerland 32%, UK 28%).
-Using the 27 pre / 36 post months where every series is observed, the post-treatment gap is −8.1×10⁻⁷ and
-the pre-treatment fit error (RMSPE) is 2.56×10⁻⁶. The EU-27 gap ranks 5th of 10 in the in-space placebo, so
-it does not stand out from the gaps of untreated countries.
+as what it does.) All nine comparison countries are donors (weights: Serbia 45%, Switzerland 43%, UK 11%).
+Using the 27 pre / 36 post months where every series is observed, the post-treatment gap is −1.45×10⁻⁶ and
+the pre-treatment fit error (RMSPE) is 2.29×10⁻⁶. The EU-27 gap ranks 2nd of 10 in the in-space placebo, behind the
+United Kingdom; with ten units that is weak evidence either way.
 
 **Moran's I spatial-autocorrelation diagnostic** (KNN-4 weights on country centroids, used because
 Cyprus, Malta and Iceland have no land neighbours in the sample) checks for cross-border dependence,
@@ -270,10 +275,10 @@ monthly means of the dekadal composites. Every number on this dashboard was re-e
 pooled null (p = 0.101) is superseded.
 
 **What the result does and does not show**: NO₂ fell about 5% more in the EU-27 than in the comparison
-group, and the pooled estimate is significant (p = 0.013). The honest conclusion is not *"the Climate Law
+group, and the pooled estimate is significant (p = 0.018). The honest conclusion is not *"the Climate Law
 worked"*: nothing changes in the first two years after the law, every alternative date is significant, an
-EU-specific trend absorbs the effect, and at pixel level the decline follows how polluted a place was, not
-whether it is in the EU. With nine comparison clusters and spatially correlated residuals, the p-values are
+EU-specific trend absorbs the effect, and at pixel level most of the estimate follows how polluted a place
+was at the start. With nine comparison clusters and spatially correlated residuals, the p-values are
 also likely too small.
 
 **Limit of the pixel-level check**: its highly polluted comparison pixels are mostly in the United Kingdom,
@@ -284,7 +289,7 @@ regulation from its absence.
 st.warning("""
 **The NDVI secondary-outcome finding is exploratory, not causal.** Once given the same
 control-group correction as NO₂, NDVI shows a statistically significant relative decline
-(−0.0194, p = 0.005) — but this analysis does not control for land-use change, drought/precipitation-driven
+(−0.0194, p = 0.008) — but this analysis does not control for land-use change, drought/precipitation-driven
 vegetation stress, or agricultural-policy shifts between treatment and control regions, any of
 which could plausibly drive the result independent of the Climate Law. It is reported as an
 exploratory association, not as evidence the Climate Law affected vegetation.

@@ -24,14 +24,14 @@ A two-group Difference-in-Differences (DiD) design compares the EU-27 with a 9-c
 
 ## The Finding
 
-NO₂ fell more in the EU-27 than in the comparison group, by about 5% of the EU's pre-treatment level, and the decline is concentrated in the 14 more polluted member states. But the design cannot attribute this to the Climate Law: nothing changes in the first two years after the law and the whole decline appears from July 2023 (−2.18e-6, p = 0.008), every alternative cutoff date is just as significant, and a steady EU-specific trend absorbs the treatment-date effect (p = 0.243). The estimate itself is sturdy: it holds with year-month fixed effects and EU-specific seasonality (−1.34e-6, p = 0.016; wild cluster bootstrap p = 0.018), with wind, boundary-layer and COVID-19 stringency controls, and when the COVID-19 or energy-crisis months are dropped — though not under randomization inference (p = 0.16) or without the GDP control (p = 0.074). A pixel-level check then shows where the estimate comes from: the decline grows with how polluted each 0.1° pixel was, and comparing pixels with the same starting level cuts the estimate to −0.21e-6 (p = 0.341). The pattern is regional, not institutional: polluted pixels lost 15–25% in north-western Europe, including the non-EU United Kingdom and Switzerland, and 0–6% in south-eastern Europe, including EU members Romania, Bulgaria, Croatia and Greece as well as Serbia and Bosnia and Herzegovina. Within either region the EU border makes no difference. The country-level estimate is also fragile: it weakens without the winter months (−0.81e-6, p = 0.11), with countries weighted by area (p = 0.11) and with log GDP (p = 0.21). The evidence fits a decline in the polluted areas of north-western Europe, not an effect of EU membership or of the law.
+NO₂ fell more in the EU-27 than in the comparison group, by about 5% of the EU's pre-treatment level, and the decline is concentrated in the 14 more polluted member states. But the design cannot attribute this to the Climate Law: nothing changes in the first two years after the law and the whole decline appears from July 2023 (−2.18e-6, p = 0.012), every alternative cutoff date is just as significant, and a steady EU-specific trend absorbs the treatment-date effect (p = 0.251). The estimate itself is sturdy: it holds with year-month fixed effects and EU-specific seasonality (−1.34e-6, p = 0.022; wild cluster bootstrap p = 0.018), with wind, boundary-layer and COVID-19 stringency controls, and when the COVID-19 or energy-crisis months are dropped — though not under randomization inference (p = 0.17) or without the GDP control (p = 0.082). A pixel-level check then shows where the estimate comes from: the decline grows with how polluted each 0.1° pixel was, and comparing pixels with the same starting level cuts the estimate to −0.21e-6 (p = 0.348). Under random assignment of countries to the two groups, the DiD estimate follows the pre-treatment gap between them (r = −0.81). Descriptively, polluted pixels lost 15–25% in north-western Europe, including the non-EU United Kingdom and Switzerland, and 0–6% in south-eastern Europe, including EU members Romania, Bulgaria, Croatia and Greece as well as Serbia and Bosnia and Herzegovina; western Turkey, outside the sample, shows no decline. Within the north-west and within the south-east the difference across the EU border is small and not significant, but those contrasts rest on few comparison countries and wide intervals. The country-level estimate is also fragile: it weakens without the winter months (−0.81e-6, p = 0.11), with countries weighted by area (p = 0.11) and with log GDP (p = 0.21). So the country-level estimate mostly reflects that the EU-27 started out more polluted, and its size depends on winter retrievals. The data do not require an effect at the EU border and cannot rule one out; the cause of the regional pattern is not identified.
 
 | Metric | NO2 (Primary, Pooled) | NO2 (Higher-Baseline, post-hoc) | NDVI (Secondary) |
 |---|---|---|---|
 | DiD Coefficient | -1.52e-6 (log: -4.2%) | -2.85e-6 (log: -6.4%) | -0.0194 |
-| P-value (cluster-robust) | 0.013 (log: 0.034) | 0.002 (log: 0.006) | 0.005 |
-| 95% Confidence Interval | [-2.73e-6, -3.16e-7] | — | [-0.0330, -0.0058] |
-| With EU-specific trend | +8.7e-7, p = 0.243 | — | — |
+| P-value (cluster-robust) | 0.018 (log: 0.041) | 0.006 (log: 0.012) | 0.008 |
+| 95% Confidence Interval | [-2.77e-6, -2.7e-7] | — | [-0.0335, -0.0053] |
+| With EU-specific trend | +8.7e-7, p = 0.251 | — | — |
 
 The NDVI result is an exploratory association, not evidence that the Climate Law changed vegetation health: land-use change, drought stress and agricultural policy are not controlled for.
 
@@ -40,19 +40,19 @@ The NDVI result is an exploratory association, not evidence that the Climate Law
 - ✓ Cluster-robust standard errors, clustered by country (Bertrand, Duflo & Mullainathan, 2004)
 - ✓ External comparison group — 9 non-EU countries (some share EU climate instruments: EU ETS for Norway/Iceland, linked Swiss ETS, Western Balkans Green Agenda)
 - ✓ Placebo test — exposed the flawed initial single-cohort design
-- ✓ 23-quarter event study — 7 of 9 pre-treatment quarters significant with a common seasonal cycle; with an EU-specific seasonal cycle and 12-month blocks the pre-treatment blocks are not significant (joint p = 0.292)
-- ✓ Year-month fixed effects + EU-specific seasonality — −1.34e-6 (p = 0.016); unchanged by wind speed, boundary-layer height and COVID-19 stringency controls
-- ✓ 12-month blocks — no effect Jul 2021–Jun 2023 (p = 0.98, 0.44); decline only from Jul 2023 (−2.18e-6, p = 0.008)
-- ✓ Few-cluster inference — wild cluster bootstrap p = 0.018; randomization inference p = 0.16; stable when any one comparison country is dropped
-- ✓ Pixel-level check (0.1° grid, 51,072 pixels) — decline grows with pre-treatment level; matched on that level the estimate is −0.21e-6 (p = 0.341)
-- ✓ Regional contrasts — EU border makes no difference inside the north-west (p = 0.44) or the south-east (p = 0.48); north-west vs south-east EU members differ (−1.43e-6, p = 0.016)
-- ✓ Stress tests — without Nov–Feb −0.81e-6 (p = 0.11); area-weighted −0.96e-6 (p = 0.11); log GDP −0.94e-6 (p = 0.21); randomization inference on the t-statistic p = 0.046
-- ✓ COVID-19 window and energy-crisis months excluded — estimate remains (−2.25e-6, p = 0.011; −2.08e-6, p = 0.005)
+- ✓ 23-quarter event study — 5 of 9 pre-treatment quarters significant with a common seasonal cycle; with an EU-specific seasonal cycle and 12-month blocks the pre-treatment blocks are not significant (joint p = 0.292)
+- ✓ Year-month fixed effects + EU-specific seasonality — −1.34e-6 (p = 0.022); unchanged by wind speed, boundary-layer height and COVID-19 stringency controls
+- ✓ 12-month blocks — no effect Jul 2021–Jun 2023 (p = 0.98, 0.45); decline only from Jul 2023 (−2.18e-6, p = 0.012)
+- ✓ Few-cluster inference — wild cluster bootstrap p = 0.018; randomization inference p = 0.17; stable when any one comparison country is dropped
+- ✓ Pixel-level check (0.1° grid, 51,072 pixels) — decline grows with pre-treatment level; matched on that level the estimate is −0.21e-6 (p = 0.348)
+- ✓ Regional contrasts — small, non-significant difference across the EU border inside the north-west (p = 0.44, wide interval) and the south-east (p = 0.48); north-west vs south-east EU members differ (−1.43e-6, p = 0.016; without Nov–Feb −0.29e-6, p = 0.50); matched against western Turkey the EU difference stays (−1.43e-6, one comparison country)
+- ✓ Stress tests — without Nov–Feb −0.81e-6 (p = 0.11); area-weighted −0.96e-6 (p = 0.11); log GDP −0.94e-6 (p = 0.21); randomization inference on the t-statistic p = 0.046; random group assignments: estimate follows the pre-treatment gap (r = −0.81), 9.6% significant at 5%
+- ✓ COVID-19 window and energy-crisis months excluded — estimate remains (−2.25e-6, p = 0.015; −2.08e-6, p = 0.008)
 - ✓ TROPOMI processor versions checked — reprocessed v2.4.0 to July 2022, operational v2.4–2.7 after; no version change at the treatment date
-- ✓ Treatment date ±6/±12 months — every date significant (p = 0.004 to 0.028): no break specific to the law's date
-- ✓ EU-specific trend — treatment term no longer significant (p = 0.243); trend −7.9e-7 per year (p = 0.016)
-- ✓ GDP excluded (−1.49e-6, p = 0.053); log outcome (−4.2%, p = 0.034); baseline split (decline only in higher-baseline group)
-- ✓ Synthetic control (9 donors, intercept-adjusted) — gap −8.1e-7, rank 5 of 10 among placebo countries
+- ✓ Treatment date ±6/±12 months — every date significant (p = 0.006 to 0.035): no break specific to the law's date
+- ✓ EU-specific trend — treatment term no longer significant (p = 0.251); trend −7.9e-7 per year (p = 0.022)
+- ✓ GDP excluded (−1.49e-6, p = 0.061); log outcome (−4.2%, p = 0.041); baseline split (decline only in higher-baseline group)
+- ✓ Synthetic control (9 donors, intercept-adjusted) — gap −1.45e-6, rank 2 of 10 among placebo countries
 - ✓ Moran's I — raw NO₂ clustered (I = 0.578, p = 0.001); DiD residuals clustered in 59 of 72 months (median I = 0.347), so p-values are likely too small
 - ✓ All of the above reported, including the results that limit the headline
 

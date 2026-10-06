@@ -1,4 +1,4 @@
-"""Synthetic control with convex donor weights and a pre-period level shift."""
+"""Synthetic control with convex donor weights and a level shift, fitted together on demeaned series."""
 
 import json
 import numpy as np
@@ -32,11 +32,14 @@ def load_series():
 
 def scm_weights(panel, pre_mask, donors):
     # Convex weights (>= 0, sum to 1), fitted only on the pre-treatment months.
-    y_pre = panel.loc[pre_mask, "EU27"].values
-    X_pre = panel.loc[pre_mask, donors].values
+    # I demean both sides first, so the weights and the level shift are fitted together.
+    y_pre = panel.loc[pre_mask, "EU27"].values * 1e6
+    X_pre = panel.loc[pre_mask, donors].values * 1e6
+    y_pre = y_pre - y_pre.mean()
+    X_pre = X_pre - X_pre.mean(axis=0)
 
     # nnls does not force the weights to sum to 1, so I add a scaled constraint row.
-    scale = 100.0
+    scale = 100.0 * np.abs(X_pre).mean()
     X_aug = np.vstack([X_pre, scale * np.ones((1, len(donors)))])
     y_aug = np.append(y_pre, scale)
 
@@ -49,7 +52,7 @@ def scm_weights(panel, pre_mask, donors):
 
 
 def intercept_adjustment(panel, pre_mask, weights, donors):
-    # Mean pre-treatment gap between EU27 and the synthetic control. I add it as a level shift.
+    # Mean pre-treatment gap between EU27 and the weighted donors: the level shift.
     synth_pre = sum(weights[c] * panel.loc[pre_mask, c] for c in donors)
     return float((panel.loc[pre_mask, "EU27"] - synth_pre).mean())
 
@@ -84,18 +87,22 @@ def run():
     print(f"For comparison, this project's DiD estimate: see causal_inference_final_did.py output")
 
     # In-space placebo: I hold out one donor and refit on the other 8.
-    placebo_gaps = {}
+    placebo_gaps, placebo_ratios = {}, {}
     for held_out in DONORS:
         other_donors = [c for c in DONORS if c != held_out]
         # The held-out country is the "treated" unit here.
         placebo_panel = panel[[held_out] + other_donors].rename(columns={held_out: "EU27"})
         ho_weights, ho_synth = fit_synthetic(placebo_panel, pre_mask, other_donors)
-        placebo_gap = (placebo_panel["EU27"] - ho_synth).loc[post_mask].mean()
+        ho_gap = placebo_panel["EU27"] - ho_synth
+        placebo_gap = ho_gap.loc[post_mask].mean()
         placebo_gaps[held_out] = placebo_gap
+        placebo_ratios[held_out] = abs(placebo_gap) / np.sqrt((ho_gap.loc[pre_mask] ** 2).mean())
         print(f"  Placebo ({held_out} as pseudo-treated vs. remaining {len(other_donors)} donors): post-period gap = {placebo_gap:+.3e}")
 
     rank = sum(1 for g in placebo_gaps.values() if abs(g) >= abs(att)) + 1
     n_total = len(DONORS) + 1
+    rank_ratio = sum(1 for r in placebo_ratios.values() if r >= abs(att) / pre_rmspe) + 1
+    print(f"EU-27's rank by |gap| / pre-RMSPE: {rank_ratio}/{n_total}")
     print(f"\nEU-27's |gap| rank among itself + {len(DONORS)} placebos: {rank}/{n_total} "
           f"(a real in-space permutation check now that each placebo gets its own NNLS-fit donor pool)")
 
@@ -114,9 +121,10 @@ def run():
         "pre_treatment_rmspe": pre_rmspe,
         "post_treatment_att": att,
         "post_treatment_att_to_pre_rmspe_ratio": abs(att) / pre_rmspe,
-        "method": "convex SCM weights (NNLS + sum-to-one) with pre-period intercept adjustment",
+        "method": "convex SCM weights (NNLS + sum-to-one) and level shift fitted together on demeaned series",
         "placebo_gaps": placebo_gaps,
         "eu27_rank_among_placebos": f"{rank}/{n_total}",
+        "eu27_rank_by_gap_over_rmspe": f"{rank_ratio}/{n_total}",
         "pre_treatment_months_used": int(pre_mask.sum()),
         "post_treatment_months_used": int(post_mask.sum()),
     }
