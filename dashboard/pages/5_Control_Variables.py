@@ -10,7 +10,7 @@ from styles import apply_custom_style, PALETTE, embed_html
 def render_map(png_name, html_name, height=520):
     # I always show the PNG from my map_*.py scripts. The old HTML maps in outputs/plots use outdated data;
     # current interactive versions are on the Interactive Maps page.
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), width="stretch")
 
 apply_custom_style()
 

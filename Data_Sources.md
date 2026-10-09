@@ -108,6 +108,7 @@ Parameter : Country boundaries for the United Kingdom, Norway and Switzerland (a
 Data Type : Vector
 Format : GeoJSON
 Purpose : Geometry for control countries not covered by the NUTS file used.
+Access : download_gadm.py (not stored in the repository; the GADM licence does not allow redistribution)
 
 ### DS11
 

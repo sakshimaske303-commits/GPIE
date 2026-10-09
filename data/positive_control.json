@@ -1,0 +1,153 @@
+{
+  "reductions": [
+    0.0,
+    0.025,
+    0.05,
+    0.1
+  ],
+  "country_real": {
+    "0.000": {
+      "coefficient": -1.3371732560446836,
+      "se": 0.5559532945668147,
+      "p_value": 0.02158645199084217,
+      "ci_low": -2.4658184470816726,
+      "ci_high": -0.2085280650076946,
+      "added_reduction": -0.0,
+      "change_from_no_reduction": 0.0,
+      "share_recovered": null
+    },
+    "0.025": {
+      "coefficient": -2.075783088499061,
+      "se": 0.6051539798626843,
+      "p_value": 0.0015628551342190392,
+      "ci_low": -3.304310980830545,
+      "ci_high": -0.8472551961675772,
+      "added_reduction": -0.7423796181029806,
+      "change_from_no_reduction": -0.7386098324543773,
+      "share_recovered": 0.9949220243165668
+    },
+    "0.050": {
+      "coefficient": -2.814392920953439,
+      "se": 0.656312588033891,
+      "p_value": 0.00013458125030203747,
+      "ci_low": -4.146778309331543,
+      "ci_high": -1.4820075325753357,
+      "added_reduction": -1.4847592362059612,
+      "change_from_no_reduction": -1.4772196649087554,
+      "share_recovered": 0.9949220243165675
+    },
+    "0.100": {
+      "coefficient": -4.291612585862192,
+      "se": 0.7629146490534936,
+      "p_value": 2.408557037824905e-06,
+      "ci_low": -5.8404116634840175,
+      "ci_high": -2.742813508240367,
+      "added_reduction": -2.9695184724119223,
+      "change_from_no_reduction": -2.9544393298175087,
+      "share_recovered": 0.9949220243165667
+    }
+  },
+  "country_random": {
+    "0.000": {
+      "mean_added_reduction": 0.0,
+      "mean_estimate": 0.014977258892209805,
+      "mean_share_recovered": null,
+      "share_significant_negative": 0.07307307307307308,
+      "share_significant_either_sign": 0.08308308308308308
+    },
+    "0.025": {
+      "mean_added_reduction": -0.6871782097145392,
+      "mean_estimate": -0.6661334277968637,
+      "mean_share_recovered": 0.9915278885664176,
+      "share_significant_negative": 0.23023023023023023,
+      "share_significant_either_sign": 0.23023023023023023
+    },
+    "0.050": {
+      "mean_added_reduction": -1.3743564194290785,
+      "mean_estimate": -1.3472441144858958,
+      "mean_share_recovered": 0.9915278885663874,
+      "share_significant_negative": 0.3993993993993994,
+      "share_significant_either_sign": 0.3993993993993994
+    },
+    "0.100": {
+      "mean_added_reduction": -2.748712838858157,
+      "mean_estimate": -2.709465487864129,
+      "mean_share_recovered": 0.9915278885664349,
+      "share_significant_negative": 0.6876876876876877,
+      "share_significant_either_sign": 0.6876876876876877
+    }
+  },
+  "pixel_real": {
+    "countries": 35,
+    "0.000": {
+      "matched": {
+        "coefficient": -0.2130532375251183,
+        "se": 0.22368249582696642,
+        "p_value": 0.3475759795749093,
+        "ci_low": -0.6676307614999544,
+        "ci_high": 0.24152428644971774
+      },
+      "not_matched": {
+        "coefficient": -1.3429254718375192,
+        "se": 0.5330052079060904,
+        "p_value": 0.016616055845029367,
+        "ci_low": -2.4261223790424205,
+        "ci_high": -0.25972856463261795
+      },
+      "added_reduction": -0.0
+    },
+    "0.025": {
+      "matched": {
+        "coefficient": -0.8006367163581934,
+        "se": 0.23389682564537187,
+        "p_value": 0.001630892772252398,
+        "ci_low": -1.2759722560228441,
+        "ci_high": -0.3253011766935427
+      },
+      "not_matched": {
+        "coefficient": -2.0864573139220597,
+        "se": 0.5836455689227108,
+        "p_value": 0.0010743129897746416,
+        "ci_low": -3.272567816752855,
+        "ci_high": -0.9003468110912645
+      },
+      "added_reduction": -0.7477897914888073
+    },
+    "0.050": {
+      "matched": {
+        "coefficient": -1.3882201951912685,
+        "se": 0.2527021617497347,
+        "p_value": 3.923308082212481e-06,
+        "ci_low": -1.9017727758998848,
+        "ci_high": -0.8746676144826522
+      },
+      "not_matched": {
+        "coefficient": -2.8299891560065973,
+        "se": 0.6361355659800803,
+        "p_value": 8.798360429841391e-05,
+        "ci_low": -4.122772167151335,
+        "ci_high": -1.53720614486186
+      },
+      "added_reduction": -1.4955795829776146
+    },
+    "0.100": {
+      "matched": {
+        "coefficient": -2.5633871528574153,
+        "se": 0.30917644114682535,
+        "p_value": 1.1219821442862807e-09,
+        "ci_low": -3.1917092777884437,
+        "ci_high": -1.9350650279263868
+      },
+      "not_matched": {
+        "coefficient": -4.317052840175672,
+        "se": 0.7450887221055765,
+        "p_value": 1.5946715214030787e-06,
+        "ci_low": -5.831255304629285,
+        "ci_high": -2.802850375722058
+      },
+      "added_reduction": -2.9911591659552292
+    },
+    "matched_minimum_detectable_effect_80pct_power": 0.6452268503329996,
+    "matched_mde_as_uniform_reduction_pct": 2.745256093714559
+  }
+}

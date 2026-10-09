@@ -35,3 +35,6 @@ Thumbs.db
 OUTPUTS2/
 outputs/no2_20190101.csv
 policy_page.html
+
+# GADM boundaries may not be redistributed; download_gadm.py fetches them
+data/earth_observation/boundaries/raw/gadm41_*.json

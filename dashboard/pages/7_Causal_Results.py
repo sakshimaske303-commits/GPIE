@@ -112,7 +112,7 @@ log_row = country["log outcome"]
 rows.append(["Log outcome (log points)", f"{log_row['coefficient']:+.3f}",
              f"{log_row['ci_t_low']:+.3f} to {log_row['ci_t_high']:+.3f}", f"{log_row['p_t']:.3f}"])
 st.dataframe(pd.DataFrame(rows, columns=["Specification", "EU × post (10⁻⁶ mol/m²)", "95% CI", "p"]),
-             hide_index=True, use_container_width=True)
+             hide_index=True, width="stretch")
 
 ri = country["randomization_inference"]
 st.info(
@@ -127,7 +127,7 @@ st.markdown("---")
 
 # 2. Timing
 st.markdown("### 2. Timing")
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "block_event_study.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "block_event_study.png"), width="stretch")
 blocks = ident["event_time_12m_blocks"]
 shifts = ident["date_shifts"]
 trend = ident["eu_specific_trend"]["did"]
@@ -149,7 +149,7 @@ st.markdown("---")
 
 # 3. Composition (RQ1)
 st.markdown("### 3. Baseline Composition (RQ1)")
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "placebo_assignments.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "placebo_assignments.png"), width="stretch")
 lvl = country["with pre-treatment level x post"]
 ec = extra["country_level"]
 st.markdown(
@@ -171,10 +171,10 @@ lg = ec["log outcome with log pre-level x post"]
 comp_rows.append(["Log outcome + log pre-level × post: EU × post (log points)", f"{lg['did']['coefficient']:+.3f}",
                   f"{lg['did']['ci_low']:+.3f} to {lg['did']['ci_high']:+.3f}", f"{lg['did']['p_value']:.3f}"])
 st.dataframe(pd.DataFrame(comp_rows, columns=["Country-level check", "Estimate (10⁻⁶ mol/m²)", "95% CI", "p"]),
-             hide_index=True, use_container_width=True)
+             hide_index=True, width="stretch")
 
 st.markdown("#### Pixel level: comparing like with like")
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), width="stretch")
 allnine = pixel["EU-27 vs all nine comparison countries"]
 um, mt = allnine["not_matched"], allnine["matched_on_baseline"]
 diff = pixel["unmatched_minus_matched"]
@@ -186,7 +186,7 @@ px_rows = [
     ["Matched, without March 2020 – June 2021", f"{covid['coefficient']:+.2f}", f"{covid['ci_low']:+.2f} to {covid['ci_high']:+.2f}", f"{covid['p_value']:.3f}"],
 ]
 st.dataframe(pd.DataFrame(px_rows, columns=["Model (country × class × month cells)", "EU × post (10⁻⁶ mol/m²)", "95% CI", "p"]),
-             hide_index=True, use_container_width=True)
+             hide_index=True, width="stretch")
 mb = extra["pixel_level"]["12-month blocks, matched"]
 st.markdown(
     f"""
@@ -203,7 +203,7 @@ st.markdown("---")
 
 # 4. Geography (RQ2)
 st.markdown("### 4. Where NO₂ Fell (RQ2)")
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_country.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_country.png"), width="stretch")
 st.markdown("""
 Polluted pixels lost about 15–25% of their NO₂ in north-western Europe, including the non-EU United Kingdom and
 Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia; polluted western Turkey, outside the
@@ -216,6 +216,38 @@ st.markdown(
     "EU-derived vehicle emission standards, so this check separates EU membership from pollution level, not EU-origin "
     "regulation from its absence.</p>",
     unsafe_allow_html=True,
+)
+
+st.markdown("---")
+
+# 5. Positive control
+st.markdown("### 5. Positive Control")
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "positive_control.png"), width="stretch")
+pc = load_json("positive_control.json")
+fmt_p = lambda v: "<0.001" if v < 0.001 else f"{v:.3f}"
+pc_rows = []
+for r in pc["reductions"]:
+    k = f"{r:.3f}"
+    c, p = pc["country_real"][k], pc["pixel_real"][k]
+    pc_rows.append(["None (observed data)" if r == 0 else f"{100 * r:g}%",
+                    "—" if r == 0 else f"{c['added_reduction']:+.2f}", f"{c['coefficient']:+.2f}", fmt_p(c['p_value']),
+                    "—" if r == 0 else f"{p['added_reduction']:+.2f}", f"{p['matched']['coefficient']:+.2f}",
+                    fmt_p(p['matched']['p_value'])])
+st.dataframe(pd.DataFrame(pc_rows, columns=["Reduction added", "Added (country)", "Country model", "p",
+                                            "Added (pixel cells)", "Matched pixel model", "p "]),
+             hide_index=True, width="stretch")
+rand = pc["country_random"]
+st.markdown(
+    f"""
+A known proportional reduction is added to EU-27 NO₂ from July 2021 and the models are run again. The country model
+recovers it in full; the matched pixel model recovers about four-fifths, because it gives the less polluted classes
+more weight. A 2.5% reduction moves the matched estimate to {pc['pixel_real']['0.025']['matched']['coefficient']:+.2f}
+× 10⁻⁶ (p = {pc['pixel_real']['0.025']['matched']['p_value']:.3f}), and with 80% power it detects a uniform reduction of
+{pc['pixel_real']['matched_mde_as_uniform_reduction_pct']:.1f}% ({pc['pixel_real']['matched_minimum_detectable_effect_80pct_power']:.2f} × 10⁻⁶). So the near-zero
+matched estimate is not a matter of low power. Across 999 random groups of 27 countries, a 5% reduction is detected
+in {100 * rand['0.050']['share_significant_negative']:.0f}% and a 10% reduction in
+{100 * rand['0.100']['share_significant_negative']:.0f}%.
+"""
 )
 
 st.markdown("---")
@@ -253,7 +285,7 @@ fig_bar.update_layout(
     height=450,
     margin=dict(t=60, b=40, l=40, r=40),
 )
-st.plotly_chart(fig_bar, use_container_width=True)
+st.plotly_chart(fig_bar, width="stretch")
 st.markdown(
     "<p class='caption-text'>Raw group means (descriptive). The EU-27 started out about 50% more polluted than the "
     "comparison group, which is the difference the composition checks above are about.</p>",
@@ -279,13 +311,13 @@ These use the **baseline model** (country and common calendar-month fixed effect
 - **NDVI** (`causal_inference_ndvi.py`): −0.0194 (p = 0.008). An exploratory association, not evidence that the
   Climate Law affected vegetation: land-use change, drought and agricultural policy are not controlled for.
 """)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "event_study_plot.png"), use_container_width=True)
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "synthetic_control_gap.png"), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "event_study_plot.png"), width="stretch")
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "synthetic_control_gap.png"), width="stretch")
 
 st.markdown("---")
 st.markdown(
     "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine | Numbers on this page "
-    "are read from data/identification_checks.json, data/stress_tests.json, data/additional_checks.json and "
-    "data/grid_baseline_checks.json</p>",
+    "are read from data/identification_checks.json, data/stress_tests.json, data/additional_checks.json, "
+    "data/grid_baseline_checks.json and data/positive_control.json</p>",
     unsafe_allow_html=True,
 )

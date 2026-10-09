@@ -22,7 +22,7 @@ IMG_PATH = os.path.join(PROJECT_ROOT, "outputs", "plots", "tropomi_example_day.p
 col_a, col_b, col_c = st.columns([0.2, 5.9, 0.2])
 with col_b:
     if os.path.exists(IMG_PATH):
-        st.image(IMG_PATH, use_container_width=True)
+        st.image(IMG_PATH, width="stretch")
     else:
         st.warning("Figure not found at outputs/plots/tropomi_example_day.png")
     st.markdown(

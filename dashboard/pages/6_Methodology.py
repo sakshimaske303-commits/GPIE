@@ -77,7 +77,7 @@ def proof_popover(filename, caption):
     path = os.path.join(PROOF_DIR, filename)
     with st.popover("View"):
         if os.path.exists(path):
-            st.image(path, caption=caption, use_container_width=True)
+            st.image(path, caption=caption, width="stretch")
         else:
             st.caption(f"Screenshot not added yet — save it as `outputs/proof_screenshots/{filename}`.")
 
@@ -238,6 +238,16 @@ with st.expander("**Step 9 — Composition Checks**", expanded=False):
     Kingdom. On the log scale, more polluted countries lost a larger share of their NO₂ (log pre-level × post
     −0.080, p = 0.005) and the EU term is +0.005 (p = 0.72). At pixel level the matched estimate shows no break
     at the law in 12-month blocks (all p ≥ 0.22) and is unchanged without March 2020 – June 2021 (−0.23 × 10⁻⁶).
+    """)
+
+with st.expander("**Step 10 — Positive Control**", expanded=False):
+    st.markdown("""
+    To check that the models can find a real effect, I add a known proportional reduction (2.5%, 5% or 10%)
+    to EU-27 NO₂ from July 2021 and run them again (`causal_inference_positive_control.py`). The country model
+    recovers the added reduction in full and the matched pixel model about four-fifths. A 2.5% reduction moves
+    the matched estimate from −0.21 to −0.80 × 10⁻⁶ (p = 0.002); with 80% power it detects a uniform reduction
+    of 2.7% (0.65 × 10⁻⁶). With 999 random groups of 27 countries, the country model
+    detects a 5% reduction in 40% of them and a 10% reduction in 69%.
     """)
 
 st.markdown("---")

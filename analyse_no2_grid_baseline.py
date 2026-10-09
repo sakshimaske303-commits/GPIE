@@ -20,6 +20,7 @@ MASTER_PATH = "data/master_dataset_control.csv"
 OUT_JSON = "data/grid_baseline_checks.json"
 OUT_BINS = "outputs/plots/no2_change_by_baseline.png"
 OUT_MAP = "outputs/plots/no2_change_map.png"
+PCT_MIN = 1e-5                                   # lowest starting level for the percent-change map
 
 BBOX = (MIN_LON, MIN_LAT, MAX_LON, MAX_LAT)
 CONTROLS = set(CONTROL_COUNTRIES) | set(EXPANSION_CONTROL_COUNTRIES)
@@ -192,31 +193,39 @@ def main():
     plt.savefig(OUT_BINS, dpi=200)
     plt.close()
 
-    # Figure 2: map of the change
-    change = np.where((eu | control) & usable, (late - pre) * 1e6, np.nan)
-    fig, ax = plt.subplots(figsize=(10, 10))
-    im = ax.imshow(change, extent=(MIN_LON, MAX_LON, MIN_LAT, MAX_LAT), cmap="RdBu_r", vmin=-15, vmax=15,
-                   aspect=1.5)
-    from shapely.geometry import shape
-    for code in codes:                               # thin lines for EU members, thick for comparison countries
-        geom = shape(load_country_geometry(code, clip_to_bbox=BBOX))
-        outside_eu = code in CONTROLS
-        for poly in getattr(geom, "geoms", [geom]):
-            xs, ys = poly.exterior.xy
-            ax.plot(xs, ys, color="black", linewidth=1.3 if outside_eu else 0.4, zorder=3 if outside_eu else 2)
-    ax.set_xlim(-12, 32)
-    ax.set_ylim(34, 71.5)
-    ax.set_xlabel("Longitude")
-    ax.set_ylabel("Latitude")
-    ax.plot([], [], color="black", linewidth=1.3, label="comparison country")
-    ax.plot([], [], color="black", linewidth=0.4, label="EU-27 country")
-    ax.legend(loc="upper left", frameon=True, fontsize=9)
-    ax.set_title("Change in tropospheric NO₂: Jul 2023 – Dec 2024 minus Jan 2019 – Jun 2021\n"
-                 "36 study countries, 0.1° pixels", fontsize=12)
-    cb = plt.colorbar(im, ax=ax, shrink=0.6, extend="both")
-    cb.set_label("Change in NO₂ (10⁻⁶ mol/m²)")
+    # Figure 2: map of the change, in 1e-6 mol/m2 and in percent of the pre-treatment level
+    study = (eu | control) & usable
+    change = np.where(study, (late - pre) * 1e6, np.nan)
+    # Percent change is noisy where the starting level is close to zero, so I leave those pixels out.
+    change_pct = np.where(study & (pre >= PCT_MIN), 100 * (late - pre) / pre, np.nan)
+    outlines = [(load_country_geometry(code, clip_to_bbox=BBOX), code in CONTROLS) for code in codes]
+    fig, axes = plt.subplots(1, 2, figsize=(18, 10))
+    panels = ((change, -15, 15, "Change in NO₂ (10⁻⁶ mol/m²)", "a) Absolute change"),
+              (change_pct, -40, 40, "Change in NO₂ (% of the pre-treatment level)",
+               f"b) Percent change (pixels starting at ≥ {PCT_MIN * 1e5:g} × 10⁻⁵ mol/m²)"))
+    for ax, (values, lo, hi, label, title) in zip(axes, panels):
+        im = ax.imshow(values, extent=(MIN_LON, MAX_LON, MIN_LAT, MAX_LAT), cmap="RdBu_r", vmin=lo, vmax=hi,
+                       aspect=1.5)
+        for geometry, outside_eu in outlines:    # thin lines for EU members, thick for comparison countries
+            polygons = [geometry["coordinates"]] if geometry["type"] == "Polygon" else geometry["coordinates"]
+            for polygon in polygons:
+                ring = np.asarray(polygon[0])
+                ax.plot(ring[:, 0], ring[:, 1], color="black", linewidth=1.3 if outside_eu else 0.4,
+                        zorder=3 if outside_eu else 2)
+        ax.set_xlim(-12, 32)
+        ax.set_ylim(34, 71.5)
+        ax.set_xlabel("Longitude")
+        ax.set_ylabel("Latitude")
+        ax.set_title(title, fontsize=12)
+        cb = plt.colorbar(im, ax=ax, shrink=0.6, extend="both")
+        cb.set_label(label)
+    axes[0].plot([], [], color="black", linewidth=1.3, label="comparison country")
+    axes[0].plot([], [], color="black", linewidth=0.4, label="EU-27 country")
+    axes[0].legend(loc="upper left", frameon=True, fontsize=9)
+    fig.suptitle("Change in tropospheric NO₂: Jul 2023 – Dec 2024 minus Jan 2019 – Jun 2021, "
+                 "36 study countries, 0.1° pixels", fontsize=13)
     plt.figtext(0.5, 0.01, "Source: Sentinel-5P TROPOMI tropospheric NO₂ column", ha="center", fontsize=8, color="gray")
-    plt.tight_layout(rect=(0, 0.03, 1, 1))
+    plt.tight_layout(rect=(0, 0.03, 1, 0.97))
     plt.savefig(OUT_MAP, dpi=200)
     plt.close()
     print(f"Saved: {OUT_BINS}\nSaved: {OUT_MAP}")

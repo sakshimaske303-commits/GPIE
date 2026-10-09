@@ -183,7 +183,7 @@ if _available:
                     data=_f.read(),
                     file_name=os.path.basename(_path),
                     mime=_mime,
-                    use_container_width=True,
+                    width="stretch",
                 )
 
 st.markdown(

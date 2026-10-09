@@ -51,7 +51,7 @@ if os.path.exists(chart):
     with open(chart, "r", encoding="utf-8") as f:
         embed_html(f.read(), height=570, scrolling=False)
 else:
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_baseline.png"), width="stretch")
 
 rows = pd.DataFrame(checks["change_by_baseline_class"])
 table = rows.pivot(index="baseline_class_1e-5", columns="group", values=["pixels", "change_from_jul2023_pct"])
@@ -64,7 +64,7 @@ show = pd.DataFrame({
     "Comparison pixels": [f"{int(v):,}" for v in table[("pixels", "control")]],
     "Comparison change": [f"{v:+.1f}%" for v in table[("change_from_jul2023_pct", "control")]],
 })
-st.dataframe(show, hide_index=True, use_container_width=True)
+st.dataframe(show, hide_index=True, width="stretch")
 
 reg = checks["pixel_regression_change_from_jul2023"]
 st.markdown(
@@ -88,7 +88,7 @@ did = pd.DataFrame([
     ["Matched, from Jul 2023", *fmt(main["matched_from_jul2023"])],
     ["Matched, classes from 2019 only, estimated on 2020–2024", *fmt(alt["matched_on_baseline"])],
 ], columns=["Model (country × class × month cells)", "EU × post (mol/m²)", "p"])
-st.dataframe(did, hide_index=True, use_container_width=True)
+st.dataframe(did, hide_index=True, width="stretch")
 
 st.markdown("""
 Without matching, the cell-level model returns the country-level estimate. With pixels compared only
@@ -99,7 +99,7 @@ not significant.
 st.markdown("---")
 st.markdown("### Country by Country: a Regional Pattern")
 
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_country.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_by_country.png"), width="stretch")
 
 with open(os.path.join(PROJECT_ROOT, "data", "stress_tests.json"), encoding="utf-8") as f:
     stress = json.load(f)["pixel_level"]
@@ -117,7 +117,7 @@ regions = pd.DataFrame([
     _row("Comparison halves: UK, NO, CH, IS vs Western Balkans", "placebo: UK, NO, CH, IS vs Western Balkans"),
     _row("EU-27 vs all nine, without November–February", "EU-27 vs all nine, without Nov-Feb"),
 ], columns=["Matched model (same pollution class)", "Estimate (mol/m²)", "p"])
-st.dataframe(regions, hide_index=True, use_container_width=True)
+st.dataframe(regions, hide_index=True, width="stretch")
 
 st.markdown("""
 Within the north-west and within the south-east, the difference across the EU border is small and not
@@ -141,7 +141,7 @@ st.markdown(
 st.markdown("---")
 st.markdown("### Random Group Assignment")
 
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "placebo_assignments.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "placebo_assignments.png"), width="stretch")
 st.markdown(
     "<p class='caption-text'>Each dot is one random split of the 36 countries into 27 and 9. The DiD estimate "
     "follows the pre-treatment NO₂ gap between the two groups (r = −0.81), so a group that starts out more "
@@ -157,7 +157,7 @@ if os.path.exists(pixel_map):
     with open(pixel_map, "r", encoding="utf-8") as f:
         embed_html(f.read(), height=600, scrolling=False)
 else:
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_map.png"), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "no2_change_map.png"), width="stretch")
 
 st.markdown(
     "<p class='caption-text'>Blue = NO₂ fell, red = NO₂ rose. The decline covers the polluted belt from England "

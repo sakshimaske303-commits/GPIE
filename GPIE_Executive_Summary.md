@@ -34,6 +34,7 @@ The test case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30
 | Fragility | Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), or under randomization inference on the coefficient (p = 0.17); appears only from July 2023 |
 | Random assignment of the label | Estimates follow the pre-treatment gap between groups (r = −0.81); the EU-27's estimate is what its gap predicts |
 | Pixels matched on pre-treatment level | −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24); about 84% of the country-level estimate disappears |
+| Positive control | A known 2.5% reduction added to EU-27 NO₂ from July 2021 is found by the matched model (−0.80 × 10⁻⁶, p = 0.002), and with 80% power it detects a uniform reduction of about 3%, so the near-zero matched estimate is not a matter of low power |
 | Where NO₂ fell | Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia; western Turkey did not decline |
 
 ## What It Means

@@ -25,7 +25,7 @@ the EU-27 study (`s5p_process_daily.py`: one Process API raster per day, pooled 
 also covered neighbouring countries and ocean; that output is superseded.
 """)
 
-st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "india_transferability_trend.png"), use_container_width=True)
+st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "india_transferability_trend.png"), width="stretch")
 
 st.markdown(
     "<p class='caption-text'>The test script records how many months returned data and how the values "

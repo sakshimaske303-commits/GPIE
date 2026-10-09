@@ -71,7 +71,7 @@ if os.path.exists(interactive_map_path):
         unsafe_allow_html=True,
     )
 else:
-    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_map.png"), use_container_width=True)
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_map.png"), width="stretch")
 
 st.markdown("---")
 

@@ -30,7 +30,7 @@ def load_data():
 
 df = load_data()
 
-st.dataframe(df.head(50), use_container_width=True)
+st.dataframe(df.head(50), width="stretch")
 
 csv = df.to_csv(index=False).encode("utf-8")
 st.download_button(

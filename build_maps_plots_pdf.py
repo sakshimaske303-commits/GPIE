@@ -13,7 +13,8 @@ OUTPUT_PATH = "GPIE_Maps_and_Plots.pdf"
 IMAGES = [
     ("control_group_design_map.png", "Study Design: Treatment vs. Control Group",
      "EU-27 (treatment) and the 9-country non-EU control group - UK, Norway, Switzerland, Iceland, "
-     "Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia."),
+     "Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia. Kosovo, Liechtenstein, "
+     "Turkey and Ukraine (grey) are not in the country panel."),
     ("no2_choropleth_map.png", "NO2 Choropleth Map",
      "Mean tropospheric NO2 concentration by country, Sentinel-5P TROPOMI."),
     ("no2_before_after_map.png", "NO2 Before vs. After the European Climate Law",
@@ -56,8 +57,13 @@ IMAGES = [
     ("placebo_assignments.png", "DiD Estimates under Random Group Assignment",
      "DiD estimate against the pre-treatment NO2 gap between groups, for random splits of the 36 countries "
      "into 27 and 9. The actual EU-27 assignment is marked."),
+    ("positive_control.png", "Positive Control: Detecting a Known Reduction",
+     "A known reduction of 2.5%, 5% or 10% is added to EU-27 NO2 from July 2021. Left: the reduction added and "
+     "what the country and matched pixel models find. Right: share of 999 random 27-country groups with a "
+     "significant negative estimate."),
     ("no2_change_map.png", "Pixel-Level NO2 Change Map",
-     "Change in tropospheric NO2 per 0.1 degree pixel, July 2023 - December 2024 minus January 2019 - June 2021."),
+     "Change in tropospheric NO2 per 0.1 degree pixel, July 2023 - December 2024 minus January 2019 - June 2021: "
+     "(a) absolute, (b) percent of the pre-treatment level for pixels starting at 1e-5 mol/m2 or more."),
     ("moran_lisa_cluster_map.png", "Local Moran's I (LISA) Spatial Cluster Map",
      "LISA clusters of full-period average NO2 (descriptive). Global and month-by-month residual Moran's I "
      "results in the figure title."),
