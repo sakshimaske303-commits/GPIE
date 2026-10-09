@@ -255,6 +255,33 @@ in {100 * rand['0.050']['share_significant_negative']:.0f}% and a 10% reduction 
 
 st.markdown("---")
 
+# 6. Ground stations
+st.markdown("### 6. Ground Stations")
+eea = load_json("eea_validation.json")
+ag, gd = eea["agreement_background"], eea["did_background"]
+g_rows = []
+for label, ks, kt in (("Main model", "stations", "satellite at the same stations"),
+                      ("Without November – February", "stations, without Nov-Feb", "satellite at the same stations, without Nov-Feb")):
+    a_, b_ = gd[ks], gd[kt]
+    g_rows.append([label, f"{a_['coefficient']:+.2f}", f"{a_['pct_of_eu_pre_mean']:+.1f}%", f"{a_['p_value']:.3f}",
+                   f"{b_['coefficient']:+.2f}", f"{b_['pct_of_eu_pre_mean']:+.1f}%", f"{b_['p_value']:.3f}"])
+st.dataframe(pd.DataFrame(g_rows, columns=["Model", "Stations (ug/m3)", "% of EU pre", "p",
+                                          "Satellite at stations (10⁻⁶)", "% of EU pre ", "p "]),
+             hide_index=True, width="stretch")
+dec = eea["december_2023"]
+st.markdown(
+    f"""
+EEA background stations ({len(gd['countries'])} countries; no UK data after 2019) agree with the satellite pixels they sit in:
+monthly r = {ag['pooled_monthly_r']:.2f}, median r over time within a station = {ag['median_within_station_r']:.2f}. In relative
+terms the stations give the same size of EU-27 decline as the satellite at the same places, but it is not significant, and it
+does not depend on winter. In December 2023 stations in Denmark and Sweden were {dec['DK']['stations']:+.0f}% and
+{dec['SE']['stations']:+.0f}% against December 2022/2024, while the satellite at the same stations was
+{dec['DK']['satellite']:+.0f}% and {dec['SE']['satellite']:+.0f}%: that month is a retrieval artefact.
+"""
+)
+
+st.markdown("---")
+
 # Raw group means
 st.markdown("### EU-27 vs. Comparison Group — Average NO₂")
 
@@ -321,6 +348,6 @@ st.markdown("---")
 st.markdown(
     "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine | Numbers on this page "
     "are read from data/identification_checks.json, data/stress_tests.json, data/additional_checks.json, "
-    "data/grid_baseline_checks.json, data/positive_control.json and data/real_gdp_checks.json</p>",
+    "data/grid_baseline_checks.json, data/positive_control.json, data/real_gdp_checks.json and data/eea_validation.json</p>",
     unsafe_allow_html=True,
 )

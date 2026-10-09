@@ -130,4 +130,24 @@ Format : CSV (`data/covid/oxcgrt_stringency_national.csv`, four columns taken fr
 Temporal Resolution : Daily, 2020-2022 (set to 0 outside that window)
 Purpose : Robustness control for COVID-19 restrictions. Covers 34 of the 36 study countries (not Montenegro or North Macedonia).
 
+### DS13
+
+Dataset Name : World Bank real GDP per capita (NY.GDP.PCAP.PP.KD, NY.GDP.PCAP.KD)
+Provider : World Bank Open Data API
+Parameter : GDP per capita, PPP at constant 2021 international $, and at constant 2015 US$
+Data Type : Tabular
+Format : JSON → CSV (`download_gdp_real.py`)
+Temporal Resolution : Annual
+Purpose : Check on the GDP control, one source for all 36 countries.
+
+### DS14
+
+Dataset Name : EEA air-quality station data, NO₂ (verified, E1a)
+Provider : European Environment Agency, Air Quality Download Service (via the `airbase` package)
+Parameter : Hourly NO₂ (µg/m³) and station metadata (location, type, area)
+Data Type : Tabular
+Format : Parquet → station-month CSV (`validate_eea_stations.py`)
+Temporal Resolution : Hourly, 2019-2024; monthly means used
+Purpose : Check of the satellite data against ground stations. The United Kingdom has data only for 2019.
+
 *Counting note: the README groups these sources as 8 (EUR-Lex, NO₂, NDVI, ERA5, GDP [Eurostat + World Bank], land cover, DEM, boundaries [GISCO + GADM]); WorldPop was acquired but not used. The Oxford stringency index (DS12) is used only as a robustness control.*

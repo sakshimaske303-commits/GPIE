@@ -1,0 +1,329 @@
+{
+  "settings": {
+    "monthly_capture_min": 0.75,
+    "months_min_share": 0.8,
+    "sources": "EEA E1a verified 2019-2023, E2a unverified 2024; background stations for the main checks"
+  },
+  "sampling_points_by_country": {
+    "AT": {
+      "background": 94,
+      "industrial": 7,
+      "traffic": 35
+    },
+    "BA": {
+      "background": 3,
+      "industrial": 3,
+      "traffic": 2
+    },
+    "BE": {
+      "background": 38,
+      "industrial": 25,
+      "traffic": 6
+    },
+    "BG": {
+      "background": 18,
+      "industrial": 2,
+      "traffic": 5
+    },
+    "CH": {
+      "background": 23,
+      "industrial": 0,
+      "traffic": 8
+    },
+    "CY": {
+      "background": 2,
+      "industrial": 0,
+      "traffic": 1
+    },
+    "CZ": {
+      "background": 60,
+      "industrial": 7,
+      "traffic": 17
+    },
+    "DE": {
+      "background": 247,
+      "industrial": 21,
+      "traffic": 119
+    },
+    "DK": {
+      "background": 7,
+      "industrial": 0,
+      "traffic": 5
+    },
+    "EE": {
+      "background": 6,
+      "industrial": 2,
+      "traffic": 1
+    },
+    "EL": {
+      "background": 9,
+      "industrial": 1,
+      "traffic": 6
+    },
+    "ES": {
+      "background": 201,
+      "industrial": 140,
+      "traffic": 115
+    },
+    "FI": {
+      "background": 11,
+      "industrial": 1,
+      "traffic": 20
+    },
+    "FR": {
+      "background": 227,
+      "industrial": 20,
+      "traffic": 80
+    },
+    "HR": {
+      "background": 3,
+      "industrial": 0,
+      "traffic": 4
+    },
+    "HU": {
+      "background": 12,
+      "industrial": 1,
+      "traffic": 6
+    },
+    "IE": {
+      "background": 13,
+      "industrial": 0,
+      "traffic": 7
+    },
+    "IS": {
+      "background": 3,
+      "industrial": 1,
+      "traffic": 1
+    },
+    "IT": {
+      "background": 324,
+      "industrial": 78,
+      "traffic": 160
+    },
+    "LT": {
+      "background": 7,
+      "industrial": 4,
+      "traffic": 5
+    },
+    "LU": {
+      "background": 4,
+      "industrial": 1,
+      "traffic": 3
+    },
+    "LV": {
+      "background": 1,
+      "industrial": 0,
+      "traffic": 0
+    },
+    "MK": {
+      "background": 2,
+      "industrial": 3,
+      "traffic": 3
+    },
+    "MT": {
+      "background": 3,
+      "industrial": 0,
+      "traffic": 0
+    },
+    "NL": {
+      "background": 44,
+      "industrial": 6,
+      "traffic": 21
+    },
+    "NO": {
+      "background": 12,
+      "industrial": 1,
+      "traffic": 24
+    },
+    "PL": {
+      "background": 96,
+      "industrial": 3,
+      "traffic": 15
+    },
+    "PT": {
+      "background": 23,
+      "industrial": 4,
+      "traffic": 8
+    },
+    "RO": {
+      "background": 5,
+      "industrial": 3,
+      "traffic": 7
+    },
+    "RS": {
+      "background": 10,
+      "industrial": 1,
+      "traffic": 3
+    },
+    "SE": {
+      "background": 14,
+      "industrial": 0,
+      "traffic": 26
+    },
+    "SI": {
+      "background": 5,
+      "industrial": 0,
+      "traffic": 2
+    },
+    "SK": {
+      "background": 16,
+      "industrial": 0,
+      "traffic": 8
+    }
+  },
+  "agreement_background": {
+    "pooled_monthly_r": 0.6810831009126637,
+    "pooled_monthly_n": 104905,
+    "median_within_station_r": 0.6968400222944869,
+    "stations_with_24_paired_months": 1533,
+    "between_station_r_pre_period": 0.6811292800940776,
+    "change_stations": 1496,
+    "change_r": 0.3416984798236142,
+    "median_change_pct": {
+      "EU-27 stations": -18.900481647535468,
+      "EU-27 pixels at the stations": -13.454760135157311,
+      "comparison stations": -17.917033807563893,
+      "comparison pixels at the stations": -8.620438391738004
+    }
+  },
+  "did_background": {
+    "stations": {
+      "coefficient": -0.482845771244831,
+      "se": 0.3038374933185821,
+      "p_value": 0.12185747322155507,
+      "ci_low": -1.1017424923787869,
+      "ci_high": 0.13605094988912475,
+      "countries": 33,
+      "pct_of_eu_pre_mean": -3.952472190229887,
+      "n": 2370
+    },
+    "satellite at the same stations": {
+      "coefficient": -1.9115540122891157,
+      "se": 0.8201334483563391,
+      "p_value": 0.02622687833103687,
+      "ci_low": -3.5821111793330562,
+      "ci_high": -0.2409968452451754,
+      "countries": 33,
+      "pct_of_eu_pre_mean": -4.4908745639723975,
+      "n": 2325
+    },
+    "stations, without Nov-Feb": {
+      "coefficient": -0.7205088217055975,
+      "se": 0.39360185946297305,
+      "p_value": 0.07649467859753638,
+      "ci_low": -1.522249573293624,
+      "ci_high": 0.08123192988242922,
+      "countries": 33,
+      "pct_of_eu_pre_mean": -6.960000203057681,
+      "n": 1581
+    },
+    "satellite at the same stations, without Nov-Feb": {
+      "coefficient": -0.8568854206257404,
+      "se": 0.8138451495630789,
+      "p_value": 0.3002794609394245,
+      "ci_low": -2.5146337421840492,
+      "ci_high": 0.8008629009325683,
+      "countries": 33,
+      "pct_of_eu_pre_mean": -2.300960899519286,
+      "n": 1579
+    },
+    "stations, log outcome": {
+      "coefficient": -0.04031996403001316,
+      "se": 0.02647105761947617,
+      "p_value": 0.13753812691523004,
+      "ci_low": -0.09423974393177775,
+      "ci_high": 0.013599815871751436,
+      "countries": 33
+    },
+    "stations, + pre-treatment level x post": {
+      "coefficient": -0.5750226698777297,
+      "se": 0.3293415166293632,
+      "p_value": 0.0904104382203746,
+      "ci_low": -1.245869386485799,
+      "ci_high": 0.09582404673033973,
+      "countries": 33
+    },
+    "satellite at the same stations, log outcome": {
+      "coefficient": -0.04162545327789775,
+      "se": 0.018671034983847177,
+      "p_value": 0.0329309686473153,
+      "ci_low": -0.07965710699340611,
+      "ci_high": -0.0035937995623894006,
+      "countries": 33
+    },
+    "satellite at the same stations, + pre-treatment level x post": {
+      "coefficient": -0.45401827505007764,
+      "se": 0.7545588266454505,
+      "p_value": 0.5516131186553189,
+      "ci_low": -1.9910043086463263,
+      "ci_high": 1.082967758546171,
+      "countries": 33
+    },
+    "countries": [
+      "AT",
+      "BA",
+      "BE",
+      "BG",
+      "CH",
+      "CY",
+      "CZ",
+      "DE",
+      "DK",
+      "EE",
+      "EL",
+      "ES",
+      "FI",
+      "FR",
+      "HR",
+      "HU",
+      "IE",
+      "IS",
+      "IT",
+      "LT",
+      "LU",
+      "LV",
+      "MK",
+      "MT",
+      "NL",
+      "NO",
+      "PL",
+      "PT",
+      "RO",
+      "RS",
+      "SE",
+      "SI",
+      "SK"
+    ]
+  },
+  "december_2023": {
+    "DK": {
+      "stations": -16.20091536576109,
+      "satellite": -149.64355074222038
+    },
+    "SE": {
+      "stations": -7.209094499003221,
+      "satellite": -110.86166203965678
+    },
+    "LV": {
+      "stations": -0.5146451489929316
+    },
+    "LT": {
+      "stations": -3.464224567047014
+    }
+  },
+  "agreement_traffic": {
+    "pooled_monthly_r": 0.5917459260521086,
+    "pooled_monthly_n": 48391,
+    "median_within_station_r": 0.624115658456893,
+    "stations_with_24_paired_months": 717,
+    "between_station_r_pre_period": 0.5800176393524776,
+    "change_stations": 678,
+    "change_r": 0.3755199464758626,
+    "median_change_pct": {
+      "EU-27 stations": -18.742694212925862,
+      "EU-27 pixels at the stations": -14.438466817252811,
+      "comparison stations": -23.487585417258288,
+      "comparison pixels at the stations": -6.442378913598263
+    }
+  }
+}

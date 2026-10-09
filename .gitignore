@@ -38,3 +38,9 @@ policy_page.html
 
 # GADM boundaries may not be redistributed; download_gadm.py fetches them
 data/earth_observation/boundaries/raw/gadm41_*.json
+
+# EEA ground-station downloads (large, re-downloadable with airbase)
+data/eea_no2/
+
+# My own checklist, stays on my laptop
+GPIE_FINISH_LINE.md

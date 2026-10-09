@@ -35,6 +35,7 @@ The test case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30
 | Random assignment of the label | Estimates follow the pre-treatment gap between groups (r = −0.81); the EU-27's estimate is what its gap predicts |
 | Pixels matched on pre-treatment level | −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24); about 84% of the country-level estimate disappears |
 | Positive control | A known 2.5% reduction added to EU-27 NO₂ from July 2021 is found by the matched model (−0.80 × 10⁻⁶, p = 0.002), and with 80% power it detects a uniform reduction of about 3%, so the near-zero matched estimate is not a matter of low power |
+| Ground stations | Against 1,543 EEA background stations the satellite agrees (monthly r = 0.68); the stations give a similar relative EU-27 decline that is not significant (−4.0%, p = 0.12) and no December 2023 drop, which is a retrieval artefact |
 | Where NO₂ fell | Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia; western Turkey did not decline |
 
 ## What It Means
@@ -43,7 +44,7 @@ Most of the country-level estimate reflects that the EU-27 was more polluted to 
 
 ## Limitations
 
-The highly polluted comparison pixels are mostly in the United Kingdom, which shares EU-derived vehicle standards, so the comparison separates EU membership from pollution level but not EU-origin regulation from its absence. The time window for the regional description was chosen after seeing the data. Part of the regional contrast comes from winter retrievals, when valid observations are fewest. There is no comparison with ground monitors, weather controls are country means, and inference rests on only nine comparison countries.
+The highly polluted comparison pixels are mostly in the United Kingdom, which shares EU-derived vehicle standards, so the comparison separates EU membership from pollution level but not EU-origin regulation from its absence. The time window for the regional description was chosen after seeing the data. Part of the regional contrast comes from winter retrievals, when valid observations are fewest. The ground-station check lacks the United Kingdom, weather controls are country means, and inference rests on only nine comparison countries.
 
 ## Correction History
 

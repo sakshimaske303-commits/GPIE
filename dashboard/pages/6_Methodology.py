@@ -251,6 +251,15 @@ with st.expander("**Step 10 — Positive Control**", expanded=False):
     detects a 5% reduction in 40% of them and a 10% reduction in 69%.
     """)
 
+with st.expander("**Step 11 — Ground Stations**", expanded=False):
+    st.markdown("""
+    I checked the satellite data against 1,543 EEA background stations (`validate_eea_stations.py`). Monthly station
+    and pixel values agree (r = 0.68). The main model on station data gives an EU-27 decline of −4.0% of the
+    pre-treatment mean (p = 0.12), close to the −4.5% from the satellite at the same stations, and the station estimate
+    does not depend on winter. Stations in Denmark and Sweden show no December 2023 collapse, so that month is a
+    retrieval artefact. The United Kingdom has EEA data only for 2019, so it is not in this check.
+    """)
+
 st.markdown("---")
 
 st.markdown("### Additional Checks: Synthetic Control &amp; Spatial Diagnostics")
