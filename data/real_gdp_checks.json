@@ -1,0 +1,112 @@
+{
+  "source": "World Bank WDI: NY.GDP.PCAP.PP.KD (PPP, constant 2021 international $) and NY.GDP.PCAP.KD (constant 2015 US$); annual values used for every month of the year",
+  "country_level": {
+    "nominal GDP (main model)": {
+      "coefficient": -1.3371732560446836,
+      "se": 0.5559532945668147,
+      "p_value": 0.02158645199084217,
+      "ci_low": -2.4658184470816726,
+      "ci_high": -0.2085280650076946,
+      "n": 2572,
+      "countries": 36
+    },
+    "real GDP per capita, PPP": {
+      "coefficient": -1.3562821391699553,
+      "se": 0.7318270425403834,
+      "p_value": 0.07228745048571245,
+      "ci_low": -2.841970020339189,
+      "ci_high": 0.129405741999278,
+      "n": 2572,
+      "countries": 36
+    },
+    "log real GDP per capita, PPP": {
+      "coefficient": -0.8075926691986159,
+      "se": 0.6594307734259399,
+      "p_value": 0.22887430691725577,
+      "ci_low": -2.146308310462872,
+      "ci_high": 0.5311229720656403,
+      "n": 2572,
+      "countries": 36
+    },
+    "real GDP per capita, constant US$": {
+      "coefficient": -1.3163521223217143,
+      "se": 0.7504421460215498,
+      "p_value": 0.08816635818414371,
+      "ci_low": -2.839830672653264,
+      "ci_high": 0.2071264280098355,
+      "n": 2572,
+      "countries": 36
+    },
+    "no GDP": {
+      "coefficient": -1.3101438243954824,
+      "se": 0.7324838756628652,
+      "p_value": 0.08233314062089472,
+      "ci_low": -2.797165147694203,
+      "ci_high": 0.17687749890323867,
+      "n": 2572,
+      "countries": 36
+    }
+  },
+  "pixel_level": {
+    "nominal GDP (Table 4)": {
+      "not_matched": {
+        "coefficient": -1.3429254718375192,
+        "se": 0.5330052079060904,
+        "p_value": 0.016616055845029367,
+        "ci_low": -2.4261223790424205,
+        "ci_high": -0.25972856463261795,
+        "n": 12947,
+        "countries": 35
+      },
+      "matched_on_baseline": {
+        "coefficient": -0.2130532375251183,
+        "se": 0.22368249582696642,
+        "p_value": 0.3475759795749093,
+        "ci_low": -0.6676307614999544,
+        "ci_high": 0.24152428644971774,
+        "n": 12947,
+        "countries": 35
+      }
+    },
+    "real GDP per capita, PPP": {
+      "not_matched": {
+        "coefficient": -1.3743444502041642,
+        "se": 0.6925731434632427,
+        "p_value": 0.0553291556857993,
+        "ci_low": -2.781822418308252,
+        "ci_high": 0.03313351789992347,
+        "n": 12947,
+        "countries": 35
+      },
+      "matched_on_baseline": {
+        "coefficient": -0.20616781223677488,
+        "se": 0.2584359556438876,
+        "p_value": 0.43055104405510486,
+        "ci_low": -0.7313728641043429,
+        "ci_high": 0.31903723963079317,
+        "n": 12947,
+        "countries": 35
+      }
+    },
+    "log real GDP per capita, PPP": {
+      "not_matched": {
+        "coefficient": -0.7893750729029324,
+        "se": 0.5794506637600589,
+        "p_value": 0.18206609890787803,
+        "ci_low": -1.9669605027498198,
+        "ci_high": 0.3882103569439549,
+        "n": 12947,
+        "countries": 35
+      },
+      "matched_on_baseline": {
+        "coefficient": 0.017011465163042513,
+        "se": 0.22208196591612758,
+        "p_value": 0.9393907923823597,
+        "ci_low": -0.4343133906884925,
+        "ci_high": 0.46833632101457756,
+        "n": 12947,
+        "countries": 35
+      }
+    }
+  }
+}

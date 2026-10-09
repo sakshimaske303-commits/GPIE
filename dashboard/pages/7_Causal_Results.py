@@ -22,6 +22,7 @@ def load_json(name):
 ident = load_json("identification_checks.json")
 stress = load_json("stress_tests.json")
 extra = load_json("additional_checks.json")
+real_gdp = load_json("real_gdp_checks.json")
 grid_checks = load_json("grid_baseline_checks.json")
 country = stress["country_level"]
 pixel = stress["pixel_level"]
@@ -107,6 +108,8 @@ rows = [
     row_stress("Countries weighted by area", country["countries weighted by area (pixels)"]),
     row_stress("Log GDP in place of GDP", country["log GDP instead of GDP level"]),
     row_stress("No GDP", country["no GDP"]),
+    row_extra("Real GDP per capita (PPP) in place of GDP", real_gdp["country_level"]["real GDP per capita, PPP"]),
+    row_extra("Log real GDP per capita (PPP) in place of GDP", real_gdp["country_level"]["log real GDP per capita, PPP"]),
 ]
 log_row = country["log outcome"]
 rows.append(["Log outcome (log points)", f"{log_row['coefficient']:+.3f}",
@@ -119,7 +122,7 @@ st.info(
     f"**Stable under the usual checks, fragile under others.** Year-month fixed effects, weather and COVID-19 controls, "
     f"excluding the COVID-19 or energy-crisis months, leaving out any one comparison country and a wild cluster "
     f"bootstrap (p = {ident['inference']['S2']['wild_cluster_bootstrap_p']:.3f}) leave it in place. Without the winter "
-    f"months, with area weights or with log GDP it is no longer significant, and randomization inference gives "
+    f"months, with area weights, or with log GDP or real GDP per capita it is no longer significant, and randomization inference gives "
     f"p = {ri['p_coefficient']:.2f} on the coefficient (p = {ri['p_t_statistic']:.3f} on the t-statistic)."
 )
 
@@ -318,6 +321,6 @@ st.markdown("---")
 st.markdown(
     "<p class='caption-text' style='text-align:center;'>GPIE — Green Policy Intelligence Engine | Numbers on this page "
     "are read from data/identification_checks.json, data/stress_tests.json, data/additional_checks.json, "
-    "data/grid_baseline_checks.json and data/positive_control.json</p>",
+    "data/grid_baseline_checks.json, data/positive_control.json and data/real_gdp_checks.json</p>",
     unsafe_allow_html=True,
 )

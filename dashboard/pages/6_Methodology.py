@@ -220,7 +220,8 @@ with st.expander("**Step 8 — Stress Tests**", expanded=False):
     st.markdown("""
     A fresh review of the whole project then tested choices that had gone unstated. The country-level
     estimate weakens without November–February (−0.81 × 10⁻⁶, p = 0.11), with countries weighted by area
-    (−0.96 × 10⁻⁶, p = 0.11) and with log GDP (−0.94 × 10⁻⁶, p = 0.21). Four country means in December 2023
+    (−0.96 × 10⁻⁶, p = 0.11) and with log GDP (−0.94 × 10⁻⁶, p = 0.21). Later, with real GDP per capita from the
+    World Bank in place of nominal GDP, it is −1.36 × 10⁻⁶ (p = 0.072) and the matched pixel estimate stays at −0.21. Four country means in December 2023
     are negative, which is physically impossible, and dropping that one month shrinks the late decline. The
     "matched" pixel result turned out to average two opposite comparisons (against UK/Norway/Switzerland/
     Iceland: +0.20; against the Western Balkans: −0.38). With countries assigned to the two groups at random,
