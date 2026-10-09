@@ -31,7 +31,7 @@ with col1:
     - **NO₂** — Sentinel-5P TROPOMI (Sentinel Hub Process API, daily rasters)
     - **NDVI** — CGLS 300m (Sentinel Hub Statistical API)
     - **Climate** — ERA5 Reanalysis (temperature, precipitation)
-    - **GDP** — Eurostat (EU-27) + World Bank (control group)
+    - **GDP** — Eurostat (EU-27) + World Bank (comparison group)
     """)
 with col2:
     st.markdown("""
@@ -148,7 +148,7 @@ with st.expander("**Step 3 — Building an External Comparison Group**", expande
 with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     st.markdown("""
     The overall DiD result was further validated by estimating the treatment effect separately for
-    23 quarters (2019Q1–2024Q4, relative to 2021Q2), rather than as a single average. Seven of the nine
+    23 quarters (2019Q1–2024Q4, relative to 2021Q2), rather than as a single average. Five of the nine
     pre-treatment quarters differ significantly from the reference quarter. The coefficients follow a
     seasonal pattern (positive in Q1/Q4, negative in Q2/Q3) before and after treatment — consistent with a
     larger seasonal NO₂ cycle in the more polluted EU countries — rather than a response dated to the law.
@@ -164,10 +164,12 @@ with s5a:
         correction for panel data where a country's repeated monthly observations are serially
         correlated (uncorrected OLS standard errors understate true uncertainty).
 
-        Further robustness checks were run against the pooled NO₂ model (−1.52 × 10⁻⁶, p = 0.018).
+        Further robustness checks were run against the baseline model, with a seasonal cycle common to both
+        groups (−1.52 × 10⁻⁶, p = 0.018); the paper reports the same checks for the main model, on the
+        *Results* page.
         Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.061; a sensitivity check, not a
         formal bad-control test). The log-outcome model gives −4.2% (p = 0.041). Shifting the treatment date
-        by ±6/±12 months gives a significant estimate at **every** date (p between 0.004 and 0.028),
+        by ±6/±12 months gives a significant estimate at **every** date (p between 0.006 and 0.035),
         including two dates before the law existed — by the logic of Step 2, the design does not tie the
         EU-specific decline to the Climate Law's date. Adding an EU-specific linear trend removes the
         treatment-date effect (+8.7 × 10⁻⁷, p = 0.251) while the trend itself is significant (−7.9 × 10⁻⁷
@@ -183,7 +185,7 @@ with s5a:
         """)
 with s5b:
     st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the final two-group Difference-in-Differences model with cluster-robust standard errors, the headline model behind the Causal Results page.")
+    proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the two-group Difference-in-Differences baseline model with cluster-robust standard errors (the main model of the paper adds year-month fixed effects and EU-specific seasonality).")
 
 with st.expander("**Step 6 — Identification and Inference Checks**", expanded=False):
     st.markdown("""
@@ -222,10 +224,20 @@ with st.expander("**Step 8 — Stress Tests**", expanded=False):
     are negative, which is physically impossible, and dropping that one month shrinks the late decline. The
     "matched" pixel result turned out to average two opposite comparisons (against UK/Norway/Switzerland/
     Iceland: +0.20; against the Western Balkans: −0.38). With countries assigned to the two groups at random,
-    the DiD estimate follows the pre-treatment gap between the groups (r = −0.81) and is significant in 9.6%
+    the DiD estimate follows the pre-treatment gap between the groups (r = −0.81) and is significant in 8.3%
     of draws. Matched against western Turkey, which is outside the sample, the EU difference stays
     (−1.43 × 10⁻⁶), so the matched result depends on where the comparison pixels are. All p-values now use
     a t distribution with clusters − 1 degrees of freedom.
+    """)
+
+with st.expander("**Step 9 — Composition Checks**", expanded=False):
+    st.markdown("""
+    Further checks test the composition explanation directly (`causal_inference_additional_checks.py`).
+    At country level the estimate is −0.73 × 10⁻⁶ (p = 0.054) without the Netherlands and Belgium, and
+    −0.11 × 10⁻⁶ (p = 0.71) when the sample is restricted to countries no more polluted than the United
+    Kingdom. On the log scale, more polluted countries lost a larger share of their NO₂ (log pre-level × post
+    −0.080, p = 0.005) and the EU term is +0.005 (p = 0.72). At pixel level the matched estimate shows no break
+    at the law in 12-month blocks (all p ≥ 0.22) and is unchanged without March 2020 – June 2021 (−0.23 × 10⁻⁶).
     """)
 
 st.markdown("---")
@@ -233,7 +245,7 @@ st.markdown("---")
 st.markdown("### Additional Checks: Synthetic Control &amp; Spatial Diagnostics")
 
 st.markdown("""
-The control group's construction invites two specific objections: that equal weighting might
+The comparison group's construction invites two specific objections: that equal weighting might
 mismatch the treated series' true counterfactual trajectory, and that country-level readings
 might not be spatially independent observations. Both were tested directly rather than left as
 theoretical concerns.
@@ -257,8 +269,10 @@ uninformative.) Local Moran's I (LISA) identifies a
 High-High cluster (Benelux, Germany, Switzerland, UK) and a Low-Low cluster (Estonia, Finland, Sweden,
 Norway, Iceland), with Denmark and Ireland as significant Low-High outliers.
 
-Neither check supports reading the pooled estimate as a Climate Law effect: the synthetic control
-finds nothing distinctive about the EU-27, and the spatial result means the reported p-values are too small.
+Neither check supports reading the pooled estimate as a Climate Law effect. The synthetic control gap is
+of similar size to the DiD estimate and ranks high among the placebos, but with ten units and the same
+composition problem it cannot separate the EU from its starting level; the spatial result means the reported
+p-values are, if anything, too small. Neither check is part of the paper.
 """)
 
 st.markdown("---")
@@ -268,27 +282,28 @@ st.markdown("### Honest Limitations")
 st.warning("""
 **Data correction**: earlier versions of this project built "monthly" NO₂ from Sentinel Hub's
 Statistical API with monthly intervals. Sentinel Hub clips Sentinel-5P requests to the last 24 hours of
-each interval, so those values were effectively end-of-month snapshots — which explained the patchy
-coverage and impossible values (negative country means on 31 December 2023). The NO₂ series is now built
+each interval, so those values were effectively end-of-month snapshots, which explained their patchy
+coverage. The NO₂ series is now built
 from one raster per day (Process API, 0.1° grid, QA ≥ 0.75) pooled into true monthly means, and NDVI from
 monthly means of the dekadal composites. Every number on this dashboard was re-estimated; the earlier
 pooled null (p = 0.101) is superseded.
 
-**What the result does and does not show**: NO₂ fell about 5% more in the EU-27 than in the comparison
-group, and the pooled estimate is significant (p = 0.018). The honest conclusion is not *"the Climate Law
-worked"*: nothing changes in the first two years after the law, every alternative date is significant, an
-EU-specific trend absorbs the effect, and at pixel level most of the estimate follows how polluted a place
-was at the start. With nine comparison clusters and spatially correlated residuals, the p-values are
-also likely too small.
+**What the result does and does not show**: NO₂ fell about 4% more in the EU-27 than in the comparison
+group (main model −1.34 × 10⁻⁶, p = 0.022). This is not evidence that the Climate Law worked: nothing changes
+in the first two years after the law, every shifted date is significant, an EU-specific trend absorbs the
+effect, and most of the estimate reflects that the EU-27 started out more polluted. Even with the corrected
+daily data, eight country-months, all in December or January at high latitudes, have negative means, and
+winter months carry much of the estimate. With nine comparison clusters and spatially correlated residuals,
+the p-values are also likely too small.
 
 **Limit of the pixel-level check**: its highly polluted comparison pixels are mostly in the United Kingdom,
-which kept EU-derived emission standards, so it separates EU membership from pollution level, not EU-origin
+which shares EU-derived vehicle emission standards, so it separates EU membership from pollution level, not EU-origin
 regulation from its absence.
 """)
 
 st.warning("""
-**The NDVI secondary-outcome finding is exploratory, not causal.** Once given the same
-control-group correction as NO₂, NDVI shows a statistically significant relative decline
+**The NDVI finding is exploratory, not causal, and is not part of the paper.** With the baseline model and the same
+comparison-group design as NO₂, NDVI shows a statistically significant relative decline
 (−0.0194, p = 0.008) — but this analysis does not control for land-use change, drought/precipitation-driven
 vegetation stress, or agricultural-policy shifts between treatment and control regions, any of
 which could plausibly drive the result independent of the Climate Law. It is reported as an

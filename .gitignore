@@ -33,3 +33,5 @@ Thumbs.db
 
 # Local working files, not part of the project
 OUTPUTS2/
+outputs/no2_20190101.csv
+policy_page.html

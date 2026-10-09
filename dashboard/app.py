@@ -88,9 +88,9 @@ with col1:
 with col2:
     st.metric("STUDY PERIOD", "2019–2024", "6 years")
 with col3:
-    st.metric("DATASETS", "8", "Multi-source")
+    st.metric("DAILY RASTERS", "2,192", "Sentinel-5P TROPOMI NO₂, 0.1°")
 with col4:
-    st.metric("METHOD", "DiD", "Causal Inference")
+    st.metric("METHOD", "DiD", "Country and pixel level")
 
 st.markdown("---")
 
@@ -102,18 +102,15 @@ st.markdown(
         <p style="color:{PALETTE['coral']}; text-transform:uppercase; letter-spacing:1.5px;
                   font-weight:700; font-size:0.85rem; margin-bottom:8px;">Why This Matters</p>
         <p style="color:{PALETTE['text']}; font-size:1rem; line-height:1.6; margin:0;">
-            Governments announce landmark climate policy and then report their own progress against it —
-            that self-reported progress is rarely independently audited against physical, satellite-observed
-            evidence. GPIE builds that independent audit layer for the EU's Climate Law. Its most important
-            result is a disciplined <strong>distinction</strong>: at country level, satellite data show NO₂ falling
-            about 5% more in the EU-27 than in neighbouring non-EU countries, and that estimate survives a long
-            list of robustness checks. But the decline starts two years after the Climate Law, and at pixel
-            level it turns out to follow how polluted a place was, not whether it is in the EU. "Pollution
-            fell" and "this law made it fall" are different claims, and only the first is supported. Along
-            the way the project corrected itself three times — a placebo test rejected its first model, its
-            satellite aggregation was rebuilt from end-of-month snapshots into true monthly means, and a
-            pixel-level check showed the decline follows pollution level and region, not the EU border (see
-            Methodology and Pixel Level Check).
+            Satellite NO₂ makes it easy to compare pollution in countries that adopted a policy with countries
+            that did not. GPIE asks what such a comparison identifies when the two groups start at different
+            pollution levels, using the European Climate Law as a negative-control case. A country-level
+            difference-in-differences finds NO₂ fell about 4% more in the EU-27 than in nine neighbouring
+            non-EU countries, but the estimate is fragile and appears only two years after the law. Most of it
+            reflects that the EU-27 was more polluted to begin with: comparing EU and comparison-group pixels
+            that started at the same level leaves an estimate close to zero. The data do not require an effect
+            at the EU border, but they cannot rule one out. NO₂ fell most in the polluted north-west, inside and
+            outside the EU, for reasons the data cannot identify.
         </p>
     </div>
     """,
@@ -123,27 +120,25 @@ st.markdown(
 st.markdown("""
 ### System Overview
 
-**GPIE** is a geospatial decision-intelligence framework that independently evaluates whether 
-the **European Green Deal** and its flagship legislation, the **European Climate Law**, 
-produced a measurable environmental effect — using satellite-derived evidence rather than 
-relying solely on self-reported government claims.
+**GPIE** is a geospatial workflow that turns 2,192 daily Sentinel-5P TROPOMI NO₂ rasters into monthly
+country and pixel panels and tests a policy-evaluation design on them. It compares a country-level
+difference-in-differences with a pixel-level comparison of areas that started at the same pollution level,
+and describes where NO₂ fell across Europe. The research paper is the reference for every result.
 
-Rather than assuming a policy worked, GPIE follows a **"Trust, But Verify"** protocol: 
-integrating Earth Observation data (Sentinel-5P TROPOMI, CGLS NDVI), climate 
-reanalysis (ERA5), economic indicators, and rigorous causal-inference methodology to 
-test policy claims against independently observed evidence.
+**Research question:** when treated and comparison countries differ in baseline pollution, what does a
+country-level DiD on satellite NO₂ identify?
 
 ### Navigate the Analysis
 
 Use the sidebar to explore:
 - **Study Design** — the treatment vs. comparison-group architecture
 - **Theoretical Foundations** — the retrieval physics behind the NO₂ column, and what makes it an independent outcome
-- **Environmental Data** — NO₂ and vegetation health across Europe
+- **Environmental Data** — NO₂ (and, as context, vegetation health) across Europe
 - **Before After** — country-level NO₂ and NDVI, 2019 vs. 2024
-- **Control Variables** — GDP and climate controls, plus land cover and elevation as context
-- **Methodology** — the full validation journey and limitations, including the placebo test that reshaped the analysis
-- **Causal Results** — the project's core statistical findings
-- **India Transferability** — running the acquisition step on a non-EU country
+- **Control Variables** — GDP and climate controls used in the model, plus land cover and elevation as context
+- **Methodology** — how the analysis developed, its corrections and its limitations
+- **Causal Results** — the paper's results: country-level estimate, timing, composition and geography
+- **India Transferability** — running the acquisition step on a non-EU country (supplementary)
 - **Interactive Maps** — hoverable, zoomable versions of the main maps and charts
 - **Explore Trends** — country-by-country NO₂ and NDVI time series
 - **About Data** — the master dataset and data sources
@@ -163,28 +158,33 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# I offer the PDFs in static/ if they are there, otherwise the Markdown files from the repo root.
 _all_docs = [
-    {"label": "Executive Summary", "filename": "GPIE_Executive_Summary.pdf"},
-    {"label": "Research Paper", "filename": "GPIE_Research_Paper.pdf"},
-    {"label": "Development Log", "filename": "GPIE_Development_Log.pdf"},
+    {"label": "Executive Summary", "stem": "GPIE_Executive_Summary"},
+    {"label": "Research Paper", "stem": "GPIE_Research_Paper"},
+    {"label": "Development Log", "stem": "GPIE_Development_Log"},
 ]
-_existing = [d for d in _all_docs if os.path.exists(os.path.join(BASE_DIR, "static", d["filename"]))]
-_missing = [d for d in _all_docs if d not in _existing]
+_available = []
+for _d in _all_docs:
+    _pdf = os.path.join(BASE_DIR, "static", _d["stem"] + ".pdf")
+    _md = os.path.join(ROOT_DIR, _d["stem"] + ".md")
+    if os.path.exists(_pdf):
+        _available.append((_d["label"], _pdf, "application/pdf"))
+    elif os.path.exists(_md):
+        _available.append((_d["label"], _md, "text/markdown"))
 
-if _existing:
-    _cols = st.columns(len(_existing))
-    for _col, _d in zip(_cols, _existing):
+if _available:
+    _cols = st.columns(len(_available))
+    for _col, (_label, _path, _mime) in zip(_cols, _available):
         with _col:
-            with open(os.path.join(BASE_DIR, "static", _d["filename"]), "rb") as _f:
+            with open(_path, "rb") as _f:
                 st.download_button(
-                    label=f"⬇ {_d['label']}",
+                    label=f"⬇ {_label}",
                     data=_f.read(),
-                    file_name=_d["filename"],
-                    mime="application/pdf",
+                    file_name=os.path.basename(_path),
+                    mime=_mime,
                     use_container_width=True,
                 )
-for d in _missing:
-    st.warning(f"{d['filename']} not found.")
 
 st.markdown(
     f"""

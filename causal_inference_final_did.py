@@ -1,3 +1,4 @@
+"""I run my baseline two-group DiD (first row of Table 2 in the paper)."""
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm

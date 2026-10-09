@@ -10,7 +10,7 @@ apply_custom_style()
 
 st.markdown("<h1 style='text-align: center;'>🎯 STUDY DESIGN</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Treatment vs. Control Group Architecture</h3>",
+    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Treatment vs. Comparison Group Architecture</h3>",
     unsafe_allow_html=True,
 )
 st.markdown("---")
@@ -23,12 +23,13 @@ meaning there is no EU country left "untreated" to compare against. Without a ge
 group, it is statistically impossible to distinguish a real policy effect from a general pollution 
 trend that would have happened anyway.
 
-### The Solution: An External Control Group
+### The Solution: An External Comparison Group
 
 GPIE addresses this by introducing nine **non-EU European countries** as a comparison group —
-geographically and economically comparable nations that are **not directly bound** by the Climate Law,
-spanning both established Western European economies and EU-accession-candidate economies in the
-Western Balkans. They are not fully untreated by EU climate policy: Norway and Iceland are in the
+neighbouring countries that are **not bound** by the Climate Law, spanning established Western European
+economies and EU-accession candidates in the Western Balkans. They are not comparable in one important
+respect: before treatment the EU-27 was about 50% more polluted than the comparison group, and the paper
+shows that most of the country-level estimate comes from that difference. They are not fully untreated by EU climate policy: Norway and Iceland are in the
 EU ETS via the EEA, Switzerland's ETS has been linked to the EU ETS since 2020, and the Western Balkans
 committed to align with the Green Deal in the 2020 Sofia Green Agenda. Any such overlap would bias the
 estimate toward zero:
@@ -36,7 +37,7 @@ estimate toward zero:
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("**United Kingdom**\n\nExited the EU in 2020 — outside EU regulatory scope from 2021 onward")
+    st.info("**United Kingdom**\n\nEU member in 2019 and applied EU law during the 2020 transition period; shares EU-derived vehicle emission standards")
 with col2:
     st.info("**Norway**\n\nNever an EU member — EEA member, participates in the EU ETS")
 with col3:
@@ -56,12 +57,12 @@ with col7:
 with col8:
     st.info("**North Macedonia**\n\nEU accession candidate — Western Balkans comparator")
 with col9:
-    st.info("**Serbia**\n\nEU accession candidate — largest Western Balkans economy in the control group")
+    st.info("**Serbia**\n\nEU accession candidate — largest Western Balkans economy in the comparison group")
 
 st.markdown("---")
 
 st.markdown("### Geographic Distribution")
-interactive_map_path = os.path.join(PROJECT_ROOT, "outputs", "plots", "control_group_design_map.html")
+interactive_map_path = os.path.join(PROJECT_ROOT, "outputs", "interactive", "control_group_map.html")
 if os.path.exists(interactive_map_path):
     with open(interactive_map_path, "r", encoding="utf-8") as f:
         embed_html(f.read(), height=560)

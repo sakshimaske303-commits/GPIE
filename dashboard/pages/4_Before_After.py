@@ -24,7 +24,7 @@ st.markdown("---")
 st.markdown("""
 ### Visual Comparison Across the Study Period
 
-These side-by-side comparisons show conditions across all 36 countries (EU-27 + 9-country control group)
+These side-by-side comparisons show conditions across all 36 countries (EU-27 + 9-country comparison group)
 in **2019** — the pre-treatment baseline year — versus **2024**, the most recent complete year
 of data. Each pair of panels uses an **identical color scale**, so any visible color shift
 represents a genuine change, not a scaling artifact.
@@ -50,9 +50,9 @@ with tab1:
         st.markdown("""
         #### Why This Matters
 
-        A before/after map cannot show what the Climate Law did. The *Causal Results* page tests
-        whether the EU-27's decline differs from the comparison group's — it does — and whether its
-        timing matches the law — it does not.
+        A before/after map cannot show what the Climate Law did. The *Causal Results* page shows that
+        the EU-27's decline is larger than the comparison group's at country level, that it is not timed to
+        the law, and that most of it disappears when areas with the same starting pollution are compared.
         """)
 
 with tab2:
@@ -72,12 +72,10 @@ with tab2:
         st.markdown("""
         #### Why This Matters
 
-        This visual subtlety doesn't mean nothing happened statistically — GPIE's corrected model,
-        using the same comparison-group design as NO₂, detects a **significant** relative
-        decline in EU-27 NDVI (coefficient = −0.0194, p = 0.008). Effects like this can be real but modest in magnitude,
-        easy to miss by eye but still statistically detectable — which is exactly why the causal
-        model exists rather than relying on a visual scan alone. See the *Methodology* page for
-        why this finding is treated as exploratory rather than fully causal.
+        NDVI is context here and is not part of the research paper. An earlier supplementary model
+        (baseline specification, same comparison group as NO₂) found a small relative decline in EU-27
+        NDVI (−0.0194, p = 0.008). It is an exploratory association only: land-use change, drought and
+        agricultural policy are not controlled for (see the *Methodology* page).
         """)
 
 st.markdown("---")

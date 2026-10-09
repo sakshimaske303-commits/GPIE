@@ -27,10 +27,15 @@ def main():
         err = [np.array(est) - np.array(low), np.array(high) - np.array(est)]
         ax.errorbar(x + offset, est, yerr=err, fmt="o", color=color, capsize=4, label=label)
     ax.axhline(0, color="black", linewidth=0.8)
+    # The reference block falls in the period of COVID-19 restrictions, so I mark it.
+    ref = ORDER.index(REFERENCE)
+    ax.axvspan(ref - 0.4, ref + 0.4, color="gray", alpha=0.12, linewidth=0)
+    ax.text(ref, ax.get_ylim()[0] * 0.92, "reference block\n(COVID-19\nrestrictions)", fontsize=8, color="gray",
+            ha="center", va="bottom")
     ax.axvline(2.5, color="gray", linestyle=":", linewidth=1.2)
     ax.text(2.55, ax.get_ylim()[1] * 0.92, "Climate Law\n(July 2021)", fontsize=9, color="gray", va="top")
     ax.set_xticks(x)
-    ax.set_xticklabels([b.replace("-", "–").replace(" 20", "\n20", 1) if len(b) > 12 else b.replace("-", "–") for b in ORDER],
+    ax.set_xticklabels([b.replace("-", "–\n") if len(b) > 12 else b.replace("-", "–") for b in ORDER],
                        fontsize=9)
     ax.set_ylabel("EU-27 minus comparison group, relative to\nJul 2020 – Jun 2021 (10⁻⁶ mol/m²)")
     ax.set_title("EU-27 vs. comparison group NO₂ in 12-month blocks (95% confidence intervals)", fontsize=12)

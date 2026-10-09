@@ -178,8 +178,10 @@ def main():
                label=f"{name} pixels")
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
-    ax.set_xticklabels(LABELS)
-    ax.set_xlabel("Pre-treatment NO₂ level of the pixel (10⁻⁵ mol/m²)")
+    counts = tab.pivot(index="baseline_class_1e-5", columns="group", values="pixels").reindex(LABELS).fillna(0)
+    ax.set_xticklabels([f"{lab}\n{int(counts.loc[lab, 'EU-27']):,} / {int(counts.loc[lab, 'control']):,}" for lab in LABELS],
+                       fontsize=9)
+    ax.set_xlabel("Pre-treatment NO₂ level of the pixel (10⁻⁵ mol/m²); pixels: EU-27 / comparison group")
     ax.set_ylabel("Change in NO₂ from Jul 2023 vs. pre-treatment (%)")
     ax.set_title("Change in NO₂ by the pixel's pre-treatment level, EU-27 and comparison pixels\n"
                  "0.1° pixels, Jul 2023 – Dec 2024 against Jan 2019 – Jun 2021", fontsize=12)

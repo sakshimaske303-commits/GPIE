@@ -115,7 +115,7 @@ if selected_codes:
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(
-        "<p class='caption-text'>Dotted lines indicate control-group (non-EU) countries. "
+        "<p class='caption-text'>Dotted lines indicate comparison-group (non-EU) countries. "
         "Dashed vertical line marks the treatment cutoff: the European Climate Law was adopted on 30 June 2021 and entered into force on 29 July 2021.</p>",
         unsafe_allow_html=True,
     )

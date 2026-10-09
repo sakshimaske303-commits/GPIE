@@ -38,6 +38,11 @@ COUNTRY_NAMES = {
 }
 
 
+
+# Esri Light Gray basemap (CARTO tiles now ask for an API key)
+ESRI_LIGHT = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+ESRI_ATTR = "Tiles &copy; Esri — Esri, HERE, Garmin, &copy; OpenStreetMap contributors"
+
 def load_geometry():
     records = []
     with open(NUTS_PATH, encoding="utf-8") as f:
@@ -57,7 +62,7 @@ def load_geometry():
 
 
 def base_map():
-    return folium.Map(location=[54, 12], zoom_start=4, tiles="cartodbpositron")
+    return folium.Map(location=[54, 12], zoom_start=4, tiles=ESRI_LIGHT, attr=ESRI_ATTR, max_native_zoom=16)
 
 
 def choropleth(gdf, value_col, legend, fmt, palette, out_name, title):
@@ -282,7 +287,7 @@ def build_pixel_change_map():
     limit = 15
     rgba = cm.get_cmap("RdBu_r")(colors.Normalize(-limit, limit)(change))
     rgba[..., 3] = np.where(np.isfinite(change), 0.85, 0.0)
-    m = folium.Map(location=[50, 10], zoom_start=4, tiles="cartodbpositron")
+    m = folium.Map(location=[50, 10], zoom_start=4, tiles=ESRI_LIGHT, attr=ESRI_ATTR, max_native_zoom=16)
     folium.raster_layers.ImageOverlay(rgba, bounds=[[BBOX[1], BBOX[0]], [BBOX[3], BBOX[2]]],
                                       mercator_project=True, opacity=1.0).add_to(m)
     stops = [colors.to_hex(cm.get_cmap("RdBu_r")(v)) for v in np.linspace(0, 1, 9)]

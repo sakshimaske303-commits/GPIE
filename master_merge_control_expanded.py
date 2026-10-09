@@ -1,5 +1,6 @@
-"""I build the expanded control-group dataset (original 30 + Iceland/Balkans, Norway NO2 replaced).
-It goes to a separate file, so master_dataset_control.csv is not touched."""
+"""Old version, kept for the record. I built the expanded control-group dataset here (original 30 +
+Iceland/Balkans) from the old single-mosaic NO2 files, so it still has end-of-month snapshots.
+My current panel comes from master_merge_control.py."""
 import json
 import csv
 import os

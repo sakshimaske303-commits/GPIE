@@ -1,5 +1,6 @@
-"""I run my final DiD model on the expanded control-group file.
-Old version, kept for the record. It gives the same result as causal_inference_final_did.py."""
+"""Old version, kept for the record. I ran my DiD on the expanded control file here, but that file still has
+the old end-of-month NO2 snapshots, so it gives my superseded estimate. My current models are in
+causal_inference_identification_checks.py and causal_inference_stress_tests.py."""
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm

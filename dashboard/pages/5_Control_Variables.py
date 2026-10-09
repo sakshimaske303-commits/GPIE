@@ -8,18 +8,15 @@ from styles import apply_custom_style, PALETTE, embed_html
 
 
 def render_map(png_name, html_name, height=520):
-    html_path = os.path.join(PROJECT_ROOT, "outputs", "plots", html_name)
-    if os.path.exists(html_path):
-        with open(html_path, "r", encoding="utf-8") as f:
-            embed_html(f.read(), height=height)
-    else:
-        st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
+    # I always show the PNG from my map_*.py scripts. The old HTML maps in outputs/plots use outdated data;
+    # current interactive versions are on the Interactive Maps page.
+    st.image(os.path.join(PROJECT_ROOT, "outputs", "plots", png_name), use_container_width=True)
 
 apply_custom_style()
 
 st.markdown("<h1 style='text-align: center;'>💶 CONTROL VARIABLES & CONTEXT</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Economic, Environmental & Climate Controls Used in the Causal Model</h3>",
+    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Controls Used in the Model, and Environmental Context</h3>",
     unsafe_allow_html=True,
 )
 st.markdown("---")
@@ -27,10 +24,10 @@ st.markdown("---")
 st.markdown("""
 ### Why These Variables Matter
 
-GPIE's causal-inference model doesn't just compare NO₂ before and after treatment — it also 
-**controls for economic, climatic, and environmental factors** that could otherwise confound the 
-result. GDP accounts for economic activity levels, temperature and precipitation account for 
-weather-driven pollution variation, and land cover / elevation provide environmental baseline context.
+The country-level model controls for **GDP, temperature and precipitation** (with wind speed,
+boundary-layer height and COVID-19 stringency as robustness checks). Land cover and elevation are **not**
+in the model: they are fixed over time, so country fixed effects absorb them, and they are shown here only
+as environmental context.
 """)
 
 tab1, tab2, tab3, tab4 = st.tabs(["GDP", "Land Cover", "Elevation", "Climate"])
@@ -46,7 +43,7 @@ with tab1:
     """)
     render_map("gdp_choropleth_map.png", "gdp_choropleth_map.html")
     st.markdown(
-        "<p class='caption-text'>Source: Eurostat (EU-27), World Bank Open Data (control group)</p>",
+        "<p class='caption-text'>Source: Eurostat (EU-27), World Bank Open Data (comparison group)</p>",
         unsafe_allow_html=True,
     )
 

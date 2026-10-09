@@ -1,5 +1,6 @@
 """I run extra robustness checks on my DiD: no GDP, log outcome, shifted treatment dates,
-baseline-pollution split, EU-specific trend and minimum detectable effect."""
+baseline-pollution split, EU-specific trend and minimum detectable effect.
+I run them on my baseline model; the paper uses my main model, so its numbers differ from these."""
 import json
 import numpy as np
 import pandas as pd

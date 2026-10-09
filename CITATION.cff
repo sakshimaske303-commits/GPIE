@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or its findings, please cite it using the metadata below."
-title: "GPIE — Green Policy Intelligence Engine: Independently Verifying Environmental Policy Claims Using Satellite Data"
+title: "GPIE — Green Policy Intelligence Engine: What Does a Country-Level Difference-in-Differences on Satellite NO2 Identify?"
 type: software
 authors:
   - family-names: "Maske"
@@ -13,41 +13,33 @@ identifiers:
     description: "Zenodo archive of GPIE v1.2.0"
 doi: "10.5281/zenodo.21756661"
 abstract: >-
-  GPIE is a geospatial causal-inference framework that tests whether the European
-  Climate Law (Regulation (EU) 2021/1119, adopted 30 June 2021, in force 29 July
-  2021) produced a
-  statistically distinguishable reduction in tropospheric NO2 pollution across the
-  EU-27, using Sentinel-5P TROPOMI satellite observations (2019-2024) and a
-  Difference-in-Differences design with a 9-country non-EU comparison group
-  (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina,
-  Montenegro, North Macedonia, Serbia). With NO2 aggregated to true monthly means,
-  EU-27 NO2 fell relative to the comparison group (pooled DiD -1.52e-6 mol/m2,
-  about 4.9% of the pre-treatment EU mean, p = 0.018, cluster-robust), mainly in
-  the 14 higher-baseline member states. The design cannot attribute this to the
-  Climate Law: every alternative cutoff date is significant, an EU-specific
-  linear trend absorbs the treatment-date term, and the estimate weakens without
-  the winter months, with area weights and with log GDP. Most of the estimate
-  reflects baseline composition: under random group assignment the estimate
-  follows the pre-treatment gap between groups, and matching EU and comparison
-  pixels on pre-treatment level on a 0.1 degree grid cuts it to -0.21e-6
-  (p = 0.348). Descriptively, polluted pixels lost 15-25% in north-western
-  Europe, including the non-EU United Kingdom and Switzerland, and 0-6% in
-  south-eastern Europe, including EU members; the cause is not identified. A
-  secondary NDVI outcome shows a relative decline (p = 0.008), reported as an
-  exploratory association. Earlier versions, based on end-of-month NO2 snapshots,
-  reported a pooled null and are superseded.
+  GPIE tests what a country-level difference-in-differences (DiD) on satellite
+  NO2 identifies when treated and comparison countries differ in baseline
+  pollution. It uses Sentinel-5P TROPOMI tropospheric NO2 (2,192 daily 0.1 degree
+  rasters, 2019-2024) and, as a negative-control case, the European Climate Law
+  (Regulation (EU) 2021/1119, adopted 30 June 2021), comparing the EU-27 with nine
+  neighbouring non-EU countries. The country-level DiD finds NO2 fell 1.34e-6
+  mol/m2 more in the EU-27 (4.3% of its pre-treatment level, p = 0.022), but the
+  estimate is not significant without the winter months, with area weights, with
+  log GDP or under randomization inference on the coefficient, and it appears only
+  from the third year after the law. Under random assignment of the treatment
+  label the estimate follows the pre-treatment gap between groups (r = -0.81), and
+  comparing EU and comparison pixels that started at the same NO2 level reduces it
+  to -0.21e-6 (95% CI -0.67 to +0.24). Polluted areas lost about 15-25% of their
+  NO2 in north-western Europe, including the non-EU United Kingdom and
+  Switzerland, and little in south-eastern Europe, including EU members, and in
+  western Turkey; the cause of this pattern is not identified. Country-level DiD
+  on satellite NO2 should be checked against comparisons matched on baseline
+  pollution before it is read as a policy effect.
 keywords:
-  - causal inference
-  - difference-in-differences
-  - synthetic control
-  - spatial autocorrelation
-  - treatment effect heterogeneity
-  - satellite remote sensing
+  - nitrogen dioxide
+  - TROPOMI
   - Sentinel-5P
-  - air pollution
-  - NO2
-  - NDVI
-  - European Green Deal
+  - difference-in-differences
+  - parallel trends
+  - aggregation
+  - modifiable areal unit problem
+  - satellite remote sensing
   - policy evaluation
   - geospatial analysis
 license: CC-BY-4.0

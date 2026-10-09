@@ -76,7 +76,9 @@ def t_randomization(d, n_perm=N_PERM, seed=12345):
     codes, gidx = np.unique(d["country"].values, return_inverse=True)
     y = d["mean_no2"].astype(float).values * 1e6
     pre_level = d[d["post"] == 0].groupby("country")["mean_no2"].mean() * 1e6
-    correction = np.sqrt(len(codes) / (len(codes) - 1))        # small-sample factor for the cluster t
+    # I use the same small-sample factor as statsmodels: G/(G-1) * (N-1)/(N-K).
+    n_obs, n_par = len(d), cic.drop_collinear(cic.build(d)).shape[1]
+    correction = np.sqrt(len(codes) / (len(codes) - 1) * (n_obs - 1) / (n_obs - n_par))
 
     def t_stat(dd, eu_col):
         X = cic.drop_collinear(cic.build(dd, eu_col=eu_col))
@@ -333,7 +335,8 @@ def pixel_level(monthly, year, month, masks):
 def plot_country_change(rows, extra):
     names = {"TR": "TR*", "UA": "UA*", "XK": "XK*"}
     more = [{"country": names[c], "group": "outside", "change_from_jul2023_pct": a["above_3e-5"]["change_from_jul2023_pct"],
-             "change_mar_oct_only_pct": a["above_3e-5"]["change_mar_oct_only_pct"]}
+             "change_mar_oct_only_pct": a["above_3e-5"]["change_mar_oct_only_pct"],
+             "pixels_above_3e-5": a["above_3e-5"]["pixels"]}
             for c, a in extra.items() if "above_3e-5" in a and a["above_3e-5"]["pixels"] >= 20]
     tab = pd.concat([pd.DataFrame(rows), pd.DataFrame(more)]).sort_values("change_from_jul2023_pct")
     palette = {"comparison": "#d95f0e", "EU-27": "#2c7fb8", "outside": "#7f7f7f"}
@@ -344,7 +347,8 @@ def plot_country_change(rows, extra):
     ax.scatter(x, tab["change_mar_oct_only_pct"], color="black", s=18, zorder=3, label="March-October only")
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xticks(x)
-    ax.set_xticklabels(tab["country"].replace({"EL": "GR"}))
+    ax.set_xticklabels([f"{c}\n{int(n):,}" for c, n in zip(tab["country"], tab["pixels_above_3e-5"])], fontsize=8)
+    ax.set_xlabel("Country (EU code; EL = Greece) and number of pixels above 3 × 10⁻⁵ mol/m²", fontsize=9)
     ax.set_ylabel("Change in NO₂ from Jul 2023 vs. pre-treatment (%)")
     ax.set_title("Change in NO₂ in polluted pixels, by country\n"
                  "Pixels that started above 3 × 10⁻⁵ mol/m²; Jul 2023 – Dec 2024 against Jan 2019 – Jun 2021", fontsize=12)
@@ -375,6 +379,8 @@ def plot_placebo(result):
     ax.set_xlabel("Pre-treatment NO₂: pseudo-treated minus pseudo-comparison countries (10⁻⁶ mol/m²)")
     ax.set_ylabel("DiD estimate (10⁻⁶ mol/m²)")
     ax.set_title("DiD estimates under random assignment of the treatment label", fontsize=12)
+    ax.text(0.02, 0.03, f"{len(draws)} random assignments; r = {draws['estimate'].corr(draws['pre_level_gap']):.2f}, "
+            f"slope = {fit[0]:.3f}", transform=ax.transAxes, fontsize=9, color="dimgray")
     ax.legend(frameon=False)
     ax.grid(alpha=0.3)
     plt.tight_layout()

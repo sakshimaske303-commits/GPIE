@@ -56,7 +56,7 @@ st.markdown("""
 | Land Cover | ESA WorldCover | AWS Open Data |
 | Elevation (DEM) | Copernicus DEM GLO-30 | AWS Open Data |
 | GDP (EU-27) | Eurostat | REST Statistics API |
-| GDP (Control Group) | World Bank | Open Data API |
+| GDP (Comparison Group) | World Bank | Open Data API |
 | Administrative Boundaries | Eurostat GISCO (NUTS), GADM | Direct Download |
 | Policy Records | EUR-Lex | Web Scraping |
 """)

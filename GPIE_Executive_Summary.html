@@ -24,81 +24,61 @@
 </head>
 <body>
 <h1>GPIE — Green Policy Intelligence Engine</h1>
-<p><em>Independently Verifying Environmental Policy Claims Using Satellite Data</em></p>
+<p><em>What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify?</em></p>
 <p><strong>Executive Summary</strong> · DOI: 10.5281/zenodo.21756661 · Sakshi D. Maske</p>
 <hr />
-<h2>Project Overview</h2>
-<p>GPIE started from a question that is seldom asked in the EU climate discussion: did the European Climate Law change pollution in a way that can be checked physically, not only through governments' own assessments? The project had two starting points: a EUR-Lex scraper to pin down the legal dates of the law, and Sentinel-5P NO₂ readings to see whether the NO₂ trend bent at that point. My first model said yes, and I almost stopped there — but a placebo test on a fake treatment date came back just as strong, which meant the model was picking up Europe's general NO₂ decline rather than anything specific to the Climate Law. So I built an outside comparison group: first three non-EU countries (UK, Norway, Switzerland), then nine, adding Iceland and five Western Balkan EU-accession candidates. The results below are built on that nine-country group. Later, a second correction changed the picture again: the satellite values themselves had been end-of-month snapshots rather than monthly means. The project's real headline is the validation process — twice it caught a wrong answer before that answer stayed the reported one.</p>
-<h2>Overview</h2>
-<p>GPIE treats government claims as hypotheses to be tested against observational evidence ("Trust, but verify"). It is a geospatial causal-inference workflow that measures the environmental effect of the European Green Deal's flagship legislation — the European Climate Law, Regulation (EU) 2021/1119 — with a statistical design rather than relying on self-reported policy success. The European Green Deal was chosen as the case study because of its scope, the availability of open data and its international relevance.</p>
+<h2>The Problem</h2>
+<p>Satellite NO₂ makes it easy to compare pollution in countries that adopted a policy with countries that did not, and a difference-in-differences (DiD) on country averages is a common way to do it. But the change in an NO₂ column depends on its level: clean areas have little to lose. If the treated countries start out more polluted than the comparison countries, a DiD in levels can record that difference as a policy effect.</p>
 <h2>The Question</h2>
-<p>Did the European Climate Law (adopted 30 June 2021, in force 29 July 2021) produce a statistically distinguishable reduction in NO₂ pollution across the EU-27, beyond the change seen in comparable non-EU countries?</p>
-<h2>The Method</h2>
-<p>A two-group Difference-in-Differences (DiD) design compares the EU-27 with a 9-country non-EU comparison group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia and Serbia — on a monthly country panel, 2019–2024, with July 2021 as the first post-treatment month. NO₂ comes from Sentinel-5P TROPOMI as true monthly means (one raster per day, QA ≥ 0.75, pooled per country); controls are ERA5 temperature and precipitation and GDP (Eurostat/World Bank), with country and calendar-month fixed effects and standard errors clustered by country. NDVI (CGLS) is a secondary outcome. Additional checks: placebo date, 23-quarter event study, GDP exclusion, log outcome, treatment-date shifts, an EU-specific trend, a post-hoc baseline split, a synthetic control and Moran's I.</p>
-<h2>The Finding</h2>
-<p>NO₂ fell more in the EU-27 than in the comparison group, by about 5% of the EU's pre-treatment level, and the decline is concentrated in the 14 more polluted member states. But the design cannot attribute this to the Climate Law: nothing changes in the first two years after the law and the whole decline appears from July 2023 (−2.18e-6, p = 0.012), every alternative cutoff date is just as significant, and a steady EU-specific trend absorbs the treatment-date effect (p = 0.251). The estimate itself is sturdy: it holds with year-month fixed effects and EU-specific seasonality (−1.34e-6, p = 0.022; wild cluster bootstrap p = 0.018), with wind, boundary-layer and COVID-19 stringency controls, and when the COVID-19 or energy-crisis months are dropped — though not under randomization inference (p = 0.17) or without the GDP control (p = 0.082). A pixel-level check then shows where the estimate comes from: the decline grows with how polluted each 0.1° pixel was, and comparing pixels with the same starting level cuts the estimate to −0.21e-6 (p = 0.348). Under random assignment of countries to the two groups, the DiD estimate follows the pre-treatment gap between them (r = −0.81). Descriptively, polluted pixels lost 15–25% in north-western Europe, including the non-EU United Kingdom and Switzerland, and 0–6% in south-eastern Europe, including EU members Romania, Bulgaria, Croatia and Greece as well as Serbia and Bosnia and Herzegovina; western Turkey, outside the sample, shows no decline. Within the north-west and within the south-east the difference across the EU border is small and not significant, but those contrasts rest on few comparison countries and wide intervals. The country-level estimate is also fragile: it weakens without the winter months (−0.81e-6, p = 0.11), with countries weighted by area (p = 0.11) and with log GDP (p = 0.21). So the country-level estimate mostly reflects that the EU-27 started out more polluted, and its size depends on winter retrievals. The data do not require an effect at the EU border and cannot rule one out; the cause of the regional pattern is not identified.</p>
+<p>When treated and comparison countries differ in baseline pollution, what does a country-level DiD on satellite NO₂ identify?
+- <strong>RQ1:</strong> how much of the country-level estimate is explained by the difference in pre-treatment NO₂ between the groups?
+- <strong>RQ2:</strong> when EU and comparison areas are compared at the same starting level, where did NO₂ fall, and does the pattern follow the EU border?</p>
+<p>The test case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021). It applies to all 27 member states from one date and not to their neighbours, but it sets climate targets and has no direct mechanism on NO₂. It is used deliberately as a negative-control case: an estimate that looks like an effect needs another explanation.</p>
+<h2>Data and Method</h2>
+<ul>
+<li><strong>Outcome:</strong> Sentinel-5P TROPOMI tropospheric NO₂, one 0.1° raster per day for 2,192 days (2019–2024, quality value ≥ 0.75), pooled into monthly means for 36 countries and for every pixel.</li>
+<li><strong>Groups:</strong> the EU-27 against nine non-EU countries (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia); July 2021 is the first post-treatment month.</li>
+<li><strong>Country level:</strong> DiD with country and year-month fixed effects, an EU-specific seasonal cycle, ERA5 weather and GDP controls, and standard errors clustered by country; re-estimated under about 20 alternative specifications.</li>
+<li><strong>Composition tests (RQ1):</strong> the interaction of each country's pre-treatment level with the post period; 999 random assignments of the treatment label; and a pixel-level DiD that compares EU and comparison pixels within the same pre-treatment class.</li>
+<li><strong>Geography (RQ2):</strong> change in polluted pixels country by country, including western Turkey and Ukraine outside the sample.</li>
+</ul>
+<h2>The Findings</h2>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>NO2 (Primary, Pooled)</th>
-<th>NO2 (Higher-Baseline, post-hoc)</th>
-<th>NDVI (Secondary)</th>
+<th>Analysis</th>
+<th>Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>DiD Coefficient</td>
-<td>-1.52e-6 (log: -4.2%)</td>
-<td>-2.85e-6 (log: -6.4%)</td>
-<td>-0.0194</td>
+<td>Country-level DiD</td>
+<td>NO₂ fell 1.34 × 10⁻⁶ mol/m² more in the EU-27 (4.3% of its pre-treatment level; p = 0.022)</td>
 </tr>
 <tr>
-<td>P-value (cluster-robust)</td>
-<td>0.018 (log: 0.041)</td>
-<td>0.006 (log: 0.012)</td>
-<td>0.008</td>
+<td>Fragility</td>
+<td>Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), or under randomization inference on the coefficient (p = 0.17); appears only from July 2023</td>
 </tr>
 <tr>
-<td>95% Confidence Interval</td>
-<td>[-2.77e-6, -2.7e-7]</td>
-<td>—</td>
-<td>[-0.0335, -0.0053]</td>
+<td>Random assignment of the label</td>
+<td>Estimates follow the pre-treatment gap between groups (r = −0.81); the EU-27's estimate is what its gap predicts</td>
 </tr>
 <tr>
-<td>With EU-specific trend</td>
-<td>+8.7e-7, p = 0.251</td>
-<td>—</td>
-<td>—</td>
+<td>Pixels matched on pre-treatment level</td>
+<td>−0.21 × 10⁻⁶ (95% CI −0.67 to +0.24); about 84% of the country-level estimate disappears</td>
+</tr>
+<tr>
+<td>Where NO₂ fell</td>
+<td>Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia; western Turkey did not decline</td>
 </tr>
 </tbody>
 </table>
-<p>The NDVI result is an exploratory association, not evidence that the Climate Law changed vegetation health: land-use change, drought stress and agricultural policy are not controlled for.</p>
-<h2>Validation &amp; Robustness Checklist</h2>
-<ul>
-<li><span class="check">&#10003;</span> Cluster-robust standard errors, clustered by country (Bertrand, Duflo &amp; Mullainathan, 2004)</li>
-<li><span class="check">&#10003;</span> External comparison group — 9 non-EU countries (some share EU climate instruments: EU ETS for Norway/Iceland, linked Swiss ETS, Western Balkans Green Agenda)</li>
-<li><span class="check">&#10003;</span> Placebo test — exposed the flawed initial single-cohort design</li>
-<li><span class="check">&#10003;</span> 23-quarter event study — 5 of 9 pre-treatment quarters significant with a common seasonal cycle; with an EU-specific seasonal cycle and 12-month blocks the pre-treatment blocks are not significant (joint p = 0.292)</li>
-<li><span class="check">&#10003;</span> Year-month fixed effects + EU-specific seasonality — −1.34e-6 (p = 0.022); unchanged by wind speed, boundary-layer height and COVID-19 stringency controls</li>
-<li><span class="check">&#10003;</span> 12-month blocks — no effect Jul 2021–Jun 2023 (p = 0.98, 0.45); decline only from Jul 2023 (−2.18e-6, p = 0.012)</li>
-<li><span class="check">&#10003;</span> Few-cluster inference — wild cluster bootstrap p = 0.018; randomization inference p = 0.17; stable when any one comparison country is dropped</li>
-<li><span class="check">&#10003;</span> Pixel-level check (0.1° grid, 51,072 pixels) — decline grows with pre-treatment level; matched on that level the estimate is −0.21e-6 (p = 0.348)</li>
-<li><span class="check">&#10003;</span> Regional contrasts — small, non-significant difference across the EU border inside the north-west (p = 0.44, wide interval) and the south-east (p = 0.48); north-west vs south-east EU members differ (−1.43e-6, p = 0.016; without Nov–Feb −0.29e-6, p = 0.50); matched against western Turkey the EU difference stays (−1.43e-6, one comparison country)</li>
-<li><span class="check">&#10003;</span> Stress tests — without Nov–Feb −0.81e-6 (p = 0.11); area-weighted −0.96e-6 (p = 0.11); log GDP −0.94e-6 (p = 0.21); randomization inference on the t-statistic p = 0.046; random group assignments: estimate follows the pre-treatment gap (r = −0.81), 9.6% significant at 5%</li>
-<li><span class="check">&#10003;</span> COVID-19 window and energy-crisis months excluded — estimate remains (−2.25e-6, p = 0.015; −2.08e-6, p = 0.008)</li>
-<li><span class="check">&#10003;</span> TROPOMI processor versions checked — reprocessed v2.4.0 to July 2022, operational v2.4–2.7 after; no version change at the treatment date</li>
-<li><span class="check">&#10003;</span> Treatment date ±6/±12 months — every date significant (p = 0.006 to 0.035): no break specific to the law's date</li>
-<li><span class="check">&#10003;</span> EU-specific trend — treatment term no longer significant (p = 0.251); trend −7.9e-7 per year (p = 0.022)</li>
-<li><span class="check">&#10003;</span> GDP excluded (−1.49e-6, p = 0.061); log outcome (−4.2%, p = 0.041); baseline split (decline only in higher-baseline group)</li>
-<li><span class="check">&#10003;</span> Synthetic control (9 donors, intercept-adjusted) — gap −1.45e-6, rank 2 of 10 among placebo countries</li>
-<li><span class="check">&#10003;</span> Moran's I — raw NO₂ clustered (I = 0.578, p = 0.001); DiD residuals clustered in 59 of 72 months (median I = 0.347), so p-values are likely too small</li>
-<li><span class="check">&#10003;</span> All of the above reported, including the results that limit the headline</li>
-</ul>
-<h2>Honest Limitation</h2>
-<p>The headline coefficient is statistically significant, but that is not the same as a Climate Law effect: the checks above show the timing does not line up with the law. This version also corrects an earlier data problem. NO₂ "monthly" values had been single end-of-month snapshots (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval); they are now true monthly means, and every number changed — the earlier pooled null (p = 0.101) is superseded. Remaining limits: a country-level estimate that largely reflects where polluted areas are and that depends on winter retrievals, country weighting and the form of the GDP control, significance that depends on the GDP control and is not confirmed by randomization inference, nine comparison clusters, spatially correlated residuals, a comparison group that differs structurally from the EU-27, and Malta represented by only three 0.1° pixels.</p>
-<h2>Global Transferability</h2>
-<p>The NO₂ acquisition step was run on India's national boundary (2019–2024) with the same request builder, evalscript and QA threshold as the EU study. The test records how many months returned data and how the values compare with the EU-27 distribution. Result: all 72 months returned data; India's monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m² (median 3.32 × 10⁻⁵), with no negative months, and all 72 values fall inside the 5th–95th percentile range of EU-27 country-months (1.34 × 10⁻⁵ to 6.34 × 10⁻⁵ mol/m²). It shows the data pipeline runs outside Europe; transferring the causal design would need its own comparison group.</p>
+<h2>What It Means</h2>
+<p>Most of the country-level estimate reflects that the EU-27 was more polluted to begin with. The decline in NO₂ was regional, strongest in the polluted north-west on both sides of the EU border, and the data do not require an effect at the border, although they cannot rule one out. For satellite-based policy evaluation this gives three practical rules: compare units at the same starting level, report results with and without the winter months, and report weighting and functional-form choices, because here each of them alone moves the estimate across the 5% threshold.</p>
+<h2>Limitations</h2>
+<p>The highly polluted comparison pixels are mostly in the United Kingdom, which shares EU-derived vehicle standards, so the comparison separates EU membership from pollution level but not EU-origin regulation from its absence. The time window for the regional description was chosen after seeing the data. Part of the regional contrast comes from winter retrievals, when valid observations are fewest. There is no comparison with ground monitors, weather controls are country means, and inference rests on only nine comparison countries.</p>
+<h2>Correction History</h2>
+<p>Earlier versions reported a pooled null (p = 0.101), based on NO₂ values that turned out to be end-of-month snapshots rather than monthly means. The acquisition was rebuilt from daily rasters and every number was re-estimated. The Development Log records every correction.</p>
 <hr />
 <p><strong>GitHub:</strong> github.com/sakshimaske303-commits/GPIE | <strong>Live Dashboard:</strong> f5cf6fijj9gm564r6aapt6.streamlit.app | <strong>Zenodo DOI:</strong> 10.5281/zenodo.21756661</p>
 <p>Sakshi D. Maske — Independent Geospatial Researcher</p>

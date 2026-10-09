@@ -1,4 +1,4 @@
-"""Row of buttons that open my PDFs in a new browser tab (Streamlit Cloud blocks iframe embeds)."""
+"""I make a row of buttons that open my PDFs in a new tab (Streamlit Cloud blocks iframe embeds)."""
 import json
 
 

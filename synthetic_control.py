@@ -1,4 +1,4 @@
-"""Synthetic control with convex donor weights and a level shift, fitted together on demeaned series."""
+"""I fit a synthetic control with convex donor weights and a level shift, together on demeaned series."""
 
 import json
 import numpy as np

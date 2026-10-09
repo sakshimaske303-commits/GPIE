@@ -1,4 +1,4 @@
-"""Sentinel Hub Statistical API helpers. I use them for monthly NDVI country means."""
+"""My Sentinel Hub Statistical API helpers, which I use for monthly NDVI country means."""
 import json
 import time
 import requests
