@@ -2,7 +2,7 @@
 
 *What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify?*
 
-**Executive Summary** · DOI: 10.5281/zenodo.21756661 · Sakshi D. Maske
+**Executive Summary** · Sakshi D. Maske
 
 ---
 
@@ -53,6 +53,6 @@ Earlier versions reported a pooled null (p = 0.101), based on NO₂ values that 
 
 ---
 
-**GitHub:** github.com/sakshimaske303-commits/GPIE | **Live Dashboard:** f5cf6fijj9gm564r6aapt6.streamlit.app | **Zenodo DOI:** 10.5281/zenodo.21756661
+**GitHub:** github.com/sakshimaske303-commits/GPIE | **Live Dashboard:** f5cf6fijj9gm564r6aapt6.streamlit.app
 
 Sakshi D. Maske — Independent Geospatial Researcher

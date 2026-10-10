@@ -7,11 +7,6 @@ authors:
     given-names: "Sakshi D."
 repository-code: "https://github.com/sakshimaske303-commits/GPIE"
 url: "https://github.com/sakshimaske303-commits/GPIE"
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.21756661"
-    description: "Zenodo archive of GPIE v1.2.0"
-doi: "10.5281/zenodo.21756661"
 abstract: >-
   GPIE tests what a country-level difference-in-differences (DiD) on satellite
   NO2 identifies when treated and comparison countries differ in baseline
