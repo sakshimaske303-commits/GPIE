@@ -30,16 +30,18 @@
 <h2>The Problem</h2>
 <p>Satellite NO₂ makes it easy to compare pollution in countries that adopted a policy with countries that did not, and a difference-in-differences (DiD) on country averages is a common way to do it. But the change in an NO₂ column depends on its level: clean areas have little to lose. If the treated countries start out more polluted than the comparison countries, a DiD in levels can record that difference as a policy effect.</p>
 <h2>The Question</h2>
-<p>When treated and comparison countries differ in baseline pollution, what does a country-level DiD on satellite NO₂ identify?
-- <strong>RQ1:</strong> how much of the country-level estimate is explained by the difference in pre-treatment NO₂ between the groups?
-- <strong>RQ2:</strong> when EU and comparison areas are compared at the same starting level, where did NO₂ fall, and does the pattern follow the EU border?</p>
+<p>When treated and comparison countries differ in baseline pollution, what does a country-level DiD on satellite NO₂ identify?</p>
+<ul>
+<li><strong>RQ1:</strong> how much of the country-level estimate is explained by the difference in pre-treatment NO₂ between the groups?</li>
+<li><strong>RQ2:</strong> when EU and comparison areas are compared at the same starting level, where did NO₂ fall, and does the pattern follow the EU border?</li>
+</ul>
 <p>The test case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021). It applies to all 27 member states from one date and not to their neighbours, but it sets climate targets and has no direct mechanism on NO₂. It is used deliberately as a negative-control case: an estimate that looks like an effect needs another explanation.</p>
 <h2>Data and Method</h2>
 <ul>
 <li><strong>Outcome:</strong> Sentinel-5P TROPOMI tropospheric NO₂, one 0.1° raster per day for 2,192 days (2019–2024, quality value ≥ 0.75), pooled into monthly means for 36 countries and for every pixel.</li>
 <li><strong>Groups:</strong> the EU-27 against nine non-EU countries (United Kingdom, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, Serbia); July 2021 is the first post-treatment month.</li>
-<li><strong>Country level:</strong> DiD with country and year-month fixed effects, an EU-specific seasonal cycle, ERA5 weather and GDP controls, and standard errors clustered by country; re-estimated under about 20 alternative specifications.</li>
-<li><strong>Composition tests (RQ1):</strong> the interaction of each country's pre-treatment level with the post period; 999 random assignments of the treatment label; and a pixel-level DiD that compares EU and comparison pixels within the same pre-treatment class.</li>
+<li><strong>Country level:</strong> DiD with country and year-month fixed effects, an EU-specific seasonal cycle, ERA5 weather and GDP controls, and standard errors clustered by country, re-estimated under about 20 alternative specifications.</li>
+<li><strong>Composition tests (RQ1):</strong> the interaction of each country's pre-treatment level with the post period, 999 random assignments of the treatment label, and a pixel-level DiD that compares EU and comparison pixels within the same pre-treatment class.</li>
 <li><strong>Geography (RQ2):</strong> change in polluted pixels country by country, including western Turkey and Ukraine outside the sample.</li>
 </ul>
 <h2>The Findings</h2>
@@ -57,32 +59,32 @@
 </tr>
 <tr>
 <td>Fragility</td>
-<td>Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), with real GDP per capita (p = 0.072), or under randomization inference on the coefficient (p = 0.17); appears only from July 2023</td>
+<td>Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), with real GDP per capita (p = 0.072), or under randomization inference on the coefficient (p = 0.17). The estimate appears only from July 2023</td>
 </tr>
 <tr>
 <td>Random assignment of the label</td>
-<td>Estimates follow the pre-treatment gap between groups (r = −0.81); the EU-27's estimate is what its gap predicts</td>
+<td>Estimates follow the pre-treatment gap between groups (r = −0.81), and the EU-27 estimate is close to what its gap predicts</td>
 </tr>
 <tr>
 <td>Pixels matched on pre-treatment level</td>
-<td>−0.21 × 10⁻⁶ (95% CI −0.67 to +0.24); about 84% of the country-level estimate disappears</td>
+<td>−0.21 × 10⁻⁶ (95% CI −0.67 to +0.24). Matching removes about 84% of the country-level estimate</td>
 </tr>
 <tr>
 <td>Positive control</td>
-<td>A known 2.5% reduction added to EU-27 NO₂ from July 2021 is found by the matched model (−0.80 × 10⁻⁶, p = 0.002), and with 80% power it detects a uniform reduction of about 3%, so the near-zero matched estimate is not a matter of low power</td>
+<td>The matched model finds a known 2.5% reduction added to EU-27 NO₂ from July 2021 (−0.80 × 10⁻⁶, p = 0.002). With 80% power it detects a uniform reduction of about 3%, so its near-zero estimate is not due to low power</td>
 </tr>
 <tr>
 <td>Ground stations</td>
-<td>Against 1,543 EEA background stations the satellite agrees (monthly r = 0.68); the stations give a similar relative EU-27 decline that is not significant (−4.0%, p = 0.12) and no December 2023 drop, which is a retrieval artefact</td>
+<td>The satellite agrees with 1,543 EEA background stations (monthly r = 0.68). The stations give a similar relative EU-27 decline that is not significant (−4.0%, p = 0.12), and they do not show the December 2023 drop that the satellite records in Denmark and Sweden, so that drop is a retrieval artefact</td>
 </tr>
 <tr>
 <td>Where NO₂ fell</td>
-<td>Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia; western Turkey did not decline</td>
+<td>Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia. Western Turkey did not decline</td>
 </tr>
 </tbody>
 </table>
 <h2>What It Means</h2>
-<p>Most of the country-level estimate reflects that the EU-27 was more polluted to begin with. The decline in NO₂ was regional, strongest in the polluted north-west on both sides of the EU border, and the data do not require an effect at the border, although they cannot rule one out. For satellite-based policy evaluation this gives three practical rules: compare units at the same starting level, report results with and without the winter months, and report weighting and functional-form choices, because here each of them alone moves the estimate across the 5% threshold.</p>
+<p>Most of the country-level estimate reflects that the EU-27 was more polluted to begin with. The decline in NO₂ was regional, strongest in the polluted north-west on both sides of the EU border, and the data do not require an effect at the border, although they cannot rule one out. For satellite-based policy evaluation, the lesson is to compare units at the same starting level, to report results with and without the winter months, and to report weighting and functional-form choices, since here each of them alone moves the estimate across the 5% threshold.</p>
 <h2>Limitations</h2>
 <p>The highly polluted comparison pixels are mostly in the United Kingdom, which shares EU-derived vehicle standards, so the comparison separates EU membership from pollution level but not EU-origin regulation from its absence. The time window for the regional description was chosen after seeing the data. Part of the regional contrast comes from winter retrievals, when valid observations are fewest. The ground-station check lacks the United Kingdom, weather controls are country means, and inference rests on only nine comparison countries.</p>
 <h2>Correction History</h2>
