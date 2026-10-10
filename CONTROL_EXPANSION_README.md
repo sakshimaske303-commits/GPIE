@@ -6,6 +6,8 @@
 > identical to `data/master_dataset_control.csv`. `causal_inference_expanded_control.py` therefore reproduces
 > the superseded pooled estimate, not the current one. The current 36-country panel is built by
 > `master_merge_control.py` (see "Superseded" below and the README's run order).
+>
+> The scripts named below now live in `archive/superseded_scripts/` (NO₂, NDVI, merge and model) and `src/` (GDP and ERA5); the commands keep their original form as a record.
 
 Adds Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia, and Serbia to the control group, and re-fetches Norway's NO2 to fix its 29/72-month gap. 
 

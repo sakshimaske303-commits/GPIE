@@ -60,7 +60,7 @@ Purpose : Descriptive context (mean elevation per EU-27 country); absorbed by co
 
 Dataset Name : ERA5 Climate Reanalysis
 Provider : Copernicus Climate Data Store (CDS)
-Parameter : Air Temperature and Total Precipitation (model controls); 10 m Wind Speed and Boundary-Layer Height (robustness controls, `download_era5_wind_blh.py`)
+Parameter : Air Temperature and Total Precipitation (model controls); 10 m Wind Speed and Boundary-Layer Height (robustness controls, `src/download_era5_wind_blh.py`)
 Data Type : Raster / NetCDF
 Format : NetCDF (.nc)
 Spatial Resolution : ~31 km
@@ -108,7 +108,7 @@ Parameter : Country boundaries for the United Kingdom, Norway and Switzerland (a
 Data Type : Vector
 Format : GeoJSON
 Purpose : Geometry for control countries not covered by the NUTS file used.
-Access : download_gadm.py (not stored in the repository; the GADM licence does not allow redistribution)
+Access : src/download_gadm.py (not stored in the repository; the GADM licence does not allow redistribution)
 
 ### DS11
 
@@ -136,7 +136,7 @@ Dataset Name : World Bank real GDP per capita (NY.GDP.PCAP.PP.KD, NY.GDP.PCAP.KD
 Provider : World Bank Open Data API
 Parameter : GDP per capita, PPP at constant 2021 international $, and at constant 2015 US$
 Data Type : Tabular
-Format : JSON → CSV (`download_gdp_real.py`)
+Format : JSON → CSV (`src/download_gdp_real.py`)
 Temporal Resolution : Annual
 Purpose : Check on the GDP control, one source for all 36 countries.
 
@@ -146,7 +146,7 @@ Dataset Name : EEA air-quality station data, NO₂ (verified, E1a)
 Provider : European Environment Agency, Air Quality Download Service (via the `airbase` package)
 Parameter : Hourly NO₂ (µg/m³) and station metadata (location, type, area)
 Data Type : Tabular
-Format : Parquet → station-month CSV (`validate_eea_stations.py`)
+Format : Parquet → station-month CSV (`src/validate_eea_stations.py`)
 Temporal Resolution : Hourly, 2019-2024; monthly means used
 Purpose : Check of the satellite data against ground stations. The United Kingdom has data only for 2019.
 

@@ -24,10 +24,10 @@ beautifulsoup4
 pyarrow
 airbase
 
-# GDAL (imported via `from osgeo import gdal` in download_dem.py) is not
+# GDAL (imported via `from osgeo import gdal` in src/download_dem.py) is not
 # reliably pip-installable on all platforms - it usually needs a matching
 # system-level GDAL install first, or is easiest via conda:
 #   conda install -c conda-forge gdal
 # HARP (used only by the superseded OData/Level-2 test pipeline,
-# extract_no2.py / run_pipeline.py) is conda-only:
+# archive/superseded_scripts/extract_no2.py and run_pipeline.py) is conda-only:
 #   conda install -c conda-forge harp

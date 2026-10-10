@@ -8,3 +8,11 @@ smoke-tests written while getting each data source's auth/parsing working
 files here). None of these are imported by, or required to run, the actual pipeline —
 kept for reference on how each data source was originally gotten working, not as
 part of the reproducible workflow described in the main README.
+
+## superseded_scripts/
+
+Earlier versions of the pipeline, kept so the Development Log can be followed: the OData + HARP
+Level-2 test pipeline (`run_pipeline.py`, `download_no2.py`, `extract_no2.py` and their helpers),
+the single-mosaic acquisition for the expanded control group, the merge and model scripts that read
+the superseded end-of-month NO₂ values, and the first single-cohort models. None of them is used by
+the paper or by `reproduce_paper.py`.

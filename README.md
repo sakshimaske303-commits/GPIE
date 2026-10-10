@@ -48,13 +48,13 @@ Further checks reported in the paper:
 - **Pixel level:** the matched estimate is flat in 12-month blocks before and after the law (all p ≥ 0.22) and unchanged without the COVID-19 months (−0.23 × 10⁻⁶).
 - **Inference:** p-values use a t distribution with clusters − 1 degrees of freedom; residuals are spatially correlated in 59 of 72 months (Moran's I), so the clustered p-values are, if anything, too small.
 
-> **Correction note:** earlier versions of this project reported a pooled null (p = 0.101). Those results were based on NO₂ values that turned out to be single end-of-month snapshots rather than monthly means (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval). The acquisition was rebuilt (`s5p_process_daily.py`: one raster per day, pooled into monthly means) and every number was re-estimated. The full history is in the Development Log.
+> **Correction note:** earlier versions of this project reported a pooled null (p = 0.101). Those results were based on NO₂ values that turned out to be single end-of-month snapshots rather than monthly means (Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval). The acquisition was rebuilt (`src/s5p_process_daily.py`: one raster per day, pooled into monthly means) and every number was re-estimated. The full history is in the Development Log.
 
 ---
 
 ## Interactive Maps
 
-Hoverable, zoomable versions of maps and charts, built by `build_interactive_maps.py` and embedded in the dashboard's **Interactive Maps** page. The NDVI, GDP, temperature and synthetic-control items are supplementary and are not part of the paper.
+Hoverable, zoomable versions of maps and charts, built by `src/build_interactive_maps.py` and embedded in the dashboard's **Interactive Maps** page. The NDVI, GDP, temperature and synthetic-control items are supplementary and are not part of the paper.
 
 | Map | Link |
 |---|---|
@@ -94,13 +94,15 @@ Contains modified Copernicus Sentinel data (2019–2024) processed by Sentinel H
 
 These come from earlier stages of the project. They use the baseline model (country and calendar-month fixed effects), not the paper's main model.
 - **NDVI.** The same design applied to CGLS NDVI gives −0.0194 (p = 0.008). It is an exploratory association, not evidence that the Climate Law affected vegetation: land-use change, drought and agricultural policy are not controlled for.
-- **Synthetic control** (`synthetic_control.py`): post-treatment gap −1.45 × 10⁻⁶, ranking 2nd of 10 among in-space placebos.
-- **Higher/lower-baseline split** (`causal_inference_robustness_checks.py`): the decline is concentrated in the 14 EU members with higher pre-treatment NO₂. The split is defined by the outcome and chosen after seeing the result.
-- **Transferability test.** The NO₂ acquisition step was run on India's GADM 4.1 boundary (2019–2024) with the same method (`test_india_transferability.py`). All 72 months returned data; the monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m², inside the 5th–95th percentile range of EU-27 country-months. This shows the pipeline runs outside Europe; it is not a causal analysis.
+- **Synthetic control** (`src/synthetic_control.py`): post-treatment gap −1.45 × 10⁻⁶, ranking 2nd of 10 among in-space placebos.
+- **Higher/lower-baseline split** (`src/causal_inference_robustness_checks.py`): the decline is concentrated in the 14 EU members with higher pre-treatment NO₂. The split is defined by the outcome and chosen after seeing the result.
+- **Transferability test.** The NO₂ acquisition step was run on India's GADM 4.1 boundary (2019–2024) with the same method (`src/test_india_transferability.py`). All 72 months returned data; the monthly national mean ranged from 2.27 × 10⁻⁵ to 4.16 × 10⁻⁵ mol/m², inside the 5th–95th percentile range of EU-27 country-months. This shows the pipeline runs outside Europe; it is not a causal analysis.
 
 ---
 
 ## Architecture
+
+All scripts named here are in `src/`.
 
 ```text
  SENTINEL-5P TROPOMI L2 NO₂ ──▶ s5p_process_daily.py / download_no2_gridded.py
@@ -121,17 +123,33 @@ These come from earlier stages of the project. They use the baseline model (coun
 
 ## Reproducibility
 
+### Quick reproduction
+
+From the repository root:
+
+```bash
+pip install -r requirements.txt
+python reproduce_paper.py --check   # lists which steps can run and which inputs are missing
+python reproduce_paper.py           # re-runs every estimate, table and figure in order (about 30 min)
+```
+
+Steps 1, 2 and 11 run from the data in this repository with no download. `src/download_nuts.py` and `src/download_gadm.py` (no account needed) add steps 9 and 10. Steps 3–8 also need the monthly 0.1° NO₂ grid, which `src/download_no2_gridded.py` builds with a free Sentinel Hub account. `python reproduce_paper.py --compare DIR` compares a re-run with an earlier copy of `data/*.json`; on my machine a full re-run gives every number in the paper again.
+
+All scripts are run from the repository root (for example `python src/master_merge_control.py`), because their file paths start at the root.
+
+### Full pipeline
+
 - **Environment**: Python 3.10+. Most dependencies install via `requirements.txt`; `geopandas`/`rasterio`/`GDAL` are easiest installed via `conda` (`conda install -c conda-forge geopandas rasterio gdal`) if the `pip` install fails on your platform.
 - **Credentials**: Sentinel Hub (`SH_CLIENT_ID`, `SH_CLIENT_SECRET`) and Copernicus CDS access need free accounts; credentials go in a local `.env` file (never committed). The World Bank and Eurostat APIs need no credentials.
 - **Run order for the paper:**
-  1. Boundaries: `download_nuts.py` and `download_gadm.py` (GADM files are not in the repository because the GADM licence does not allow redistribution).
-  2. NO₂: `download_no2_sentinelhub.py` (daily Process API rasters → country monthly means, `no2_stats_monthly_mean_36.json`) and `download_no2_gridded.py` (keeps every daily 0.1° raster and builds `data/earth_observation/no2/gridded/no2_grid_monthly.npz`, about 77 MB, which the pixel-level analysis needs; not in the repository because of its size). `check_s5p_processor_versions.py` checks which TROPOMI processor versions the values come from; `diagnose_sentinelhub.py` checks which Sentinel Hub endpoints currently work.
-  3. Controls: `download_era5.py` → `unzip_era5.py` → `process_era5.py` → `era5_regional_stats.py` + `era5_regional_stats_control_expansion.py`; `download_era5_wind_blh.py` (→ `data/era5_wind_blh_country_monthly.csv`); `download_eurostat_gdp.py` → `process_eurostat.py` → `apply_eu27_filter.py`; `download_gdp_control_countries.py` + `download_gdp_control_expansion.py`; `download_gdp_real.py` (real GDP per capita, for the check); `data/covid/oxcgrt_stringency_national.csv` (Oxford stringency index).
-  4. `master_merge_control.py` → `data/master_dataset_control.csv`
-  5. Models: `causal_inference_identification_checks.py` (→ `data/identification_checks.json`), `analyse_no2_grid_baseline.py` (→ `data/grid_baseline_checks.json`, Figures 4–5), `causal_inference_stress_tests.py` (→ `data/stress_tests.json`, `data/placebo_assignments.csv`, Figures 3 and 6), `causal_inference_additional_checks.py` (→ `data/additional_checks.json`), `causal_inference_positive_control.py` (→ `data/positive_control.json`, Figure 7), `causal_inference_real_gdp.py` (→ `data/real_gdp_checks.json`), `validate_eea_stations.py` (EEA stations, after `airbase verified -p NO2 ... -M`; → `data/eea_station_monthly.csv`, `data/eea_validation.json`), `spatial_autocorrelation.py`
-  6. Figures: `map_control_group_highlight.py` (Figure 1), `plot_block_event_study.py` (Figure 2); dashboard: `dashboard/app.py`
-- **Supplementary and historical scripts** (not used for the paper): `causal_inference_final_did.py` and `causal_inference_robustness_checks.py` (baseline model), `causal_inference_ndvi.py`, `causal_inference_event_study.py`, `synthetic_control.py`, `test_india_transferability.py`; the single-cohort models `causal_inference_initial_model.py`, `causal_inference_placebo.py`, `causal_inference.py`.
-- **Superseded scripts kept for the record**: `run_pipeline.py`/`download_no2.py`/`extract_no2.py` (OData + HARP Level-2 test pipeline), `download_*_control_expansion.py` for NO₂/NDVI (single-mosaic acquisition), `master_merge.py`, `master_merge_control_expanded.py` and `causal_inference_expanded_control.py` (these two read `data/master_dataset_control_expanded.csv`, which holds the superseded end-of-month NO₂ values).
+  1. Boundaries: `src/download_nuts.py` and `src/download_gadm.py` (GADM files are not in the repository because the GADM licence does not allow redistribution).
+  2. NO₂: `src/download_no2_sentinelhub.py` (daily Process API rasters → country monthly means, `no2_stats_monthly_mean_36.json`) and `src/download_no2_gridded.py` (keeps every daily 0.1° raster and builds `data/earth_observation/no2/gridded/no2_grid_monthly.npz`, about 77 MB, which the pixel-level analysis needs; not in the repository because of its size). `src/check_s5p_processor_versions.py` checks which TROPOMI processor versions the values come from; `src/diagnose_sentinelhub.py` checks which Sentinel Hub endpoints currently work.
+  3. Controls: `src/download_era5.py` → `src/unzip_era5.py` → `src/process_era5.py` → `src/era5_regional_stats.py` + `src/era5_regional_stats_control_expansion.py`; `src/download_era5_wind_blh.py` (→ `data/era5_wind_blh_country_monthly.csv`); `src/download_eurostat_gdp.py` → `src/process_eurostat.py` → `src/apply_eu27_filter.py`; `src/download_gdp_control_countries.py` + `src/download_gdp_control_expansion.py`; `src/download_gdp_real.py` (real GDP per capita, for the check); `data/covid/oxcgrt_stringency_national.csv` (Oxford stringency index).
+  4. `src/master_merge_control.py` → `data/master_dataset_control.csv`
+  5. Models: `src/causal_inference_identification_checks.py` (→ `data/identification_checks.json`), `src/analyse_no2_grid_baseline.py` (→ `data/grid_baseline_checks.json`, Figures 4–5), `src/causal_inference_stress_tests.py` (→ `data/stress_tests.json`, `data/placebo_assignments.csv`, Figures 3 and 6), `src/causal_inference_additional_checks.py` (→ `data/additional_checks.json`), `src/causal_inference_positive_control.py` (→ `data/positive_control.json`, Figure 7), `src/causal_inference_real_gdp.py` (→ `data/real_gdp_checks.json`), `src/validate_eea_stations.py` (EEA stations, after `airbase verified -p NO2 ... -M`; → `data/eea_station_monthly.csv`, `data/eea_validation.json`), `src/spatial_autocorrelation.py`
+  6. Figures: `src/map_control_group_highlight.py` (Figure 1), `src/plot_block_event_study.py` (Figure 2); dashboard: `dashboard/app.py`
+- **Supplementary and historical scripts** (not used for the paper): `src/causal_inference_final_did.py` and `src/causal_inference_robustness_checks.py` (baseline model), `src/causal_inference_ndvi.py`, `src/causal_inference_event_study.py`, `src/synthetic_control.py`, `src/test_india_transferability.py`; the single-cohort models `archive/superseded_scripts/causal_inference_initial_model.py`, `src/causal_inference_placebo.py`, `archive/superseded_scripts/causal_inference.py`.
+- **Superseded scripts kept for the record**: `archive/superseded_scripts/run_pipeline.py`/`archive/superseded_scripts/download_no2.py`/`archive/superseded_scripts/extract_no2.py` (OData + HARP Level-2 test pipeline), `download_*_control_expansion.py` for NO₂/NDVI (single-mosaic acquisition), `archive/superseded_scripts/master_merge.py`, `archive/superseded_scripts/master_merge_control_expanded.py` and `archive/superseded_scripts/causal_inference_expanded_control.py` (these two read `data/master_dataset_control_expanded.csv`, which holds the superseded end-of-month NO₂ values).
 - **Audit trail**: every methodology change is logged chronologically in the Development Log.
 
 ---
@@ -140,22 +158,28 @@ These come from earlier stages of the project. They use the baseline model (coun
 
 ```text
 GPIE/
-├── dashboard/                  # Streamlit dashboard
+├── reproduce_paper.py          # One command: re-runs every estimate, table and figure in the paper
+├── src/                        # All pipeline scripts (download, processing, models, figures)
+│   ├── download_*.py, process_*.py, *_regional_stats*.py   # Data acquisition and processing
+│   ├── s5p_process_daily.py    # NO₂: daily Process API rasters → country monthly means
+│   ├── master_merge_control.py # Country × month panel (36 countries × 72 months)
+│   ├── causal_inference_*.py   # Country- and pixel-level models
+│   ├── analyse_no2_grid_baseline.py, validate_eea_stations.py
+│   ├── map_*.py, plot_*.py     # Figures
+│   └── config.py, country_boundaries.py   # Shared settings and boundary loader
 ├── data/                       # Processed datasets, master panel and model outputs (JSON/CSV)
 │   └── earth_observation/      # Per-dataset acquisition/processing outputs
 ├── outputs/
 │   ├── plots/                  # Static maps and charts
-│   └── interactive/            # Hoverable/zoomable HTML maps (build_interactive_maps.py)
-├── archive/                    # Dev-time scratch/inspection/smoke-test scripts, not part of the pipeline
+│   └── interactive/            # Hoverable/zoomable HTML maps (src/build_interactive_maps.py)
+├── dashboard/                  # Streamlit dashboard
+├── archive/
+│   ├── superseded_scripts/     # Earlier pipeline versions, kept for the record, not used by the paper
+│   └── ...                     # Dev-time scratch and smoke-test scripts
 ├── GPIE_Research_Paper.md      # Research paper
 ├── GPIE_Executive_Summary.md   # Executive summary
-├── GPIE_Development_Log.md     # Development log
-├── s5p_process_daily.py        # NO₂: daily Process API rasters → country monthly means
-├── download_no2_gridded.py     # NO₂: daily rasters kept as a 0.1° monthly grid
-├── analyse_no2_grid_baseline.py
-├── causal_inference_*.py       # Country- and pixel-level models
-├── map_*.py, plot_*.py         # Figures
-└── country_boundaries.py       # Shared EU-27 + comparison-group boundary loader
+├── GPIE_Development_Log.md     # Development log (script names as they were when each entry was written)
+├── Data_Sources.md, CITATION.cff, LICENSE, requirements.txt
 ```
 
 ## Tech Stack
