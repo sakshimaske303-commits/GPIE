@@ -21,11 +21,15 @@ abstract: >-
   neighbouring non-EU countries. The country-level DiD finds NO2 fell 1.34e-6
   mol/m2 more in the EU-27 (4.3% of its pre-treatment level, p = 0.022), but the
   estimate is not significant without the winter months, with area weights, with
-  log GDP or under randomization inference on the coefficient, and it appears only
+  log GDP, with real GDP per capita or under randomization inference on the
+  coefficient, and it appears only
   from the third year after the law. Under random assignment of the treatment
   label the estimate follows the pre-treatment gap between groups (r = -0.81), and
   comparing EU and comparison pixels that started at the same NO2 level reduces it
-  to -0.21e-6 (95% CI -0.67 to +0.24). Polluted areas lost about 15-25% of their
+  to -0.21e-6 (95% CI -0.67 to +0.24); a known 2.5% reduction added to the data
+  is detected by the same comparison. Against 1,543 EEA background stations the
+  satellite values agree (monthly r = 0.68), and the stations show that a
+  December 2023 drop in the satellite data is a retrieval artefact. Polluted areas lost about 15-25% of their
   NO2 in north-western Europe, including the non-EU United Kingdom and
   Switzerland, and little in south-eastern Europe, including EU members, and in
   western Turkey; the cause of this pattern is not identified. Country-level DiD

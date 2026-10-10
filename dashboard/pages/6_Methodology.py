@@ -20,7 +20,7 @@ st.markdown("""
 
 GPIE compiles eight data sources for 2019–2024 (36 countries: EU-27 + a 9-country non-EU comparison
 group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia,
-Serbia). The headline model uses NO₂, ERA5 temperature/precipitation and GDP; NDVI is a secondary
+Serbia). The main model uses NO₂, ERA5 temperature/precipitation and GDP; NDVI is a secondary
 outcome; land cover, elevation and EUR-Lex records are descriptive context. A ninth source, WorldPop
 population, was acquired for 2019–2020 only and is not used:
 """)
@@ -189,7 +189,7 @@ with s5b:
 
 with st.expander("**Step 6 — Identification and Inference Checks**", expanded=False):
     st.markdown("""
-    The headline model was then stress-tested on four weak points.
+    The baseline model was then stress-tested on four weak points.
 
     - **Specification.** Year-month fixed effects and an EU-specific seasonal cycle give −1.34 × 10⁻⁶
       (p = 0.022). With them, the pre-treatment blocks are no longer significant (joint p = 0.292). Adding

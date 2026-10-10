@@ -16,10 +16,10 @@
   },
   "did_residuals_monthly": {
     "n_months": 72,
-    "median_I": 0.3466295738919822,
-    "mean_I": 0.3324606093503436,
+    "median_I": 0.3466295729180668,
+    "mean_I": 0.3324606092076856,
     "n_months_significant_positive_p05": 59,
     "share_months_significant_positive_p05": 0.8194444444444444,
-    "max_abs_country_mean_residual": 2.420070623797765e-14
+    "max_abs_country_mean_residual": 3.7825329826844043e-14
   }
 }

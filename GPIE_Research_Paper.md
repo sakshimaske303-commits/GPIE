@@ -131,7 +131,7 @@ Two checks address regression to the mean (Daw & Hatfield, 2018): classes are re
 
 ### 4.6 Descriptive Geography
 
-To describe where NO₂ changed, the change from the pre-treatment period to July 2023–December 2024 is reported by pre-treatment class and, for pixels above 3 × 10⁻⁵ mol/m², by country (countries with at least 20 such pixels). The later period was chosen after the block estimates of Section 4.2 showed where the country-level estimate originates, so these comparisons are descriptive. The daily rasters also cover three areas outside the country panel: Turkey and Ukraine west of 35° E, and Kosovo. They have no covariates here and are used only descriptively and in matched models without controls. Finally, the matched model is estimated on subsets that hold region fixed: north-western EU members (Netherlands, Belgium, Luxembourg, Germany, Denmark, France, Austria, Ireland) against the United Kingdom and Switzerland; south-eastern EU members (Croatia, Hungary, Romania, Bulgaria, Greece, Slovenia) against the Western Balkans; and north-western against south-eastern EU members. This grouping was also chosen after inspecting the data.
+To describe where NO₂ changed, the change from the pre-treatment period to July 2023–December 2024 is reported by pre-treatment class and, for pixels above 3 × 10⁻⁵ mol/m², by country (countries with at least 20 such pixels). The later period was chosen after the block estimates of Section 4.2 showed where the country-level estimate originates, and the threshold of 3 × 10⁻⁵ mol/m² for polluted pixels was set at the same stage, so these comparisons are descriptive. The daily rasters also cover three areas outside the country panel: Turkey and Ukraine west of 35° E, and Kosovo. They have no covariates here and are used only descriptively and in matched models without controls. Finally, the matched model is estimated on subsets that hold region fixed: north-western EU members (Netherlands, Belgium, Luxembourg, Germany, Denmark, France, Austria, Ireland) against the United Kingdom and Switzerland; south-eastern EU members (Croatia, Hungary, Romania, Bulgaria, Greece, Slovenia) against the Western Balkans; and north-western against south-eastern EU members. This grouping was also chosen after inspecting the data.
 
 ### 4.7 Positive Control
 
@@ -359,7 +359,7 @@ For the Climate Law itself, the conclusion is limited. The design cannot detect 
 
 The matched pixel comparison has thin common support at high pollution levels. Of the comparison-group pixels above 4 × 10⁻⁵ mol/m², 86% are in the United Kingdom, with the rest mostly in Switzerland and Serbia. Western Turkey adds polluted pixels outside the country panel, but without covariates and from one country. The comparison therefore separates EU membership from pollution level and, descriptively, from region; it does not separate regulation of EU origin from its absence.
 
-The period from July 2023 and the regional grouping were chosen after seeing the data, so the descriptive results of Section 5.5 and the p-values in Table 5 are not confirmatory. No formal sensitivity analysis for violations of parallel trends (Rambachan & Roth, 2023) is reported.
+The period from July 2023, the threshold for polluted pixels and the regional grouping were chosen after seeing the data, so the descriptive results of Section 5.5 and the p-values in Table 5 are not confirmatory. No formal sensitivity analysis for violations of parallel trends (Rambachan & Roth, 2023) is reported.
 
 Sixteen of the thirty pre-treatment months, including the whole reference block of Section 4.2, fall in the period of COVID-19 restrictions, when NO₂ fell most in polluted areas. Leaving them out makes the country-level estimate larger (−2.25 × 10⁻⁶, Table 2) and leaves the matched estimate unchanged (−0.23 × 10⁻⁶, Table 4), but the pre-treatment period remains short and unusual.
 
@@ -397,13 +397,13 @@ Conley, T. G., & Taber, C. R. (2011). Inference with "Difference in Differences"
 
 Dang, H.-A. H., & Trinh, T.-A. (2021). Does the COVID-19 lockdown improve global air quality? New cross-national evidence on its unintended consequences. *Journal of Environmental Economics and Management*, 105, 102401. [https://doi.org/10.1016/j.jeem.2020.102401](https://doi.org/10.1016/j.jeem.2020.102401)
 
-Daw, J. R., & Hatfield, L. A. (2018). Matching and Regression to the Mean in Difference-in-Differences Analysis. *Health Services Research*, 53(6). [https://doi.org/10.1111/1475-6773.12993](https://doi.org/10.1111/1475-6773.12993)
+Daw, J. R., & Hatfield, L. A. (2018). Matching and Regression to the Mean in Difference-in-Differences Analysis. *Health Services Research*, 53(6), 4138–4156. [https://doi.org/10.1111/1475-6773.12993](https://doi.org/10.1111/1475-6773.12993)
 
 Directive 2010/75/EU of the European Parliament and of the Council of 24 November 2010 on industrial emissions (integrated pollution prevention and control) (recast). [https://eur-lex.europa.eu/eli/dir/2010/75/oj/eng](https://eur-lex.europa.eu/eli/dir/2010/75/oj/eng)
 
-Directive (EU) 2016/2284 of the European Parliament and of the Council of 14 December 2016 on the reduction of national emissions of certain atmospheric pollutants, amending Directive 2003/35/EC and repealing Directive 2001/81/EC. *Official Journal of the European Union*, L 344, 17.12.2016, 1–31. [https://eur-lex.europa.eu/EN/legal-content/summary/eu-rules-on-national-emissions-of-certain-atmospheric-pollutants.html](https://eur-lex.europa.eu/EN/legal-content/summary/eu-rules-on-national-emissions-of-certain-atmospheric-pollutants.html)
+Directive (EU) 2016/2284 of the European Parliament and of the Council of 14 December 2016 on the reduction of national emissions of certain atmospheric pollutants, amending Directive 2003/35/EC and repealing Directive 2001/81/EC. *Official Journal of the European Union*, L 344, 17.12.2016, 1–31. [https://eur-lex.europa.eu/eli/dir/2016/2284/oj/eng](https://eur-lex.europa.eu/eli/dir/2016/2284/oj/eng)
 
-Eskes, H. J., & Eichmann, K.-U. (2023). *S5P Mission Performance Centre Nitrogen Dioxide [L2__NO2___] Readme* (S5P-MPC-KNMI-PRF-NO2, issue 2.4). KNMI / S5P Mission Performance Centre for the European Space Agency. [https://sentinels.copernicus.eu/documents/247904/3541451/Sentinel-5P-Nitrogen-Dioxide-Level-2-Product-Readme-File](https://sentinels.copernicus.eu/documents/247904/3541451/Sentinel-5P-Nitrogen-Dioxide-Level-2-Product-Readme-File)
+Eskes, H. J., & Eichmann, K.-U. (2023). *S5P Mission Performance Centre Nitrogen Dioxide [L2__NO2___] Readme* (S5P-MPC-KNMI-PRF-NO2, issue 2.4). KNMI / S5P Mission Performance Centre for the European Space Agency. [https://sentiwiki.copernicus.eu/web/s5p-documents](https://sentiwiki.copernicus.eu/web/s5p-documents)
 
 European Commission. (2016). *The EU Emissions Trading System (EU ETS)* [Factsheet]. [https://climate.ec.europa.eu/system/files/2016-12/factsheet_ets_en.pdf](https://climate.ec.europa.eu/system/files/2016-12/factsheet_ets_en.pdf)
 
@@ -423,7 +423,7 @@ Hale, T., Angrist, N., Goldszmidt, R., Kira, B., Petherick, A., Phillips, T., et
 
 Hersbach, H., Bell, B., Berrisford, P., Hirahara, S., Horányi, A., Muñoz-Sabater, J., et al. (2020). The ERA5 global reanalysis. *Quarterly Journal of the Royal Meteorological Society*, 146(730), 1999–2049. [https://doi.org/10.1002/qj.3803](https://doi.org/10.1002/qj.3803)
 
-Kahn-Lang, A., & Lang, K. (2020). The Promise and Pitfalls of Differences-in-Differences: Reflections on 16 and Pregnant and Other Applications. *Journal of Business & Economic Statistics*, 38(3), 613–620. [https://doi.org/10.1080/07350015.2018.1546591](https://doi.org/10.1080/07350015.2018.1546591)
+Kahn-Lang, A., & Lang, K. (2020). The Promise and Pitfalls of Differences-in-Differences: Reflections on '16 and Pregnant' and Other Applications. *Journal of Business & Economic Statistics*, 38(3), 613–620. [https://doi.org/10.1080/07350015.2018.1546591](https://doi.org/10.1080/07350015.2018.1546591)
 
 Keola, S., & Hayakawa, K. (2021). Do Lockdown Policies Reduce Economic and Social Activities? Evidence from NO2 Emissions. *The Developing Economies*, 59(2), 178–205. [https://doi.org/10.1111/deve.12274](https://doi.org/10.1111/deve.12274)
 
@@ -431,7 +431,7 @@ Laughner, J. L., & Cohen, R. C. (2019). Direct observation of changing NOx lifet
 
 MacKinnon, J. G., & Webb, M. D. (2020). Randomization inference for difference-in-differences with few treated clusters. *Journal of Econometrics*, 218(2), 435–450. [https://doi.org/10.1016/j.jeconom.2020.04.024](https://doi.org/10.1016/j.jeconom.2020.04.024)
 
-Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. *Biometrika*, 37(1/2), 17–23. [https://doi.org/10.2307/2332142](https://doi.org/10.2307/2332142)
+Moran, P. A. P. (1950). Notes on Continuous Stochastic Phenomena. *Biometrika*, 37(1/2), 17–23. [https://doi.org/10.1093/biomet/37.1-2.17](https://doi.org/10.1093/biomet/37.1-2.17)
 
 Rambachan, A., & Roth, J. (2023). A More Credible Approach to Parallel Trends. *The Review of Economic Studies*, 90(5), 2555–2591. [https://doi.org/10.1093/restud/rdad018](https://doi.org/10.1093/restud/rdad018)
 
@@ -461,6 +461,6 @@ van Geffen, J., Eskes, H., Compernolle, S., Pinardi, G., Verhoelst, T., Lambert,
 
 Veefkind, J. P., Aben, I., McMullan, K., Förster, H., de Vries, J., Otter, G., et al. (2012). TROPOMI on the ESA Sentinel-5 Precursor: A GMES mission for global observations of the atmospheric composition for climate, air quality and ozone layer applications. *Remote Sensing of Environment*, 120, 70–83. [https://doi.org/10.1016/j.rse.2011.09.027](https://doi.org/10.1016/j.rse.2011.09.027)
 
-Verhoelst, T., Compernolle, S., Pinardi, G., Lambert, J.-C., Eskes, H. J., Eichmann, K.-U., et al. (2021). Ground-based validation of the Copernicus Sentinel-5P TROPOMI NO2 measurements with the NDACC ZSL-DOAS, MAX-DOAS and Pandonia global networks. *Atmospheric Measurement Techniques*, 14, 481–510. [https://doi.org/10.5194/amt-14-481-2021](https://doi.org/10.5194/amt-14-481-2021)
+Verhoelst, T., Compernolle, S., Pinardi, G., Lambert, J.-C., Eskes, H. J., Eichmann, K.-U., et al. (2021). Ground-based validation of the Copernicus Sentinel-5P TROPOMI NO2 measurements with the NDACC ZSL-DOAS, MAX-DOAS and Pandonia global networks. *Atmospheric Measurement Techniques*, 14(1), 481–510. [https://doi.org/10.5194/amt-14-481-2021](https://doi.org/10.5194/amt-14-481-2021)
 
 Vîrghileanu, M., Săvulescu, I., Mihai, B.-A., Nistor, C., & Dobre, R. (2020). Nitrogen Dioxide (NO2) Pollution Monitoring with Sentinel-5P Satellite Imagery over Europe during the Coronavirus Pandemic Outbreak. *Remote Sensing*, 12(21), 3575. [https://doi.org/10.3390/rs12213575](https://doi.org/10.3390/rs12213575)

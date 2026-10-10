@@ -2,7 +2,7 @@
   "settings": {
     "monthly_capture_min": 0.75,
     "months_min_share": 0.8,
-    "sources": "EEA E1a verified 2019-2023, E2a unverified 2024; background stations for the main checks"
+    "sources": "EEA verified data (E1a) 2019-2024; unverified (E2a) only for months the verified files lack; background stations for the main checks"
   },
   "sampling_points_by_country": {
     "AT": {

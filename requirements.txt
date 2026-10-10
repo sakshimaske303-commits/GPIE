@@ -21,6 +21,8 @@ requests
 python-dotenv
 PyJWT
 beautifulsoup4
+pyarrow
+airbase
 
 # GDAL (imported via `from osgeo import gdal` in download_dem.py) is not
 # reliably pip-installable on all platforms - it usually needs a matching
