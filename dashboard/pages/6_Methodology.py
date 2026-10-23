@@ -43,92 +43,44 @@ with col2:
 
 st.markdown("---")
 
-# Proof popover buttons. They show my screenshots from outputs/proof_screenshots/.
-st.markdown(f"""
-<style>
-    div[data-testid="stPopover"] button {{
-        animation: proof-blink 1.8s ease-in-out infinite;
-        border: 3px solid {PALETTE['coral']} !important;
-        width: 32px !important;
-        height: 32px !important;
-        border-radius: 50% !important;
-        padding: 0 !important;
-        min-height: unset !important;
-        min-width: unset !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }}
-    div[data-testid="stPopover"] button p {{
-        margin: 0 !important;
-        font-size: 0.95rem !important;
-        line-height: 1 !important;
-    }}
-    @keyframes proof-blink {{
-        0%, 100% {{ box-shadow: 0 0 0px rgba(248, 131, 121, 0); }}
-        50% {{ box-shadow: 0 0 12px rgba(248, 131, 121, 0.85); }}
-    }}
-</style>
-""", unsafe_allow_html=True)
-
-PROOF_DIR = os.path.join(PROJECT_ROOT, "outputs", "proof_screenshots")
-
-def proof_popover(filename, caption):
-    path = os.path.join(PROOF_DIR, filename)
-    with st.popover("View"):
-        if os.path.exists(path):
-            st.image(path, caption=caption, width="stretch")
-        else:
-            st.caption(f"Screenshot not added yet — save it as `outputs/proof_screenshots/{filename}`.")
-
 st.markdown("### The Validation Sequence")
 
-s1a, s1b = st.columns([0.94, 0.06])
-with s1a:
-    with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
-        st.markdown("""
-        The first causal model compared all 27 EU countries before vs. after the European Climate Law
-        (adopted 30 June 2021, in force 29 July 2021; July 2021 = first post month), using country and
-        seasonal fixed effects. This found a statistically significant
-        reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
+with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
+    st.markdown("""
+    The first causal model compared all 27 EU countries before vs. after the European Climate Law
+    (adopted 30 June 2021, in force 29 July 2021; July 2021 = first post month), using country and
+    seasonal fixed effects. This found a statistically significant
+    reduction in NO₂ (p = 0.026, as originally computed with classical/non-clustered standard errors).
 
-        **A later verification correction**: this initial-model figure had not been re-estimated with the
-        cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
-        cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
-        doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
-        model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
-        p = 0.0017 (significant) once corrected the same way.
+    **A later verification correction**: this initial-model figure had not been re-estimated with the
+    cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
+    cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
+    doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
+    model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
+    p = 0.0017 (significant) once corrected the same way.
 
-        **The problem**: because all 27 countries were treated simultaneously, there was no untreated
-        comparison group — making it mathematically impossible to distinguish a genuine policy effect
-        from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
+    **The problem**: because all 27 countries were treated simultaneously, there was no untreated
+    comparison group — making it mathematically impossible to distinguish a genuine policy effect
+    from a general, ongoing pollution-decline trend, regardless of which standard-error type is used.
 
-        **Reproducing this figure**: `causal_inference.py` was later extended with an explicit
-        `time_trend` diagnostic control (see Step 2 rationale below), so it no longer reproduces this
-        p = 0.026 / p = 0.041 result on its own. The original specification — identical data and fixed
-        effects, without `time_trend` — lives in `causal_inference_initial_model.py`.
-        """)
-with s1b:
-    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("01_causal_inference_vscode.png", "causal_inference.py open in VS Code, showing the time_trend diagnostic control added after this initial single-cohort result — see causal_inference_initial_model.py for the original specification.")
+    **Reproducing this figure**: `causal_inference.py` was later extended with an explicit
+    `time_trend` diagnostic control (see Step 2 rationale below), so it no longer reproduces this
+    p = 0.026 / p = 0.041 result on its own. The original specification — identical data and fixed
+    effects, without `time_trend` — lives in `causal_inference_initial_model.py`.
+    """)
 
-s2a, s2b = st.columns([0.94, 0.06])
-with s2a:
-    with st.expander("**Step 2 — Placebo Test**", expanded=False):
-        st.markdown("""
-        To test the result's credibility, the identical model was re-run with the treatment date
-        artificially shifted to 30 June 2020 — a date with no relevant policy event.
+with st.expander("**Step 2 — Placebo Test**", expanded=False):
+    st.markdown("""
+    To test the result's credibility, the identical model was re-run with the treatment date
+    artificially shifted to 30 June 2020 — a date with no relevant policy event.
 
-        **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
-        more significant than the real result. This showed the single-cohort design could not separate a
-        policy-dated break from Europe's continuing NO₂ decline. Adding an explicit linear time trend points
-        the same way: with the trend controlled for, the original estimate is no longer significant
-        (p = 0.186, cluster-robust). (The placebo was run on the full 2019–2024 panel, not on pre-treatment
-        data only.)
-        """)
-with s2b:
-    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("02_causal_inference_placebo_vscode.png", "causal_inference_placebo.py open in VS Code — the placebo test with the treatment date artificially shifted to 30 June 2020.")
+    **The result**: the placebo model found an equally significant "effect" (p = 0.004, cluster-robust) — even
+    more significant than the real result. This showed the single-cohort design could not separate a
+    policy-dated break from Europe's continuing NO₂ decline. Adding an explicit linear time trend points
+    the same way: with the trend controlled for, the original estimate is no longer significant
+    (p = 0.186, cluster-robust). (The placebo was run on the full 2019–2024 panel, not on pre-treatment
+    data only.)
+    """)
 
 with st.expander("**Step 3 — Building an External Comparison Group**", expanded=False):
     st.markdown("""
@@ -156,36 +108,31 @@ with st.expander("**Step 4 — Event-Study Robustness Check**", expanded=False):
     longer significant. The 23 coefficients come from one regression, so they are not independent tests.
     """)
 
-s5a, s5b = st.columns([0.94, 0.06])
-with s5a:
-    with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustness Checks**", expanded=False):
-        st.markdown("""
-        All models were re-estimated with standard errors clustered by country, the standard
-        correction for panel data where a country's repeated monthly observations are serially
-        correlated (uncorrected OLS standard errors understate true uncertainty).
+with st.expander("**Step 5 — Cluster-Robust Standard Errors & Further Robustness Checks**", expanded=False):
+    st.markdown("""
+    All models were re-estimated with standard errors clustered by country, the standard
+    correction for panel data where a country's repeated monthly observations are serially
+    correlated (uncorrected OLS standard errors understate true uncertainty).
 
-        Further robustness checks were run against the baseline model, with a seasonal cycle common to both
-        groups (−1.52 × 10⁻⁶, p = 0.018); the paper reports the same checks for the main model, on the
-        *Results* page.
-        Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.061; a sensitivity check, not a
-        formal bad-control test). The log-outcome model gives −4.2% (p = 0.041). Shifting the treatment date
-        by ±6/±12 months gives a significant estimate at **every** date (p between 0.006 and 0.035),
-        including two dates before the law existed — by the logic of Step 2, the design does not tie the
-        EU-specific decline to the Climate Law's date. Adding an EU-specific linear trend removes the
-        treatment-date effect (+8.7 × 10⁻⁷, p = 0.251) while the trend itself is significant (−7.9 × 10⁻⁷
-        per year, p = 0.022): a steady faster decline, not a step. A post-hoc split by baseline pollution
-        finds the decline in the 14 higher-baseline countries (p = 0.006; log −6.4%, p = 0.012) and none in
-        the 13 lower-baseline countries (p = 0.761). The minimum detectable *pooled* effect at 80% power is
-        ~5.5% of the EU-27's pre-treatment NO₂.
+    Further robustness checks were run against the baseline model, with a seasonal cycle common to both
+    groups (−1.52 × 10⁻⁶, p = 0.018); the paper reports the same checks for the main model, on the
+    *Results* page.
+    Removing GDP barely moves the coefficient (−1.49 × 10⁻⁶, p = 0.061; a sensitivity check, not a
+    formal bad-control test). The log-outcome model gives −4.2% (p = 0.041). Shifting the treatment date
+    by ±6/±12 months gives a significant estimate at **every** date (p between 0.006 and 0.035),
+    including two dates before the law existed — by the logic of Step 2, the design does not tie the
+    EU-specific decline to the Climate Law's date. Adding an EU-specific linear trend removes the
+    treatment-date effect (+8.7 × 10⁻⁷, p = 0.251) while the trend itself is significant (−7.9 × 10⁻⁷
+    per year, p = 0.022): a steady faster decline, not a step. A post-hoc split by baseline pollution
+    finds the decline in the 14 higher-baseline countries (p = 0.006; log −6.4%, p = 0.012) and none in
+    the 13 lower-baseline countries (p = 0.761). The minimum detectable *pooled* effect at 80% power is
+    ~5.5% of the EU-27's pre-treatment NO₂.
 
-        The **secondary NDVI outcome** shows a significant relative decline under the two-group design
-        (see *Causal Results* page). Its initial single-cohort model, re-estimated with cluster-robust
-        standard errors, was already significant (p = 0.0017, not the originally reported p = 0.128). Full details and all
-        reported numbers are in the Research Paper document in the project repository.
-        """)
-with s5b:
-    st.markdown("<div style='margin-top: 0.5rem;'></div>", unsafe_allow_html=True)
-    proof_popover("04_causal_inference_final_did_vscode.png", "causal_inference_final_did.py open in VS Code — the two-group Difference-in-Differences baseline model with cluster-robust standard errors (the main model of the paper adds year-month fixed effects and EU-specific seasonality).")
+    The **secondary NDVI outcome** shows a significant relative decline under the two-group design
+    (see *Causal Results* page). Its initial single-cohort model, re-estimated with cluster-robust
+    standard errors, was already significant (p = 0.0017, not the originally reported p = 0.128). Full details and all
+    reported numbers are in the Research Paper document in the project repository.
+    """)
 
 with st.expander("**Step 6 — Identification and Inference Checks**", expanded=False):
     st.markdown("""
