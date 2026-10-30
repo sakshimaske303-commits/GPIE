@@ -44,3 +44,6 @@ data/eea_no2/
 
 # My own checklist, stays on my laptop
 GPIE_FINISH_LINE.md
+
+# Editor settings
+.vscode/

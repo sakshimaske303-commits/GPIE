@@ -16,3 +16,8 @@ Level-2 test pipeline (`run_pipeline.py`, `download_no2.py`, `extract_no2.py` an
 the single-mosaic acquisition for the expanded control group, the merge and model scripts that read
 the superseded end-of-month NO₂ values, and the first single-cohort models. None of them is used by
 the paper or by `reproduce_paper.py`.
+
+## Moved here from the root
+
+- `CONTROL_EXPANSION_README.md`: the run order used when the comparison group grew from three to nine countries. Historical; the current panel is built by `src/master_merge_control.py`.
+- `GPIE_Executive_Summary.html`: an earlier HTML copy of the executive summary. The current one is `GPIE_Executive_Summary.md` / `.pdf` at the root.

@@ -19,6 +19,7 @@ GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–20
 | [Research Paper](./GPIE_Research_Paper.md) | The study: question, data, methods, results, limitations |
 | [Executive Summary](./GPIE_Executive_Summary.md) | Two-page summary of the paper |
 | [Development Log](./GPIE_Development_Log.md) | How the project developed, including every correction |
+| [Declarations](./GPIE_Declarations.pdf) | Highlights, author contributions, funding, competing interests, data and code availability, corrections, use of AI tools |
 
 ---
 
@@ -152,6 +153,25 @@ All scripts are run from the repository root (for example `python src/master_mer
 - **Superseded scripts kept for the record**: `archive/superseded_scripts/run_pipeline.py`/`archive/superseded_scripts/download_no2.py`/`archive/superseded_scripts/extract_no2.py` (OData + HARP Level-2 test pipeline), `download_*_control_expansion.py` for NO₂/NDVI (single-mosaic acquisition), `archive/superseded_scripts/master_merge.py`, `archive/superseded_scripts/master_merge_control_expanded.py` and `archive/superseded_scripts/causal_inference_expanded_control.py` (these two read `data/master_dataset_control_expanded.csv`, which holds the superseded end-of-month NO₂ values).
 - **Audit trail**: every methodology change is logged chronologically in the Development Log.
 
+## Where the numbers come from
+
+Every headline number in the paper is written to a file in `data/` by one script. `reproduce_paper.py` runs them in this order.
+
+| In the paper | Script (`src/`) | Output file |
+| --- | --- | --- |
+| The country panel (36 countries x 72 months) | `master_merge_control.py` | `data/master_dataset_control.csv` |
+| Table 2, Sections 5.1–5.3 (country-level DiD, −4.3%) | `causal_inference_identification_checks.py` | `data/identification_checks.json` |
+| Tables 3–4, Figures 4–5 (pixel level, matched DiD) | `analyse_no2_grid_baseline.py` | `data/grid_baseline_checks.json` |
+| Figure 3, Table 5, Figure 6 (random assignment, regional contrasts) | `causal_inference_stress_tests.py` | `data/stress_tests.json` |
+| Table 4 (blocks, COVID exclusion) | `causal_inference_additional_checks.py` | `data/additional_checks.json` |
+| Table 6, Figure 7 (positive control) | `causal_inference_positive_control.py` | `data/positive_control.json` |
+| Real-GDP rows of Tables 2 and 4 | `causal_inference_real_gdp.py` | `data/real_gdp_checks.json` |
+| Table 7, Section 5.7 (ground stations) | `validate_eea_stations.py` | `data/eea_validation.json` |
+| Moran's I, Section 5.1 | `spatial_autocorrelation.py` | `data/spatial_autocorrelation_summary.json` |
+| Figures 1 and 2 | `map_control_group_highlight.py`, `plot_block_event_study.py` | `outputs/plots/` |
+
+[`src/README.md`](src/README.md) lists every script by job, and [`data/README.md`](data/README.md) says what each data file is, which script made it and which reads it.
+
 ---
 
 ## Repository Structure
@@ -195,6 +215,17 @@ pip install -r requirements.txt
 cd dashboard
 streamlit run app.py
 ```
+
+## Declarations
+
+The full statement is in [`GPIE_Declarations.pdf`](./GPIE_Declarations.pdf) (source: [`GPIE_Declarations.md`](./GPIE_Declarations.md)).
+
+- **Author contributions:** single-author study; Sakshi D. Maske did the conceptualization, methodology, software, analysis, data curation, writing and visualization.
+- **Funding:** none. I covered all costs myself.
+- **Competing interests:** none.
+- **Ethics:** not applicable; no human participants, animals or personal data.
+- **Analysis transparency:** the period from July 2023, the threshold for polluted pixels and the regional grouping were chosen after seeing the data, so the descriptive regional results are not confirmatory.
+- **Use of AI tools:** I used Claude (Anthropic), an AI assistant, at several points in this project. Most of that help was checking: whether the estimates quoted in the paper, executive summary, README and dashboard matched my output tables, from the country-panel difference-in-differences to the pixel comparison on 51,072 matched pixels and the comparison with EEA ground stations. When a script failed or returned something I could not explain, I sometimes used it to help trace the problem in my Python code. I wrote the paper and the other documents myself; I used it to point out sentences that were unclear or too technical, places where something seemed to be missing, and punctuation errors, and I decided what to change. I also used it for the layout of the project pages. It did not download or process the Sentinel-5P data, specify or run any model, or produce the results. The research design, the choice of comparison countries and tests, the decision to report the country-level estimate as not robust once polluted places were compared with equally polluted places, and the interpretation are my own. I checked every suggestion before using it and take full responsibility for the content.
 
 ## Author
 
