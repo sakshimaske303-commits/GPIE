@@ -1,6 +1,6 @@
 # GPIE — Green Policy Intelligence Engine
 
-[![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14824/)
+[![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14824/) [![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.21756660-1682D4.svg)](https://doi.org/10.5281/zenodo.21756660)
 
 **What does a country-level difference-in-differences on satellite NO₂ actually identify?**
 
@@ -16,10 +16,10 @@ GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–20
 
 | Document | What's Inside |
 |---|---|
-| [Research Paper](./GPIE_Research_Paper.md) | The study: question, data, methods, results, limitations |
-| [Executive Summary](./GPIE_Executive_Summary.md) | Two-page summary of the paper |
-| [Development Log](./GPIE_Development_Log.md) | How the project developed, including every correction |
-| [Declarations](./GPIE_Declarations.pdf) | Highlights, author contributions, funding, competing interests, data and code availability, corrections, use of AI tools |
+| [Research Paper](./docs/GPIE_Research_Paper.md) | The study: question, data, methods, results, limitations |
+| [Executive Summary](./docs/GPIE_Executive_Summary.md) | Two-page summary of the paper |
+| [Development Log](./docs/GPIE_Development_Log.md) | How the project developed, including every correction |
+| [Declarations](./docs/GPIE_Declarations.pdf) | Highlights, author contributions, funding, competing interests, data and code availability, corrections, use of AI tools |
 
 ---
 
@@ -196,9 +196,7 @@ GPIE/
 ├── archive/
 │   ├── superseded_scripts/     # Earlier pipeline versions, kept for the record, not used by the paper
 │   └── ...                     # Dev-time scratch and smoke-test scripts
-├── GPIE_Research_Paper.md      # Research paper
-├── GPIE_Executive_Summary.md   # Executive summary
-├── GPIE_Development_Log.md     # Development log (script names as they were when each entry was written)
+├── docs/                       # Paper, executive summary, development log (script names as they were when each entry was written), declarations, maps and plots
 ├── Data_Sources.md, CITATION.cff, LICENSE, requirements.txt
 ```
 
@@ -218,7 +216,7 @@ streamlit run app.py
 
 ## Declarations
 
-The full statement is in [`GPIE_Declarations.pdf`](./GPIE_Declarations.pdf) (source: [`GPIE_Declarations.md`](./GPIE_Declarations.md)).
+The full statement is in [`GPIE_Declarations.pdf`](./docs/GPIE_Declarations.pdf) (source: [`GPIE_Declarations.md`](./docs/GPIE_Declarations.md)).
 
 - **Author contributions:** single-author study; Sakshi D. Maske did the conceptualization, methodology, software, analysis, data curation, writing and visualization.
 - **Funding:** none. I covered all costs myself.

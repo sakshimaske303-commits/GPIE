@@ -55,6 +55,26 @@ st.markdown(
                 </div>
             </div>
         </a>
+        <a href="https://doi.org/10.5281/zenodo.21756660" target="_blank" class="doi-badge-link" style="text-decoration:none;">
+            <div class="doi-badge-card" style="
+                display:flex; align-items:center; gap:18px;
+                background: linear-gradient(145deg, #052226, {PALETTE['slate']});
+                border: 2px solid {PALETTE['coral']};
+                border-radius: 14px;
+                padding: 16px 32px;
+                box-shadow: 0 4px 20px rgba(248, 131, 121, 0.35);
+            ">
+                <div style="text-align:left;">
+                    <div style="color:{PALETTE['chantilly']}; font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:0.4px; display:flex; align-items:center; gap:8px;">
+                        <span>CODE AND DATA ON ZENODO</span>
+                        <span style="opacity:0.8; font-size:0.95rem;">↗</span>
+                    </div>
+                    <div style="color:{PALETTE['text']}; font-family:'Inter',sans-serif; font-weight:900; font-size:1.35rem; margin-top:2px;">
+                        Get the archive
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
     """,
     unsafe_allow_html=True,
@@ -138,7 +158,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# I offer the PDFs in static/ if they are there, otherwise the Markdown files from the repo root.
+# I offer the PDFs in static/ if they are there, otherwise the Markdown files from docs/.
 _all_docs = [
     {"label": "Executive Summary", "stem": "GPIE_Executive_Summary"},
     {"label": "Research Paper", "stem": "GPIE_Research_Paper"},
@@ -147,7 +167,7 @@ _all_docs = [
 _available = []
 for _d in _all_docs:
     _pdf = os.path.join(BASE_DIR, "static", _d["stem"] + ".pdf")
-    _md = os.path.join(ROOT_DIR, _d["stem"] + ".md")
+    _md = os.path.join(ROOT_DIR, "docs", _d["stem"] + ".md")
     if os.path.exists(_pdf):
         _available.append((_d["label"], _pdf, "application/pdf"))
     elif os.path.exists(_md):

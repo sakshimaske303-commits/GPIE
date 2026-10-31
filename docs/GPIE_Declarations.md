@@ -5,7 +5,7 @@
 Sakshi D. Maske · Independent Geospatial Researcher · ORCID [0009-0002-5683-5966](https://orcid.org/0009-0002-5683-5966)
 
 Version 1.2.0  
-Preprint: EarthArXiv, DOI [10.31223/X5GB87](https://doi.org/10.31223/X5GB87) · Code and data: [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE)
+Preprint: EarthArXiv, DOI [10.31223/X5GB87](https://doi.org/10.31223/X5GB87) · Archive: Zenodo, DOI [10.5281/zenodo.21756660](https://doi.org/10.5281/zenodo.21756660) · Code and data: [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE)
 
 ## Highlights
 
