@@ -141,7 +141,7 @@ Relative to July 2020 – June 2021, the two pre-treatment blocks are not signif
 the first two years after the law show no change (p = {blocks['Jul 2021-Jun 2022']['p_value']:.2f} and
 {blocks['Jul 2022-Jun 2023']['p_value']:.2f}), and the estimate comes from July 2023 – June 2024
 ({e6(blocks['Jul 2023-Jun 2024']['coefficient']):+.2f} × 10⁻⁶, p = {blocks['Jul 2023-Jun 2024']['p_value']:.3f}).
-Without November – February the post-treatment blocks become a gradual drift that starts before the law.
+Without November – February the post-treatment blocks decline gradually rather than in a late step, and July 2019 – June 2020 is also below the reference block.
 Shifting the treatment date by ±6 or ±12 months is also significant (p between {min(shift_p):.3f} and {max(shift_p):.3f}),
 and with an EU-specific linear trend the treatment coefficient is {e6(trend['coefficient']):+.2f} × 10⁻⁶ (p = {trend['p_value']:.2f}).
 The relative decline is not tied to July 2021.
@@ -159,9 +159,9 @@ st.markdown(
     f"""
 Across {ri['n_perm']} random assignments of the treatment label to 27 of the 36 countries, the DiD estimate follows
 how much more polluted the labelled group was before treatment (r = {ri['correlation_estimate_with_pre_level_gap']:.2f}),
-and the EU-27's estimate is what its pre-treatment gap ({ri['real_assignment']['pre_level_gap']:.1f} × 10⁻⁶) predicts.
+and the EU-27's estimate is close to what its pre-treatment gap ({ri['real_assignment']['pre_level_gap']:.1f} × 10⁻⁶) predicts.
 Random labels are significant at 5% in {100 * ri['share_of_random_assignments_significant_at_5pct']:.1f}% of draws,
-because groups that differ in starting level diverge for the same reason.
+partly because groups that differ in starting level diverge for the same reason.
 """
 )
 comp_rows = [

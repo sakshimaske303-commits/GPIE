@@ -12,7 +12,7 @@ Preprint: EarthArXiv, DOI [10.31223/X5GB87](https://doi.org/10.31223/X5GB87) · 
 - A country-level difference-in-differences finds NO₂ fell 4.3% more in the EU-27 than in nine neighbouring countries after the European Climate Law (p = 0.022), but the gap appears only from July 2023 and is not robust to several reasonable specifications.
 - Under random assignment of the treatment label, the estimate follows how much more polluted the labelled group was before treatment (r = −0.81).
 - Comparing EU and comparison pixels that started at the same NO₂ level reduces the estimate to −0.21 × 10⁻⁶ mol/m² (95% CI −0.67 to +0.24); the same comparison detects a known 2.5% reduction added to EU-27 NO₂.
-- 1,543 EEA ground stations agree with the satellite (monthly r = 0.68) and show that the December 2023 drop is a retrieval artefact.
+- 1,543 EEA ground stations agree with the satellite (monthly r = 0.68) and show that most of the December 2023 drop in Denmark and Sweden is a retrieval artefact.
 - Polluted areas lost about 15–25% of their NO₂ in north-western Europe, including the non-EU United Kingdom and Switzerland, and little in south-eastern Europe.
 
 ## Author contributions (CRediT)

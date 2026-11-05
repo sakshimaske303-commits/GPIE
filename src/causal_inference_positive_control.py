@@ -39,7 +39,7 @@ def injected(y, treated_post, r):
 
 
 def country_real(d):
-    """Real EU-27, main model (Table 2, row 2)."""
+    """Real EU-27, main model (Table 2, row 3)."""
     out = {}
     y = d["mean_no2"].astype(float).values
     tp = (d["did"] == 1).values

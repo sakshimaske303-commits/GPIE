@@ -57,6 +57,8 @@ st.markdown("""
 | Elevation (DEM) | Copernicus DEM GLO-30 | AWS Open Data |
 | GDP (EU-27) | Eurostat | REST Statistics API |
 | GDP (Comparison Group) | World Bank | Open Data API |
+| Real GDP per capita (check) | World Bank | Open Data API |
+| NO₂ at ground stations (check) | European Environment Agency | `airbase` package; verified (E1a), with unverified (E2a) only for months the verified files lack |
 | Administrative Boundaries | Eurostat GISCO (NUTS), GADM | Direct Download |
 | Policy Records | EUR-Lex | Web Scraping |
 """)

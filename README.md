@@ -37,7 +37,7 @@ GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–20
 | Its fragility | Not significant without November–February (p = 0.11), with countries weighted by area (p = 0.11), with log GDP (p = 0.21), with real GDP per capita in place of nominal GDP (p = 0.072), or under randomization inference on the coefficient (p = 0.17); it appears only from July 2023 |
 | RQ1: baseline composition | Under 999 random assignments of the treatment label, the estimate follows the pre-treatment gap between groups (r = −0.81). Comparing EU and comparison pixels in the same pre-treatment class on a 0.1° grid reduces the estimate to −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24) |
 | Positive control | When a known 2.5% reduction is added to EU-27 NO₂ from July 2021, the matched pixel model finds it (−0.80 × 10⁻⁶, p = 0.002); with 80% power it detects a uniform reduction of about 3% (0.65 × 10⁻⁶) |
-| Ground stations | Against 1,543 EEA background stations the satellite agrees (monthly r = 0.68); the stations give a similar relative EU-27 decline that is not significant (−4.0%, p = 0.12) and no December 2023 drop, which is a retrieval artefact |
+| Ground stations | Against 1,543 EEA background stations the satellite agrees (monthly r = 0.68); the stations give a similar relative EU-27 decline that is not significant (−4.0%, p = 0.12), and in December 2023 they fall by only 16% in Denmark and 7% in Sweden, where the satellite values turn negative: most of that drop is a retrieval artefact |
 | RQ2: where NO₂ fell | Polluted pixels lost about 15–25% in north-western Europe, including the non-EU United Kingdom (−20%) and Switzerland (−18%), and 0–6% in south-eastern Europe, including EU members and Serbia; polluted western Turkey did not decline (−0.3%) |
 
 Most of the country-level estimate reflects that the EU-27 was more polluted to begin with. The data do not require an effect at the EU border, but they cannot rule one out: the matched interval admits a decline of up to half the country-level estimate. The regional pattern depends partly on winter retrievals of uncertain quality, and its cause is not identified.
@@ -83,7 +83,7 @@ Hoverable, zoomable versions of maps and charts, built by `src/build_interactive
 | Real GDP per capita (PPP, constant 2021 int. $; constant 2015 US$) | World Bank, all 36 countries | Check on the GDP control |
 | COVID-19 stringency index | Oxford COVID-19 Government Response Tracker | Control (robustness) |
 | Boundaries | Eurostat GISCO NUTS 0 (2024); GADM 4.1 for UK, Norway, Switzerland | Country masks |
-| NO₂ at ground stations (verified E1a) | European Environment Agency, via the `airbase` package | Check on the satellite data (station-month means) |
+| NO₂ at ground stations (verified E1a; unverified E2a only for months the verified files lack) | European Environment Agency, via the `airbase` package | Check on the satellite data (station-month means) |
 
 The repository also holds datasets that are **not used in the paper**: CGLS NDVI, ESA WorldCover land cover, Copernicus DEM, WorldPop population and EUR-Lex policy records. They support the dashboard's context pages and the supplementary analyses below (see `Data_Sources.md`).
 
@@ -160,10 +160,10 @@ Every headline number in the paper is written to a file in `data/` by one script
 | In the paper | Script (`src/`) | Output file |
 | --- | --- | --- |
 | The country panel (36 countries x 72 months) | `master_merge_control.py` | `data/master_dataset_control.csv` |
-| Table 2, Sections 5.1–5.3 (country-level DiD, −4.3%) | `causal_inference_identification_checks.py` | `data/identification_checks.json` |
-| Tables 3–4, Figures 4–5 (pixel level, matched DiD) | `analyse_no2_grid_baseline.py` | `data/grid_baseline_checks.json` |
-| Figure 3, Table 5, Figure 6 (random assignment, regional contrasts) | `causal_inference_stress_tests.py` | `data/stress_tests.json` |
-| Table 4 (blocks, COVID exclusion) | `causal_inference_additional_checks.py` | `data/additional_checks.json` |
+| Table 2 (models, added controls, excluded periods), Sections 5.1–5.3 (country-level DiD, −4.3%) | `causal_inference_identification_checks.py` | `data/identification_checks.json` |
+| Tables 3–4 (matched and unmatched, by period, classes from 2019), Figures 4–5 (pixel level, matched DiD) | `analyse_no2_grid_baseline.py` | `data/grid_baseline_checks.json` |
+| Figure 3, Table 5, Figure 6 (random assignment, regional contrasts); Table 2 rows on the 2020–2024 sample, winter, data quality, weighting, GDP form, log outcome and starting level; Table 4 rows on the difference, winter, number of classes and log outcome | `causal_inference_stress_tests.py` | `data/stress_tests.json` |
+| Table 4 (blocks, COVID exclusion); Table 2 row without the non-positive months; Section 5.3 (without the Netherlands and Belgium, common support) | `causal_inference_additional_checks.py` | `data/additional_checks.json` |
 | Table 6, Figure 7 (positive control) | `causal_inference_positive_control.py` | `data/positive_control.json` |
 | Real-GDP rows of Tables 2 and 4 | `causal_inference_real_gdp.py` | `data/real_gdp_checks.json` |
 | Table 7, Section 5.7 (ground stations) | `validate_eea_stations.py` | `data/eea_validation.json` |

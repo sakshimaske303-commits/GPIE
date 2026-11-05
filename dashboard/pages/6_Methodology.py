@@ -21,8 +21,9 @@ st.markdown("""
 GPIE compiles eight data sources for 2019–2024 (36 countries: EU-27 + a 9-country non-EU comparison
 group — UK, Norway, Switzerland, Iceland, Albania, Bosnia and Herzegovina, Montenegro, North Macedonia,
 Serbia). The main model uses NO₂, ERA5 temperature/precipitation and GDP; NDVI is a secondary
-outcome; land cover, elevation and EUR-Lex records are descriptive context. A ninth source, WorldPop
-population, was acquired for 2019–2020 only and is not used:
+outcome; land cover, elevation and EUR-Lex records are descriptive context. EEA ground stations, the Oxford COVID-19
+stringency index and World Bank real GDP per capita are used only as checks. WorldPop population was also
+acquired, for 2019–2020 only, and is not used:
 """)
 
 col1, col2 = st.columns(2)
@@ -144,7 +145,7 @@ with st.expander("**Step 6 — Identification and Inference Checks**", expanded=
     - **Timing.** In 12-month blocks the first two years after the law show nothing (p = 0.98 and 0.45);
       the decline appears only from July 2023 (−2.18 × 10⁻⁶, p = 0.012).
     - **Few comparison countries.** A wild cluster bootstrap agrees with the clustered p-value (p = 0.018),
-      but randomization inference does not (p = 0.17). Dropping any one comparison country changes little.
+      but randomization inference on the coefficient does not (p = 0.17; p = 0.046 on the t-statistic). Dropping any one comparison country changes little.
     - **COVID-19 and the energy crisis.** The Oxford stringency index does not move the estimate, and
       excluding either window leaves it in place.
 

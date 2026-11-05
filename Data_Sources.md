@@ -142,12 +142,12 @@ Purpose : Check on the GDP control, one source for all 36 countries.
 
 ### DS14
 
-Dataset Name : EEA air-quality station data, NO₂ (verified, E1a)
+Dataset Name : EEA air-quality station data, NO₂ (verified, E1a; unverified E2a only for months the verified files lack)
 Provider : European Environment Agency, Air Quality Download Service (via the `airbase` package)
 Parameter : Hourly NO₂ (µg/m³) and station metadata (location, type, area)
 Data Type : Tabular
 Format : Parquet → station-month CSV (`src/validate_eea_stations.py`)
 Temporal Resolution : Hourly, 2019-2024; monthly means used
-Purpose : Check of the satellite data against ground stations. The United Kingdom has data only for 2019.
+Purpose : Check of the satellite data against ground stations. The United Kingdom has data only for 2019, and Albania and Montenegro have no station with enough months.
 
 *Counting note: the README groups these sources as 8 (EUR-Lex, NO₂, NDVI, ERA5, GDP [Eurostat + World Bank], land cover, DEM, boundaries [GISCO + GADM]); WorldPop was acquired but not used. The Oxford stringency index (DS12) is used only as a robustness control.*

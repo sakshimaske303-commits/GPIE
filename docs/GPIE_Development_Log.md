@@ -42,6 +42,7 @@ But for this project, I chose to write it down as a proper, ongoing story. Wante
 34. [Entry 34](#entry-34)
 35. [Entry 35](#entry-35)
 36. [Entry 36](#entry-36)
+37. [Entry 37](#entry-37)
 
 ---
 
@@ -455,3 +456,21 @@ Third, Turkey. My rasters already cover western Turkey, Ukraine nd Kosovo, I jus
 I also refitted the synthetic control with weights nd level shift together (gap -1.45×10⁻⁶, 2nd of 10), cleaned the figures (country borders on the pixel map, neutral titles), and added the two new figures to the maps PDF, which now has 23.
 
 What I still cannot fix from my desk: I checked the processor version on sample days only, not on every file. My weather controls are country averages, not pixel level. I have no ground monitor validation. And I have no source yet for how closely UK nd Swiss vehicle standards follow the EU ones. These are written in the limitations section as they are.
+
+---
+
+## Entry 37
+
+Entry 36 ended with a list of things I could not fix from my desk. Some of them I could after all, and they went into the paper without an entry here, so this one catches the log up.
+
+Ground stations. I pulled hourly NO2 from the European Environment Agency through the `airbase` package (`validate_eea_stations.py`). I used verified data, and unverified data only for months the verified files lack. 1,543 background sampling points in 33 countries had enough months. Station and satellite agree (monthly r = 0.68). The main model on station data gives an EU-27 decline of −4.0% that is not significant (p = 0.12), about the same size as the satellite at the same places (−4.5%). In December 2023 the stations in Denmark and Sweden fell by 16% and 7%, while the satellite values there went negative. So most of that month is a retrieval problem, not air quality. The United Kingdom has EEA data only for 2019, and Albania and Montenegro have no station with enough months, so this check is missing them.
+
+Positive control. I added a known 2.5%, 5% and 10% cut to EU-27 NO2 from July 2021 and re-ran both models (`causal_inference_positive_control.py`). The matched pixel model finds about four fifths of each cut, and it would detect a uniform cut of about 2.7% with 80% power. So the near-zero matched estimate is not just a weak test.
+
+Real GDP. With World Bank real GDP per capita in place of nominal GDP (`causal_inference_real_gdp.py`) the country estimate stays about the same size (−1.36) but is no longer significant (p = 0.072). The matched estimate does not move (−0.21).
+
+Two numbers in Entry 36 have changed. The share of random splits significant at 5% is now 8.3% (83 of 999) with t(35) critical values, not 9.6%. And the vehicle-standards point now cites the EU regulations, and the paper lists it as one of three possible explanations, not as a finding.
+
+The paper is on EarthArXiv (10.31223/X5GB87) and the code and data are archived on Zenodo (10.5281/zenodo.21756660). `reproduce_paper.py` runs the scripts behind every table and figure in order.
+
+Last, I had the whole project checked again from zero and corrected what it found. The paper now says the stations show a much smaller December 2023 fall instead of none, it no longer calls the winter-free blocks a drift that starts before the law, it says the stations include unverified data for missing months, it gives the Zenodo DOI in the data statement, and it quotes Sager and Singer exactly (a factor of three). The executive summary, dashboard and both portfolio pages now say, as the paper does, that the randomization p-value of 0.17 is on the coefficient and 0.046 on the t-statistic. Every copy now uses the same December 2023 wording. And the NO2 bar chart title still showed an old p-value (0.013); it now shows 0.018.

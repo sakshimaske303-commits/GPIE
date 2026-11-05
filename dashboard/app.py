@@ -23,7 +23,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    f"<h3 style='text-align: center; color: {PALETTE['coral']}; font-weight: 400;'>Independently Verifying Environmental Policy Claims Using Satellite Data</h3>",
+    f"<h3 style='text-align: center; color: {PALETTE['coral']}; font-weight: 400;'>What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify?</h3>",
     unsafe_allow_html=True,
 )
 
@@ -203,7 +203,7 @@ st.markdown(
     <div style="text-align: center; padding: 25px; background: rgba(0, 135, 149, 0.06); border: 1px solid rgba(248, 131, 121, 0.25); border-radius: 12px;">
         <p style="color: {PALETTE['text_muted']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Developed by</p>
         <h2 style="color: {PALETTE['lagoon']}; margin: 5px 0;">SAKSHI D. MASKE</h2>
-        <p style="color: {PALETTE['coral']}; font-weight: 600;">Independent Geospatial Researcher</p>
+        <p style="color: {PALETTE['coral']}; font-weight: 600;">Satellite data and policy, self-directed research</p>
     </div>
     """,
     unsafe_allow_html=True,

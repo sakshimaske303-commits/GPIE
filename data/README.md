@@ -9,7 +9,7 @@ Files are not moved into sub-folders because the scripts and the dashboard read 
 | File | What it is | Made by | Read by |
 | --- | --- | --- | --- |
 | `master_dataset_control.csv` | **Current panel:** NO₂, weather and GDP for 36 countries x 72 months (2019–2024) | `src/master_merge_control.py` | every model, the maps, the dashboard |
-| `master_dataset.csv` | Original EU-27-only panel from the first version | `archive/superseded_scripts/master_merge.py` | `src/causal_inference_placebo.py`, dashboard "About the Data" page |
+| `master_dataset.csv` | Original EU-27-only panel from the first version | `archive/superseded_scripts/master_merge.py` | `src/causal_inference_placebo.py` |
 | `master_dataset_control_expanded.csv` | **Superseded.** Expanded panel built from end-of-month NO₂ snapshots; do not use for new work | `archive/superseded_scripts/master_merge_control_expanded.py` | `archive/superseded_scripts/causal_inference_expanded_control.py` only |
 | `era5_wind_blh_country_monthly.csv` | ERA5 wind speed and boundary-layer height per country and month | `src/download_era5_wind_blh.py` | `src/causal_inference_identification_checks.py` |
 | `covid/oxcgrt_stringency_national.csv` | Oxford COVID-19 stringency index, national (see `Data_Sources.md`) | downloaded | `src/causal_inference_identification_checks.py` |
@@ -19,14 +19,16 @@ Files are not moved into sub-folders because the scripts and the dashboard read 
 
 | File | Made by | In the paper |
 | --- | --- | --- |
-| `identification_checks.json` | `src/causal_inference_identification_checks.py` | Table 2, Sections 5.1–5.3 |
+| `identification_checks.json` | `src/causal_inference_identification_checks.py` | Table 2 (models, added controls, excluded periods), Sections 5.1–5.3 |
 | `grid_baseline_checks.json` | `src/analyse_no2_grid_baseline.py` | Tables 3–4, Figures 4–5 |
-| `stress_tests.json`, `placebo_assignments.csv` | `src/causal_inference_stress_tests.py` | Figure 3, Table 5, Figure 6 |
-| `additional_checks.json` | `src/causal_inference_additional_checks.py` | Table 4 |
+| `stress_tests.json`, `placebo_assignments.csv` | `src/causal_inference_stress_tests.py` | Figure 3, Table 5, Figure 6; the 2020–2024, winter, data-quality, weighting, GDP-form, log and starting-level rows of Table 2; the difference, winter, class-number and log rows of Table 4; randomization inference |
+| `additional_checks.json` | `src/causal_inference_additional_checks.py` | Table 4; the non-positive row of Table 2; Section 5.3 |
 | `positive_control.json` | `src/causal_inference_positive_control.py` | Table 6, Figure 7 |
 | `real_gdp_checks.json` | `src/causal_inference_real_gdp.py` | real-GDP rows of Tables 2 and 4 |
 | `eea_validation.json` | `src/validate_eea_stations.py` | Table 7, Section 5.7 |
 | `spatial_autocorrelation_summary.json`, `moran_local_clusters.csv`, `moran_residuals_by_month.csv`, `country_no2_for_moran.geojson` | `src/spatial_autocorrelation.py` | Moran's I, Section 5.1 |
+
+`identification_checks.json` also keeps an earlier randomization inference (2,000 reassignments, p = 0.16 on the coefficient). The paper uses the one in `stress_tests.json` (999 reassignments: p = 0.17 on the coefficient, p = 0.046 on the t-statistic).
 
 ## Supplementary results (not in the paper)
 

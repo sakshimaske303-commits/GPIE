@@ -46,7 +46,7 @@ def make_chart():
     ax.set_title(
         "NDVI: EU-27 vs. 9-Country Control Group, Before vs. After the Climate Law date\n"
         f"Raw group means (descriptive). Two-group DiD estimate: {res.params['did_interaction']:.4f}, "
-        f"p = {res.pvalues['did_interaction']:.3f} (cluster-robust) - exploratory, not attributed to the Climate Law",
+        f"p = {res.pvalues['did_interaction']:.3f} (cluster-robust)\nExploratory, not attributed to the Climate Law",
         fontsize=11, fontweight="bold"
     )
     ax.legend(loc="lower right")

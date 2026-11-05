@@ -22,7 +22,7 @@ MAPS = {
     "Temperature": "climate_map.html",
     "GDP": "gdp_map.html",
     "Moran's I Spatial Clusters": "moran_lisa_map.html",
-    "Event-Study Plot": "event_study.html",
+    "Quarterly Event Study (baseline model, supplementary)": "event_study.html",
     "Synthetic Control Gap": "synthetic_control.html",
     "Explore Trends by Country": "explore_trends.html",
     "Pixel-Level NO2 Change Map": "no2_pixel_change_map.html",

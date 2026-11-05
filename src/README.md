@@ -12,10 +12,10 @@ The groups below are by job. Each script appears once, except `download_nuts.py`
 | Step | Script | Writes | Used in the paper |
 | --- | --- | --- | --- |
 | 1 | `master_merge_control.py` | `data/master_dataset_control.csv` | the country panel, 36 countries x 72 months |
-| 2 | `causal_inference_identification_checks.py` | `data/identification_checks.json` | Table 2, Sections 5.1–5.3 |
+| 2 | `causal_inference_identification_checks.py` | `data/identification_checks.json` | Table 2 (models, added controls, excluded periods), Sections 5.1–5.3 |
 | 3 | `analyse_no2_grid_baseline.py` | `data/grid_baseline_checks.json` | Tables 3–4, Figures 4–5 |
-| 4 | `causal_inference_stress_tests.py` | `data/stress_tests.json`, `data/placebo_assignments.csv` | Figure 3, Table 5, Figure 6 |
-| 5 | `causal_inference_additional_checks.py` | `data/additional_checks.json` | Table 4 (blocks, COVID exclusion) |
+| 4 | `causal_inference_stress_tests.py` | `data/stress_tests.json`, `data/placebo_assignments.csv` | Figure 3, Table 5, Figure 6; the 2020–2024, winter, data-quality, weighting, GDP-form, log and starting-level rows of Table 2; the difference, winter, class-number and log rows of Table 4 |
+| 5 | `causal_inference_additional_checks.py` | `data/additional_checks.json` | Table 4 (blocks, COVID exclusion); the non-positive row of Table 2; Section 5.3 |
 | 6 | `causal_inference_positive_control.py` | `data/positive_control.json` | Table 6, Figure 7 |
 | 7 | `causal_inference_real_gdp.py` | `data/real_gdp_checks.json` | real-GDP rows of Tables 2 and 4 |
 | 8 | `validate_eea_stations.py` | `data/eea_station_monthly.csv`, `data/eea_validation.json` | Table 7, Section 5.7 |
@@ -93,4 +93,4 @@ The groups below are by job. Each script appears once, except `download_nuts.py`
 | `map_moran_lisa_clusters.py` | Local Moran's I clusters |
 | `plot_event_study.py`, `plot_synthetic_control.py`, `plot_india_trend.py`, `plot_tropomi_example_day.py` | supplementary plots |
 | `build_interactive_maps.py` | HTML versions of the maps in `outputs/interactive/` |
-| `build_maps_plots_pdf.py` | `GPIE_Maps_and_Plots.pdf` |
+| `build_maps_plots_pdf.py` | `docs/GPIE_Maps_and_Plots.pdf` |

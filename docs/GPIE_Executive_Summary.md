@@ -32,11 +32,11 @@ The test case is the European Climate Law (Regulation (EU) 2021/1119), adopted o
 | Analysis | Result |
 |---|---|
 | Country-level DiD | NO₂ fell 1.34 × 10⁻⁶ mol/m² more in the EU-27, 4.3% of its starting level (p = 0.022) |
-| How stable it is | Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), with real GDP per capita (p = 0.072), or under randomization inference (p = 0.17). The difference appears only from July 2023 |
+| How stable it is | Not significant without November–February (p = 0.11), with area weights (p = 0.11), with log GDP (p = 0.21), with real GDP per capita (p = 0.072), or under randomization inference on the coefficient (p = 0.17; p = 0.046 on the t-statistic). The difference appears only from July 2023 |
 | Random EU labels | Estimates follow how much more polluted the labelled group was at the start (r = −0.81). The real EU-27 estimate is close to what its starting gap predicts |
 | Pixels with the same starting level | −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24). This removes about 84% of the country-level estimate |
 | Known reduction added | When a 2.5% reduction is added to EU-27 NO₂ from July 2021, the same model finds it (−0.80 × 10⁻⁶, p = 0.002). It can detect an even reduction of about 3% with 80% power |
-| Ground stations | The satellite agrees with 1,543 EEA background stations (monthly r = 0.68). The stations show a similar EU-27 decline that is not significant (−4.0%, p = 0.12). They do not show the December 2023 drop the satellite records in Denmark and Sweden, so that drop is a satellite error |
+| Ground stations | The satellite agrees with 1,543 EEA background stations (monthly r = 0.68). The stations show a similar EU-27 decline that is not significant (−4.0%, p = 0.12). In December 2023 they fall by only 16% in Denmark and 7% in Sweden, where the satellite values turn negative, so most of that drop is a satellite error |
 | Where NO₂ fell | Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia. Western Turkey did not decline |
 
 ## What It Means
@@ -47,7 +47,7 @@ For anyone using satellite data to evaluate policy, three things follow. Compare
 
 ## Limitations
 
-Most of the highly polluted comparison pixels are in the United Kingdom, which uses vehicle standards that come from the EU. So the study separates EU membership from pollution level, but not EU-origin rules from their absence. The time window for the regional comparison was chosen after seeing the data. Part of the regional difference comes from winter, when there are fewest valid satellite readings. The ground-station check has no data for the United Kingdom, weather controls are country averages, and there are only nine comparison countries.
+Most of the highly polluted comparison pixels are in the United Kingdom, which uses vehicle standards that come from the EU. So the study separates EU membership from pollution level, but not EU-origin rules from their absence. The time window for the regional comparison was chosen after seeing the data. Part of the regional difference comes from winter, when there are fewest valid satellite readings. The ground-station check has no data for the United Kingdom, Albania or Montenegro, weather controls are country averages, and there are only nine comparison countries.
 
 ## Earlier Versions
 

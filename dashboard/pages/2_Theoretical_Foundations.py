@@ -39,7 +39,7 @@ st.markdown("### Why NO₂ Can Be “Seen” From Orbit at All")
 
 st.markdown("""
 GPIE's core evidence is a satellite-retrieved gas concentration, not a ground sensor reading — so
-the causal claims in this project rest on trusting a genuine piece of atmospheric physics: **NO₂
+the estimates in this project rest on trusting a genuine piece of atmospheric physics: **NO₂
 absorbs sunlight at very specific wavelengths, and that absorption can be measured remotely.**
 
 Sunlight travels down through the atmosphere, and any NO₂ molecules in its path absorb a portion
@@ -92,6 +92,6 @@ makes both the country-level and the 0.1° pixel-level analyses possible.
 st.markdown("---")
 
 st.markdown(
-    f"<p class='caption-text' style='text-align:center;'>GPIE — The Physics Behind the Policy Verdict</p>",
+    f"<p class='caption-text' style='text-align:center;'>GPIE — The Physics Behind the Measurement</p>",
     unsafe_allow_html=True,
 )

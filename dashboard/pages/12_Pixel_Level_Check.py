@@ -167,8 +167,8 @@ st.markdown(
 )
 
 st.info(
-    "**Caveat:** the highly polluted comparison pixels are almost all in the United Kingdom, with some in "
-    "Switzerland and Serbia. The United Kingdom kept EU-derived vehicle and industrial emission standards, so "
+    "**Caveat:** the highly polluted comparison pixels are mostly in the United Kingdom, with some in "
+    "Switzerland and Serbia. The United Kingdom kept EU-derived vehicle emission standards, so "
     "this check separates EU membership from pollution level, not EU-origin regulation from its absence."
 )
 
