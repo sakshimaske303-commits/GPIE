@@ -52,7 +52,7 @@ pct = 100 * main["coefficient"] / ident["eu_pre_treatment_mean"]
 
 st.markdown("<h1 style='text-align: center;'>🔬 RESULTS</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>What Does a Country-Level DiD on Satellite NO₂ Identify?</h3>",
+    "<h3 style='text-align: center; color: #a78bfa; font-weight: 400;'>Membership or Instruments? Satellite NO₂, Baseline Pollution and the European Climate Law</h3>",
     unsafe_allow_html=True,
 )
 st.markdown("---")

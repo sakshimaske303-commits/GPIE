@@ -205,8 +205,8 @@ with st.expander("**Step 11 — Ground Stations**", expanded=False):
     I checked the satellite data against 1,543 EEA background stations (`validate_eea_stations.py`). Monthly station
     and pixel values agree (r = 0.68). The main model on station data gives an EU-27 decline of −4.0% of the
     pre-treatment mean (p = 0.12), close to the −4.5% from the satellite at the same stations, and the station estimate
-    does not depend on winter. Stations in Denmark and Sweden show no December 2023 collapse, so that month is a
-    retrieval artefact. The United Kingdom has EEA data only for 2019, so it is not in this check.
+    does not depend on winter. In December 2023 stations in Denmark and Sweden fell by only 16% and 7%, while the satellite
+    values there turned negative, so most of that month's drop is a retrieval artefact. The United Kingdom has EEA data only for 2019, so it is not in this check.
     """)
 
 st.markdown("---")
