@@ -23,7 +23,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    f"<h3 style='text-align: center; color: {PALETTE['coral']}; font-weight: 400;'>What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify?</h3>",
+    f"<h3 style='text-align: center; color: {PALETTE['coral']}; font-weight: 400;'>Membership or Instruments? Satellite NO₂, Baseline Pollution and the European Climate Law</h3>",
     unsafe_allow_html=True,
 )
 

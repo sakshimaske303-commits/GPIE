@@ -64,7 +64,8 @@ estimate is explained by the difference in pre-treatment NO₂ between the group
 comparison areas are compared at the same starting level, where did NO₂ fall?
 
 The European Climate Law (July 2021) is used as a negative-control case: it has a clear date and border but no
-plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation.
+plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation. This
+framing came after the first results; the project began as an evaluation of the law (see the Development Log).
 """)
 
 st.markdown("---")

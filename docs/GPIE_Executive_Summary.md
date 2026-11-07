@@ -1,18 +1,18 @@
-# GPIE — Green Policy Intelligence Engine
+# GPIE: Green Policy Intelligence Engine
 
-*What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify?*
+*Membership or Instruments? Satellite NO₂, Baseline Pollution and the European Climate Law*
 
-**Executive Summary** · Sakshi D. Maske
+**Executive Summary** · Sakshi D. Maske · ORCID [0009-0002-5683-5966](https://orcid.org/0009-0002-5683-5966)
 
 ---
 
-## The Problem
+## Problem
 
-Satellite NO₂ makes it easy to compare pollution in countries that adopted a policy with countries that did not. A common way to do this is a difference-in-differences (DiD) on country averages. But how much NO₂ can fall depends on how much there was to begin with, and clean areas have little to lose. If the treated countries start out more polluted, a DiD can mistake that difference for a policy effect.
+Satellite NO₂ makes it easy to compare pollution in countries that adopted a policy with countries that did not. A common way to do this is a difference-in-differences (DiD) on country averages. How much NO₂ can fall, however, depends on how much there was to begin with, and clean areas have little to lose. If the treated countries start out more polluted, a DiD can mistake that difference for a policy effect.
 
-## The Question
+## Research Question
 
-When treated and comparison countries start from different pollution levels, what does a country-level DiD on satellite NO₂ actually measure?
+When treated and comparison countries start from different pollution levels, what does a country-level DiD on satellite NO₂ measure?
 
 - **RQ1:** How much of the country-level estimate comes from the difference in starting NO₂ between the two groups?
 - **RQ2:** When EU and comparison areas start at the same level, where did NO₂ fall, and does the pattern follow the EU border?
@@ -27,7 +27,7 @@ The test case is the European Climate Law (Regulation (EU) 2021/1119), adopted o
 - **Starting-level tests (RQ1):** How each country's starting level interacts with the post period, 999 random reassignments of the EU label, and a pixel-level DiD that compares EU and non-EU pixels with the same starting level.
 - **Geography (RQ2):** The change in polluted pixels country by country, including western Turkey and Ukraine outside the sample.
 
-## The Findings
+## Findings
 
 | Analysis | Result |
 |---|---|
@@ -36,25 +36,35 @@ The test case is the European Climate Law (Regulation (EU) 2021/1119), adopted o
 | Random EU labels | Estimates follow how much more polluted the labelled group was at the start (r = −0.81). The real EU-27 estimate is close to what its starting gap predicts |
 | Pixels with the same starting level | −0.21 × 10⁻⁶ (95% CI −0.67 to +0.24). This removes about 84% of the country-level estimate |
 | Known reduction added | When a 2.5% reduction is added to EU-27 NO₂ from July 2021, the same model finds it (−0.80 × 10⁻⁶, p = 0.002). It can detect an even reduction of about 3% with 80% power |
-| Ground stations | The satellite agrees with 1,543 EEA background stations (monthly r = 0.68). The stations show a similar EU-27 decline that is not significant (−4.0%, p = 0.12). In December 2023 they fall by only 16% in Denmark and 7% in Sweden, where the satellite values turn negative, so most of that drop is a satellite error |
+| Ground stations | The satellite agrees with 1,543 EEA background stations (monthly r = 0.68). The stations show a similar EU-27 decline that is not significant (−4.0%, p = 0.12). In December 2023 they fall by only 16% in Denmark and 7% in Sweden, where the satellite values turn negative, so most of that drop is a retrieval artefact |
 | Where NO₂ fell | Polluted pixels lost about 15–25% in north-western Europe, including the non-EU UK and Switzerland, and 0–6% in south-eastern Europe, including EU members and Serbia. Western Turkey did not decline |
 
 ## What It Means
 
-Most of the country-level estimate comes from the EU-27 being more polluted to begin with. NO₂ fell by region. It fell most in the polluted north-west, on both sides of the EU border. The data do not need an effect at the border to explain the pattern, though they cannot rule one out.
+Most of the country-level estimate comes from the EU-27 being more polluted to begin with. The decline followed region more than membership and was largest in the polluted north-west, on both sides of the EU border. The data are consistent with no effect at the border, although a small one cannot be ruled out.
 
-For anyone using satellite data to evaluate policy, three things follow. Compare places that start at the same level. Report results with and without the winter months. Report how countries are weighted and how controls enter the model, because here each of these choices alone moves the estimate across the 5% threshold.
+For satellite-based policy evaluation, the study suggests comparing places that start at the same pollution level, reporting results with and without the winter months, and reporting how countries are weighted and how controls enter the model, since here each of these choices alone moves the estimate across the 5% threshold.
+
+## Policy Relevance
+
+The Climate Law sets targets. NO₂ is regulated by other instruments, chiefly vehicle emission standards, the Industrial Emissions Directive and the National Emission reduction Commitments Directive. Environmental policy works through such mixes of instruments (Daugbjerg & Sønderskov, 2012), and EU environmental rules are also adopted by states outside the EU (Knill & Tosun, 2009). The United Kingdom and Switzerland apply the same vehicle standards as the EU, and their polluted areas declined like those of their EU neighbours. A comparison across the membership border therefore compares jurisdictions that share the instruments that matter for NO₂. Explaining why the same standards were followed by larger declines in the north-west than in south-eastern member states, for example through faster fleet renewal in richer countries, needs comparative evidence on how the instruments were implemented, which this study does not have.
 
 ## Limitations
 
-Most of the highly polluted comparison pixels are in the United Kingdom, which uses vehicle standards that come from the EU. So the study separates EU membership from pollution level, but not EU-origin rules from their absence. The time window for the regional comparison was chosen after seeing the data. Part of the regional difference comes from winter, when there are fewest valid satellite readings. The ground-station check has no data for the United Kingdom, Albania or Montenegro, weather controls are country averages, and there are only nine comparison countries.
+Most of the highly polluted comparison pixels are in the United Kingdom, which uses vehicle standards that come from the EU. The study therefore separates EU membership from pollution level, but not EU-origin rules from their absence. The time window for the regional comparison was chosen after seeing the data. Part of the regional difference comes from winter, when there are fewest valid satellite readings. The ground-station check has no data for the United Kingdom, Albania or Montenegro, weather controls are country averages, and there are only nine comparison countries.
 
 ## Earlier Versions
 
 Earlier versions reported no effect (p = 0.101). Those results used end-of-month snapshots instead of monthly means. I rebuilt the data from daily maps and re-estimated every number. The Development Log lists each change.
 
+## References
+
+Daugbjerg, C., & Sønderskov, K. M. (2012). Environmental Policy Performance Revisited: Designing Effective Policies for Green Markets. *Political Studies*, 60(2), 399–418. [https://doi.org/10.1111/j.1467-9248.2011.00910.x](https://doi.org/10.1111/j.1467-9248.2011.00910.x)
+
+Knill, C., & Tosun, J. (2009). Hierarchy, networks, or markets: how does the EU shape environmental policy adoptions within and beyond its borders? *Journal of European Public Policy*, 16(6), 873–894. [https://doi.org/10.1080/13501760903088090](https://doi.org/10.1080/13501760903088090)
+
 ---
 
 **GitHub:** github.com/sakshimaske303-commits/GPIE | **Live Dashboard:** f5cf6fijj9gm564r6aapt6.streamlit.app
 
-Sakshi D. Maske — Independent Geospatial Researcher
+Sakshi D. Maske · Independent Geospatial Researcher

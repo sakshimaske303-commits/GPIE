@@ -1,10 +1,10 @@
 # GPIE: Declarations
 
-**What Does a Country-Level Difference-in-Differences on Satellite NO₂ Identify? Baseline Composition, Winter Retrievals and the European Climate Law**
+**GPIE: Membership or Instruments? Satellite NO₂, Baseline Pollution and the European Climate Law**
 
 Sakshi D. Maske · Independent Geospatial Researcher · ORCID [0009-0002-5683-5966](https://orcid.org/0009-0002-5683-5966)
 
-Version 1.2.1  
+Version 1.3.0  
 Preprint: EarthArXiv, DOI [10.31223/X5GB87](https://doi.org/10.31223/X5GB87) · Archive: Zenodo, DOI [10.5281/zenodo.21756660](https://doi.org/10.5281/zenodo.21756660) · Code and data: [github.com/sakshimaske303-commits/GPIE](https://github.com/sakshimaske303-commits/GPIE)
 
 ## Highlights
@@ -14,6 +14,10 @@ Preprint: EarthArXiv, DOI [10.31223/X5GB87](https://doi.org/10.31223/X5GB87) · 
 - Comparing EU and comparison pixels that started at the same NO₂ level reduces the estimate to −0.21 × 10⁻⁶ mol/m² (95% CI −0.67 to +0.24); the same comparison detects a known 2.5% reduction added to EU-27 NO₂.
 - 1,543 EEA ground stations agree with the satellite (monthly r = 0.68) and show that most of the December 2023 drop in Denmark and Sweden is a retrieval artefact.
 - Polluted areas lost about 15–25% of their NO₂ in north-western Europe, including the non-EU United Kingdom and Switzerland, and little in south-eastern Europe.
+
+## Use of AI tools
+
+The research design, the choice of comparison countries and tests, the decision to report the country-level estimate as not robust once polluted places were compared with equally polluted places, and the interpretation are mine. Within that work I used Claude (Anthropic), an AI assistant, in a supporting role. Its main job was cross-checking: comparing the estimates quoted in the paper, executive summary, README and dashboard against my output tables, from the country-panel difference-in-differences to the pixel comparison on 51,072 matched pixels and the comparison with EEA ground stations. I also asked it for help when one of my Python scripts failed or returned output I could not explain, and for the layout of the project pages. The paper and other documents are my own writing; I used the assistant to flag sentences that were unclear or overly technical, places where something seemed to be missing, and punctuation errors, and I decided which of those points to act on. It did not download or process the Sentinel-5P data, specify or run any model, or produce the results. I reviewed every suggestion before using it, and the responsibility for the content is mine.
 
 ## Author contributions (CRediT)
 
@@ -41,15 +45,11 @@ All code is in the repository. `reproduce_paper.py` re-runs every estimate, tabl
 
 ## Analysis transparency
 
-The European Climate Law is used as a negative-control case: it has a clear date and border but no plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation. The period from July 2023, the threshold for polluted pixels and the regional grouping were chosen after seeing the data, so the descriptive regional results and their p-values are not confirmatory. Residuals are spatially correlated, so the clustered p-values are, if anything, too small.
+The European Climate Law is used as a negative-control case: it has a clear date and border but no plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation. This framing was adopted after the first results: the study began as an evaluation of the law (see Corrections and version history). The period from July 2023, the threshold for polluted pixels and the regional grouping were chosen after seeing the data, so the descriptive regional results and their p-values are not confirmatory. Residuals are spatially correlated, so the clustered p-values are, if anything, too small.
 
 ## Corrections and version history
 
 Earlier versions reported a pooled null (p = 0.101). Those results rested on NO₂ values that were single end-of-month snapshots rather than monthly means, because Sentinel Hub clips Sentinel-5P requests to the last 24 hours of the interval. I rebuilt the acquisition as one raster per day pooled into monthly means and re-estimated every number. Before that, my first model attributed the NO₂ decline to the law, but a placebo test on a fake date was just as strong, so I rebuilt the study around an outside comparison group. Every change is recorded in `GPIE_Development_Log.md`.
-
-## Use of AI tools
-
-I used Claude (Anthropic), an AI assistant, at several points in this project. Most of that help was checking: whether the estimates quoted in the paper, executive summary, README and dashboard matched my output tables, from the country-panel difference-in-differences to the pixel comparison on 51,072 matched pixels and the comparison with EEA ground stations. When a script failed or returned something I could not explain, I sometimes used it to help trace the problem in my Python code. I wrote the paper and the other documents myself; I used it to point out sentences that were unclear or too technical, places where something seemed to be missing, and punctuation errors, and I decided what to change. I also used it for the layout of the project pages. It did not download or process the Sentinel-5P data, specify or run any model, or produce the results. The research design, the choice of comparison countries and tests, the decision to report the country-level estimate as not robust once polluted places were compared with equally polluted places, and the interpretation are my own. I checked every suggestion before using it and take full responsibility for the content.
 
 ## Licence and citation
 

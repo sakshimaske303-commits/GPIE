@@ -2,9 +2,9 @@
 
 [![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14824/) [![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.21756660-1682D4.svg)](https://doi.org/10.5281/zenodo.21756660)
 
-**What does a country-level difference-in-differences on satellite NO₂ actually identify?**
+**Membership or Instruments? Satellite NO₂, Baseline Pollution and the European Climate Law**
 
-GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–2024) to test a design that is common in satellite-based policy evaluation: compare the change in pollution in countries that adopted a policy with the change in countries that did not. The case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021; July 2021 is the first post-treatment month), compared across the EU-27 and nine neighbouring non-EU countries. The law is used as a negative-control case: it has a clear date and border but no plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation.
+GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–2024) to test a design that is common in satellite-based policy evaluation: compare the change in pollution in countries that adopted a policy with the change in countries that did not. The case is the European Climate Law (Regulation (EU) 2021/1119; adopted 30 June 2021, in force 29 July 2021; July 2021 is the first post-treatment month), compared across the EU-27 and nine neighbouring non-EU countries. The law is used as a negative-control case: it has a clear date and border but no plausible dated effect on NO₂, so an estimate that looks like an effect needs another explanation. This framing came after the first results; the project began as an evaluation of the law (see the Development Log).
 
 **Research question.** When treated and comparison countries differ in baseline pollution, what does a country-level DiD on satellite NO₂ identify?
 - **RQ1:** how much of the country-level estimate is explained by the difference in pre-treatment NO₂ between the two groups?
@@ -19,7 +19,7 @@ GPIE uses Sentinel-5P TROPOMI tropospheric NO₂ (2,192 daily rasters, 2019–20
 | [Research Paper](./docs/GPIE_Research_Paper.md) | The study: question, data, methods, results, limitations |
 | [Executive Summary](./docs/GPIE_Executive_Summary.md) | Two-page summary of the paper |
 | [Development Log](./docs/GPIE_Development_Log.md) | How the project developed, including every correction |
-| [Declarations](./docs/GPIE_Declarations.pdf) | Highlights, author contributions, funding, competing interests, data and code availability, corrections, use of AI tools |
+| [Declarations](./docs/GPIE_Declarations.pdf) | Highlights, use of AI tools, author contributions, funding, competing interests, data and code availability, corrections |
 
 ---
 
@@ -223,7 +223,7 @@ The full statement is in [`GPIE_Declarations.pdf`](./docs/GPIE_Declarations.pdf)
 - **Competing interests:** none.
 - **Ethics:** not applicable; no human participants, animals or personal data.
 - **Analysis transparency:** the period from July 2023, the threshold for polluted pixels and the regional grouping were chosen after seeing the data, so the descriptive regional results are not confirmatory.
-- **Use of AI tools:** I used Claude (Anthropic), an AI assistant, at several points in this project. Most of that help was checking: whether the estimates quoted in the paper, executive summary, README and dashboard matched my output tables, from the country-panel difference-in-differences to the pixel comparison on 51,072 matched pixels and the comparison with EEA ground stations. When a script failed or returned something I could not explain, I sometimes used it to help trace the problem in my Python code. I wrote the paper and the other documents myself; I used it to point out sentences that were unclear or too technical, places where something seemed to be missing, and punctuation errors, and I decided what to change. I also used it for the layout of the project pages. It did not download or process the Sentinel-5P data, specify or run any model, or produce the results. The research design, the choice of comparison countries and tests, the decision to report the country-level estimate as not robust once polluted places were compared with equally polluted places, and the interpretation are my own. I checked every suggestion before using it and take full responsibility for the content.
+- **Use of AI tools:** The research design, the choice of comparison countries and tests, the decision to report the country-level estimate as not robust once polluted places were compared with equally polluted places, and the interpretation are mine. Within that work I used Claude (Anthropic), an AI assistant, in a supporting role. Its main job was cross-checking: comparing the estimates quoted in the paper, executive summary, README and dashboard against my output tables, from the country-panel difference-in-differences to the pixel comparison on 51,072 matched pixels and the comparison with EEA ground stations. I also asked it for help when one of my Python scripts failed or returned output I could not explain, and for the layout of the project pages. The paper and other documents are my own writing; I used the assistant to flag sentences that were unclear or overly technical, places where something seemed to be missing, and punctuation errors, and I decided which of those points to act on. It did not download or process the Sentinel-5P data, specify or run any model, or produce the results. I reviewed every suggestion before using it, and the responsibility for the content is mine.
 
 ## Author
 

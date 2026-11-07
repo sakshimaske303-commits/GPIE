@@ -55,8 +55,9 @@ with st.expander("**Step 1 — Initial Single-Cohort Model**", expanded=False):
 
     **A later verification correction**: this initial-model figure had not been re-estimated with the
     cluster-robust standard errors this project applies everywhere else (Step 5 below). Re-estimated
-    cluster-robust, the same NO₂ coefficient yields p = 0.041 — still significant at 5%, so this
-    doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
+    cluster-robust, the same NO₂ coefficient yields p = 0.041 with normal critical values, or about
+    0.05 with the t-distribution (clusters minus one degrees of freedom) that the current scripts use,
+    so it is borderline at 5%. This doesn't change the conclusion below. It does matter more for the secondary NDVI outcome's initial
     model (see the *Causal Results* page): its originally-reported p = 0.128 (not significant) becomes
     p = 0.0017 (significant) once corrected the same way.
 
